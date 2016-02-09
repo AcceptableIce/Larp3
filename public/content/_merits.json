@@ -1,0 +1,1602 @@
+[
+    {
+        "merit_id": 2,
+        "merit": "Ambidextrous",
+        "description": "You can use either of your hands equally well, negating the two-Trait penalty for performing tasks with your secondary hand. If you have two weapons drawn, and at least one of them is a one-handed melee weapon, you may block incoming attacks as though your melee weapon was a shield while attacking normally with your drawn weapons.",
+        "category": "physical",
+        "explanation": "N",
+        "cost": 3,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 3,
+        "merit": "Catlike Balance",
+        "description": "You have a particularly acute sense of balance. You are up two Traits on challenge resolution where balance is an important factor.",
+        "category": "physical",
+        "explanation": "N",
+        "cost": 1,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 4,
+        "merit": "Blush of Health",
+        "description": "You lack the characteristic pallor of most vampires, and your skin feels only slightly cool to the touch. You still suffer a Social penalty for low Humanity when dealing with mortals, however, as this unease is due to your character, not your appearance. ",
+        "category": "physical",
+        "explanation": "N",
+        "cost": 2,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 5,
+        "merit": "Enchanting Voice",
+        "description": "Your voice is naturally resonant and commanding. You gain two Bonus Traits on Social Challenges where you use your voice.",
+        "category": "social",
+        "explanation": "N",
+        "cost": 2,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 6,
+        "merit": "Daredevil",
+        "description": "Taking risks and surviving is a specialty of yours. Whenever you try to do something particularly risky or difficult,you get a Bonus Trait on the attempt.",
+        "category": "physical",
+        "explanation": "N",
+        "cost": 3,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 7,
+        "merit": "Efficient Digestion",
+        "description": "You can process blood taken from mortals more efficiently, getting three Blood Traits for every two taken from your victim.",
+        "category": "physical",
+        "explanation": "N",
+        "cost": 3,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 8,
+        "merit": "Huge Size",
+        "description": "Being extremely large, you gain one extra Bruised health level due to sheer extra body mass.",
+        "category": "physical",
+        "explanation": "N",
+        "cost": 4,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 9,
+        "merit": "Hard of Hearing",
+        "description": "You have difficulty hearing. You suffer a two-Trait penalty on all tests of hearing.",
+        "category": "physical",
+        "explanation": "N",
+        "cost": -1,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 10,
+        "merit": "Short",
+        "description": "Due to your small stature, you can only take two steps in combat and have trouble reaching countertops and manipulating objects designed for people of normal height (like cars).",
+        "category": "physical",
+        "explanation": "N",
+        "cost": -1,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 11,
+        "merit": "Smell of the Grave",
+        "description": "You have a distinct stench of wet earth about you, which puts you one Trait down on all social interactions with mortals.",
+        "category": "physical",
+        "explanation": "N",
+        "cost": -1,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 12,
+        "merit": "Bad Sight (Uncorrectable)",
+        "description": "You have trouble seeing details. You are two Traits down when performing a challenge involving careful eyesight. This version is not correctable.",
+        "category": "physical",
+        "explanation": "N",
+        "cost": -3,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 13,
+        "merit": "Fourteenth Generation",
+        "description": "You were embraced by a member of the thirteenth generation. You have a pool of 10 Blood Traits but can only use 8 for healing, Disciplines or raising your Physical Traits. The remaining two can be used for rising in the evening, creating ghouls, Embracing childer, or creating blood bonds (though these may not always be successful). You may not take the Generation Background. You may not have any Disciplines above Intermediate (level 4). You are limited to 10 Attribute Traits. If you diablerize someone of lower generation while possessing this Flaw, the Experience Traits you would normally receive will be applied toward buying off the Flaw instead.",
+        "category": "physical",
+        "explanation": "N",
+        "cost": -2,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 14,
+        "merit": "Disfigured",
+        "description": "A hideous disfigurement afflicts you.You cannot take any Appearance-related Social Traits. Furthermore, you suffer a two Trait penalty on all Social Challenges except intimidation.",
+        "category": "physical",
+        "explanation": "Y",
+        "cost": -2,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 15,
+        "merit": "One Eye",
+        "description": "And eye or yours is missing or does not function. You are two Traits down on tests of depth perception, including ranged combat.",
+        "category": "physical",
+        "explanation": "N",
+        "cost": -2,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 16,
+        "merit": "Child",
+        "description": "You were embraced as a child. You cannot have more than six Physical Traits normally, and you suffer a two Social Trait penalty on tests of authority with adults. You also suffer the effects of the Short Flaw (the cost of which is included in this Flaw).",
+        "category": "physical",
+        "explanation": "N",
+        "cost": -4,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 17,
+        "merit": "Deformity",
+        "description": "A physical deformity of some sort mars your appearance and makes physical activity more difficult for you. You have a one Trait penalty on all Physical tests, and a two Trait penalty on all Social tests.",
+        "category": "physical",
+        "explanation": "Y",
+        "cost": -3,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 18,
+        "merit": "Infectious Bite",
+        "description": "You cannot heal your bite by licking the wound, and mortals you feed upon may develop a serious disease if you fail a Simple Test.",
+        "category": "physical",
+        "explanation": "N",
+        "cost": -3,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 19,
+        "merit": "Lame",
+        "description": "You have severe damage to your legs. You cannot run and can only take one step in combat.",
+        "category": "physical",
+        "explanation": "N",
+        "cost": -3,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 20,
+        "merit": "Monstrous",
+        "description": "Your outward form twists to reflect your inner Beast. You cannot initiate Social Challenges except intimidation when your true form is apparent, and you may not take Appearance-related Traits. Nosferatu and Samedi cannot take this flaw.",
+        "category": "physical",
+        "explanation": "N",
+        "cost": -3,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 21,
+        "merit": "Permanent Wound",
+        "description": "You have a wound that will not stay healed. Every night when you rise, you wake up each evening at your first Wounded health level with lethal damage, although this may be healed normally.",
+        "category": "physical",
+        "explanation": "N",
+        "cost": -3,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 22,
+        "merit": "Slow Healing",
+        "description": "The blood in your system does not heal wounds efficiently. Repairing one level of Lethal damage costs two Blood Traits and one level of Bashing costs one Blood Trait. Keep in mind that you do not need to spend all the blood at once to heal; it can be spent over time.",
+        "category": "physical",
+        "explanation": "N",
+        "cost": -3,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 23,
+        "merit": "Deaf",
+        "description": "You are completely deaf, and suffer the obvious penalties of being unable to hear. You cannot hear spoken Dominate commands, but you suffer a three Trait penalty on tests of perception and alertness. In addition, you are surprised automatically by anyone who approaches you outside of your line of sight. You cannot take the Acute Sense: Hearing Merit or the Hard of Hearing Flaw. You may purchase Lipreading as a custom Ability.  American Sign Language (ASL) or other forms of nonverbal communication may be purchased as Languages.",
+        "category": "physical",
+        "explanation": "N",
+        "cost": -4,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 24,
+        "merit": "Disease Carrier",
+        "description": "You spread a fatal disease to anyone who drinks your blood. You need to spend an extra Blood Trait when awakening in the evening to avoid its symptoms, which will be determined by the Storytellers at character creation. Furthermore, other vampires who feed on you can contract the disease as well. ",
+        "category": "physical",
+        "explanation": "Y",
+        "cost": -4,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 25,
+        "merit": "Mute",
+        "description": "You cannot speak at all. You must sign or write out your thoughts in order to communicate.",
+        "category": "physical",
+        "explanation": "N",
+        "cost": -4,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 26,
+        "merit": "Thin Blood",
+        "description": "Your blood sustains you poorly. All costs for Blood Traits are doubled. You cannot create a blood bond, and you can only Embrace someone if you win a Simple Test.",
+        "category": "physical",
+        "explanation": "N",
+        "cost": -4,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 27,
+        "merit": "Flesh of the Corpse",
+        "description": "Every time you take a wound, your flesh knits with terrible scars, giving you a -1 on social tests (except intimidation) with mortals throughout the night, even after it is healed.  This effect is cumulative for each box on your damage track that is filled with a lethal or greater wound.",
+        "category": "physical",
+        "explanation": "N",
+        "cost": -2,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 28,
+        "merit": "Bad Sight (Correctable)",
+        "description": "You have trouble seeing details. You are two Traits down when performing a challenge involving careful eyesight. This version is correctable by glasses or contacts.",
+        "category": "physical",
+        "explanation": "N",
+        "cost": -1,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 30,
+        "merit": "Blind",
+        "description": "You cannot see. You automatically lose all ties where sight would be a factor, and fail any challenge requiring sight. However, you are immune to Dominate.",
+        "category": "physical",
+        "explanation": "N",
+        "cost": -6,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 31,
+        "merit": "Addiction",
+        "description": "You are dependent on a chemical or biological substance. You can only draw nourishment from blood with this substance in it; you vomit up other blood. This substance also typically causes additional role-playing (e.g., your character may be drunk) or other negative side effects, although the details are established by the Storytellers. ",
+        "category": "physical",
+        "explanation": "Y",
+        "cost": -2,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 32,
+        "merit": "Eat Food",
+        "description": "Unlike most vampires, you are able to overcome your disgust and swallow solid food. However, you gain no sustenance from it and must regurgitate it fifteen minutes later.",
+        "category": "physical",
+        "explanation": "N",
+        "cost": 1,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 33,
+        "merit": "Common Sense",
+        "description": "Whenever you do something particularly dangerous or risky, you are advised by an ST of a possibly better course of action. You may ask for advice from ST&#039;s on possible future courses of action.",
+        "category": "mental",
+        "explanation": "N",
+        "cost": 1,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 34,
+        "merit": "Concentration",
+        "description": "You are particularly adept at remaining on task. You do not receive penalty Traits due to distraction. If you also possess the Eidetic Memory Merit, you may memorize information while distracted without a Mental Challenge. This also helps resist distractions when using Thaumaturgical abilities.",
+        "category": "mental",
+        "explanation": "N",
+        "cost": 1,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 35,
+        "merit": "Time Sense",
+        "description": "Your sense of time is immaculate, usually off by less than two minutes.",
+        "category": "mental",
+        "explanation": "N",
+        "cost": 1,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 36,
+        "merit": "Code of Honor",
+        "description": "A specific and personal code of ethics defines your behavior. You should determine the tenets of your code in consultation with the Storytellers. You gain one free Mental or Social retest per night when in a situation in which you might violate your code. ",
+        "category": "mental",
+        "explanation": "Y",
+        "cost": 1,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 37,
+        "merit": "Eidetic Memory",
+        "description": "You have a photographic memory and can remember even the smallest of details. This may require a Static Mental Challenge if you are significantly hurried or distracted, unless you also have the Concentration Merit.",
+        "category": "mental",
+        "explanation": "N",
+        "cost": 2,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 39,
+        "merit": "Iron Will",
+        "description": "You gain +1 on ties for all defensive Mental Challenges.",
+        "category": "mental",
+        "explanation": "N",
+        "cost": 2,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 41,
+        "merit": "Nightmares",
+        "description": "Hideous nightmares haunt you as you slumber. At the beginning of the night you must win a simple challenge or you suffer nightmares so bad that you cannot sleep restfully causing you to lose one Trait on all challenges for the evening.",
+        "category": "mental",
+        "explanation": "N",
+        "cost": -1,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 42,
+        "merit": "Prey Exclusion",
+        "description": "You refuse to hunt a certain class of prey. If you accidentally feed on your excluded subject, you immediately enter frenzy and must make a four Trait Conscience/Conviction challenge or lose a Morality Trait. Furthermore, if you witness someone else feeding on your excluded type, you must make a Self-Control/Instinct Test as if provoked. Ventrue cannot take this flaw.",
+        "category": "mental",
+        "explanation": "Y",
+        "cost": -1,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 43,
+        "merit": "Shy",
+        "description": "You have a specific problem with large groups of people. You take a two-Trait penalty on all Social Challenges with three or more people, three Traits for groups of 10 or more.",
+        "category": "social",
+        "explanation": "N",
+        "cost": -1,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 44,
+        "merit": "Soft-Hearted",
+        "description": "You cannot abide suffering; you must avoid causing pain or suffering to anyone. Only by spending a Willpower Trait can you overcome this limitation for a scene or one hour. You must have at least four Morality Traits to take this Flaw.",
+        "category": "mental",
+        "explanation": "N",
+        "cost": -1,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 45,
+        "merit": "Speech Impediment",
+        "description": "Speaking is difficult for you. Roleplay your deficiency and suffer a two Trait penalty on all verbal communication.",
+        "category": "mental",
+        "explanation": "N",
+        "cost": -1,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 46,
+        "merit": "Amnesia",
+        "description": "You know nothing of your past, your history, or any of that. Your Storyteller makes up your history.",
+        "category": "mental",
+        "explanation": "N",
+        "cost": -2,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 48,
+        "merit": "Phobia",
+        "description": "You are deathly afraid of some object, creature, or circumstance. Confronted with your trigger, you face a Courage Test; failure means Rotschreck.",
+        "category": "mental",
+        "explanation": "Y",
+        "cost": -2,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 49,
+        "merit": "Short Fuse",
+        "description": "Even for a vampire, your temper is ferocious. You suffer a one Trait penalty on all Virtue Tests of Sel -Control/ Instinct. Brujah cannot take this Flaw.",
+        "category": "mental",
+        "explanation": "N",
+        "cost": -2,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 50,
+        "merit": "Territorial 2",
+        "description": "You will staunchly defend your territory and will do not tolerate trespassers, especially other predators. If you catch an uninvited vampire, you must make a Self-Control/Instinct Test as if provoked; failure means you frenzy. You also generally dislike leaving your home for extended periods.",
+        "category": "mental",
+        "explanation": "N",
+        "cost": -2,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 52,
+        "merit": "Weak-Willed",
+        "description": "You regain only a single Willpower Trait between games rather than the normal 2.",
+        "category": "mental",
+        "explanation": "N",
+        "cost": -1,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 55,
+        "merit": "Natural Linguist",
+        "description": "Your understanding of and ability to learn languages is far better than average.  You can buy 3 languages for the cost of a single XP.  When you do so, list them all as a single Custom Ability (e.g., &quot;Latin, Spanish, Arabic&quot;).",
+        "category": "mental",
+        "explanation": "N",
+        "cost": 2,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 56,
+        "merit": "Natural Leader",
+        "description": "You can lead and command people with ease. You gain two Bonus Traits on tests of leadership. You must have at least six Social Traits to take this Merit.",
+        "category": "social",
+        "explanation": "N",
+        "cost": 1,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 57,
+        "merit": "Prestigious Sire",
+        "description": "Your sire is well-known and well-liked, and this speaks well of you in society. You possess one Status Trait more than you actually possess, although it cannot be expended like a normal Status Trait.",
+        "category": "social",
+        "explanation": "Y",
+        "cost": 1,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 59,
+        "merit": "Debt of Gratitude",
+        "description": "You are owed a boon by an elder or someone more powerful than you. When the boon is called in, you may convert it into another Merit or Background, apply it toward removing a Flaw, or remove it from your sheet, depending on the nature of the favor.",
+        "category": "social",
+        "explanation": "Y",
+        "cost": 2,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 61,
+        "merit": "Enemy 1",
+        "description": "A particular enemy or group of enemies is out to ruin or take your life. This version is a single vampire of similar power to your own. The storytellers reserve the right to reject Enemies on the grounds that they require some time and effort to be worked into a plot without seeming cheesy.",
+        "category": "social",
+        "explanation": "Y",
+        "cost": -1,
+        "book_id": 1,
+        "merit_allowed": "N"
+    },
+    {
+        "merit_id": 62,
+        "merit": "Enemy 2",
+        "description": "A particular enemy or group of enemies is out to ruin or take your life. The storytellers reserve the right to reject Enemies on the grounds that they require some time and effort to be worked into a plot without seeming cheesy.",
+        "category": "social",
+        "explanation": "Y",
+        "cost": -2,
+        "book_id": 1,
+        "merit_allowed": "N"
+    },
+    {
+        "merit_id": 63,
+        "merit": "Enemy 3",
+        "description": "A particular enemy or group of enemies is out to ruin or take your life. The storytellers reserve the right to reject Enemies on the grounds that they require some time and effort to be worked into a plot without seeming cheesy.",
+        "category": "social",
+        "explanation": "Y",
+        "cost": -3,
+        "book_id": 1,
+        "merit_allowed": "N"
+    },
+    {
+        "merit_id": 64,
+        "merit": "Enemy 5",
+        "description": "A particular enemy or group of enemies is out to ruin or take your life. This version is an extremely powerful organization. The storytellers reserve the right to reject Enemies on the grounds that they require some time and effort to be worked into a plot without seeming cheesy.",
+        "category": "social",
+        "explanation": "Y",
+        "cost": -5,
+        "book_id": 1,
+        "merit_allowed": "N"
+    },
+    {
+        "merit_id": 65,
+        "merit": "Dark Secret",
+        "description": "You have a secret that, if exposed, would cause you great embarrassment or hardship. If it becomes exposed, you will exchange this Flaw for an appropriate disadvantage (such as another Flaw or loss of Status). ",
+        "category": "social",
+        "explanation": "Y",
+        "cost": -1,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 66,
+        "merit": "Infamous Sire",
+        "description": "You sire is well-known and well-hated. You are treated as if you have one less Status Trait than you actually possess. (This does not affect the amount of Status you actually possess).",
+        "category": "social",
+        "explanation": "N",
+        "cost": -1,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 67,
+        "merit": "Mistaken Identity",
+        "description": "Someone else bears a striking resemblance to you, causing you no end of trouble.",
+        "category": "social",
+        "explanation": "Y",
+        "cost": -1,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 68,
+        "merit": "Sire's Resentment",
+        "description": "Your sire has decided that your Embrace was a mistake and wishes you ill.",
+        "category": "social",
+        "explanation": "N",
+        "cost": -1,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 69,
+        "merit": "Infamous",
+        "description": "You are &quot;famous&quot; within Kindred society, and not in a positive light. Perhaps you played fast and loose with the Masquerade, or frustrated the political schemes of someone powerful. (Work out the details of your reputation with the STs.) Whatever it was, you are now known as a troublemaker. You are two Traits down on non-aggressive Social challenges with other vampires, and are more likely to be blamed for similar incidents in the future.",
+        "category": "social",
+        "explanation": "Y",
+        "cost": -2,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 70,
+        "merit": "Probationary Sect Member",
+        "description": "You are suspect within your current organization because you were formerly with another sect. You can have Status normally, but everyone treats you as if you have only one Status Trait.",
+        "category": "social",
+        "explanation": "N",
+        "cost": -4,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 71,
+        "merit": "Enemy 4",
+        "description": "A particular enemy or group of enemies is out to ruin or take your life. The storytellers reserve the right to reject Enemies on the grounds that they require some time and effort to be worked into a plot without seeming cheesy.",
+        "category": "social",
+        "explanation": "Y",
+        "cost": -4,
+        "book_id": 1,
+        "merit_allowed": "N"
+    },
+    {
+        "merit_id": 72,
+        "merit": "Magic Resistance",
+        "description": "Thaumaturgy and other magic has difficulty affecting you. You gain two Bonus Traits when testing against any form of magic (both beneficial and harmful), and can never learn Thaumaturgy.",
+        "category": "supernatural",
+        "explanation": "N",
+        "cost": 2,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 73,
+        "merit": "Medium",
+        "description": "You have the ability to hear the voices of the restless dead and sense their presence (although you cannot see them normally). In addition, you can communicate with them for favors or information.",
+        "category": "supernatural",
+        "explanation": "N",
+        "cost": 2,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 74,
+        "merit": "Lucky",
+        "description": "Good fortune has smiled upon you. You gain one Lucky Trait to use as a retest per night.",
+        "category": "supernatural",
+        "explanation": "N",
+        "cost": 3,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 75,
+        "merit": "Oracular Ability",
+        "description": "You can read signs and omens to predict the future. Once per session, you can attempt a Static Mental Challenge to read the future of a current situation, and if successful, allows you one Insight Trait to be used as a restest related to that situation. The Insight Trait expires at the end of the session.",
+        "category": "supernatural",
+        "explanation": "N",
+        "cost": 3,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 77,
+        "merit": "Unbondable",
+        "description": "You can never be blood bond, even partially.",
+        "category": "supernatural",
+        "explanation": "N",
+        "cost": 3,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 78,
+        "merit": "True Love",
+        "description": "Your love for someone can drive you to great heights. You gain a True Love Trait that can be spent as a Willpower once per session, and your True Love may require assistance or attention from time to time.",
+        "category": "supernatural",
+        "explanation": "N",
+        "cost": 4,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 79,
+        "merit": "Nine Lives",
+        "description": "Like is said of cats, you have the ability to cheat death for a while. Whenever you would lose a challenge that would result inyour final death, you can retest it by expending one of your nine Lives Traits. This can be used to retest the same challenge as long as you have Lives remaining.",
+        "category": "supernatural",
+        "explanation": "N",
+        "cost": 6,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 80,
+        "merit": "Cursed 3",
+        "description": "You are subject to a curse other than vampirism. Three Traits is a major inconvenience, such as any weapon you use breaking.",
+        "category": "supernatural",
+        "explanation": "Y",
+        "cost": -3,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 81,
+        "merit": "Cursed 4",
+        "description": "You are subject to a curse other than vampirism. Four Traits causes you significant hardship.",
+        "category": "supernatural",
+        "explanation": "Y",
+        "cost": -4,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 82,
+        "merit": "Cursed 5",
+        "description": "You are subject to a curse other than vampirism. Five Traits causes you major hardship, such as all your best efforts being turned against you.",
+        "category": "supernatural",
+        "explanation": "Y",
+        "cost": -5,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 83,
+        "merit": "Repulsed by Garlic",
+        "description": "The stench of garlic is repulsive to you. You must spend a Willpower trait to stomach the smell for one scene, or else you are driven at least 10 feet away.",
+        "category": "supernatural",
+        "explanation": "N",
+        "cost": -1,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 84,
+        "merit": "Touch of Frost",
+        "description": "Your touch is chilling.",
+        "category": "supernatural",
+        "explanation": "N",
+        "cost": -1,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 85,
+        "merit": "Eerie Presence",
+        "description": "Your presence radiates an otherworldly air that causes nervousness and unease. You suffer a two Trait penalty on all Social Challenges with mortals.",
+        "category": "supernatural",
+        "explanation": "N",
+        "cost": -2,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 86,
+        "merit": "Can't Cross Running Water",
+        "description": "You believe that you cannot cross running water. To cross a body of water at least two feet wide and not completely stagnant and enclosed, you must be at least 50 feet above it.",
+        "category": "supernatural",
+        "explanation": "N",
+        "cost": -3,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 87,
+        "merit": "Haunted",
+        "description": "A malicious ghost has decided to torment you and hound your every step, trying its best to make your unlife difficult.",
+        "category": "supernatural",
+        "explanation": "N",
+        "cost": -3,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 88,
+        "merit": "Repelled by Crosses",
+        "description": "The sight of the cross causes you to flee unless you expend Willpower Trait to resist it for the scene. If you are struck by a cross on your bare skin, you take one level of unsoakable aggravated damage.",
+        "category": "supernatural",
+        "explanation": "N",
+        "cost": -3,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 89,
+        "merit": "Grip of the Damned",
+        "description": "When you bite to feed, you do not cause the Kiss, so the experience is terrible and painful to them.",
+        "category": "supernatural",
+        "explanation": "N",
+        "cost": -4,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 90,
+        "merit": "Dark Fate",
+        "description": "You have visions of a dark and inevitable fate that will eventually strike you down. In any particular session as dictated by the Storytellers, you receive such a vision and must spend a Willpower Trait to shake off the experience or be a Trait down on all Challenges for the rest of the session.",
+        "category": "supernatural",
+        "explanation": "N",
+        "cost": -5,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 91,
+        "merit": "Light-Sensitive",
+        "description": "You are more vulnerable to light than other vampires. Sunlight inflicts twice as much damage, and direct moonlight causes one level of Lethal damage per turn.",
+        "category": "supernatural",
+        "explanation": "N",
+        "cost": -5,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 92,
+        "merit": "Cursed 1",
+        "description": "You are subject to a curse other than vampirism. One Trait causes you a minor inconvenience, such as stumbling whenever you cross a doorstep.",
+        "category": "supernatural",
+        "explanation": "Y",
+        "cost": -1,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 93,
+        "merit": "Cursed 2",
+        "description": "You are subject to a curse other than vampirism. Two Traits cause a moderate inconvenience for you.",
+        "category": "supernatural",
+        "explanation": "Y",
+        "cost": -2,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 94,
+        "merit": "Casts no Reflection",
+        "description": "Your reflection does not appear in mirrors or reflective surfaces. Lasombra cannot take this Flaw. ",
+        "category": "supernatural",
+        "explanation": "N",
+        "cost": -1,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 95,
+        "merit": "True Faith",
+        "description": "You have found a true and pure belief in some power beyond your own. You gain a True Faith trait that can be used as a Willpower or to repel other vampires with a Social Challenge.",
+        "category": "supernatural",
+        "explanation": "N",
+        "cost": 7,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 96,
+        "merit": "Bruiser",
+        "description": "You have the look and presence of a stone cold thug. You are one Trait up on attempts to intimidate someone.",
+        "category": "social",
+        "explanation": "N",
+        "cost": 2,
+        "book_id": 2,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 97,
+        "merit": "Friendly Face",
+        "description": "You have an open and honest look about you. With strangers, you are one Trait up on all Social Challenges besides intimidation.",
+        "category": "social",
+        "explanation": "N",
+        "cost": 1,
+        "book_id": 2,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 98,
+        "merit": "Dulled Bite",
+        "description": "Your fangs are underdeveloped and cannot be used to draw blood like other vampires. You require a Physical Challenge to draw blood with your teeth.",
+        "category": "physical",
+        "explanation": "N",
+        "cost": -2,
+        "book_id": 2,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 99,
+        "merit": "Glowing Eyes",
+        "description": "Your eyes actually glow in the dark. This partially blinds you and makes you stand out like a sore thumb. Special wrap-around glasses are required to contain this effect, and you are down one trait on Social Challenges (see exception below) and down one trait in Mental Challenges regarding your perception. However, you are one trait up in in Social Challenges to Intimidate.",
+        "category": "physical",
+        "explanation": "N",
+        "cost": -2,
+        "book_id": 2,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 100,
+        "merit": "Permanent Fangs",
+        "description": "Your fangs do not retract which has the great potential to be a Masquerade Breach in the wrong situations.",
+        "category": "physical",
+        "explanation": "N",
+        "cost": -2,
+        "book_id": 2,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 101,
+        "merit": "Coldly Logical",
+        "description": "Your actions are directed by reason rather than emotion, to the degree that&#039;s possible for a vampire. You receive a bonus of 1 to Self-Control Tests when attempting to resist frenzy triggers based on your emotional state. (This does not apply to triggers based on hunger.) Brujah cannot take this Merit. You lose the benefits of this merit if you ever enter a Path of Enlightenment based on Instinct. This cannot be taken with the Short Fuse Flaw.",
+        "category": "mental",
+        "explanation": "N",
+        "cost": 2,
+        "book_id": 2,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 103,
+        "merit": "Guilt-Wracked",
+        "description": "The fact that you must consume blood to survive weighs heavily on your conscience. You must pass a Courage test each time you attempt to feed or you cannot go through with it.",
+        "category": "mental",
+        "explanation": "N",
+        "cost": -4,
+        "book_id": 2,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 104,
+        "merit": "Bright Aura",
+        "description": "You aura appears bright, like a mortal&#039;s.",
+        "category": "supernatural",
+        "explanation": "N",
+        "cost": 1,
+        "book_id": 2,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 105,
+        "merit": "Healing Touch",
+        "description": "You can heal wounds left from the Kiss by touching them. (Normally, this would require a lick.)",
+        "category": "supernatural",
+        "explanation": "N",
+        "cost": 1,
+        "book_id": 2,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 106,
+        "merit": "Inoffensive to Animals",
+        "description": "Animals will not automatically flee from you, as they would do with other kindred.",
+        "category": "supernatural",
+        "explanation": "N",
+        "cost": 1,
+        "book_id": 2,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 107,
+        "merit": "Cold Breeze",
+        "description": "A cold breeze follows you wherever you go. You are one Trait down on any Social Challenge with mortals.",
+        "category": "supernatural",
+        "explanation": "N",
+        "cost": -1,
+        "book_id": 2,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 108,
+        "merit": "Beacon of the Unholy",
+        "description": "YYou radiate a palpable aura of evil. Anyone possessing True Faith recognizes that you are a supernatural creature of darkness, and you suffer a penalty of -2 on ties when you are on holy ground. (It is up to the Storytellers to determine what constitutes holy ground.)",
+        "category": "supernatural",
+        "explanation": "N",
+        "cost": -2,
+        "book_id": 2,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 109,
+        "merit": "Bound",
+        "description": "You are blood bound to another character. If you are bound to another player character, you may not take this Flaw. Instead, you should both record that fact as a 0-point Feature on your character sheet.  You may not take this Flaw if you have the Unbondable Merit.",
+        "category": "supernatural",
+        "explanation": "Y",
+        "cost": -2,
+        "book_id": 2,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 110,
+        "merit": "Deathsight",
+        "description": "Everything and everyone you see appears to be dead and decaying around you. This has rendered you callous, causing you to suffer a 2-Trait penalty on Social Challenges. However, you are not affected by Social Challenges based on Physical Appearance, and cannot take the Lecherous Flaw. You may suffer a -2 penalty to Challenges involving sight, and using some Abilities and Disciplines that require you to see beings clearly (such as Medicine or Vicissitude) may be difficult or impossible.",
+        "category": "supernatural",
+        "explanation": "N",
+        "cost": -2,
+        "book_id": 2,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 111,
+        "merit": "Lord of the Flies",
+        "description": "Buzzing, swarming insects constantly surround you. You are one Trait down on any Social or Stealth-related Challenge.",
+        "category": "supernatural",
+        "explanation": "N",
+        "cost": -2,
+        "book_id": 2,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 112,
+        "merit": "Early Riser",
+        "description": "You can operate with less sleep than other vampires. You may awaken early or go to bed late (an hour later or earlier than normal) without the need to expend Willpower. (This allows Players with Rituals extra time at the beginning of a session to prepare)",
+        "category": "physical",
+        "explanation": "N",
+        "cost": 1,
+        "book_id": 3,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 113,
+        "merit": "Vulnerability to Silver",
+        "description": "Silver to you is as painful as the rays of the sun. You suffer aggravated damage from silver weapons, and touching silver objects is painful, causing you to be one Trait down on Challenges when in contact with the metal.",
+        "category": "physical",
+        "explanation": "N",
+        "cost": -2,
+        "book_id": 3,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 114,
+        "merit": "Lazy",
+        "description": "You avoid anything that requires work or effort. You are one Trait down for any spontaneous actions (including combat, unless it is preplanned).",
+        "category": "physical",
+        "explanation": "N",
+        "cost": -3,
+        "book_id": 3,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 115,
+        "merit": "Infertile Vitae",
+        "description": "You cannot Embrace anyone, and any childer you attempt to create will simply die. You can still create ghouls with this flaw.",
+        "category": "physical",
+        "explanation": "N",
+        "cost": -2,
+        "book_id": 3,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 120,
+        "merit": "Territorial 1",
+        "description": "You will staunchly defend your territory and will do not tolerate trespassers, especially other predators. Any infraction must be roleplayed. You also generally dislike leaving your home for extended periods. (ST Approved)",
+        "category": "mental",
+        "explanation": "N",
+        "cost": -1,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 121,
+        "merit": "Calm Heart",
+        "description": "The Beast that stirs within you is more subdued than in other vampires, and you are able to control your emotions easily. You are two Traits up on ties on Self-Control/Instinct Virtue Tests. (This does not affect the triggers you must react to.) Brujah may not take this Merit.",
+        "category": "mental",
+        "explanation": "N",
+        "cost": 3,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 124,
+        "merit": "Flightless",
+        "description": "You cannot fly nor can you take any powers of the Flight discipline. Gargoyles only.",
+        "category": "physical",
+        "explanation": "N",
+        "cost": -1,
+        "book_id": 4,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 125,
+        "merit": "Lecherous",
+        "description": "A lecherous vampire may still have his or her head turned by a pretty face.  When engaging in social challenges against a lecherous character, you can add your Appearance traits to your social traits on ties.",
+        "category": "social",
+        "explanation": "N",
+        "cost": -2,
+        "book_id": 6,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 127,
+        "merit": "Infernalist 2",
+        "description": "You have ties to a demon.  The STs determine what benefits you gain from this alliance.  <br><b>You cannot take this flaw at character generation.</b>",
+        "category": "supernatural",
+        "explanation": "Y",
+        "cost": 2,
+        "book_id": 6,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 128,
+        "merit": "Insight",
+        "description": "For thin-bloods (14th and 15th generation) only.  This merit gives a vampire the ability to request a divinatory vision from the STs once per session and sometimes during downtime.",
+        "category": "supernatural",
+        "explanation": "N",
+        "cost": 2,
+        "book_id": 6,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 132,
+        "merit": "Acute Sense: Sight",
+        "description": "You are one trait up on tests involving sight.",
+        "category": "physical",
+        "explanation": "N",
+        "cost": 1,
+        "book_id": 6,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 133,
+        "merit": "Acute Sense: Touch",
+        "description": "You are one trait up on tests involving your sense of touch.",
+        "category": "physical",
+        "explanation": "N",
+        "cost": 1,
+        "book_id": 6,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 134,
+        "merit": "Acute Sense: Hearing",
+        "description": "You are one trait up on tests involving hearing.",
+        "category": "physical",
+        "explanation": "N",
+        "cost": 1,
+        "book_id": 6,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 136,
+        "merit": "Acute Sense: Smell and Taste",
+        "description": "You are one trait up on tests using your nose.  Since Smell and Taste are interconnected senses and since Taste is rarely taken, you&#039;re also up one trait on tests when using your sense of taste.",
+        "category": "physical",
+        "explanation": "N",
+        "cost": 1,
+        "book_id": 6,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 137,
+        "merit": "Blas&eacute;",
+        "description": "You are +1 on ties for all defensive Social Challenges.",
+        "category": "social",
+        "explanation": "N",
+        "cost": 2,
+        "book_id": 6,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 139,
+        "merit": "Cannot Cross the Threshold",
+        "description": "You cannot enter a mortal home or apartment unless you are invited. Businesses and public spaces are not affected. The invitation must be issued by a legitimate inhabitant of the dwelling.  Tzimisce may not take this Flaw.",
+        "category": "supernatural",
+        "explanation": "N",
+        "cost": -1,
+        "book_id": 6,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 140,
+        "merit": "Ward",
+        "description": "You have one or more individuals within your care.",
+        "category": "social",
+        "explanation": "Y",
+        "cost": -1,
+        "book_id": 6,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 142,
+        "merit": "Stigmata",
+        "description": "You drip blood from somewhere obvious (your choice). You can cover it, but it will soon soak through. At the beginning of any game, you are down one extra Blood Trait.",
+        "category": "supernatural",
+        "explanation": "Y",
+        "cost": -2,
+        "book_id": 6,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 143,
+        "merit": "Gliding",
+        "description": "Thin, membranous flaps of skin stretch between your wrists and hips. When this skin is exposed, the character can stretch her hands out and use this skin to glide to a safe landing when falling. This membrane does not preclude the wearing of clothing but without special tailoring cannot be used for gliding while wearing a shirt. It cannot be used to take off from the ground and you cannot carry anything other than your clothes and personal effects (within reason). Members of the Gargoyle clan receive this merit for free and it cannot be taken with the Flightless Flaw unless you are a Gargoyle.",
+        "category": "physical",
+        "explanation": "N",
+        "cost": 1,
+        "book_id": 6,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 144,
+        "merit": "Feature",
+        "description": "A feature, when added as a Merit, represents a positive aspect of your character not described by other Traits.  For example, extra forms for Protean 4:  Shape of the Beast, could be included on your sheet as a feature.",
+        "category": "physical",
+        "explanation": "Y",
+        "cost": 0,
+        "book_id": 6,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 145,
+        "merit": "Feature",
+        "description": "A feature, when added as a Flaw, represents a negative aspect of your character not described by other Traits.  Ventrue clan feeding restrictions, a description of Nosferatu-ugliness, and Gangrel frenzy traits are all logical negative Features.",
+        "category": "physical",
+        "explanation": "Y",
+        "cost": 0,
+        "book_id": 6,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 146,
+        "merit": "Sect Ignorance",
+        "description": "You are unfamiliar with the working of your Sect.  While you possess this Flaw, you do not receive the two free levels of the lore for your Sect normally given to PCs.",
+        "category": "social",
+        "explanation": "N",
+        "cost": -1,
+        "book_id": 6,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 147,
+        "merit": "Kindred Ignorance",
+        "description": "You are unfamiliar with some of the basic facts of vampiric nature.  While you possess this Flaw, you cannot Embrace a childe or create a Ghoul, and you do not receive the two free levels of Kindred Lore normally given to PCs.",
+        "category": "social",
+        "explanation": "N",
+        "cost": -1,
+        "book_id": 6,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 148,
+        "merit": "Fifteenth Generation",
+        "description": "Your blood is so thin and weak that you are practically a mortal. You can only spend 6 of your 10 Blood Traits for normal uses (healing, Disciplines, increasing Physical Traits) and all costs for these effects are doubled. The remaining 4 blood can only be used for rising in the evening (which costs normal). You cannot sire childer, create ghouls, or create blood bonds. Sunlight only deals lethal damage to you, and you may hold down food for about an hour before vomiting it up. You may not take the Generation background or the Thin Blood or Infertile Vitae flaws. If you commit diablerie while possessing this Flaw, the experience you would normally receive will be applied toward converting this Flaw to the Fourteenth Generation Flaw instead.",
+        "category": "physical",
+        "explanation": "N",
+        "cost": -4,
+        "book_id": 5,
+        "merit_allowed": "N"
+    },
+    {
+        "merit_id": 149,
+        "merit": "Sanguinist",
+        "description": "The Sanguinist Merit allows you to spend two blood per turn in combat.",
+        "category": "supernatural",
+        "explanation": "N",
+        "cost": 6,
+        "book_id": 6,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 151,
+        "merit": "Infernalist 1",
+        "description": "You have ties to a demon.  The STs will determine the effects of this alliance.",
+        "category": "supernatural",
+        "explanation": "N",
+        "cost": 1,
+        "book_id": 6,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 152,
+        "merit": "Prior Diablerie",
+        "description": "You have Diablerized at some time in your past.  Diablerie veins are no longer present in your aura, but other methods of detecting Diablerie will reveal your act.  This flaw is required if you are playing a Caitiff or Pander and wish to have a Generation lower than 12th.  ",
+        "category": "supernatural",
+        "explanation": "N",
+        "cost": -1,
+        "book_id": 6,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 153,
+        "merit": "Investiture",
+        "description": "Sabbat characters only. You are a pack priest, and have been invested with the ability to perform Sabbat rituals, including the Vaulderie. You may perform the Vaulderie at level 1. (Higher levels of Investiture, including the ability to invest others, are available only to NPCs.) This Merit is not currently available to PCs, but will be in the future.",
+        "category": "social",
+        "explanation": "N",
+        "cost": 2,
+        "book_id": 6,
+        "merit_allowed": "N"
+    },
+    {
+        "merit_id": 154,
+        "merit": "Fire Dancer",
+        "description": "You have such mastery over the Beast that you do not easily succumb to R&ouml;tschreck. You are two Traits up on ties on Courage Virtue Tests. (This does not affect the triggers you must react to.)",
+        "category": "supernatural",
+        "explanation": "N",
+        "cost": 3,
+        "book_id": 6,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 156,
+        "merit": "Poisonous Bite",
+        "description": "You have poison glands in the roof of your mouth that contain virulent poison, You cannot control whether your bite injects the poison. When you do envenomate a human there&rsquo;s a significant chance they will sicken or even die, so you have to learn different ways to feed if this would cause you moral qualms. The poison does not affect supernatural creatures.",
+        "category": "physical",
+        "explanation": "N",
+        "cost": -2,
+        "book_id": 6,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 157,
+        "merit": "Weather Sense",
+        "description": "You have an uncanny sense of weather. By making a Mental Challenge, you can know what the weather in an area is going to be like in a few more hours. You can also make a chop to determine if a certain weather formation is natural or not.",
+        "category": "supernatural",
+        "explanation": "N",
+        "cost": 1,
+        "book_id": 6,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 158,
+        "merit": "Incoherent",
+        "description": "Perhaps your jaw is deformed or you have just been away from society for too long. Either way you are incapable of comprehensible speech. This differs from Mute in that you can still make sound (say, to convey your presence through a door or shout when in danger), but your vocal communication is pretty much limited to &quot;one NNNGGGH!! for yes, two NNNGGGH!!s for no.&quot;",
+        "category": "physical",
+        "explanation": "N",
+        "cost": -2,
+        "book_id": 6,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 159,
+        "merit": "Controllable Thirst",
+        "description": "You are considered to have one more blood in your pool than you actually do for determining if you are hungry.",
+        "category": "physical",
+        "explanation": "N",
+        "cost": 1,
+        "book_id": 6,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 160,
+        "merit": "Vulgar",
+        "description": "The opposite of Refined, you are incredibly crass. You are down two Traits on ties in Social Challenges, are looked down upon by people who value good manners, and may not have more than 3 dots of High Society Influence. (Please keep other player&#039;s sensibilities in mind. Offending other characters is the idea, not making the game unfun for the people around you.)",
+        "category": "social",
+        "explanation": "N",
+        "cost": -1,
+        "book_id": 6,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 161,
+        "merit": "Paragon",
+        "description": "The Embrace awoke a commanding nature in you, allowing you to control those around you more easily. When you take this Merit, choose an Influence field that you have innate control over. You may have (and use) Influence one level above that Influence&#039;s cap. (Five is still the maximum, however.)",
+        "category": "social",
+        "explanation": "Y",
+        "cost": 2,
+        "book_id": 6,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 162,
+        "merit": "Arrogant",
+        "description": "You are exceptionally full of yourself. As a result you suffer a -2 to Social Challenges where you are trying to charm or convince someone. Also, insults to yourself are considered one difficulty higher for causing frenzies.",
+        "category": "social",
+        "explanation": "N",
+        "cost": -2,
+        "book_id": 6,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 165,
+        "merit": "Coward",
+        "description": "You find it difficult to face threats to your own existence. You must spend two Willpower rather than one to ignore a R&ouml;tschreck trigger for ten minutes.",
+        "category": "mental",
+        "explanation": "N",
+        "cost": -2,
+        "book_id": 6,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 166,
+        "merit": "Frail",
+        "description": "Because you were in poor condition when Embraced (due to serious illness or advanced age) or because something went wrong with the process, your body is less resilient than that of the average vampire. You have one less Bruised health level than a character without this Flaw.",
+        "category": "physical",
+        "explanation": "N",
+        "cost": -3,
+        "book_id": 6,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 167,
+        "merit": "Technologically Inept",
+        "description": "You cannot use the technology of the digital age. This Flaw is not uncommon among older vampires, especially those who have had little contact with modern society or who regard the tools of mortals as beneath them. You cannot use computers, cell phones, ATMs, MP3 players, etc. without assistance. You also cannot drive.You may not have any dots in Computer, Drive, Repair, or similar Abilities. In order to learn such skills, you must buy off this Flaw.",
+        "category": "mental",
+        "explanation": "N",
+        "cost": -2,
+        "book_id": 6,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 168,
+        "merit": "Distinctive Accent",
+        "description": "You have a thick accent you cannot hide.",
+        "category": "mental",
+        "explanation": "N",
+        "cost": -1,
+        "book_id": 6,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 169,
+        "merit": "Distinctive Feature",
+        "description": "You have some easily identified physical feature, like an obvious scar or ears that stick out. This feature does not reveal anything of your supernatural nature. In other words it does not cause you to breach the Masquerade. However, this is a Supernatural Flaw in that the feature will show through any disguise, supernatural or mundane.",
+        "category": "supernatural",
+        "explanation": "Y",
+        "cost": -1,
+        "book_id": 6,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 170,
+        "merit": "Legal Identity",
+        "description": "This is the default condition for a PC if they choose not to buy another Merit or Flaw related to legal identities. Unless noted below, a character cannot have more than one legal identity Merit or Flaw at the same time. You have a set of legal records and identification that will stand up to some degree of scrutiny. If you were Embraced recently, you may have maintained your mortal identity by keeping your death hidden; if you were Embraced a long time ago, or you have been declared legally dead, you have either taken over someone else&#039;s identity or had records falsified in some way.You have the appropriate identifiers for someone in your social position (driver&#039;s license, Social Security number, firearms or hunting licenses if appropriate, etc.). Your legal records that will withstand a basic search (the state has a record of your driver&#039;s license, your SSN is attached to your name, etc.). Serious investigation, especially by legal authorities, may reveal irregularities in your records, but there are no obvious, glaring flaws. Your photo ID looks either like you or a regularly used disguise; you will be listed as of legal age unless you possess the Child Flaw.",
+        "category": "social",
+        "explanation": "N",
+        "cost": 0,
+        "book_id": 6,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 171,
+        "merit": "Alternate Legal Identity",
+        "description": "In addition to a normal Legal Identity, you have a second legal identity that will stand up to a similar level of scrutiny. (By necessity, at least one of these identities will be false.) This enables you to carry out activities under one identity while protecting your other identity from possible consequences of your actions. If one identity becomes compromised, you may continue to use the other. Your second identity is not immune from discovery; unless you possess Vicissitude or some other means of changing your appearance, both identities will have roughly the same appearance and, if appropriate, fingerprints. Mixing identities, or loosing track of which one you have used with whom, can also put you at risk of discovery. Your identities may not have access to the other identity&#039;s assets (Resources, Influences, etc.) unless you have taken action to make this possible. It is possible to have an Alternate Legal Identity be Compromised; this is the exception to the rule that legal identities cannot be mixed. You may not have more than one non-compromised alternate identity at any one time.",
+        "category": "social",
+        "explanation": "N",
+        "cost": 1,
+        "book_id": 6,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 172,
+        "merit": "No Legal Identity",
+        "description": "For whatever reason, there is no record of your existence in the legal system, or what records do exist are not useable for their intended purpose. You may be old enough that you predate legal records in your region, you may be legally recorded as dead, or your records may be old enough that they do not appear to match you (you appear to be 20 years old and were born in 1902, for example). It may be difficult to maintain a legal identity due to limited resources or options, or your vampiric form may be too removed from your human form to maintain the charade of your continued mortal existence. This Flaw means that any attempt at checking your legal credentials will fail. You may possess a false ID which is good enough to allow you to enter a bar, but may not legally take actions that require a background check, such as purchasing guns. Any transactions you take in making large purchases or renting an apartment will involve cash or the equivalent (this Flaw is not generally compatible with high levels of Resources or the Finance Influence). This Flaw may be bought off if the character obtains a properly falsified identity.",
+        "category": "social",
+        "explanation": "N",
+        "cost": -1,
+        "book_id": 6,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 173,
+        "merit": "Compromised Identity",
+        "description": "You have a Legal Identity, but it is dangerous for you to use it for legal purposes. Your identity is as solid as any Legal Identity, but attempts to to use it for more than casual purposes (such as using your driver&#039;s license for ID) put you at risk from the authorities in some way. You may have a criminal record, or your identity may put you at risk of breaching the Masquerade. (For example, you appear to be 20 and have a listed birthdate of 1972. If this problem can be solved through the straightforward use of Disciplines such as Obfuscate or Vicissitude, the identity does not qualify as compromised.) It is possible for your identity to become compromised by your own actions, such as being wanted by the police; if this happens, you may be assigned this Flaw by the STs.",
+        "category": "social",
+        "explanation": "N",
+        "cost": -1,
+        "book_id": 6,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 174,
+        "merit": "Obvious Predator",
+        "description": "You are clearly a monster, though people have problems pinning down why. They might think you are a serial killer, a mugger, or just an all-around terrible person. Either way, mortals highly distrust you, and you lose on ties in all offensive Social Challenges against mortals except attempts to scare or intimidate. This Flaw makes you frightening and disturbing, but it does not constitute a breach of the Masquerade. Mask of 1000 Faces does not negate the effects of this Flaw because it is not based on your appearance.",
+        "category": "social",
+        "explanation": "N",
+        "cost": -3,
+        "book_id": 6,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 175,
+        "merit": "Disembodied Mentor",
+        "description": "While many Malkavians hear voices, yours actually seem to drop grains of wisdom. They are considered a 3 point mentor who you have access to at all times, may have many different sets of knowledge they can provide, and ask little of you. Unfortunately it isnï¿½t common for what you think is important or want to learn to line up with what they are offering.",
+        "category": "supernatural",
+        "explanation": "N",
+        "cost": 5,
+        "book_id": 6,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 176,
+        "merit": "Former Ghoul",
+        "description": "Before your Embrace, you knowingly served a vampire as a ghoul. As such, that vampire looks upon you favorably, and you have a Level One blood bond to them. You can look to your former domitor for occasional advice or minor information. If you want to have learned Disciplines from them or get other concrete help, also buy them as a Mentor. This Merit cannot be taken by the Sabbat.",
+        "category": "social",
+        "explanation": "N",
+        "cost": 1,
+        "book_id": 6,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 177,
+        "merit": "Glutton",
+        "description": "You like to eat. Vampires... can&#039;t eat. In a situation where there is food available to you, you should spend 1 blood to &quot;warm up&quot; your mouth/digestive tract and buy/sample some of the food. This flaw does not require you to go after food which does not belong to yo but you should acquire some where possible. Spending 2 Mental Traits lets you ignore this Flaw for a short time. This Flaw does not include the effects of the Eat Food Merit; you may take both.",
+        "category": "mental",
+        "explanation": "N",
+        "cost": -1,
+        "book_id": 6,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 178,
+        "merit": "Broke",
+        "description": "You have no money, and can&#039;t seem to hold onto what you do get. You may not have any dots of Resources or Finance Influence. You fund your lifestyle by pawning/fencing things (represented by regularly turning item cards in to an ST). If you cannot regularly turn in any item cards, the STs may choose consequences for you.",
+        "category": "social",
+        "explanation": "N",
+        "cost": -1,
+        "book_id": 6,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 179,
+        "merit": "Clumsy",
+        "description": "The opposite of Catlike Balance. You are down two Traits on tests of fine manipulation or balance.",
+        "category": "physical",
+        "explanation": "N",
+        "cost": -1,
+        "book_id": 6,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 180,
+        "merit": "Aura of Suspicion",
+        "description": "People mistrust you and suspect you of wrongdoing. When first interacting with someone, you are down 2 Traits on non-aggressive Social Challenges until they know you better. There may be additional effects as well (such as police routinely taking you in for questioning for no reason). This flaw can not be taken with the Sanctity Merit. ",
+        "category": "social",
+        "explanation": "N",
+        "cost": -3,
+        "book_id": 6,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 181,
+        "merit": "Detested by Animals",
+        "description": "Animals respond more violently to your presence than usual. In many cases, they will react aggressively rather than fleeing. ",
+        "category": "supernatural",
+        "explanation": "N",
+        "cost": -2,
+        "book_id": 6,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 182,
+        "merit": "Fallen",
+        "description": "While on holy ground (including any location made sacred by religious ritual), you must retest all Challenges you win, as you are made physically ill by the locale. You cannot take both this and Beacon of the Unholy. ",
+        "category": "supernatural",
+        "explanation": "N",
+        "cost": -2,
+        "book_id": 6,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 183,
+        "merit": "Hemophilliac",
+        "description": "You bleed more easily than most. Lose a Trait of blood whenever you take a point of lethal damage. ",
+        "category": "physical",
+        "explanation": "N",
+        "cost": -4,
+        "book_id": 6,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 184,
+        "merit": "Illiterate",
+        "description": "You cannot read or write and may not purchase Abilities or Disciplines (such as Thaumaturgy and Necromancy) that require reading to learn or use.",
+        "category": "mental",
+        "explanation": "N",
+        "cost": -2,
+        "book_id": 6,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 185,
+        "merit": "Wanderlust",
+        "description": "You hate staying in one place for too long and want to constantly be on the move. You must permanently retire your character after one year of play. (The regular limit is two years.)",
+        "category": "mental",
+        "explanation": "N",
+        "cost": -2,
+        "book_id": 6,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 187,
+        "merit": "False Humanity",
+        "description": "Whether through nature or practice, you are skilled at concealing your true inhumanity from others. This Merit offsets up to two Social Traits' worth of penalties on tests with mortals, provided that those penalties stem from low Humanity or being on an alternative Path of Morality. (It has no effect on any other Social penalties.) In addition, it removes the requirement to indicate one's lack of Humanity on a tag. Other characters may still use context clues and appropriate challenges to discern your disconnection from mortal morality, but it will not be casually apparent to everyone around you.",
+        "category": "social",
+        "explanation": "N",
+        "cost": 3,
+        "book_id": 6,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 188,
+        "merit": "Enemy",
+        "description": "A particular enemy or group of enemies is out to ruin or take your life. The storytellers reserve the right to reject Enemies on the grounds that they require some time and effort to be worked into a plot without seeming cheesy.",
+        "category": "social",
+        "explanation": "Y",
+        "cost": -1,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 189,
+        "merit": "Sociopath",
+        "description": "Typical emotions are not an intrinsic part of your nature. You are immune to some of the powers of Auspex.",
+        "category": "social",
+        "explanation": "N",
+        "cost": 2,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    },
+    {
+        "merit_id": 190,
+        "merit": "Unusual Worldview",
+        "description": "You may enter the game with one of the following Paths of Enlightenment: Death and the Soul, Feral Heart, Harmony, Honorable Accord, Power and the Inner Voice, Scorched Heart, Self-Focus. You cannot take this Merit after character generation. You cannot have this Merit on your first character.",
+        "category": "supernatural",
+        "explanation": "Y",
+        "cost": 4,
+        "book_id": 1,
+        "merit_allowed": "Y"
+    }
+]

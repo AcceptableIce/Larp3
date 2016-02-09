@@ -1,0 +1,614 @@
+[
+    {
+        "name": "Banish Big Brother",
+        "description": "Until the next sunrise, those affected by this ritual automatically feel a buzzing sensation any time they are taped or monitored by surveillance devices, as well as sensing the general nature and approximate location of the machine. Once a Kindred is aware of attempted surveillance, they may spend a Mental Trait to temporarily disable the devices involved; complex systems may also require a Mental Test (retest Security), at the Storyteller's discretion.<br><br>A cellular phone or car phone that is off, or that is on but not currently in use, does not trigger the warning sensation. A phone being used to make or receive a call will.",
+        "group": "Basic",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Blood Mastery",
+        "description": "This ritual allows the caster to automatically succeed on the next test they make against the target, as long as they possess a Trait of the target's blood. The ritual only works if the caster would be able to normally succeed on the test. The ritual expires at sunrise if unused during the game.",
+        "group": "Basic",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Blood Mead",
+        "description": "By invoking Dionysus' blessing on a concoction of mead and two Blood Traits, the ritualist gains an extra Healthy health level, but also suffers a one Trait penalty on all Challenges involving dexterity or intelligence due to intoxication. This ritual lasts for one night.",
+        "group": "Basic",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Blood Rush",
+        "description": "With this ritual, the caster experiences all the pleasures of feeding and gains one free retest to avoid frenzying over hunger or the smell or sight of blood. This ritual lasts until the next sunset.",
+        "group": "Basic",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Brand of the Paramour",
+        "description": "After gathering two Traits of blood from a pair of twins, the ritualist and a ghoul each ingest one trait. Following the ritual, the vampire will feel a phantom pain when their ghoul is hurt. This ritual lasts until the ghoul is Embraced or killed.",
+        "group": "Basic",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Communicate with Kindred Sire",
+        "description": "By meditating for half an hour on an object which once belonged to their sire, the ritualist can establish a telepathic link to their sire anywhere in the world. The link lasts for ten minutes.",
+        "group": "Basic",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Craft Bloodstone",
+        "description": "By imbuing a stone with three Traits of blood, the ritualist can track its distance and direction from the stone's location. This ritual takes five minutes each night for three nights. The appearance of the stone is not altered. You cannot have more bloodstones than the number of Willpower Dots you possess. If your Willpower Dots are reduced below the number of bloodstones you possess, the excess bloodstones are destroyed, starting with the oldest.",
+        "group": "Basic",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Dedicate the Chantry",
+        "description": "By walking around a single building and anointing it with water, the caster creates a space in which any subsequent enchantment cast on the area is at a one Trait bonus to completion. Areas larger than a single building may require multiple castings of this ritual. (Note: this is not the only ritual involved in creating a chantry in which Thaumaturgy may be taught. The others are not available to player characters.)",
+        "group": "Basic",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Defense of the Sacred Haven",
+        "description": "After the user spends an hour inscribing mystic sigils on the walls of a room, using one Trait of blood, all sunlight is mystically prevented from entering the room as long as the ritualist is within.",
+        "group": "Basic",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Deflection of Wooden Doom",
+        "description": "After sitting in a circle of wood for an hour, the ritualist places a splinter under their tongue. Until the splinter is removed or the next dawn or dusk passes, the first stake entering the caster's body turns to dust.",
+        "group": "Basic",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Deny the Intruder",
+        "description": "Generally cast on chantries, this ritual is cast by sending a page of mystical symbols through the mail. For the next year, all Influence Actions to access the chantry require double the normal Influence level.",
+        "group": "Basic",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Devil's Touch",
+        "description": "By placing an enchanted penny on a mortal, the caster curses them to lose two Social Traits.",
+        "group": "Basic",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Domino of Life",
+        "description": "This ritual allows the caster to assume one physical characteristic of mortality, such as a heart beat, flesh tone, or respiration until one hour before dawn. This ritual requires the caster carry a vial of mortal blood with them. It may be cast multiple times for various features of mortality.",
+        "group": "Basic",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Enchanting the Curse",
+        "description": "This ritual is used almost exclusively to punish or torment ghouls. The ritualist draws the blood of the ghoul and speaks the words of a curse. For the following month, the ghoul suffers aggravated damage from exposure to sunlight at a rate of one health level per two rounds.",
+        "group": "Basic",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Enchantment Versus Ghouls",
+        "description": "By spending ten minutes repeating an incantation and pouring one Blood Trait over an object such as a melee weapon, the caster creates a mystical glyph which causes an automatic level of lethal damage to any ghoul who touches it or is touched by it, in addition to the damage normally done by the weapon itself. This ritual activates the night after it is cast. If the weapon on which the glyph is inscribed is destroyed, the enchantment collapses.",
+        "group": "Basic",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Encrypt Missive",
+        "description": "As a message is written in blood, the caster speaks the name of the person who will be able to read it. Once the message is finished, only the ritualist and the addressee can read it. To anyone else, the message appears to be random scribbles.",
+        "group": "Basic",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Extinguish",
+        "description": "By intoning the ritual, pinching out a candle flame, and spitting on the floor, the ritualist may at any time for the rest of the night speak a magical syllable that will extinguish one flame up to the size of a small bonfire.",
+        "group": "Basic",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Eyes of the Nighthawk",
+        "description": "Through this ritual, the caster's perceptions are transferred into the body of a predatory bird until dawn or until they choose to end the ritual. Auspex may be used while inhabiting the raptor. The ritual ends if the caster touches the bird. They must also blind the bird within one minute of ending the ritual or suffer temporary blindness for three nights. This may require a Humanity Test.",
+        "group": "Basic",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Flatline",
+        "description": "After incantations, ritual gestures, and the placing of a small dead insect or animal someplace in the subject's home, the ritual causes a mortal to exhibit no secondary characteristics of being alive. A heart monitor will show a flat line and, if wounded, the mortal's blood will not flow (though the damage inflicted does not change). This power lasts until the sunrise after the night it is cast and has no effect on supernatural beings.",
+        "group": "Basic",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Illuminate Trail of Prey",
+        "description": "This ritual allows the caster to perceive the path of their target as a series of silvery footprints, and gains three free retests on attempts to track. The trail will end at the first body of water the target passes through. The caster must know their target's true face and burn a length of white ribbon wrapped around a predatory mammal's bone. The ritual ends if the caster removes their attention from the hunt.",
+        "group": "Basic",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Impassible Trail",
+        "description": "Lasting until sunrise, the ritualist can travel through even the densest woods without betraying any sign of passage aside from a faint scent (detectable by supernatural sensory abilities only) by carrying an owl feather steeped in vampiric vitae or the ashes of burnt toad legs.",
+        "group": "Basic",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Impressive Visage",
+        "description": "By performing this ritual and then placing a sprig of dried mint in their right shoe or pocket, the caster gains two Appearance-related Social Traits for the evening which may not be bid, but may be counted in ties and overbids. Multiple castings of this ritual in a single night have no effect beyond the first. If these traits bring the caster's Appearance to more than 5, they are supernaturally beautiful and may attract an unusual amount of attention.",
+        "group": "Basic",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "The Imp's Affliction",
+        "description": "This ritual works only on mortals, and infects them with an uncomfortable and embarrassing illness for one scene. It requires the caster to write the target's name on a scrap of paper and then burn it.",
+        "group": "Basic",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Inscription",
+        "description": "This ritual allows the caster to create a written version of a basic ritual for use by another individual who need not know Thaumaturgy. The ritual must be written out in one Trait of the ritualist's blood an then given to the user. Once used, the paper upon which the ritual was inscribed turns to ash.",
+        "group": "Basic",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Iron Body",
+        "description": "For every ten minutes spent performing this ritual, one level of aggravated damage sustained within the next hour is converted to lethal damage instead, up to a maximum of four. This ritual must be performed during in-game time. The ritual's subject must also carry a spent shell casing with them while this ritual is in use.",
+        "group": "Basic",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Jinx",
+        "description": "By sacrificing one Trait of the victim's blood, the thaumaturge afflicts a vampire with bad luck for one scene. The effects of this will be determined by the Storytellers.",
+        "group": "Basic",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Learning the Mind Enslumbered",
+        "description": "This ritual allows the ritualist to determine the cause of a Kindred's torpor or demise by placing a penny or other small coin on the vampire's eye. The Kindred's spirit recites the cause of its current state, but will not answer questions. The ritual takes a full half-hour to perform and only works on Kindred.",
+        "group": "Basic",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Machine Blitz",
+        "description": "By spending one minute tracing incorrect mathematical equations on the surface of a target device with a pencil-sized bone wand, the ritualist causes the machine to instantly stop working through what appears to be a normal system failure. A skilled repairman can restore the target to function by succeeding in a Mental Test with difficulty equal to the caster's Mental Traits at the time the ritual is performed.",
+        "group": "Basic",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Mourning the Life Curse",
+        "description": "The ritualist smears a paste of copal oil, ground eyebright, and dates onto the eyelids of the victim, who must be a mortal. The mortal then begins to uncontrollably cry tears of blood at a rate of one Blood Trait every five minutes. The processes is painless and lasts until the vampire stops concentrating on the victim.",
+        "group": "Basic",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "The Open Passage",
+        "description": "By tracing a pattern with one Trait of blood, the ritualist makes a barrier insubstantial for one full round, allowing themselves and allies to pass through walls or locked doors. Anything touching the wall becomes similarly insubstantial. This ritual requires ten minutes to draw the pattern, and fifty additional minutes for the blood to set and seep through the solid area to create the passage. Thereafter, the passage is only open for a single round. This ritual cannot be used to enter or leave combat without extremely careful planning and timing.",
+        "group": "Basic",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Principle Focus of Vitae Infusion",
+        "description": "This ritual allows the caster to infuse one small object (often generically referred to as a “blood bead”) with a single Blood Trait available later for extraction and use by the caster or another person who is present during the ritual. The blood used, however, must be the caster's, and will create or reinforce blood bonds as normal if used by such an other person.<br><br>A caster may make as many items in a night as time and available blood permit. The infused items last until dawn; they do not carry between sessions. Activating a blood bead requires an action, during which it is held in the hand. This does not count any action(s) required to remove it from a container or hiding place.",
+        "group": "Basic",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Purge the Inner Demon",
+        "description": "By pushing a pin through their own hand, the caster pulls another vampire's Beast out of frenzy. In this state, the other vampire cannot be made to frenzy by anything non-supernatural for the night.",
+        "group": "Basic",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Purify the Blood",
+        "description": "This ritual allows the caster to purify one Trait of blood of any diseases or drugs prior to consumption. It does not work on vampire blood or blood within a living being.",
+        "group": "Basic",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Rebirth of Mortal Vanity",
+        "description": "This ritual allows a vampire to effectively “grow” hair. For every inch of hair they wish to have, the recipient of the ritual must pluck a hair from the head of a living human child. It lasts until the hair is cut shorter than the vampire's “normal” length.",
+        "group": "Basic",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Recure of the Homeland",
+        "description": "By mixing one handful of earth from the area of the subject's mortal birth with two of their Blood Traits, the ritualist creates a paste that instantly heals one level of their aggravated damage per night. This paste may only be used once on an individual each night, regardless of how many different ritualists have created it. The paste lasts forever, but must ferment for one night prior to it becoming useful, and it cannot be used during combat.",
+        "group": "Basic",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Rite of Introduction",
+        "description": "Traditionally used to announce the presence of a new Tremere within a city, the caster boils a mixture of mystical ingredients in a pot of rainwater, recites an incantation into the vapors, and speaks a brief (30 second or less) message of introduction for the regent of the city. The regent may reply telepathically for up to five minutes. This ability to telepathically respond is only available to regents.",
+        "group": "Basic",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Rituals Recognition",
+        "description": "The ritualist cuts off the tip of their nose, crushes it into a bloody paste, and smears it all over their face. This enables them whether the next ritual they cast succeeds or fails.",
+        "group": "Basic",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Sanguineous Phial",
+        "description": "Over two days, the caster enchants a vessel to hold a quantity of blood without spoiling until the container is opened. The blood will then rot normally unless the container is broken, in which case the blood will turn to dust. The jugs may not be reused.",
+        "group": "Basic",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Scent of the Lupine's Passing",
+        "description": "With a mixture of herbs, the caster can smell out werewolves for a full scene or hour, but must be within five feet of the target and succeed in a Mental Challenge against them.",
+        "group": "Basic",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "The Scribe",
+        "description": "With this ritual, the caster's spoken words are mystically transcribed into a written document. The ritual may also be cast on another. The power lasts for one scene, or until the caster chooses to end it.",
+        "group": "Basic",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Sense the Mystical",
+        "description": "The caster chants for five minutes without stopping, then carries a lit candle. When the candlelight finds an object or effect touched by any kind of blood-related magic, the item glitters. The ritual does not distinguish between different types of magic. By succeeding on a Simple Test, the caster can also identify other types of magic.",
+        "group": "Basic",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Trima",
+        "description": "The ritualist uses a Trait of their vitae to create a spiced wine, causing any mortal who drinks it to become lethargic and their memories of the evening to be indistinct. Once consumed by a mortal, the vitae retains no power to create a blood bond in a vampire feeding from them. This effect lasts until sunrise.",
+        "group": "Basic",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Wake with Evening's Freshness",
+        "description": "Before sleeping, the ritualist spreads burnt feathers over their sleeping place and performs this ritual. They will awaken instantly to any danger and be unhindered by acting in the day for two full rounds. The ritual must be recast each night.",
+        "group": "Basic",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Ward Versus Ghouls",
+        "description": "By spending ten minutes repeating a warding incantation and then pouring one Trait of blood over an object, the caster creates a mystical glyph which causes an automatic level of lethal damage to any ghoul who touches it. The ritual activates the night after it is cast and can be done on any stationary object. <br><br>Alternatively, the blood can be painted on all inner surfaces of a doorway or similar passages, such as a window frame or skylight. If so, any ghoul who violates the warded space by passing any part of their body through the painted opening will take an automatic level of lethal damage. <br><br>If the object on which the glyph is inscribed is moved or destroyed, or the continuity of the ward line around a passageway is disrupted, the ward collapses.",
+        "group": "Basic",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Whispers of the Ghost",
+        "description": "Whispers of the Ghost",
+        "group": "Basic",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Widow's Spite",
+        "description": "By personally constructing a small ceremonial doll resembling a target, the caster can hinder their thinking temporarily. Some small bit of the target, such as a lock of hair or a fingernail, must be incorporated into the doll, and it must have been removed from the target personally by the caster. Parts removed from vampires turn to ash as normal; this ash functions for the purposes of this ritual. Crafting the doll requires succeeding on a Static Mental Challenge with difficulty 6, which can be retested with an appropriate Craft Ability.<br><br>To complete the ritual, the caster makes the normal Mental Test with difficulty 5 (retested by Occult) and drives a pin through the head of the doll. The doll begins with Durability 3, and each time the ritual is attempted on it reduces its Durability by one. If the Test is successful, the target suffers a -2 penalty on ties on all Mental Challenges for the rest of the night.<br><br>If the doll is destroyed, the ritual ends. Aura Perception (Auspex 2) can spot a tether leading away from the target, as well as a tether leading away from the doll. Astral Projection (Auspex 5) can be used to follow the tether through the astral plane.",
+        "group": "Basic",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Blood Allergy",
+        "description": "By mixing a trait of their target's blood with dead rose petals and speaking an incantation, the caster forces the victim Kindred to expel all but three Blood Traits from their system. The ritual lasts an entire evening, but cannot be cast on vampires of lower generation than the caster.",
+        "group": "Intermediate",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Blood Certamen",
+        "description": "This ritual allows two Tremere to use two Blood Traits per round while in mystical combat with each other. The ritual's effects only work within the ritualized circle, which can only be constructed within a chantry.",
+        "group": "Intermediate",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Bone of Lies",
+        "description": "By enchanting a bone that is least 200 years old and steeped in ten Traits of blood, the ritualist creates an object which detects lies. Each lie told by the person holding the bone uses one Trait, causes a crack in the bone. Once all the traits have been used, the bone becomes useless and blackened.",
+        "group": "Intermediate",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Cleanse the Flesh",
+        "description": "The ritualist may cleans non-supernatural diseases or addictions from their body by spending an entire night in a bathtub of water, bleeding themselves dry. The ritual takes an entire evening and may be done on other Kindred but when completed the subject has only one Blood Trait remaining.",
+        "group": "Intermediate",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Clinging of the Insect",
+        "description": "After spending five minutes performing stretching exercises, the caster places a live spider under their tongue. They may then move on walls and ceilings at half their normal walking speed until the spider dies or the scene ends. While keeping a live spider pinned under their tongue, the caster suffers a three Trait penalty on all Social Conflicts which require them to speak well.",
+        "group": "Intermediate",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Crystal Eye",
+        "description": "By entering a meditative state, the thaumaturge may use any television they have touched in the last week as an 'eye' into the room where it is kept. The caster may also control the images the device projects. The power lasts for 10 minutes from the completion of the ritual and it may be prolonged for an extra 10 minutes per temporary Mental Trait spent. Breaking the meditative state ends the ritual.",
+        "group": "Intermediate",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "The Curse Belated",
+        "description": "By spending two permanent Physical Dots and infusing a Trait of blood into a ghoul, the ritualist insures that, the instant the ghoul dies, the infused vitae will revive them as a Kindred within ten minutes. The ghoul cannot use the Blood Trait in any way, and is marked with a sigil.",
+        "group": "Intermediate",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Detect the Hidden Observer",
+        "description": "The caster drains a Blood Trait and casts it into a fire of personal documents or recordings and anoints their forehead, eyes, and ears with the ashes. Until the next sunrise, the ritualist feels a sharp pain in their forehead, eyes, or ears whenever another individual uses supernatural powers of perception to actively spy on her.",
+        "group": "Intermediate",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Enchantment Versus Fae",
+        "description": "By spending ten minutes repeating an incantation and pouring cold iron filings over an object such as a melee weapon, the caster creates a mystical glyph which causes an automatic level of lethal damage to any fae who touches it or is touched by it, in addition to the damage normally done by the weapon itself. The ritual activates the night after it is cast. If the weapon on which the glyph is inscribed is destroyed, the enchantment collapses.",
+        "group": "Intermediate",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Enchantment Versus Lupines",
+        "description": "By spending ten minutes repeating an incantation and pouring a handful of silver dust ($1,000 worth) over an object such as a melee weapon, the caster creates a mystical glyph which causes an automatic level of lethal damage to any fae who touches it or is touched by it, in addition to the damage normally done by the weapon itself. The ritual activates the night after it is cast. If the weapon on which the glyph is inscribed is destroyed, the enchantment collapses.",
+        "group": "Intermediate",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Firewalker",
+        "description": "By cutting off one of their big toes (and thus inflicting one level of lethal damage), burning it, and smearing the ashes on their feet or palms, the caster gains a resistance to fire. For the next hour, they may make a Check for each level of aggravated fire damage they take. If they win or tie, that damage becomes lethal. This ritual may be cast on as many subjects as the caster's Mental Traits.",
+        "group": "Intermediate",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Hell's Calling",
+        "description": "By burning someone's personal item for thirty minutes while incanting, the ritualist forces that person to immediately succumb to Rötschreck, which can then be controlled with the usual Willpower or Courage/Self-Control Tests. If the target fails the Test, they are seized by supernatural panic, but calm down immediately once away from the scene.",
+        "group": "Intermediate",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "By burning someone's personal item for thirty minutes while incanting, the ritualist forces that person to immediately succumb to Rötschreck, which can then be controlled with the usual Willpower or Courage/Self-Control Tests. If the target fails the Test, they are seized by supernatural panic, but calm down immediately once away from the scene.",
+        "description": "By holding a piece of mirror and intoning a chant, the caster becomes completely incorporeal. Objects and attacks pass straight through their form. However, they can only move forward or stand still; they may not turn or back up. This ritual lasts for a scene or until the caster turns away from the fragment of mirror.",
+        "group": "Intermediate",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Infirm Inert",
+        "description": "This ritual deprives a Kindred of their ability to spend blood to close wounds. The caster imbibes blood laced with laudanum and then must smear blood onto the victim's skin. The target may spend a Willpower Trait to negate this effect for one round. The ritual lasts one night, or for as long as the laudanum remains in the ritualist's system, during which time they must spend an additional trait in Mental Challenges.",
+        "group": "Intermediate",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Mark of Amaranth",
+        "description": "After destroying another Kindred while carrying an object formerly possessed by the target, the caster can invoke this ritual to cause the target to appear to be a diablerist to all forms of detection until sunrise.",
+        "group": "Intermediate",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Mirror of Second Sight",
+        "description": "This ritual creates a permanently enchanted circular mirror which reveals supernatural creatures for what they are, but does not pierce concealment such as Obfuscate or reveal ghouls. Enchanting the mirror requires the caster bathe it in two Traits of their own blood and carve it with mystical sigils; carving a mirror in this way requires a Downtime Action.",
+        "group": "Intermediate",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Pavis of Foul Presence",
+        "description": "By tying a blue silken cord around their neck, the caster, gains protection from the effects of Basic and Intermediate Presence powers, and such powers are projected back to the vampire who used them. The ritual works once per cord and they last until sunrise after casting is unused. The blue silk cord must be visible. The color, location, and material are important, but the exact configuration is not—a blue silk scarf, necktie, or security badge lanyard would be just as legitimate as a plain cord. If multiple cords are used they must be distinct; braiding three cords together causes them to count as effectively one cord for the purposes of this ritual. This ritual cannot be cast on another person.",
+        "group": "Intermediate",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Power of the Pyramid",
+        "description": "To combine magical power, this ritual allows a group of casters to lend Willpower to another for further rituals, trait refreshes, and so forth. Only one caster may leave the circle at any time to perform other activities. All of the casters must know the ritual, and one must pierce their flesh with a bone pin.",
+        "group": "Intermediate",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Return of the Heart",
+        "description": "By mixing a Trait of their vampire victim's blood with the tears of an infant, the ritualist forces the victim to reflect upon their past actions through the eyes of an innocent and become overwhelmed with guilt. While this does not affect a Path rating, the target behaves the rest of the evening as if they had 5 Dots on the Path of Humanity.",
+        "group": "Intermediate",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Rutor's Hands",
+        "description": "After casting this ritual, the caster cuts off their hand and places their own eyeballs on top of it, suffering five levels of aggravated damage in the process. The hand becomes an animated servant for use by the creator. The creation must be fed a Trait of blood each week and can be destroyed by one level of damage. The caster's eyes and hands regenerate normally. A card is needed for each servant created.",
+        "group": "Intermediate",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Scry",
+        "description": "The ritual causes a body of water to become a scrying pool after the caster mixes it with owl's blood. The caster may view a known location they have visited or a person; doing the latter requires an object of significance to that person. The ritual lasts ten minutes, although additional viewing time may be gained at the expenditure of one Mental Trait for each additional ten minutes.",
+        "group": "Intermediate",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Soul of Homunculi",
+        "description": "Taking an entire month of out of game time to cast, the ritualist creates a servant who acts as a spy and an aide. Utterly loyal, homunculi possess three Physical Traits and two health levels, but cannot fight. A vampire may only have one homunculus at a time.",
+        "group": "Intermediate",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Stolen Kisses",
+        "description": "By making a small incision on their body and carrying a thistle steeped in vampiric vitae, the ritualist seals the self-inflicted wound into an undetectable mouth-like sucker which can steal one Blood Trait every other round during contact. Victims are not immediately aware of their blood loss, although they will suffer the usual health effects. The “mouth” lasts until sunrise.",
+        "group": "Intermediate",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "A Touch of Nightshade",
+        "description": "By anointing their hands with deadly nightshade, the caster causes anyone they touch to become poisoned until sunrise. This poison inflicts one level of bashing damage (not halved) per hour to Kindred, and one level of lethal damage per hour to mortals. The poison may not be treated by medical or mystical means.",
+        "group": "Intermediate",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Track Transgressor",
+        "description": "By uttering mystical syllables and spilling a Trait of their vitae upon the ground where Thaumaturgy has taken place within the past twenty-four hours, the caster tracks the path the magus took after leaving the area where the magic was used. This ritual does not distinguish between Tremere and non-Tremere uses of Thaumaturgy.",
+        "group": "Intermediate",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Unweave Ritual",
+        "description": "This ritual allows the caster to prematurely end any ritual with a duration that may be affecting them. The caster need only identify the ritual, gather the components, and succeed in a Mental Challenge against the original caster. The original caster does not know the ritual has ended.",
+        "group": "Intermediate",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Ward Versus Fae",
+        "description": "By spending ten minutes repeating a warding incantation and then pouring cold iron filings over an object, the caster creates a mystical glyph which causes an automatic level of lethal damage to any fae who touches it. The ritual activates the night after it is cast and can be done on any stationary object. <br><br>Alternatively, the iron filings can be mixed with black paint and painted on all inner surfaces of a doorway or similar passages, such as a window frame or skylight. If so, any fae who violates the warded space by passing any part of their body through the painted opening will take an automatic level of lethal damage.<br><br>If the object on which the glyph is inscribed is moved or destroyed, or the continuity of the ward line around a passageway is disrupted, the ward collapses.",
+        "group": "Intermediate",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Ward Versus Lupines",
+        "description": "By spending ten minutes repeating a warding incantation and then pouring a handful of silver dust ($1,000 worth) over an object, the caster creates a mystical glyph which causes an automatic level of lethal damage to any werewolf who touches it. The ritual activates the night after it is cast and can be done on any stationary object. <br><br>Alternatively, the silver dust can be mixed with white paint and painted on all inner surfaces of a doorway or similar passages, such as a window frame or skylight. If so, any werewolf who violates the warded space by passing any part of their body through the painted opening will take an automatic level of lethal damage.<br><br>If the object on which the glyph is inscribed is moved or destroyed, or the continuity of the ward line around a passageway is disrupted, the ward collapses.",
+        "group": "Intermediate",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Ward Versus Vitae",
+        "description": "By spending ten minutes repeating a warding incantation and then drawing in their own blood on a stationary object, the caster creates a mystical glyph which causes an automatic level of lethal damage to any Kindred of lower generation who touches it. The ritual activates the night after it is cast and can be done on any stationary object. <br><br>Alternatively, the glyph can be drawn repeatedly on all inner surfaces of a doorway or similar passages, such as a window frame or skylight. If so, any Kindred of lower generation who violates the warded space by passing any part of their body through the painted opening will take an automatic level of lethal damage.<br><br>If the object on which the glyph is inscribed is moved or destroyed, or the continuity of the ward line around a passageway is disrupted, the ward collapses.",
+        "group": "Intermediate",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Abandon the Fetters",
+        "description": "Extremely powerful and extraordinarily rare, this ritual allows the caster to sever a blood bond. The ritual requires a Trait of blood from each of the vampires in the blood bond and the caster of the ritual. The subject is chained and tortured for an entire night and takes four levels of aggravated damage and loses one permanent Willpower Dot, while the caster takes one level of aggravated damage.",
+        "group": "Advanced",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Blood Contract",
+        "description": "The caster writes a contract capable of forging a mystical bond between the caster and another individual. A blood contract can only have two signers, and the signers can only have one contract binding each other at any given time. Only three contracts may have the name of a single character on them, no matter how many ritualists exist. Each contract requires an Advanced Downtime Action to prepare, must be written in one Blood Trait of the caster's vitae, and must be written in 300 words or fewer. A contract counts as the caster's custom creation for the month. To complete the contract, both parties must sign it, each using a Trait of their own blood.<br><br>The terms of a contract outline the limit for the punishment for breaking. Each contract has a set level of punishment associated with breaking it, determined by the caster at the time of creation.<br><br>? A Knowledge level contract will alert both of the signers with a telepathic nudge when the contract has been broken. This may take some time, and will not always occur as soon as the contract is broken. <br>? A Blood level contract will deal the signer that broke it one level of lethal damage and alert the innocent party as soon as possible. <br>? A Soul level contract will deal the offending signer three levels of aggravated damage and immediately alert the innocent signer. <br><br>The Storytellers will look at each contract while it is being made, and will determine when a contract has been broken.",
+        "group": "Advanced",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Cobra's Favor",
+        "description": "After combining one Trait of their blood with a brew of toxic herbs and snake venom, the ritualist ingests the elixir and takes a level of unsoakable aggravated damage. For one full month, the thaumaturge's blood turns into a deadly poison, inflicting one level of aggravated damage per Trait to anyone ingesting it.",
+        "group": "Advanced",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Court of Hallowed Truth",
+        "description": "By placing a pair of crossed bones before every entry into a room (including the windows), the ritualist assures no falsehood may be spoken within and direct questions from the presiding judge must be answered completely candidly. The power lasts only for a single night.",
+        "group": "Advanced",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Nectar of the Bitter Rose",
+        "description": "This ritual, said to allow multiple individuals to share the benefits of diablerie, is not available to player characters, and it may not exist at all outside rumor.",
+        "group": "Advanced",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Night of the Red Heart",
+        "description": "Cast over the course of an entire night, this ritual requires a trait of the victim's blood and a carving of their likeness. Once the ritual has begun, the victim feels an overwhelming sense of dread and knows the caster is trying to kill them. If the victim travels farther than 35 miles from the caster, or anything interrupts the ritual, it immediately fails; otherwise, the victim is killed upon completion of the ritual.",
+        "group": "Advanced",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Paper Flesh",
+        "description": "The ritualist uses a Trait of their own blood to sketch the target's face, writes the target's full birth name across the image, then cuts the sketch with a silver dagger. The target is stripped of 1/3 of their Physical Traits, rounded up.",
+        "group": "Advanced",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Severed Hand",
+        "description": "Use of this powerful rite requires an entire night of preparation and prevents a Kindred's severed appendage from healing normally, ensuring that the Kindred becomes permanently maimed. The appendage may not be regenerated by any means short of supernatural healing such as Obeah.",
+        "group": "Advanced",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Stone of True Form",
+        "description": "By coating a small pebble in one Trait of their blood, the thaumaturge creates a talisman capable of forcing those touched by it (usually requiring a Physical Challenge) to assume their “natural” shape for a scene. Werewolves revert to human form, Protean claws are eliminated, Vicissitude is reversed, the false visage produced by Mask of a Thousand Faces (Obfuscate 3) disappears, and so forth. Other Obfuscate powers can be broken, but the stone cannot be used to target someone invisible to the user; one cannot detect hidden observers by tossing a stone around the room, but if one has successfully used Auspex to spot such an individual, one may then use the stone to reveal them to everyone else present.<br><br>Each pebble may only be used once.",
+        "group": "Advanced",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Stone Slumber",
+        "description": "The caster smears their body with blood and stands completely still in an open area facing east. They then turn to stone when the sun's rays strike them. While stone, the Kindred is not aware and will wake ten minutes after the next sunset, burning an additional Trait of blood.",
+        "group": "Advanced",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Umbra Walk",
+        "description": "To enter the spirit plane of the Umbra, the caster sacrifices a living sentient being for each vampire who wishes to travel there, including herself. The ritual lasts until the caster chooses to re-enter the regular world.",
+        "group": "Advanced",
+        "is_thaumaturgy": "TRUE"
+    },
+    {
+        "name": "Find the Soul's Anchor",
+        "description": "This ritual allows the necromancer to determine whether an object is an item of importance to a ghost. The necromancer must place a drop of their blood in each eye, then focus on the item for thirty seconds and succeed in a Mental Test with difficulty 7. If successful, they receive a general impression of the ghost (or ghosts) tied to the object. This ritual may be used on up to three objects at a time.",
+        "group": "Basic",
+        "is_thaumaturgy": "FALSE"
+    },
+    {
+        "name": "Funeral Goods",
+        "description": "By applying a Blood Trait to an object and destroying it, the necromancer creates a working version of it that exists in the Shadowlands. The object does not need to be completely obliterated, but it must be damaged beyond easy repair; thus, an object made of paper could be burned, while a glass object could be smashed with a hammer or a metal object could be cut to small pieces with shears. The copy in the Shadowlands will be in the same state when the Blood Trait was applied. It cannot be brought back to the real world by any means. This power can be used to give an object to a ghost, or to make it available to a user in the Shadowlands.",
+        "group": "Basic",
+        "is_thaumaturgy": "FALSE"
+    },
+    {
+        "name": "Preservation",
+        "description": "The necromancer may preserve a part of the body up to the size of a limb, whether from a mortal or a vampire; a complete torso is too large for this power to affect, but individual organs from the torso can be affected as discrete entities. The body part will not decay, but it will not contain any consumable blood. If it began to crumble into ash when removed from a vampire, it will be returned to its unliving state. The ritual can be performed on multiple body parts at once, but they must be detached from each other. This ritual costs one Mental Trait per body part preserved.",
+        "group": "Basic",
+        "is_thaumaturgy": "FALSE"
+    },
+    {
+        "name": "Skeleton Key",
+        "description": "By taking the bone of a current or former resident or owner of a building and succeeding at a Mental Chop, the necromancer turns the bone into a key that lasts for the rest of the night. The source of the bone may be mortal or supernatural. This key may open a door in the building once, and is then used up. It is limited to doors and cannot be used on vehicles, padlocked boxes, or the like. You may not have more than one key made for a specific building at one time, but you can have multiple keys made for multiple buildings, at a limit of your Mental Dots.",
+        "group": "Basic",
+        "is_thaumaturgy": "FALSE"
+    },
+    {
+        "name": "The Soul's Pulse",
+        "description": "By holding a personal item belonging to an individual and succeeding on a Mental Test with difficulty 7, the necromancer can determine if the individual is “alive.” Since this ritual was designed to work on vampires as well as mortals, it actually determines if the individual's soul is on the plane of the living and in its original body; hence, a vampire or Risen (in its own body) will register as “alive” for this purpose. If this is the case, the item will vibrate briefly. Any other result (including the target being physically on another plane of existence, or the soul being in a body other than the original) will register an inconclusive result. The exact location or state of the soul is not revealed by this ritual, so it not will reveal whether someone is dead, diablerized, or traveling interdimensionally.",
+        "group": "Basic",
+        "is_thaumaturgy": "FALSE"
+    },
+    {
+        "name": "Spiritual Control",
+        "description": "This ritual binds a spirit to observe and defend a location for one lunar cycle (two gaming sessions). It requires the necromancer to possess an anchor belonging to the ghost, and to use Summon Soul (d'Uso 2) using the standard rules for that power. The ritual also requires a pair of coins. The anchor is destroyed during the ritual, and the coins must be enchanted with one Blood Trait. One coin dissolves and bonds with the spirit during the ritual while the other remains physical and can remain with the necromancer or whomever the necromancer deems worthy. If the bound spirit discovers a problem, it can send a warning by vibrating its matched coin.<br<br>This ritual does not negate a surprise attack; while a spirit might warn the person holding its coin about danger, it doesn't provide them knowledge of exactly when that danger may materialize or from what direction it will come. The spirit cannot be sensed without the use of Auspex or other appropriate Disciplines. It cannot see through Obfuscate or operate during the day. As these spirits are dragged closer to the material plane in order to observe it for problems, they lose the ability to detect Astral threats. However, they can still perceive and interact with other spirits.",
+        "group": "Basic",
+        "is_thaumaturgy": "FALSE"
+    },
+    {
+        "name": "Unholy Communication",
+        "description": "By enchanting two skulls, the necromancer can produce a tool allowing them to communicate over long distances. Only necromancers can engage the skulls and begin a conversation, but anyone can use one after it has been engaged. Any skull can be used, though small mammals are the most common as they are sturdier than bird skulls. A paired set of skulls can be enchanted during each use of this Ritual; each skull only speaks to its partner. These skulls can be used to communicate between the Shadowlands and the mortal world.",
+        "group": "Basic",
+        "is_thaumaturgy": "FALSE"
+    },
+    {
+        "name": "Attune the Goods",
+        "description": "By applying a Blood Trait to an object, the necromancer enables the object to be brought with them the next time they use Dead Hand (Path of the Shadowlands 3). The object will coexist in the real world and the Shadowlands as you do; if you extend Dead Hand past its original duration, you must spend an additional Blood Trait per object you wish to keep attuned as well. When Dead Hand ends, the attunement ends as well.<br><br>This power is most often used on a melee weapon. It can be used on firearms or missile weapons, but each bullet or arrow must be attuned as well. As firearms do not ordinarily work in the Shadowlands, an attuned firearm is unreliable; before firing, you must succeed in a Check or the gun fails to fire.",
+        "group": "Intermediate",
+        "is_thaumaturgy": "FALSE"
+    },
+    {
+        "name": "Cadaverous Meal",
+        "description": "The most vile of necromancers have determined a way by which to gain sustenance from corpses, human and otherwise. By performing this ritual on a corpse and, and its conclusion, draining the blood from it, necromancers can sustain themselves as if feeding.<br><br>Blood acquired in this manner is weaker than that from living bodies, and only corpses that are less than seven days old are appropriate for consumption. Corpses must be kept free of decay or the blood drunk in this manner has no potency. Freezing or other means to reduce or remove the threat of decay will preserve the blood, though a body must be completely thawed prior to using the ritual.<br><br>Blood drunk from such a corpse is turned into vampiric vitae at 50% efficiency; for every two traits of blood drunk from the corpse, the vampire gains one Blood Trait. At the end of the ritual, the corpse is mummified and drained of fluids.",
+        "group": "Intermediate",
+        "is_thaumaturgy": "FALSE"
+    },
+    {
+        "name": "Death Knell",
+        "description": "By attuning themselves to the underworld, the necromancer can sense when a new ghost is formed. This ritual, once cast, lasts for the entire evening. The Storytellers will inform you when a new ghost comes into existence within roughly a one mile radius. Note that few vampires, and not all mortals, become ghosts upon death.",
+        "group": "Intermediate",
+        "is_thaumaturgy": "FALSE"
+    },
+    {
+        "name": "Forge the Soul's Anchor",
+        "description": "The necromancer can attune an object to a ghost, making it serve as a temporary anchor to aid in summoning or controlling it. An item must be prepared in advance by leaving it  from dusk until dawn in a circle of ashes formed from burned bones. When the item is brought into the ghost's presence, the necromancer may take an action to make a Mental Challenge against the ghost (with the standard anchor bonuses if the item has an appropriate connection to the ghost). If successful, the item serves as an anchor for the ghost for the next month. Only one ghost can be connected to an anchor created this way, and it cannot be an existing anchor for another ghost. This ritual cannot be used to forge an anchor for a ghost someone else controls without the controller's permission.",
+        "group": "Intermediate",
+        "is_thaumaturgy": "FALSE"
+    },
+    {
+        "name": "The Mortician's Art",
+        "description": "This ritual allows the necromancer to restore the ashes of a corpse (vampiric, mortal, or other) to its physical state at the moment of death. This requires the necromancer to spend two Mental Traits and squeeze a Blood Trait from their body onto the ashes. As long as the ashes represent at least 50% of the substance of the body, they reshape themselves into a whole body, in the exact physical condition they were at the moment of death. This does not restore clothing or personal possessions, and if the individual burned to death and was subsequently reduced to ash, the restored corpse will still be burned.<br><br>This ritual can be used to verify a dead vampire's identity, examine their body forensically (including with Insight), or provide a physical corpse for a memorial service. The vitae remains in the system, and can be drunk (causing the body to collapse back into ash), but remains that of the necromancer and retains its original properties. The restored body falls into a pile of fine dust at dawn, and cannot be restored again by this power. <br><br>This ritual has no effect on a vampire using Ashes to Ashes (Thanatosis 3), but it can restore a corpse destroyed by Destroy the Husk (Thanatosis 1). Note that vampires destroyed by diablerie leave no ashes.",
+        "group": "Intermediate",
+        "is_thaumaturgy": "FALSE"
+    },
+    {
+        "name": "Pristine Mummification",
+        "description": "Under normal circumstances, mummification requires the draining of fluids from a corpse, the removal of its internal organs, and the forced drying of the remaining body, usually in salts. Necromancers, however, have developed this ritual to allow them to quickly mummify a corpse without all the intermediate steps. Any corpse—human, animal, even plants—can be preserved using this ritual.<br><br>This ritual takes an hour and, in addition to the corpse, requires a pound of salt and a jar of formaldehyde. The salt must be poured into a circle surrounding the necromancer and the corpse prior to beginning the ritual. For an hour the necromancer must meditate and draw on the black energies of death. Finally, the necromancer must pour formaldehyde on the corpse, consuming the salt in a flash of lightless energy. <br><br>The enchanted corpse will no longer decay. In other ways, it remains a “normal” corpse, even providing sustenance for necromancers who wish to combine this Ritual with Cadaverous Meal or who wish to preserve bodies for later necromantic purposes.",
+        "group": "Advanced",
+        "is_thaumaturgy": "FALSE"
+    },
+    {
+        "name": "Spiritual Guardian",
+        "description": "This power requires an object to which a ghost is tied, an object the necromancer wishes to protect, and a copy of the object (the more exact the copy, the better). The ghost's anchor must be attached to the protected object in some way. The object and the copy are each marked with a Blood Trait, and the copy is destroyed. Doing this ties the ghost to the original object, and gives the ghost a ghostly version of the copy. If the original object would be damaged or destroyed, the damage is applied to the ghostly copy instead, leaving the original untouched. The ghost can restore the copy using its own ghostly substance, which regenerates slowly. Thus, an object that is subject to repeated damage will eventually cause the destruction of its ghostly guardian, rendering it vulnerable to damage as normal.",
+        "group": "Advanced",
+        "is_thaumaturgy": "FALSE"
+    },
+    {
+        "name": "Temper the Soul's Anchor",
+        "description": "With this ritual, the necromancer can make a temporary anchor created by Forge the Soul's Anchor permanent. The necromancer must keep the ghost in the presence of the anchor for twenty-four hours. The necromancer must be present during this time, but does not need to be conscious. After the day has passed, the necromancer must spend one Willpower Trait, making the anchor permanent for that ghost.",
+        "group": "Advanced",
+        "is_thaumaturgy": "FALSE"
+    },
+    {
+        "name": "Visage Sharing",
+        "description": "This ritual allows a necromancer to exchange someone's physical appearance with that of a corpse. The corpse must have two reasonably intact eyes that are still located in the skull. Two pennies are placed over the corpse's eyes and one Trait of the necromancer's blood is applied to each. The necromancer must then succeed on a Mental Test with difficulty 7. The pennies then absorb the blood over the course of the ritual and appear normal at the end. At any time within the next week, the necromancer may apply the pennies to the living or undead individual's eyes, causing the pennies to vanish and the target to take on the appearance of the corpse prior to its death (disfigurement to the corpse in the course of its death will not appear). If used on an unwilling target, the necromancer must also defeat them in a Physical Challenge.<br><br>This transformation operates in a manner similar to Mask of a Thousand Faces (Obfuscate 3). The transformation is illusory rather than physical, but affects all senses. Unlike Mask, recordings of the illusion will remain after the effect ends. <br><br>This effect ends at the end of a scene or an hour, whichever is shorter. When the effect ends, the subject and the pennies return to normal, and the corpse rots away into a skeleton, preventing further use of this ritual.",
+        "group": "Advanced",
+        "is_thaumaturgy": "FALSE"
+    }
+]

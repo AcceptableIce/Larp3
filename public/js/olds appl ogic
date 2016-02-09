@@ -1,0 +1,135 @@
+//Pull in existing data if possible
+				/* <?	if(isset($character_id)) {
+						$character = Character::find($character_id);
+						if($character->in_review) {
+							echo 'document.location = "/dashboard";';
+						}
+						$cdata = $character->getVersion($character->latestVersion()->version);
+					?>
+						self.editingId({{$cdata["id"]}});
+						self.editingVersion({{$character->approved_version}});
+						var activeSect = self.getSectById({{$cdata["sect"]["sect_id"]}});
+						self.activeSect(activeSect);
+						self.characterSheet.sect.selected(activeSect);
+						self.characterSheet.sect.displaying(self.getSectById({{$cdata["sect"]["hidden_id"]}}));
+			
+						var activeClan = self.getClanById({{$cdata["clan"]["clan_id"]}});
+						self.activeClan({Value: activeClan.id});
+						self.characterSheet.clan.selected(activeClan);
+						self.characterSheet.clan.displaying(self.getClanById({{$cdata["clan"]["hidden_id"]}}));
+						
+						var selNature = self.getNatureById({{$cdata["nature"]["nature_id"]}});
+						self.characterSheet.nature(selNature);
+						self.activeNature(selNature);
+
+						self.characterSheet.willpower.traits({{$cdata["willpower"]["traits"]}});
+						self.characterSheet.willpower.dots({{$cdata["willpower"]["dots"]}});
+
+						self.characterSheet.attributes([{{$cdata["attributes"]["physicals"]}}, {{$cdata["attributes"]["mentals"]}}, {{$cdata["attributes"]["socials"]}}]);
+						<? foreach($cdata["abilities"] as $a) { ?>
+							self.characterSheet.abilities.push({ id: {{$a["ability_id"]}}, count: {{$a["amount"]}}, name: "{{RulebookAbility::find($a["ability_id"])->name}}" });
+						<? } ?>
+
+						<? foreach($cdata["disciplines"] as $a) { ?>
+							self.characterSheet.disciplines.push({ id: {{$a["discipline_id"]}}, count: {{$a["ranks"]}}, name: "{{RulebookDiscipline::find($a["discipline_id"])->name}}", "path": {{$a["path_id"]}}  });
+						<? } ?>
+
+						<? foreach($cdata["rituals"] as $a) { ?>
+							self.characterSheet.rituals.push({{$a["ritual_id"]}});
+						<? } ?>
+
+						<? foreach($cdata["backgrounds"] as $a) { ?>
+							self.characterSheet.backgrounds.push({ id: {{$a["background_id"]}}, count: {{$a["amount"]}}, name: "{{RulebookBackground::find($a["background_id"])->name}}", description: "{{$a['description']}}" });
+						<? } ?>
+						console.log(self.characterSheet.disciplines());
+						self.characterSheet.path(self.getPathById({{$cdata["path"]["path_id"]}}));
+						self.characterSheet.virtues([ {{$cdata["path"]["virtue1"]}}, {{$cdata["path"]["virtue2"]}}, {{$cdata["path"]["virtue3"]}}, {{$cdata["path"]["virtue4"]}} ])
+
+						<? foreach($cdata["derangements"] as $a) { ?>
+							self.characterSheet.derangements.push({{$a["derangement_id"]}});
+						<? } ?>
+
+						<? foreach($cdata["merits"] as $a) { ?>
+							self.characterSheet.merits.push({data: self.getMeritById({{$a["merit_id"]}}), description: "{{$a['description']}}"});
+						<? } ?>
+
+						<? foreach($cdata["flaws"] as $a) { ?>
+							self.characterSheet.flaws.push({data: self.getFlawById({{$a["flaw_id"]}}), description: "{{$a['description']}}"});
+						<? } ?>
+						<?
+							$clanOptionMap = [	"Brujah" => "brujah", "Caitiff"=> "caitiff", "Malkavian"=> "malkavian", "Toreador" => "toreador", "Ventrue" => "ventrue",
+												"Lasombra" => "lasombra", "Ravnos" => "ravnos", "Daughters of Cacophony"=> "daughters", "Followers of Set"=> "setites",
+												"Giovanni" => "giovanni"];
+							$clan = $character->clan($character->latestVersion()->version)->first()->definition->name;
+							if(array_key_exists($clan, $clanOptionMap)) {
+								if($clan == "Toreador") { 
+									if(strpos($cdata['clanOptions']['option1'], 'Perform') !== false || strpos($cdata['clanOptions']['option1'], 'Crafts') !== false) {
+										$parts = explode(': ', $cdata['clanOptions']['option1']); ?>
+										self.clanOptionValues["toreador"][0]("{{$parts[0]}}");
+										self.clanOptionValues["toreador"][2]("{{$parts[1]}}");
+									<? } else { ?>
+										self.clanOptionValues["toreador"][0]("{{$cdata['clanOptions']['option1']}}");
+									<? }
+									if(strpos($cdata['clanOptions']['option2'], 'Perform') !== false || strpos($cdata['clanOptions']['option2'], 'Crafts') !== false) {
+										$parts = explode(': ', $cdata['clanOptions']['option2']); ?>
+										self.clanOptionValues["toreador"][1]("{{$parts[0]}}");
+										self.clanOptionValues["toreador"][3]("{{$parts[1]}}");
+									<? } else { ?>
+										self.clanOptionValues["toreador"][1]("{{$cdata['clanOptions']['option2']}}");
+									<? }
+								} else { 
+									$clanMapping = $clanOptionMap[$clan] ?>
+									@if($cdata['clanOptions']['option1'])
+									self.clanOptionValues["{{$clanMapping}}"][0]("{{$cdata['clanOptions']['option1']}}");
+									@endif
+									@if($cdata['clanOptions']['option2'])
+									self.clanOptionValues["{{$clanMapping}}"][1]("{{$cdata['clanOptions']['option2']}}");
+									@endif
+									@if($cdata['clanOptions']['option3'])
+									self.clanOptionValues["{{$clanMapping}}"][2]("{{$cdata['clanOptions']['option3']}}");
+									@endif
+							 <? }
+							}
+							
+
+						?>
+
+						self.characterSheet.name("{{$cdata["name"]}}");
+						self.versionComment("{{$cdata['version']['comment']}}");
+						self.experienceSpent({{$character->getExperienceCost($character->latestVersion()->version)}});
+						self.totalExperience(10 + {{$character->experience}});
+						
+					<?} ?>
+					if(self.editingVersion() == 0) {
+						console.log('Enabling subscribers');
+						self.characterSheet.clan.selected.subscribe(function(oldValue) { self.lockAndClearClanOptions(); }, this, 'beforeChange');
+
+						self.characterSheet.clan.selected.subscribe(function(newValue) { self.unlockAndUpdateClanOptions(); });
+
+						for(var key in self.clanOptionValues) {
+							for(var i in self.clanOptionValues[key]) {
+								self.clanOptionValues[key][i].subscribe(function(oldValue){ console.log("Update ID", update++); self.lockAndClearClanOptions(); }, this, 'beforeChange');
+								self.clanOptionValues[key][i].subscribe(function(newValue){ console.log("Update ID", update++);  self.unlockAndUpdateClanOptions(); });
+							}
+						}
+						self.clanOptionValues.caitiff[0].subscribe(function(newValue) {
+							if(newValue != "" && (newValue == self.clanOptionValues.caitiff[1]() || newValue == self.clanOptionValues.caitiff[2]())) {
+								self.showModal("Cannot select the same discipline.", "Caitiff must have three distinct disciplines.");
+								self.clanOptionValues.caitiff[0]("");
+							}							
+						});
+						self.clanOptionValues.caitiff[1].subscribe(function(newValue) {
+							if(newValue != "" && (newValue == self.clanOptionValues.caitiff[0]() || newValue == self.clanOptionValues.caitiff[2]())) {
+								self.showModal("Cannot select the same discipline.", "Caitiff must have three distinct disciplines.");
+								self.clanOptionValues.caitiff[1]("");
+							}							
+						});
+						self.clanOptionValues.caitiff[2].subscribe(function(newValue) {
+							if(newValue != "" && (newValue == self.clanOptionValues.caitiff[0]() || newValue == self.clanOptionValues.caitiff[1]())) {
+								self.showModal("Cannot select the same discipline.", "Caitiff must have three distinct disciplines.");
+								self.clanOptionValues.caitiff[2]("");
+							}							
+						});
+					}
+					$(".load-curtain").addClass("curtain-fall");
+					setTimeout(function() { $(".load-curtain").remove()}, 1500);*/

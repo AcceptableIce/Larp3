@@ -1,0 +1,423 @@
+{
+    "sects": [
+        {
+            "name": "Anarchs",
+            "description": "Anarchs description.",
+            "clans":
+			[
+                { 
+                    "name": "Common Clans",
+                    "options":
+                    [
+                        "Brujah",
+                        "Gangrel",
+                        "Tremere"
+                    ]
+                },
+                { 
+                    "name": "Uncommon Clans",
+                    "options":
+                    [
+                        "Caitiff"
+                    ]
+                }
+			]
+        },
+        {
+            "name": "Camarilla",
+            "description": "Cam description.",
+            "clans":
+			[
+                { 
+                    "name": "Common Clans",
+                    "options":
+                    [
+                        "Brujah",
+                        "Gangrel"   
+                    ]
+                },
+                { 
+                    "name": "Uncommon Clans",
+                    "options":
+                    [
+                        "Caitiff"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Independent",
+            "description": "Independent description.",
+			"clans":
+    		[
+                { 
+                    "name": "Common Clans",
+                    "options":
+                    [
+                        "Brujah",
+                        "Gangrel"   
+                    ]
+                },
+                { 
+                    "name": "Uncommon Clans",
+                    "options":
+                    [
+                        "Caitiff"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Sabbat",
+            "description": "Sabbat description.",
+            "disabled": true,
+            "clans":
+		    [
+                { 
+                    "name": "Common Clans",
+                    "options":
+                    [
+                        "Brujah",
+                        "Gangrel"   
+                    ]
+                },
+                { 
+                    "name": "Uncommon Clans",
+                    "options":
+                    [
+                        "Caitiff"
+                    ]
+                }
+            ]
+        }
+    ],
+    "clans": [
+        {
+            "name": "Brujah",
+            "description": "Literally a wall of text.",
+            "disciplines": [
+                "Auspex",
+                "Fortitude",
+                "Obfuscate"
+            ]
+        },
+        {
+            "name": "Gangrel",
+            "description": "More text.",
+            "disciplines": [
+                "Auspex",
+                "Fortitude",
+                "Obfuscate"
+            ]
+        },
+        {
+            "name": "Caitiff",
+            "description": "Even More text.",
+            "disciplines": [
+                "Auspex",
+                "Fortitude",
+                "Obfuscate"
+            ]
+        },
+        {
+	        "name": "Tremere",
+	        "description": "Magic!",
+	        "disciplines": [
+		        "Thaumaturgy",
+		        "Auspex"
+	        ]
+        }
+    ],
+    "natures": [
+        {
+            "name": "Architect",
+            "description": "build a thing."
+        },
+        {
+            "name": "Autocrat",
+            "description": "fancy a thing."
+        }
+    ],
+    "abilities": [
+        {
+            "name": "Discipline",
+            "values": [
+                {
+                    "name": "Animal Kin",
+                    "description": "animals and things.",
+                    "cost": "1"
+                },
+                {
+                    "name": "Awareness",
+                    "description": "Seeing stuff.",
+                    "cost": "1"
+                }
+            ]
+        },
+        {
+            "name": "Combat",
+            "values": [
+                {
+                    "name": "Blindfighting",
+                    "description": "Seeing isn't belieing.",
+                    "cost": "1"
+                },
+                {
+                    "name": "Block",
+                    "description": "Blocking stuff.",
+                    "cost": "1"
+                }
+            ]
+        }
+    ],
+    "disciplines": [
+        {
+            "name": "Auspex",
+            "retest": "Investigation",
+            "ranks": [
+                {
+                    "name": "Heightened Senses",
+                    "description": "See and hear things well.",
+                    "cost": "3"
+                },
+                {
+                    "name": "Aura Perception",
+                    "description": "do you have a minute to talk bout aura",
+                    "cost": "3"
+                }
+            ]
+        },
+        {
+            "name": "Fortitude",
+            "retest": "None",
+            "ranks": [
+                {
+                    "name": "Endurance",
+                    "description": "I dont even remember",
+                    "cost": "3"
+                }
+            ]
+        },
+        {
+            "name": "Obfuscate",
+            "retest": "Stealth",
+            "ranks": [
+                {
+                    "name": "Cloak of Shadows",
+                    "description": "invis",
+                    "cost": "3"
+                },
+                {
+                    "name": "Unseen Presence",
+                    "description": "unseen",
+                    "cost": "3"
+                }
+            ]
+        },
+        {
+	        "name": "Thaumaturgy",
+	        "retest": "Occult",
+	        "ranks": [
+		        {
+			        "name": "N/A",
+			        "description": "Thaum needs different formatting.",
+			        "cost": "3"
+		        }
+	        ]
+        },
+        {
+            "name": "A Fouth One",
+            "retest": "Stealth",
+            "ranks": [
+                {
+                    "name": "Cloak of Shadows",
+                    "description": "invis",
+                    "cost": "3"
+                },
+                {
+                    "name": "Unseen Presence",
+                    "description": "unseen",
+                    "cost": "3"
+                }
+            ]
+        }
+    ],
+    "rituals": [
+        {
+            "name": "Basic Rituals",
+            "options":
+            [
+	            {
+		            "name": "A Ritual 1",
+					"description": "Do a ritualistic thing."
+	            }
+	            
+            ]
+        },
+        {
+            "name": "Intermediate Rituals",
+            "options":
+            [
+	            {
+		            "name": "A Ritual 2",
+					"description": "Do a ritualistic thing."
+	            }
+	            
+            ]
+        },
+        {
+            "name": "Advanced Rituals",
+            "options":
+            [
+	            {
+		            "name": "A Ritual 3",
+					"description": "Do a ritualistic thing."
+	            }
+	            
+            ]
+        }
+    ],
+    "backgrounds":   [
+    	{
+            "name": "Backgrounds",
+            "values": [
+                {
+		            "name": "Appearance",
+		            "description": "How good you look.",
+		            "cost": "1"
+		        },
+		        {
+		            "name": "Generation",
+		            "description": "How old you are.",
+		            "cost": "1,1,2,4,7"
+		        }
+            ]
+        },
+        {
+	        "name": "Influences",
+	        "values": [
+		        {
+		            "name": "Bureaucracy",
+		            "description": "Business and government and stuff",
+		            "cost": "1"
+		        },
+		        {
+		            "name": "Church",
+		            "description": "Godly things",
+		            "cost": "1"
+		        }
+	        ]
+        },
+        {
+	        "name": "Lores",
+	        "values": [
+		        {
+		            "name": "Anarch",
+		            "description": "Anarch things",
+		            "cost": "1"
+		        },
+		        {
+		            "name": "Camarilla",
+		            "decsription": "Cam things",
+		            "cost": "1"
+		        }
+	        ]
+        }
+     
+    ],
+    "paths": [
+        {
+            "name": "Path of Humanity",
+            "description": "The default one",
+            "sins": [
+                "Tier 5",
+                "Tier 4",
+                "Tier 3",
+                "Tier 2",
+                "Tier 1"
+            ],
+            "stats": [
+                "Self-Control",
+                "Conscience",
+                "Morality",
+                "Courage"
+            ]
+        }
+    ],
+    "derangements": [
+        {
+            "name": "Blood Sweats",
+            "description": "Blood bleeding."
+        },
+        {
+            "name": "Blood Taste",
+            "description": "Blood taste."
+        }
+    ],
+    "merits": [
+        { 
+            "name": "Physical",
+            "options": [
+                {
+                    "name": "Acute Sense: Hearing",
+                    "cost": 1,
+                    "description": "This is a description for Acute Sense: Hearing"
+                },
+                {
+                    "name": "Clumsy",
+                    "cost": 2,
+                    "description": "Clumsy clumsy wait this is a flaw shit."
+                }
+            ]
+        },
+        {
+            "name": "Mental",
+            "options": [
+                {
+                    "name": "Mentally Merit 1",
+                    "cost": 1,
+                    "description": "Lorum ipsum set I dont remember this."
+                },
+                {
+                    "name": "Mentally Merit Dos",
+                    "cost": 2,
+                    "description": "This one costs more."
+                }
+            ]
+
+        }
+    ],
+    "flaws": [
+        { 
+            "name": "Physical",
+            "options": [
+                {
+                    "name": "Uncute Sense: Hearing",
+                    "cost": 1,
+                    "description": "This is a description for Unacute Sense: Hearing"
+                },
+                {
+                    "name": "Clumsy",
+                    "cost": 2,
+                    "description": "Clumsy clumsy. Actually a flaw"
+                }
+            ]
+        },
+        {
+            "name": "Mental",
+            "options": [
+                {
+                    "name": "Mentally Flaw 1",
+                    "cost": 1,
+                    "description": "Lorum ipsum set I dont remember this."
+                },
+                {
+                    "name": "Mentally Flaw Dos",
+                    "cost": 2,
+                    "description": "This one costs more."
+                }
+            ]
+
+        }
+    ]
+}

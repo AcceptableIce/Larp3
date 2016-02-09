@@ -1,0 +1,242 @@
+[
+    {
+        "name": "The Path of Blood",
+        "description": "<p>The Path of Blood is followed primarily—almost solely—by Assamites. Its history tells followers that the precepts were set down by Haqim, the legendary father of the Assamites.</p><p>It teaches that vampires are a curse, a blight upon the world that will someday be eradicated. This eradication will be facilitated by followers of the Path of Blood. However, it is understood that the numbers of those who walk the path are far less than the sum of all those who do not. The Assamites have already tried to war against the other so-called 'lower' clans and failed, resulting in the Blood Curse placed upon them by the Tremere. Such open methods have proven too dangerous in the past. This does not preclude overt action, but it does stress the need for careful deliberation and planning before such an undertaking is attempted.</p><p>Instead, adherents of the Path have turned themselves towards the protection of mortals. In essence, by protecting mortals from other vampires, they can slowly over many years create a situation where the lower clans—those which feed on mortals—will eventually be starved to the point where they fall upon each other and bring about the sought-after eradication without the obvious involvement of the Assamites. In fact, the most devout followers of this Path eschew even the consumption of human blood, considering it to be beneath them. Plus, taking the blood of other vampires furthers their destruction.</p><p>Members of this Path are extremely loyal to each other. It is unlikely that you can pick a fight with one of them and not end up on the wrong side of the rest. Further, it is understood that their covert war against the other clans is furthered by becoming as powerful as possible before any overt actions are taken. Thus, the Path of Blood considers diablerie an acceptable act.</p>",
+        "sins": [
+            "Feeding on a mortal; failing to pursue lesser blood for others on the path.",
+            "Breaking your word to a mortal; placing personal desires or ambition above duty.",
+            "Breaking your word to another on the path; killing a mortal, for blood or otherwise.",
+            "Failing to assist another on the path; revealing Assamite/Path secrets to an outsider.",
+            "Failing to take a chance to lower your generation; acting against another on the path."
+        ],
+        "stats": [
+            "Conviction",
+            "Self-Control"
+        ]
+    },
+    {
+        "name": "The Path of Bones",
+        "description": "<p>Those on the Path of Bones see themselves and other vampires as a unique opportunity to study life, death, decay, and all that these processes encompass. This Path is found primarily among the Giovanni and some of the Samedi. It drives its followers to try and unravel the mysteries of death, to understand why and how it occurs, and to figure out why vampires exist outside of this normal cycle.</p><p>In keeping with their scholarly pursuits, most of those on this Path study <em>Necromancy</em> in some way. Many have other supernatural capabilities that allow them to traffic with the dead or use their necromantic might to speak with ghosts. While these vampires might be quite scholarly in their own right, their area of study often results in a separation between them and the others around them that they study, mortal and vampiric alike. In their quest for understanding, they step outside the normal rules of society, quell their very emotions in order to remain objective, and do their best to observe and record without influencing the events around them.</p><p>Diablerie, for those on this Path, remains a sin. The study of death requires the study of the remains left behind when mortals and vampires expire. Diablerie, which destroys the remains of its victims, is thus orthogonal to their scholarly goals.</p>",
+        "sins": [
+            "Showing fear of death; failing to study death.",
+            "Accidentally killing; failing to feed when hungry.",
+            "Succumbing to frenzy; refusing to kill.",
+            "Heeding emotion; showing compassion.",
+            "Preventing the occurrence of death."
+        ],
+        "stats": [
+            "Conviction",
+            "Self-Control"
+        ]
+    },
+    {
+        "name": "The Path of Caine",
+        "description": "<p>Most vampires have encountered the mythology that Caine was the first of the Kindred and the progenitor of all other vampires. However, some take this mythology a step further and cross over into reverence for their shared patriarch. Followers of the Path of Caine believe that Caine was not only first but that he was perfect. All weaknesses and flaws evidenced by later generations of Kindred are the result of their distance from the potency of Caine's blood. Thus, the followers have two primary goals: to learn all they can about Caine, and to use that knowledge to push themselves past the bounds of normal human limitations in order to achieve vampiric perfection.</p><p>In their quest for perfection, scholarly efforts and research can only take them so far. There is something else, however, that they can utilize to expand their understanding of the vampiric condition: diablerie. During the moment of diablerie, one vampire consumes the essence of another and briefly has the opportunity to achieve full understanding of what the other knows and understands. You can see their memories, feel their thoughts, and know what they learned. While these understandings fade quickly, followers of this path ritualize the act of diablerie and include a record of what they see as part of that ritual. These records are then closely and carefully guarded for the information they contain.</p><p>There are not many within the Camarilla who can stomach this path. The acceptance of diablerie is something so alien to the structures of that sect and the disdain for mortals and mortality that these vampires show become something that few can overcome. At any given time, there are few followers of this path, and, in these nights, they have often abandoned the life of a scholar to lead war parties and explore the world, all the better to understand Caine's life as a warrior, leader, and wanderer.</p>",
+        "sins": [
+            "Failing to engage in study (academic or active) each night; failing to instruct others in the Path of Caine.",
+            "Befriending or associating with mortals; showing disrespect to others on the Path.",
+            "Resisting frenzy rather than controlling it; succumbing to Rötschreck.",
+            "Failing to diablerize 'humane' vampires; failing to test one's limits.",
+            "Neglecting to follow a lead about vampirism; denying vampiric needs."
+        ],
+        "stats": [
+            "Conviction",
+            "Instinct"
+        ]
+    },
+    {
+        "name": "The Path of Cathari",
+        "description": "<p>Followers of this Path hold that there are two gods: one purely good and the other purely evil. This philosophy crops up throughout mortal history in the teachings of Zoroaster and Manichaeus, who both preached that these gods were equal and opposite. Christian and Jewish scholars later held that the darkness would eventually lose to the light. By the twelfth and thirteenth centuries in Europe, this philosophy was shared by the Cathars in southern France. When the Albigensian Crusade destroyed the Cathar heresy, some of its followers accepted the Embrace from local vampires.</p><p>These new vampires—those who didn't give themselves to the sun—went about defining their new existence within their religious worldview. Clearly, vampires were the perfect servants of the darkness, and as such, it was their duty to test those who followed the light and reveal their weakness. To do so, Cathari indulge in every form of vice and entice others to do so as well, although they do not do so capriciously, as their indulgence is not without purpose. Anyone—even a vampire—that can be corrupted has been shown to be weak or uncommitted to the light. They must then be destroyed so that when the light and the darkness are finally pitted directly against each other, only the strongest and the most pure will remain on either side.</p><p>Despite this, the Cathari do not kill lightly. Death (and diablerie) interrupts the process of a soul's corruption and precludes further corruption. As it is their purpose to determine the fitness of others' souls, destroying them is antithetical to their practices. Thus, Cathari practice mastery over their own emotions and their frenzy to avoid strengthen the forces of the light with their untimely demise. When a follower of this path does determine that another has to die to further the cause of this cosmic battle, they kill deliberately and coolly, deriving as little pleasure from the act as possible. It is, after all, better to corrupt than to destroy.</p>",
+        "sins": [
+            "Self-destructive behavior; showing trust.",
+            "Withholding the Embrace from passionately wicked or virtuous mortals; resisting frenzy.",
+            "Acting against another Cathari; killing with passion.",
+            "Refraining from indulging in an interesting vice with others.",
+            "Arbitrary killing; encouraging others to restrain their impulses."
+        ],
+        "stats": [
+            "Conviction",
+            "Instinct"
+        ]
+    },
+    {
+        "name": "The Path of Death and the Soul",
+        "description": "<p>According to those on this Path, the heart is the anchor of the soul in its body. Under normal circumstances, the soul extends beyond the heart in order to keep functioning the normal bodily processes of respiration, digestion, circulation, etc. However, at the moment of the Embrace, a vampire's soul contracts within the heart and is purified therein by the simple fact that it no longer needs to spend its energy on those processes. This philosophy explains, at least for followers, why a simple stake in the heart incapacitates a vampire; it pierces their very soul.</p><p>A followers seeks to isolate the manifestations of their soul—of their heart—by making them pure and intense. There is no moderation; rage must be all-consuming, love should not cease, reason should be without any influence of emotion or intuition, and pain should be incomprehensible. Followers usually devote themselves to the obsessive study of one facet of these extremities at the expense of everything else before moving on to the next. As a result, they usually exist on the fringes of vampiric society unless concerned with a more social facet like leadership or torture. Unless experimenting on themselves to understand pain and emotion, most blanket themselves in the security of rationality and detachment in order to more fully study their chosen field.</p><p>This Path is most attractive to the Tzimisce; history indicates that this clan invented the Path thousands of years ago. It also calls to members of the Malkavian and Toreador <em>antitribu</em> as well as necromancers of all stripes. It is found more often among the Sabbat and Independent clans where an antisocial personality is less damaging.</p>",
+        "sins": [
+            "Showing fear of Final Death; maintaining attachment to the mortal world.",
+            "Succumbing to frenzy; being guided by emotions other than the ones you currently study.",
+            "Failing to kill when it would be useful; forsaking the pursuit of enlightenment for other satisfactions.",
+            "Showing an aversion to death in any form; showing compassion.",
+            "Needlessly preventing a death; killing without studying the death and its aftermath."
+        ],
+        "stats": [
+            "Conviction",
+            "Self-Control"
+        ]
+    },
+    {
+        "name": "The Path of Entelechy",
+        "description": "<p>The origins of this path are in much dispute. Some claim that it is very old while others believe that it is quite new. Regardless, European Brujah seem to have either developed or rediscovered it in recent nights. This philosopher's path promotes the protection of one's fragile humanity in the decay of morality found throughout the world in mortal and immortal society alike. It holds that the soul is eternal and that vampirism holds it hostage in base matter after the death of the Embrace. But, some good can be performed as a vampire. Some believe that God has a plan for them; others without such faith simply recognize the knowledge that vampires can hold and share with others. Regardless, followers act with a purpose: to expand their intellectual understanding of their world and to refine and distill that understanding for others. In this way, vampires are uniquely suited as repositories for that knowledge and understanding.</p><p>This path is very similar to the Path of Humanity; however, followers of Entelechy believe that Humanity is too passive. Simply avoiding sin is not enough. Instead, one must actively strive against the Beast with purpose and forethought. To this end, followers have three essential concepts on which they base their philosophy: <em>enkrateia</em> (inner strength), <em>reie</em> (courage), and <em>saphrosyne</em> (self-control). These concepts are essential to followers and Path elders often bemoan the state of new followers who have so much left to learn.</p>",
+        "sins": [
+            "Ill-defined or idle thoughts; allowing others to frenzy",
+            "Acting on impulse; theft, robbery or vandalism",
+            "Causing deliberate harm to a mortal; feeding from an innocent by force",
+            "Succumbing to frenzy or Rötschreck; allowing a crime to go unpunished",
+            "The murder of innocents; aiding a monstrous act"
+        ],
+        "stats": [
+            "Conviction",
+            "Self-Control"
+        ]
+    },
+    {
+        "name": "The Path of the Feral Heart",
+        "description": "<p>So many other paths focus on control of the Beast. They teach that the Beast must be subsumed beneath logic, reason, scholarly activity, and an understanding of the vampiric condition. To those on this Path, however, the Beast is the vampiric condition, and it should not be controlled but rather savored.</p><p>Vampires are the ultimate predators, and therefore stand outside mere mortal concerns like morality and civilization. These are the chains of the weak and those who need the support of others. Vampires should respond to the needs of their form and hunt when hungry from those who sustain them. The Beast can tell a vampire when to act and when to remain calm. It is not the mindless uncontrolled rage that others seem to feel it is. Instead, it is the very soul of a vampire.</p><p>However, foolishly risking one's safety is stupid. Even the rudest of predators understand the need for caution and a careful stalking of one's prey. As sentient predators, vampires should be held to an even higher standard. A hunt can be made more exciting and its inevitable conclusion more satisfying with planning and forethought, after all.</p><p>This path rejects the trappings of civilization, including technology, particularly while on the hunt. Vampires have all the technology they need at their very fingertips, encapsulated within their most powerful form. Relying on tools invented by their prey makes a predator even more dependent on them, makes them more like prey, and makes them more prone to failure.</p><p>This path is most common among the Gangrel, but can also be found among the Nosferatu and Ravnos <em>antitribu</em>. Other clans who value structure and hierarchy find it difficult to walk a path so totally focused on the self.</p>",
+        "sins": [
+            "Hunting with anything other than your own capabilities; engaging in politics.",
+            "Remaining near fire or sunlight except to finish a job; acting with unnecessary cruelty.",
+            "Failing to hunt when hungry; failing to support your allies.",
+            "Refusing to follow your instincts; killing without need.",
+            "Refusing to kill to survive; killing for any reason other than survival."
+        ],
+        "stats": [
+            "Conviction",
+            "Instinct"
+        ]
+    },
+    {
+        "name": "The Path of Harmony",
+        "description": "<p>Everything has a destiny, even vampires. To meet that destiny, a vampire has to carefully navigate between the similarities that they have with mortal humans and the Beast. The Path of Harmony teaches that it is best to remain true to one's human side while not neglecting the needs of the Beast. To move to the extreme in either direction is to court disaster. One one hand, to be too human is to neglect the Beast and fall prey to frenzy when hungry, but on the other hand, to indulge the Beast is to become a monster that all—even mortal humans—will seek to destroy.</p><p>However, it is not enough to seek self-harmony. Those who walk this Path feel it is their duty, a part of their very purpose, to help others reach the same balance that they seek. To that end, followers proselytize their beliefs upon others and actively seek to prevent extreme acts by those around them. Killing, and by extension diablerie, are both considered sins on this path. If an individual dies before finding their purpose and completing that which they are required to do, then an irrevocable loss is the result.</p><p>As a result, this Path is far more likely to be found among those clans whose social make-up promotes working well with others. Toreador, Ventrue, and Tremere make up the majority of this Path's followers, though you can find the odd Malkavian seeking to make peace with their insanity. The activities of the more extreme members of the Sabbat make this Path hard to walk within the sect. Often, followers of the Path of Harmony are seen as a nuisance within the Sabbat for their sanctimonious belief that everyone will eventually agree with their views and join them on their Path.</p>",
+        "sins": [
+            "Killing an animal for any reason other than survival; feeling guilty about something you needed to do.",
+            "Acting in an overly cruel manner; showing mercy to an enemy.",
+            "Killing a mortal for any reason other than survival; succumbing to frenzy.",
+            "Allowing yourself to act too human or too bestial; failing to provide safety for your loved ones and comrades.",
+            "Refusing to kill when it is important for your survival; allowing an ally to complete an extreme action."
+        ],
+        "stats": [
+            "Conscience",
+            "Self-Control"
+        ]
+    },
+    {
+        "name": "The Path of Honorable Accord",
+        "description": "<p>The knights of the Path of Honorable Accord seek to reduce their personal ambition and individualism as much as possible. It is their belief that if left unrestrained, vampires would destroy each other given time—a viewpoint that may be entirely too accurate. Additionally, immoderate action would expose vampires to the wider and now globally connected mortal society and result in the destruction of all Kindred. As a result, the needs of the self need to be weighed against the needs of the many.</p><p>To restrain themselves, followers allow no room for sentiment or mercy. Instead, honor is held sacrosanct and pursued with calculated rationality both because it can hold the Beast in check, and because it acts as a limiting force against one's other, baser instincts. Followers generally lose interest in friendship and society, and instead focus on allies and regular associates; trust plays no part in rational, honorable choice.</p><p>The Path of Honorable Accord breeds reliable Sabbat leaders as long as their superiors administer oaths carefully. Followers serve with less treachery than almost anyone else in the sect, as doing so would promote individualistic wants over those of the sect. However, if oaths are not carefully worded, followers will not restrain themselves from working around them, rationalizing their treachery as providing negative examples regarding the importance of carefully defining what honorable society truly means. However, most followers stop short of killing (or diablerizing) their opponents. After all, if you kill someone, they cannot learn from their mistakes, and revenge is a fairly personal concern.</p><p>While primarily a Sabbat path, in recent nights, members of the Camarilla—especially within the more rigidly hierarchal clans like Ventrue and Tremere—have begun to walk this Path.</p>",
+        "sins": [
+            "Failing to uphold the precepts of your sect; failing to show hospitality to your allies.",
+            "Associating with dishonorable individuals; failing to participate in the rituals of your sect.",
+            "Disobeying your leader; failing to protect your allies.",
+            "Placing personal concerns above duty; showing cowardice.",
+            "Breaking your word; killing without justification."
+        ],
+        "stats": [
+            "Conscience",
+            "Self-Control"
+        ]
+    },
+    {
+        "name": "The Path of Metamorphosis",
+        "description": "<p>Just as vampires are superior to humans, Metamorphosists believe that there is a state superior to vampirism that they can reach through a process of personal change and evolution. As a result, this Path focuses on the needs of the individual. The process that one follower undertakes to find this enlightenment may be very different from another's.</p><p>The only thing that most if not all followers share in common is <p>Vicissitude</p>. The flesh-altering Discipline provides the toolbox used by Metamorphosists to reach their enlightenment. Additions and subtractions to the body act to create something new and different with challenges different from those posed by other forms. Overcoming these challenges teaches followers about themselves and helps them evolve towards their sought-after enlightenment.</p><p>This focus on the self often makes followers divisive within the more rigidly defined sects. Tzimisce followers in the Sabbat, however, are often too useful for the creative ways that they deal with their opposition to be expunged. Among the Camarilla, followers are extremely rare and are usually quickly identified and dealt with. Oddly, while this path sees few adherents amongst the family-oriented Independents, the form-altering powers of the Gangrel and the malleable philosophical beliefs of the Anarchs have provided fertile ground for the precepts of this Path. However, like the Camarilla, others within even these organizations find Metamorphosists to be a thorn in their sides.</p>",
+        "sins": [
+            "Postponing feeding; indulging in vices.",
+            "Asking for or sharing knowledge with another.",
+            "Refusing to kill for knowledge; failing to control a frenzy.",
+            "Considering others; failing to experiment.",
+            "Neglecting to practice alteration and evolution; showing compassion."
+        ],
+        "stats": [
+            "Conviction",
+            "Instinct"
+        ]
+    },
+    {
+        "name": "The Path of Night",
+        "description": "<p>In some ways, this Path is similar to that of the Cathari described above. However, while the Cathari feel that their agency for the powers of darkness and chaos that they believe in is justified in order to strengthen the forces of the light, followers of this path seek only to tear down and destroy. As such, these vampires tend to be some of the most depraved and Beast-ridden members of Kindred societies.</p><p>It is almost unheard of for members of this Path to be found within the Camarilla. In the Sabbat, most of its followers are among clan Lasombra. Within that clan, the most fervent adherents of this Path of Night are sometimes referred to as 'Abyss mystics.' They believe that their signature Discipline, <em>Obtenebration</em>, allows them to reach beyond the normal boundaries of space and time into a different dimension composed entirely of shadow and chaos. They maintain that this plane, this Abyss, predates the creation of this universe by God; it was into the Abyss that God created light. Thus, these mystics believe that by using Obtenebration to tap into this plane, they are wielding a force more ancient than creation itself.</p><p>Regardless of whether or not this is true, the sense this mysticism creates within its followers makes them believe themselves to be beyond what other vampires claim to be. As a result, most followers of the Path of Night have more than a little bit of a superiority complex.</p><p>Because of its anti-social focus, this Path was dwindling until the modern nights as physicists' theories of dark matter and black holes began to mesh well with the Abyss mysticism of this path's core followers, Sabbat Lasombra. As these individuals twisted modern scientific thoughts to meet their own ends, more and more neonates have been enticed by not only the teachings of the Path, but also the nihilistic indulgence of the baser nature of vampirism.</p><p><strong>The Plan</strong><br>As the list of sins on path of Night makes clear, it is very difficult for one on this path to lie or deceive others. The situation may arise, however, where it is highly desirable for a Path of Night character to let another character <em>think</em> they've won, are better, have authority, or have provided necessary assistance. These situations would normally call for the Path of Night character to make morality chops. If the player approaches the Storytellers beforehand and outlines their amazing plan, and the Storytellers deem it worthy of the label 'The Plan,' the character will be given some leniency on certain morality chops that would be necessary by-products of the plan. The Plan needs to be sufficiently grand, and must have a fairly quick turnaround; that is, The Plan cannot be used to get out of chops for months on end.</p><p>Questions about the mechanics of The Plan can be answered by the Storytellers.</p>",
+        "sins": [
+            "Killing a mortal for food; acting altruistically",
+            "Failing to be innovative in one's depredations; asking for assistance.",
+            "Accidentally killing; following another vampire's will.",
+            "Intentionally killing rather than prolonging suffering; showing compassion.",
+            "Accepting another's claim to superiority; repenting your evil."
+        ],
+        "stats": [
+            "Conviction",
+            "Instinct"
+        ]
+    },
+    {
+        "name": "The Path of Power and the Inner Voice",
+        "description": "<p>If there ever was a soul, it is lost along with the need to breathe. Usually, when one stops breathing, one is also dead, but for vampires this is obviously not the case. Therefore, all abstract concerns of humanity like nobility, honor, friendship, compassion, and love are discarded in favor of a single all-encompassing goal: power. Vampires, after all, exist to rule the world, but until then they will rule whatever they can control.</p><p>The ability to give orders and have them obeyed is what matters to followers on this Path. They aim to control everything around them from politics to social norms to spiritual authority. While this megalomaniacal focus would seem to preclude followers from working well with others, the opposite is actually true. What use is giving a command if there's no one around to follow it? Instead, followers seek to understand the motivations of others and to twist those motivations to their own benefit.</p><p>Followers receive a great deal of respect from members of the Sabbat, but receive even more fear. Each successful follower of this Path represents someone who has accumulated enough power to become nigh untouchable and has shown that they are willing to go to any lengths to maintain that power. Failure is not acceptable from those whom they command. They constantly work to supplant their superiors and control even greater spheres of influence. This impulse means that multiple followers of this Path will usually end up in conflict with each other.</p><p>Novices usually focus on control through fear and punishment. The truly terrifying followers are those whose leadership precludes the possibility of treachery. Willing subordinates, after all, are far more effective and will perform tasks not suitable for slaves and prisoners.</p>",
+        "sins": [
+            "Denying responsibility for your actions; treating loyal underlings badly.",
+            "Failing to respect your superiors (except when they err).",
+            "Accepting defeat; failing to kill when it is in your interests.",
+            "Submitting yourself to others' errors; not using every effective tool of control.",
+            "Tolerating failure; declining an opportunity for power."
+        ],
+        "stats": [
+            "Conviction",
+            "Instinct"
+        ]
+    },
+    {
+        "name": "The Path of the Scorched Heart",
+        "description": "<p>The Path of the  Scorched Heart seeks to reject the Beast in all its forms and thus transcend the vampiric condition. Rumors indicate that this path was practiced in ancient times by Brujah, but in these nights, the path is followed only by an extremely small number. That said, it rejects the ideologies of the various sects and has found a few followers within the Independents and within the more independently-minded clans.</p><p>Emotions are the fuel that the Beast requires in order to survive. In order to transcend the Beast, followers believe that they must transcend emotion and by doing so starve the Beast of what it requires to survive. Doing so requires that followers be willing to separate themselves from those around them in order to avoid irrational attachments which tempt the Beast. Hence the name of the path—to separate oneself from all others is to scorch one's own heart.</p><p>Without these attachments, however, there must be something else out there which anchors followers to this world, and that anchor is the search for the unvarnished and definable Truth. Ambiguity is, after all, the result of emotional constructs and wishful thinking. Thus, if these can be avoided, ambiguity can be resolved, and the Truth might become ultimately discoverable.</p><p>A criticism of the followers of this Path is that lacking an emotional, sympathetic attitude toward those around them indicates that they lack any social morality that could be of benefit to society. Followers argue this is not the case. Those of the Scorched Heart act when necessary based on their search for Truth, but otherwise understand that careful investigation and a clear assessment of the situation at hand will show them the appropriate action to take.</p>",
+        "sins": [
+            "Making assumptions of any kind; relying on others.",
+            "Acting rashly; passing up an opportunity to learn a new skill or Discipline.",
+            "Failure to kill a destructive mortal; failure to end an overt supernatural threat (if possible without undue risk).",
+            "Killing a non-destructive mortal; falling to frenzy or Rötschreck.",
+            "Emotional outburst; feeling strong emotion."
+        ],
+        "stats": [
+            "Conviction",
+            "Self-Control"
+        ]
+    },
+    {
+        "name": "The Path of Self-Focus",
+        "description": "<p>The Path of Self-Focus owes quite a bit of its development to Eastern thought and practice. The Taoist concepts described by the philosopher Laozi as 'conscious inaction' or 'non-doing' are the core of its teachings. To the Western mind, the phrase 'you cannot change the world; you can only change yourself' is, perhaps, the closest equivalent.</p><p>To followers of this Path, the Universe is working toward a specific goal or purpose. Individuals must go with its flow or the flow is impeded in some way. To work in harmony with the Universe is to avoid conflict with it. Personal goals are illusory if they are not in congruence with the Universe, and the only way to find that congruence is to wander without purpose and see what one learns during the journey rather than focusing entirely on the end of it.</p><p>The Path also teaches that to interfere with others is to interrupt their wanderings. This too creates conflict. This does not mean that followers will never assist, only that they need to be asked first. Once asked, it is right to provide the assistance that one can because the wanderings of those two (or more) vampires have now merged, even if only temporarily.</p><p>Followers know that there is no future. What will be simply will be, and we have little control over that. Further, the past is dead and gone, never to be seen again. Events may be similar, but they are never the same. Thus, the only way to live is to focus on each moment and live for that moment in a way that is in harmony of the Universe.</p><p>To do this, followers seek all answers within. To know yourself, as the Greeks charged, is to understand everything about the world that you could possibly know, since we can only experience the Universe through the filter of our own senses. This requires a self-awareness that many other vampires would shun; in other words, followers frequently court the Beast as a friend and companion along their wanderings rather than an entity to be shunned and controlled.</p>",
+        "sins": [
+            "Overconfidence; laziness of mind or body.",
+            "Failing to treat others as you would be treated; relying on others.",
+            "Manipulating or controlling others (through Disciplines or the blood bond); struggling to overcome a weakness rather than turning it into a strength.",
+            "Restraining the Beast unnecessarily; failing to spend some time each night in meditation.",
+            "Allowing outside forces to goad you into frenzy; being a willing slave."
+        ],
+        "stats": [
+            "Conviction",
+            "Instinct"
+        ]
+    },
+    {
+        "name": "The Path of Typhon",
+        "description": "<p><em>Note that this Path is almost a religion to the Followers of Set. Its mysteries are a closely guarded secret and thus, while we describe it here for your information, understand that it is extremely unlikely that your character has any information regarding this path if they are not among the Followers of Set. Even Setites, if they don't follow the Path, probably don't know specifics.</em></p><p>Followers of the Path of Typhon are mistrusted by almost all others, and with good reason. All Setites keep their motives carefully hidden to use the resources of others toward their own goals. Followers of this Path are masters of subtle control and the corruption of others. To this end, they carefully learn the weaknesses of others and exploit them while holding themselves aloof from petty indulgence at the same time they promote the reckless actions of others.</p><p>Other Paths share with their followers methods to control the Beast. This Path holds that this control is a fool's errand. Considering the limitless lifespan of a vampire—barring forced destruction at the hands of the self or another—it is a guarantee that at some point the rational mind will slip up and allow the Beast its time in the spotlight either temporarily, or permanently in Wassail. Therefore, this Path teaches a twofold dogma: an understanding of the weaknesses of the self so that you can delay this inevitable fall, an an understanding of the weaknesses of those around you so that you can help them to fall first.</p><p>There are other paths which promote monstrous acts (Night), or the temptation of others (Cathari), but even those stop short of the willful manipulation of others to bring about their own eventual destruction at the hands of their colleagues. This Path holds no such limitations. To use a metaphor, the worldview of this Path indicates that all vampires are in a drinking contest, and the Beast is their alcohol. Abstaining from all alcohol means only that your tolerance for it is weak, and that your eventual drunken binge will be that much worse. Followers of this Path believe that it is better to drink a little here and there to build your tolerance while also getting others to drink with you, and then drink them under the table.</p><p>Setites hold that the Egyptian god Set tricked Caine into Embracing him. Set was an immortal being even before the Embrace, but afterwards became even more powerful. After the Embrace, he went about working with vampires to reshape all existence in his image and under his control. It is a tenet of his mysteries that when the Age of the Sun ends and the Sun-God Ra is overthrown that his eldest sibling, Set, should rule over the rest of eternity in the Endless Night to come. However, before this goal could be reached, other immortal beings of the time plotted to destroy Set to avoid his rule. This story was passed down in mythology not only by the Egyptians but also by the Greeks in the myth of how the Olympians banded together to destroy the thousand-headed serpent king, Typhon. It is from this tale that the Path draws its name.</p><p>The eventual resurrection of Set and the continuance of his plans for all creation is the primary goal of all followers of the Path of Typhon. It is their belief that when Set rises again, he will judge those who are worthy and use them to reshape the world into a dark paradise for those who are not culled. To return to the drinking metaphor, the more Kindred that a Setite can drink under the table, the better their odds are of being judged worthy by Set to live in this paradise.</p>",
+        "sins": [
+            "Pursuing your own values; failing to aid another on the path.",
+            "Failing to destroy a vampire in Golconda; failure to observe a Setite ritual.",
+            "Failing to undermine the social order in favor of the Setites; failing to do what is necessary to bring another to ruin.",
+            "Failing to pursue occult knowledge; hindering another Setite.",
+            "Failing to take advantage of another; failing to aid in raising Set."
+        ],
+        "stats": [
+            "Conviction",
+            "Self-Control"
+        ]
+    },
+    {
+        "name": "The Path of Humanity",
+        "description": "<p>All vampires follow what is known as a Path of Enlightenment. The default Path is the Path of Humanity, which is generally equivalent to the moral system founded in mortal life.</p><p>The relationship of a vampire to their Path (even Humanity) is not that of a human being to their moral code. It is not a matter of being a 'good person,' but rather of resisting the appetites and destructive urges of the Beast. For this reason, unlike humans, vampires cannot safely rationalize their actions as 'if I didn’t steal the car, I couldn’t save my friend' or 'that being is evil, or isn’t human, so it’s okay to kill it.' The Beast only knows 'I took something that wasn’t mine,' or 'I killed a sapient being, on purpose.' Such acts can rapidly erode a vampire’s fragile control, even if done for the noblest of reasons. As noted below under Conscience, rationalizations certainly have a place—as the comforting lies you tell yourself when the damage to your moral standing is already done.</p><p>The Path of Humanity is represented by three Virtues: <em>Self-Control</em>, <em>Conscience</em>, and <em>Courage</em>. Each Virtue starts with one Dot for free, and you receive seven points to distribute amongst the three at character creation. Your Morality score (known as Humanity for those on the Path of Humanity) is the average of your Self-Control and Conscience, rounded up.</p>",
+        "sins": [
+            "Selfish thoughts and actions",
+            "Theft; causing injury",
+            "Accidentally killing; intentionally causing property damage",
+            "Killing with premeditation",
+            "Casual killing or acts of great evil (as defined by your culture)"
+        ],
+        "stats": [
+            "Conscience",
+            "Self-Control"
+        ]
+    }
+]

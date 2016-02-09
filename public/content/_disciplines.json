@@ -1,0 +1,226 @@
+[
+    {
+        "discipline_id": 1,
+        "discipline": "Animalism",
+        "ability": 2,
+        "caitiff": "Y",
+        "allowed": "Y",
+        "book": 1
+    },
+    {
+        "discipline_id": 2,
+        "discipline": "Auspex",
+        "ability": 17,
+        "caitiff": "Y",
+        "allowed": "Y",
+        "book": 1
+    },
+    {
+        "discipline_id": 3,
+        "discipline": "Celerity",
+        "ability": null,
+        "caitiff": "Y",
+        "allowed": "Y",
+        "book": 1
+    },
+    {
+        "discipline_id": 4,
+        "discipline": "Chimerstry",
+        "ability": 31,
+        "caitiff": "N",
+        "allowed": "Y",
+        "book": 1
+    },
+    {
+        "discipline_id": 5,
+        "discipline": "Dementation",
+        "ability": 8,
+        "caitiff": "N",
+        "allowed": "Y",
+        "book": 1
+    },
+    {
+        "discipline_id": 6,
+        "discipline": "Dominate",
+        "ability": 16,
+        "caitiff": "Y",
+        "allowed": "Y",
+        "book": 1
+    },
+    {
+        "discipline_id": 7,
+        "discipline": "Fortitude",
+        "ability": null,
+        "caitiff": "Y",
+        "allowed": "Y",
+        "book": 1
+    },
+    {
+        "discipline_id": 8,
+        "discipline": "Melpominee",
+        "ability": "Singing",
+        "caitiff": "N",
+        "allowed": "Y",
+        "book": 1
+    },
+    {
+        "discipline_id": 9,
+        "discipline": "Necromancy",
+        "ability": 46,
+        "caitiff": "N",
+        "allowed": "Y",
+        "book": 1
+    },
+    {
+        "discipline_id": 10,
+        "discipline": "Obeah",
+        "ability": 21,
+        "caitiff": "N",
+        "allowed": "N",
+        "book": 1
+    },
+    {
+        "discipline_id": 11,
+        "discipline": "Obfuscate",
+        "ability": 29,
+        "caitiff": "Y",
+        "allowed": "Y",
+        "book": 1
+    },
+    {
+        "discipline_id": 12,
+        "discipline": "Obtenebration",
+        "ability": 23,
+        "caitiff": "N",
+        "allowed": "Y",
+        "book": 1
+    },
+    {
+        "discipline_id": 13,
+        "discipline": "Potence",
+        "ability": null,
+        "caitiff": "Y",
+        "allowed": "Y",
+        "book": 1
+    },
+    {
+        "discipline_id": 14,
+        "discipline": "Presence",
+        "ability": 19,
+        "caitiff": "Y",
+        "allowed": "Y",
+        "book": 1
+    },
+    {
+        "discipline_id": 15,
+        "discipline": "Protean",
+        "ability": null,
+        "caitiff": "N",
+        "allowed": "Y",
+        "book": 1
+    },
+    {
+        "discipline_id": 16,
+        "discipline": "Quietus",
+        "ability": null,
+        "caitiff": "N",
+        "allowed": "Y",
+        "book": 1
+    },
+    {
+        "discipline_id": 17,
+        "discipline": "Serpentis",
+        "ability": null,
+        "caitiff": "N",
+        "allowed": "Y",
+        "book": 1
+    },
+    {
+        "discipline_id": 18,
+        "discipline": "Thanatosis",
+        "ability": 46,
+        "caitiff": "N",
+        "allowed": "Y",
+        "book": 1
+    },
+    {
+        "discipline_id": 19,
+        "discipline": "Thaumaturgy",
+        "ability": 23,
+        "caitiff": "N",
+        "allowed": "Y",
+        "book": 1
+    },
+    {
+        "discipline_id": 20,
+        "discipline": "Vicissitude",
+        "ability": "Bodycraft",
+        "caitiff": "N",
+        "allowed": "Y",
+        "book": 1
+    },
+    {
+        "discipline_id": 21,
+        "discipline": "Sanguinus",
+        "ability": null,
+        "caitiff": "N",
+        "allowed": "N",
+        "book": 3
+    },
+    {
+        "discipline_id": 23,
+        "discipline": "Valeren",
+        "ability": 4,
+        "caitiff": "N",
+        "allowed": "N",
+        "book": 3
+    },
+    {
+        "discipline_id": 24,
+        "discipline": "Visceratika",
+        "ability": 32,
+        "caitiff": "N",
+        "allowed": "Y",
+        "book": 2
+    },
+    {
+        "discipline_id": 25,
+        "discipline": "Flight",
+        "ability": null,
+        "caitiff": "N",
+        "allowed": "N",
+        "book": 2
+    },
+    {
+        "discipline_id": 26,
+        "discipline": "Daimoinon",
+        "ability": null,
+        "caitiff": "N",
+        "allowed": "N",
+        "book": 4
+    },
+    {
+        "discipline_id": 27,
+        "discipline": "Temporis",
+        "ability": null,
+        "caitiff": "N",
+        "allowed": "N",
+        "book": 4
+    },
+    {
+        "discipline_id": 28,
+        "discipline": "Countermagic",
+        "ability": 23,
+        "caitiff": "N",
+        "allowed": "Y",
+        "book": 2
+    },
+    {
+        "discipline_id": 29,
+        "discipline": "Dark Thaumaturgy",
+        "ability": null,
+        "caitiff": "N",
+        "allowed": "N",
+        "book": 3
+    }
+]

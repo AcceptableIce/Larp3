@@ -1,0 +1,83 @@
+.main {
+	margin-bottom: -5px;   
+}
+.forum-wrapper, .roster-wrapper, .calendar-content, .handbook-content, .influence-wrapper {
+    background: #111;
+    color: rgb(237, 237, 237);
+    margin-top: 0px;
+    padding-top: 5px;
+    min-height: 100vh;
+}
+.forum-wrapper::after, .roster-wrapper::after, .influence-wrapper::after, .forum-content::after {
+    clear: both;
+    height: 0;
+    display: block;
+    content: "";
+    visibility: hidden;
+}
+.theme-wrapper h1, .theme-wrapper h2, .theme-wrapper h3, .theme-wrapper h4, .theme-wrapper h5, .theme-wrapper h6, .theme-wrapper table caption, .theme-wrapper table tr th, .theme-wrapper table tr td {
+	color: rgb(237, 237, 237);
+}
+.forum-title, .post-title, .post-title:before, .user-name, .clan-title, .game-day {
+    background: #434;
+}
+.forum-title, .post-title, .post-title:before, .user-name, .clan-title, .game-day, .theme-wrapper select {
+    font-weight: bold;
+    border: 1px solid #999;
+    border-bottom: none;
+}
+.game-day{
+	border-bottom: 1px solid #999;   
+}
+.topic-row, .forum-statistics-box, .user-card, .post-body, .clan-members, .theme-wrapper table, .theme-wrapper table tr.even, .theme-wrapper table tr.alt, .theme-wrapper table tr:nth-of-type(even) {
+    border-color: #999;
+    background: #222;
+}
+.forum-category {
+    border-bottom-color: #999;
+}
+.theme-wrapper a, .theme-wrapper .panel.callout a:not(.button) {
+    color: #D44;
+}
+.theme-wrapper a:hover, .theme-wrapper a:focus, .theme-wrapper .panel.callout a:not(.button):hover, .theme-wrapper .panel.callout a:not(.button):focus{
+	color: #C90;   
+}
+.top-bar, .top-bar-section li:not(.has-form) a:not(.button) {
+    background: #5C5C5C;
+}
+.theme-wrapper label {
+    color: rgb(237, 237, 237);
+}
+.theme-wrapper button.info, .theme-wrapper .button.info, .theme-wrapper ul.pagination li.current a, .theme-wrapper ul.pagination li.current button, .theme-wrapper button, .theme-wrapper .button {
+	background: #666;
+    color:#eee;
+}
+.theme-wrapper button.info:hover, .theme-wrapper button.info:focus, .theme-wrapper button:hover, .theme-wrapper button:focus, .theme-wrapper ul.pagination li.current a:hover, .theme-wrapper ul.pagination li.current a:focus, .theme-wrapper ul.pagination li.current button:hover, .theme-wrapper ul.pagination li.current button:focus {
+	background: #888;
+    color:#fff;
+}
+.unread-topics {
+    background-color: transparent;
+}
+.unread-topics.unread {
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/a/a3/Give_Blood.svg');
+    background-color: transparent;
+    background-size: contain;
+}
+.theme-wrapper .panel.callout {
+    background: #400;
+    color: #ccc;
+    border: 1px solid #9A0000;
+}
+.mention {
+    background: transparent;
+}
+.theme-wrapper .panel.callout h1, .theme-wrapper .panel.callout h2, .theme-wrapper .panel.callout h3, .theme-wrapper .panel.callout h4, .theme-wrapper .panel.callout h5, .theme-wrapper .panel.callout h6, .theme-wrapper .panel.callout p, .theme-wrapper .panel.callout li, .theme-wrapper .panel.callout dl {
+    color: #ccc;
+}
+.topic-divider {
+	background: transparent;   
+}
+.position-list {
+    color: #bbb;
+}

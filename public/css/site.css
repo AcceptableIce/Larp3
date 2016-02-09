@@ -1,0 +1,487 @@
+*, *:before, *:after {
+	box-sizing: border-box;
+	-webkit-font-smoothing: antialiased;
+}
+
+html, body {
+	margin: 0 0;
+	padding: 0 0;
+}
+
+body, h1, h2, h3, h4, h5, p, .top-bar-section ul li > a, .button, button, .sub-nav dt, .sub-nav dd, .sub-nav li {
+	font-family: Lato, Helvetica, Tahoma, sans-serif;
+}
+
+b {
+	font-weight: 700;
+}
+
+.main {
+	margin-bottom: 40px;
+}
+.toast-error, .toast-success {
+	opacity: 1.0 !important;
+	box-shadow: none !important;
+}
+#toast-container.toast-top-full-width>div {
+	width: 50%;
+}
+#toast-container>.toast-error, #toast-container>.toast-success {
+	background-image: none !important;
+}
+
+#toast-container>.toast-error:before, #toast-container>.toast-success:before {
+    font-family: Fontello;
+    position: absolute;
+    left: 15px;
+    font-size: 2.0em;
+    top: 3px;
+}
+
+#toast-container {
+	z-index: 9999999999 !important;
+}
+
+#storyteller-nav .top-bar-section {
+	z-index: 999999;
+}
+.top-bar-section {
+	z-index: 9999999;
+}
+
+.category-display-order {
+	float: left;
+}
+
+.character-pagination {
+	float: right;
+	margin-top: -20px;
+}
+
+.mailbox-selector {
+	width: 100px;
+	height: 33px;
+	margin-left: 5px;
+	font-size: 0.9em;
+	line-height: 13px;
+}
+.topbar-mail-alert {
+	position: relative;
+	left: 5px;
+	margin-right: 3px;
+	top: -1px;
+}
+
+.user-settings-switch {
+	margin-bottom: 0;
+}
+
+.save-category {
+	float: left;
+	margin-top: 10px;
+	margin-left: 10px;
+}
+
+.page-build-time {
+	font-size: 0.7em;
+	color: #909090;
+	position: fixed;
+	right: 5px;
+	bottom: 5px;
+}
+
+.top-bar-section .dropdown li.parent-link a {
+	display: none;
+}
+
+.small-input {
+	width: 50px !important;
+	position: relative;
+	top: 8px;
+	text-align: center;
+}
+
+.influence-table tr td, .influence-table input, .influence-table select {
+	padding: .25em .25em;
+	margin: 0 0;
+}
+
+#toast-container>.toast-error:before {
+	    content: '\E80E';
+}
+
+#toast-container>.toast-success:before {
+	    content: '\E80C';
+}
+
+input.checkin-experience-box {
+	width: 40px; 
+	text-align: center;
+	margin: 0;
+}
+
+.mce-container button:hover {
+	background-color: transparent;
+}
+
+/** Mail panel **/
+.mail-panel-left {
+	width: 340px;
+	display: inline-block;
+	background-color: #fff;
+	height: 100%;
+	float: left;
+	border-right: 1px solid #c0c0c0
+}
+
+.mail-panel-right {
+	width: calc(100% - 340px);
+	min-width: 500px;
+	display: inline-block;
+	height: 100%;
+	background-color: #fff;
+	float: left;
+	overflow-y: hidden;
+	overflow-x: auto;
+	position: relative;
+}
+
+.mail-item {
+	border-bottom: 1px solid #c0c0c0;
+	padding: 10px 20px 10px 40px;
+	box-sizing: border-box;
+	position: relative;
+	background-color: #f9f9f9;
+	cursor: pointer;
+}
+
+.mail-item.active {
+	background-color: #E2F0FA;
+}
+
+.mail-sender {
+	font-size: 1.1em;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	max-width: 165px;
+}
+
+.mail-time {
+	text-transform: uppercase;
+	font-size: 0.8em;
+	vertical-align: top;
+	position: absolute;
+	top: 10px;
+	right: 20px;
+	text-align: right;
+	color: #666;
+}
+
+.mail-title {
+	font-size: 1.1em;
+	font-weight: 600;
+	height: 30px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.mail-preview {
+	color: #444;
+	height: 40px;
+	overflow-y: hidden;
+	line-height: 20px;
+}
+
+.mail-read {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	width: 40px;
+	height: 100%;
+	text-align: center;
+}
+
+.mail-read.unread:before {
+	content: '●';
+	font-size: 1.7em;
+	color: #3D95B3;
+	top: 2px;
+	position: relative;
+}
+
+.no-mail {
+	color: #c0c0c0;
+	text-align: center;
+	position: absolute;
+	top: 80%;
+	left: 50%;
+	-webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	height: calc(100% - 40px);
+}
+.no-mail-icon {
+	font-size: 2.0em;
+}
+
+.no-mail-icon .icon-mail {
+	font-size: 5.0em;
+
+	line-height: 12px;
+}
+
+.displaying-mail {
+	padding: 20px 20px;
+	overflow-y: auto;
+	height: calc(100% - 40px);
+}
+
+.displaying-mail h3 {
+	margin-bottom: 0;
+}
+
+.mark-all-read-option {
+	position: absolute;
+	right: 5px;
+}
+.displaying-mail-time {
+	font-size: 0.9em;
+	color: #666;
+	margin-bottom: 5px;
+}
+
+.displaying-mail-from {
+	font-size: 1.1em;
+	color: #333;
+	margin-bottom: 10px;
+}
+
+.mail-options {
+	height: 40px;
+	background-color: #f9f9f9;
+	border-bottom: 1px solid #c0c0c0;
+	width: 100%;
+	line-height: 40px;
+}
+
+.mail-options .mail-option.disabled {
+	pointer-events: none;
+	opacity: 0.3;
+}
+
+.mail-options .mail-option i {
+	font-size: 2.0em;
+}
+
+.mail-left-options {
+	position: relative;
+}
+
+.mail-listing {
+	height: calc(100% - 40px);
+	overflow-y: auto;
+}
+
+.message-body {
+	min-height: 200px;
+}
+
+.setting-description {
+	font-size: 0.9em;
+	font-weight: 300;
+}
+
+.costume-switch {
+	position: relative;
+	top: 15px;
+}
+
+#primary-nav {
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	z-index: 99999999;
+}
+
+.main {
+    margin-bottom: 30px;
+    top: 45px;
+    position: absolute;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+}
+
+.dash-main {
+	margin-top: -50px;
+}
+.builder-nav {
+	margin-top: 0px;
+	position: fixed !important;
+}
+
+.delete-toggle {
+	position: absolute;
+	left: 280px;
+	top: 70px;
+}
+
+.changes-view-sheet {
+	position: relative;
+	top: -10px;
+}
+
+.button.remove-permission {
+	padding: .5em .5em;
+	line-height: 10px;
+	position: relative;
+	top: -2px;
+	margin: 0 0;
+}
+
+.remove-permission-form {
+	display: inline-block;
+	float: right;
+	margin: 0 0;
+}
+
+.redirect {
+	font-size: 0.8em;
+	margin-top: -15px;
+	margin-bottom: 15px;
+}
+
+.handbook-edit-options {
+	right: 10px;
+	top: 7px;
+	left: auto;
+	position: absolute;
+}
+
+.invalid {
+	color: #A65050;
+}
+
+.invalid:active, .invalid:focus {
+	color: #783F2C;	
+}
+
+.invalid:hover {
+	color: #C98F7B;
+}
+
+.handbook-lock {
+	font-size: 0.5em;
+	position: relative;
+	top: -7px;
+}
+
+.rulebook-links {
+	float: right;
+	width: 250px;
+	margin-left: 20px;
+}
+
+.rulebook-links p {
+	font-size: 0.85em;
+}
+
+.handbook-stats {
+	font-size: 0.8em;
+	margin-top: 20px;
+}
+
+.permission-row {
+	padding: 5px 5px;
+	position: relative;
+}
+
+.permission-set .permission-row:nth-child(2n + 1) {
+	background-color: #f0f0f0;
+}
+
+.permission-description {
+	color: #333;
+	margin-top: 5px;
+	font-size: 0.7em;
+	font-style: italic;
+}
+
+.remove-permission-def-form {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+}
+
+.stats-select {
+	width: 200px;
+	margin: 0px 10px;
+}
+.auto-chop {
+	padding: .15em;
+	background-color: #e0e0e0;
+	border: 1px solid #c0c0c0;
+	border-radius: 3px;
+	display: inline-block;
+	position: relative;
+}
+
+.mailto-link {
+	color: #000;
+}
+
+.mailto-link:hover {
+	color: #52291C;	
+}
+
+@media screen and (max-device-width : 736px) {
+	.builder-nav a {
+		padding: 0.5rem;
+	}
+	.builder-nav a i {
+		font-size: 0.9em;
+	}
+	
+	div.dash-main {
+		left: 37px;
+		width: calc(100% - 37px);
+	}
+
+	.button.new-character {
+		left: 0px !important;
+	}
+
+	.login-subtitle {
+		width: 90% !important;
+	}
+
+	.handbook-edit-options {
+		clear: both;
+    	right: auto;
+   	 	position: absolute;
+   		width: 100%;
+   		top: 0px;
+   		left: 0px;
+   		display: flex;
+   		align-items: stretch;
+   		justify-content: space-around;
+    }
+
+    .handbook-edit-options li {
+    	flex: 1;
+    }
+
+    .handbook-edit-options li a {
+    	width: 100%;
+    	height: 100%;
+    }
+
+    .handbook-title {
+    	top: 50px;
+    	position: relative;
+    	margin-bottom: 60px;
+    }
+	
+}
