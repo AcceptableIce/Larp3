@@ -63,7 +63,7 @@ $forum = Forum::find($id);
 		</div>
 		<div class="topic-row-last-post">
 			<? $post = $topic->lastUpdatedPostForUser($user->id); ?>
-			<span class="hide-for-small">Last updated</span> {{$post->created_at->diffForHumans() }}<br><span class="hide-for-small"> by </span> {{$post->poster->mailtoLink()}}
+			<span class="hide-for-small">Last updated</span> {{ Helpers::timestamp($post->created_at) }}<br><span class="hide-for-small"> by </span> {{$post->poster->mailtoLink()}}
 		</div>
 	</div>
 	@endforeach

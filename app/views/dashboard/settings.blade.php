@@ -21,7 +21,7 @@
 	<div class="small-12 columns">
 	  <h3>User Settings</h3>
 	  <form method="post" action="/dashboard/settings/save">
-	  @foreach(UserSettingDefinition::all() as $definition)
+	  @foreach(UserSettingDefinition::orderBy('position')->get() as $definition)
 	  	<label for="user-settings-{{$definition->id}}">{{$definition->name}}
 		  	{{$definition->createForm($user)}}
 		  	<p class="setting-description">{{$definition->description}}</p>

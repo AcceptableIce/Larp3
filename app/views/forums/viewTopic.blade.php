@@ -145,7 +145,7 @@
 		<div class="post-data">
 			<div class="post-title">
 				<a id="post{{$i}}"></a>{{$i}}
-				<span class="right">Posted {{$post->created_at->diffForHumans()}}</span>
+				<span class="right">Posted {{Helpers::timestamp($post->created_at)}}</span>
 			</div>
 			<? 	$storyteller_reply = $isStoryteller && $forum_category_id == 5 && !$post->is_storyteller_reply; 
 				$user_reply = $isStoryteller && $forum_category_id == 5 && $post->posted_by == $first_poster_id;
@@ -154,7 +154,7 @@
 				<div class="post-content">{{$post->renderBody()}}</div>
 
 				@foreach($post->edits()->orderBy('created_at')->take(3)->get() as $edit) 
-					<div class="edit-notification"><i>Edited {{$edit->created_at->diffForHumans()}} by {{$edit->user->username}}</i></div>
+					<div class="edit-notification"><i>Edited {{Helpers::timestamp($edit->created_at)}} by {{$edit->user->username}}</i></div>
 				@endforeach
 
 				<div class="forum-signature">{{$post->poster->getSettingValue("Forum Signature")}}</div>

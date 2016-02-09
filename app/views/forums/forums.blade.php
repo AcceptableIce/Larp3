@@ -52,7 +52,7 @@
 				<? $topic = $forum->lastUpdatedTopicForUser($user_id); ?>
 				@if($topic)
 					<? $last_post = ForumTopic::find($topic->topic_id)->lastUpdatedPostForUser($user_id); ?>
-					<span class="hide-for-small">Last updated </span> {{$last_post->created_at->diffForHumans() }}<br><span class="hide-for-small">by </span> {{$last_post->poster->mailtoLink()}}
+					<span class="hide-for-small">Last updated </span> {{Helpers::timestamp($last_post->created_at) }}<br><span class="hide-for-small">by </span> {{$last_post->poster->mailtoLink()}}
 				@endif
 			</div>
 		</div>

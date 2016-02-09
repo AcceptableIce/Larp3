@@ -9,6 +9,9 @@ class UserSettingDefinition extends Eloquent {
 			case "Theme":
 				$options = ["default" => "Default", "edgy" => "Darkriven Talonfire"];
 				break;
+			case "Timestamp Style":
+				$options = ["default" => "Relative (\"minutes ago\")", "exact" => "Exact"];
+				break;
 		}
 		$out = "";
 		foreach($options as $k => $v) {

@@ -7,7 +7,7 @@
 	"require": {
 		"laravel/framework": "4.2.*",
 		"elasticsearch/elasticsearch": "1.0",
-		"fairholm/elasticquent": "dev-master"
+		"fairholm/elasticquent": "dev-master",
 		"dropbox/dropbox-sdk": "1.1.*"
 	},
 	"autoload": {
