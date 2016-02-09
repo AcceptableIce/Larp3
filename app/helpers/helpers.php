@@ -4,7 +4,7 @@ class Helpers {
 		$user = Auth::user();
 		if($user) {
 			$value = $user->getSettingValue('Timestamp Style');
-			if($value == "exact") return $timestamp->setTimezone('America/Chicago')->format('F jS g:i A');
+			if($value && $value == "exact") return $timestamp->setTimezone('America/Chicago')->format('F jS g:i A');
 		}
 		return $timestamp->diffForHumans();
 	}
