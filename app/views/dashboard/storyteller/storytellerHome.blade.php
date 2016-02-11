@@ -61,7 +61,7 @@ table {
 
 	<div class="small-12 medium-7 columns">
 		<h4>Incomplete Threads</h4>
-		<? $topics = ForumTopic::where('is_complete', 0)->whereHas('forum', function($q) { $q->where('category_id', 5)->where('forum_id', '!=', 42); })->orderBy('created_at', 'desc')->get(); ?>
+		<? $topics = ForumTopic::where('is_complete', 0)->whereHas('forum', function($q) { $q->where('show_on_st_todo_list', true); })->orderBy('created_at', 'desc')->get(); ?>
 		<p>There are currently <b>{{$topics->count()}}</b> incomplete threads. @if($topics->count() > 0) The oldest thread was created <b>{{$topics->last()->created_at->diffForHumans()}}</b>.@endif</p>
 		<table class="responsive">
 			<thead>

@@ -314,6 +314,7 @@ class StorytellerController extends BaseController {
 			$forum->topic_permission = Input::get("topic-permission") == "NULL" ? null : Input::get("topic-permission");			
 			$forum->reply_permission = Input::get("reply-permission") == "NULL" ? null : Input::get("reply-permission");						
 			$forum->is_private = Input::get("private") ? 1 : 0;
+			$forum->show_on_st_todo_list = Input::get("todo_list") ? 1 : 0;
 			$forum->position = Input::get("position");
 			$forum->save();
 			Cache::flush(); 

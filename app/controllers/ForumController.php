@@ -163,9 +163,9 @@ class ForumController extends BaseController {
 			$user = $watch->user;
 			$topic = $watch->topic;
 			//Do not message the user who posted it
-			if(Auth::user()->id != $post->poster->id) {
+			if($user != $post->poster->id) {
 				//Make sure the user still has access to this post.
-				if($user->canAccessPost($post->id)) {
+				if($user->canAccessTopic($topic->id)) {
 					Mail::send("emails.forumWatch", ['user' => $user, 'topic' => $topic, 'post' => $post], function($message) use ($user, $topic) {
 						$message->to($user->email, $user->username)->subject("The topic $topic->title has been updated.");
 					});

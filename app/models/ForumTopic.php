@@ -55,7 +55,7 @@ class ForumTopic extends Eloquent {
 
 	public function getLinkForPost($position) {
 		$page = ceil($position / 10);
-		return "/forums/topic/$this->id?page=$page#post$position";
+		return "http://larp.illini-rp.net/forums/topic/$this->id?page=$page#post$position";
 	}
 
 	public function getLinkForPostById($id) {

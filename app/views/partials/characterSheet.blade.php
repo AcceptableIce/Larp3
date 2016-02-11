@@ -380,9 +380,9 @@
 			@for($i = 0; $i < $value; $i++)
 				<div class="damage-track-box">
 				@if($i == 0 && $key == "B")<div class="damage-track-marker track-marker-left">+0</div>@endif
-				@if($i == 0 && $key == "W" && !$fortitude_1)<div class="damage-track-marker track-marker-left">-1</div>@endif				
+				@if($i == 0 && $key == "W" && !$fortitude_1)<div class="damage-track-marker track-marker-left">+1</div>@endif				
 				<span>{{$key}}</span>
-				@if($i == 0 && $key == "B")<div class="damage-track-marker track-marker-right">+1</div>@endif
+				@if($i == 0 && $key == "B")<div class="damage-track-marker track-marker-right">-1</div>@endif
 				@if($i == 0 && $key == "W" && !$fortitude_1)<div class="damage-track-marker track-marker-right">LT</div>@endif		
 				</div>		
 			@endfor

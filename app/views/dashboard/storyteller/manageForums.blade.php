@@ -23,6 +23,7 @@
 				<th>Create Topic Permission</th>			
 				<th>Reply Permission</th>					
 				<th>Private</th>
+				<th>On Todo List?</th>
 				<th>Allowed Characters</th>
 				<th>Position</th>
 			</thead>
@@ -54,6 +55,7 @@
 					<td>{{$forum->topic_permission ? PermissionDefinition::find($forum->topic_permission)->name : ''}}</td>		
 					<td>{{$forum->reply_permission ? PermissionDefinition::find($forum->reply_permission)->name : ''}}</td>					
 					<td>{{$forum->is_private ? "Yes" : "No"}}</td>
+					<td>{{$forum->show_on_st_todo_list ? "Yes" : "No"}}
 					<td>{{ForumCharacterPermission::where('forum_id', $forum->id)->count()}}</td>
 					<td>{{$forum->position}}</td>
 				</tr>
@@ -196,6 +198,17 @@
 				</div> 
 			</div>
 		</div>
+		<div class="row">
+			<div class="small-2 columns">
+				<label for="todo_list" class="right inline">On ST Todo List?</label>	
+			</div>
+			<div class="small-10 columns">
+				<div class="switch">
+				  <input id="todo_list" name="todo_list" type="checkbox" {{$forum && $forum->on_st_todo_list ? "checked" : ""}}>
+				  <label for="todo_list"></label>
+				</div> 
+			</div>
+		</div>		
 		<div class="row">
 			<div class="small-2 columns">
 				<label for="position" class="right inline">Position</label>	
