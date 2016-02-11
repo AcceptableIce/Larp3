@@ -4,6 +4,7 @@
 
 # Configuration
 /app/config
+/app/storage
 
 # Composer
 composer.phar
