@@ -204,7 +204,7 @@
 			</div>
 			<div class="small-10 columns">
 				<div class="switch">
-				  <input id="todo_list" name="todo_list" type="checkbox" {{$forum && $forum->on_st_todo_list ? "checked" : ""}}>
+				  <input id="todo_list" name="todo_list" type="checkbox" {{$forum && $forum->show_on_st_todo_list ? "checked" : ""}}>
 				  <label for="todo_list"></label>
 				</div> 
 			</div>
