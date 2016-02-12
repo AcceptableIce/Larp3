@@ -18,11 +18,11 @@
 	self.allUsers = ko.observableArray([]);
 	self.selectedUsers = ko.observableArray([]);
 	self.selectedUser = ko.observable();
-	<? $added_users = ForumTopicAddedUser::where('topic_id', $topic_id)->get(); ?>
+	<? if(isset($topic_id)) $added_users = ForumTopicAddedUser::where('topic_id', $topic_id)->get(); ?>
 	@foreach(Character::activeCharacters()->get() as $c)
 		var userObject = {id: "{{$c->owner->id}}", name: "{{$c->owner->username}}"};
 		self.allUsers.push(userObject);
-		@if($added_users->filter(function($item) use ($c) { return $item->user_id == $c->owner->id; })->first())
+		@if(isset($added_users) && $added_users->filter(function($item) use ($c) { return $item->user_id == $c->owner->id; })->first())
 		self.selectedUsers.push(userObject);
 		@endif
 	@endforeach
