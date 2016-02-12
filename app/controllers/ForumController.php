@@ -38,12 +38,15 @@ class ForumController extends BaseController {
 				$edit->save();
 				
 				ForumTopicAddedUser::where('topic_id', $topic_id)->delete();
-				$addedUsers = explode(",", Input::get("added-users"));
-				foreach($addedUsers as $au) {
-					$new_au = new ForumTopicAddedUser;
-					$new_au->topic_id = $topic_id;
-					$new_au->user_id = $au;
-					$new_au->save();
+				$addedUsersRaw = Input::get("added-users");
+				if(strlen(trim($addedUsersRaw)) > 0) {
+					$addedUsers = explode(",", $addedUsersRaw);
+					foreach($addedUsers as $au) {
+						$new_au = new ForumTopicAddedUser;
+						$new_au->topic_id = $topic->id;
+						$new_au->user_id = $au;
+						$new_au->save();
+					}
 				}
 
 		
@@ -66,12 +69,16 @@ class ForumController extends BaseController {
 					$posted_by = Input::get("post-as");
 					$body = ForumPost::replaceSpecialTerms($body);
 					$topic = $forum->post($title, $body, User::find($posted_by));
-					$addedUsers = explode(",", Input::get("added-users"));
-					foreach($addedUsers as $au) {
-						$new_au = new ForumTopicAddedUser;
-						$new_au->topic_id = $topic->id;
-						$new_au->user_id = $au;
-						$new_au->save();
+					
+					$addedUsersRaw = Input::get("added-users");
+					if(strlen(trim($addedUsersRaw)) > 0) {
+						$addedUsers = explode(",", $addedUsersRaw);
+						foreach($addedUsers as $au) {
+							$new_au = new ForumTopicAddedUser;
+							$new_au->topic_id = $topic->id;
+							$new_au->user_id = $au;
+							$new_au->save();
+						}
 					}
 					//Check for @mentions.
 					$this->alertMentions($posted_by, $body, $topic);
