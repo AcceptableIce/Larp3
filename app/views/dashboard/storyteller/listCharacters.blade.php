@@ -99,7 +99,8 @@
 						@if($character->active) Inactivate @else Activate @endif
 					</a></li>		
 					<li><a href="#"><i class="icon-book"></i> Read Lores</a></li>
-					<li><a href="/dashboard/character/{{$character->id}}/biography"><i class="icon-vcard"></i> Edit Biography</a><li>					
+					<li><a href="/dashboard/character/{{$character->id}}/biography"><i class="icon-vcard"></i> Edit Biography</a><li>								<li><a href="/dashboard/character/{{$character->id}}/cheatsheet"><i class="icon-book-open"></i> Character Reference</a>
+
 					<li><a href="/dashboard/storyteller/character/{{$character->id}}/experience"><i class="icon-ticket"></i> Award Experience</a><li>
 					<li><a href="/dashboard/storyteller/character/{{$character->id}}/positions"><i class="icon-trophy"></i> Manage Positions</a></li>
 					<li><a href="/dashboard/storyteller/character/{{$character->id}}/timeout"><i class="icon-flight"></i> Set Timeout Date</a></li>	

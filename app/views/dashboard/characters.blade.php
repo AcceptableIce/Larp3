@@ -85,6 +85,7 @@
 							</a></li>
 						@endif
 						<li><a href="/dashboard/character/{{$character->id}}/lores"><i class="icon-book"></i> Read Lores</a></li>
+						<li><a href="/dashboard/character/{{$character->id}}/cheatsheet"><i class="icon-book-open"></i> Character Reference</a>
 						<li><a href="/dashboard/character/{{$character->id}}/versioncontrol"><i class="icon-back-in-time"></i> Version Control</a></li>
 					  	<li class="warning"><a href="#" data-bind="click: function() { promptDelete('{{$character->name}}', {{$character->id}}) }"><i class="icon-trash"></i> Delete Character</a></li>
 					</ul>

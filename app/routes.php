@@ -94,6 +94,7 @@ Route::group(array('before' => 'auth'), function() {
 		
 		Route::group(array('prefix' => 'character/{id}/', 'before' => 'ownsCharacter'), function() {
 			Route::get('/print/{version?}', function($id, $version = -1) { return View::make('dashboard/character/print')->with(["character_id" => $id, 'version' => $version]); });
+			Route::get('/cheatsheet/{version?}', function($id, $version = -1) { return View::make('dashboard/character/cheatSheet')->with(["character_id" => $id, 'version' => $version]); });
 			
 			Route::get('/biography', function($id) { return View::make('dashboard/character/questionnaire')->with(["character_id" => $id]); });
 			Route::get('/versioncontrol', function($id) { return View::make('dashboard/character/versioncontrol')->with(["character_id" => $id]); });
