@@ -1,7 +1,16 @@
 @extends('forums/forumLayout')
 <? 	$topic = ForumTopic::find($id); 
 	$forum = $topic->forum; 
-	$user = Auth::user() ?>
+	$user = Auth::user();
+	
+	function nl_join(array $list, $conjunction = 'and') {
+	  $last = array_pop($list);
+	  if ($list) {
+	    return implode(', ', $list) . ' ' . $conjunction . ' ' . $last;
+	  }
+	  return $last;
+	}
+?>
 @section('title', $topic->title)
 @section('forum-style') 
 
@@ -88,6 +97,11 @@
 <a href="/forums/topic/{{$id}}/post" class="button info small right"><i class="icon-plus"></i> Post Reply</a>
 @endif
 <h3 class="topic-title">{{$topic->title}}</h3>
+<? $added_users = $topic->addedUsers; ?>
+@if($added_users->count() > 0)
+	<? $list = []; foreach($added_users as $u) $list[] = $u->user->username; ?>
+	<div class="added-user-list">{{nl_join($list)}} can also see this thread.</div>
+@endif
 <?
 	$listing = $topic->postsForUser($user->id)->with("poster")->paginate(10);
 	$i = $listing->getFrom() - 1;	
@@ -147,8 +161,8 @@
 				<a id="post{{$i}}"></a>{{$i}}
 				<span class="right">Posted {{Helpers::timestamp($post->created_at)}}</span>
 			</div>
-			<? 	$storyteller_reply = $isStoryteller && $forum_category_id == 5 && !$post->is_storyteller_reply; 
-				$user_reply = $isStoryteller && $forum_category_id == 5 && $post->posted_by == $first_poster_id;
+			<? 	$storyteller_reply = $isStoryteller && ($forum_category_id == 5 && !$post->is_storyteller_reply); 
+				$user_reply = $isStoryteller && $forum_category_id == 5 && $post->posted_by == $first_poster_id && !$storyteller_reply && !$post->poster->isStoryteller();
 			?>
 			<div class="post-body {{$storyteller_reply ? 'storyteller-reply' : ''}} {{$user_reply ? 'user-reply' : ''}}">
 				<div class="post-content">{{$post->renderBody()}}</div>

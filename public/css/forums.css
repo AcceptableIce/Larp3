@@ -338,6 +338,25 @@ p + .handbook-page {
     clear: both;
 }
 
+.added-user-list {
+	float: left;
+	clear: both;
+}
+
+.remove-button {
+	display: inline-block;
+	color: #990000;
+    padding-right: 3px;
+    cursor: pointer;
+}
+
+.user-list-panel {
+	display: inline-block;
+	margin-right: 10px;
+	margin-bottom: 10px;
+	padding: 5px 10px;
+}
+
 .forum-pagination {
 	float: right;
 	clear: both;

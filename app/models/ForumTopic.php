@@ -22,6 +22,10 @@ class ForumTopic extends Eloquent {
 		return $query;
 	}
 
+	public function addedUsers() {
+		return $this->hasMany("ForumTopicAddedUser", "topic_id", "id");
+	}
+	
 	public function markAsRead($user) {
 		$receipt = ForumTrackRead::firstOrCreate(['topic_id' => $this->id, 'user_id' => $user->id]);
 		$receipt->mark_read = new DateTime;

@@ -68,7 +68,7 @@ class Forum extends Eloquent {
 		switch($this->category_id) {
 			case 5:
 			if(!$user->isStoryteller()) {
-				$query = $query->where('fpost.posted_by', $user_id);
+				$query = $query->where('fpost.posted_by', $user_id)->orWhere(DB::raw("(select count(id) from forums_topics_added_users as added where added.topic_id = forums_topics.id and added.user_id = ".$user_id.")"), ">", "0");
 			}
 			break;
 			case 7:

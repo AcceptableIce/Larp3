@@ -14,6 +14,44 @@
 		image_advtab: true,
     	forced_root_block : ''
 	});
+	
+	self.allUsers = ko.observableArray([]);
+	self.selectedUsers = ko.observableArray([]);
+	self.selectedUser = ko.observable();
+	<? $added_users = ForumTopicAddedUser::where('topic_id', $topic_id)->get(); ?>
+	@foreach(Character::activeCharacters()->get() as $c)
+		var userObject = {id: "{{$c->owner->id}}", name: "{{$c->owner->username}}"};
+		self.allUsers.push(userObject);
+		@if($added_users->filter(function($item) use ($c) { return $item->user_id == $c->owner->id; })->first())
+		self.selectedUsers.push(userObject);
+		@endif
+	@endforeach
+	
+	self.availableUsers = ko.computed(function() {
+		var out = [];
+		for(var i = 0; i < self.allUsers().length; i++) {
+			var item = self.allUsers()[i];
+			if(self.selectedUsers().indexOf(item) == -1) out.push(item);
+		}
+		return out;
+	});
+	
+	self.addedUserOutput = ko.computed(function() {
+		var selUserIds = [];
+		for(var i = 0; i < self.selectedUsers().length; i++) {
+			selUserIds.push(self.selectedUsers()[i].id);
+		}
+		return selUserIds.join(",");
+	})
+	
+	self.addUser = function() {
+		self.selectedUsers.push(self.selectedUser());
+	};
+	
+	self.removeUser = function(item) {
+		self.selectedUsers.remove(item);
+	};
+	 
 @stop
 @section('forum-content')
 <? if(isset($topic_id)) {
@@ -60,8 +98,30 @@
 					<option value="{{$u->id}}" {{Auth::user()->id == $u->id ? "selected" : ""}}>{{$u->username}} (ST)</option>
 				@endforeach
 			</select>
-		</div>
+		</div>		
 	@endif
+	<input type="hidden" name="added-users" data-bind="value: addedUserOutput" />
 	<input type="submit" class="button success button-submit right" value="Submit" />
+	@if(Auth::user()->isStoryteller())
+	<hr>
+	<h4>Added Users</h4>
+	<p>Allow additional users to view this thread. They must still have access to the forum.</p>
+	<div class="row">
+		<div class="small-12 columns" data-bind="foreach: selectedUsers">
+			<div class="panel user-list-panel">
+				<div class="remove-button" data-bind="click: $root.removeUser">&times</div>
+				<span data-bind="text: name"></span>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="small-8 columns">
+			<select data-bind="value: selectedUser, options: availableUsers, optionsText: 'name'"></select>&nbsp;&nbsp;
+		</div>
+		<div class="small-4 columns">
+			<input type="button" class="button tiny success" data-bind="click: $root.addUser" value="Add to Thread" />
+		</div>
+	</div>
+	@endif
 </form>
 @stop
