@@ -1478,7 +1478,7 @@ function chargenVM() {
 
 		
 		self.tickBackground = function(background, amount) {
-			var item = _.findWhere(self.characterSheet.backgrounds(), { id: background.id });
+			var item = _.findWhere(self.characterSheet.backgrounds(), { id: background.id, description: background.description });
 			if(item) {
 				var ref = self.getBackgroundById(background.id);
 				if(ref.group == "Influence") {
