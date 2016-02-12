@@ -169,16 +169,16 @@
 				@if($character->merits($version)->count() > 0)
 					<h2>Merits</h2>
 					@foreach($character->merits($version)->with('definition')->get()->sortBy('definition.name') as $merit)
-						<h4>{{$merit->definition->name}}</h4>
-						{{$merit->definition->description}}
+						<b>{{$merit->definition->name}}</b><br>
+						{{$merit->definition->description}}<br>
 					@endforeach
 					<hr>
 				@endif
 				@if($character->flaws($version)->count() > 0)
 					<h2>Flaws</h2>
 					@foreach($character->flaws($version)->with('definition')->get()->sortBy('definition.name') as $flaw)
-						<h4>{{$flaw->definition->name}}</h4>
-						{{$flaw->definition->description}}
+						<b>{{$flaw->definition->name}}</b><br>
+						{{$flaw->definition->description}}<br>
 					@endforeach
 					<hr>
 				@endif
@@ -186,8 +186,8 @@
 				@if($character->derangements($version)->count() > 0)				
 					<h2>Derangements</h2>
 					@foreach($character->derangements($version)->with('definition')->get()->sortBy('definition.name') as $derangement)
-						<h4>{{$derangement->definition->name}}</h4>
-						{{$derangement->definition->description}}
+						<b>{{$derangement->definition->name}}</b><br>
+						{{$derangement->definition->description}}<br>
 					@endforeach
 				@endif
 			</div>
