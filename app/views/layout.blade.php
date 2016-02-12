@@ -69,7 +69,7 @@
 		<script src="/js/foundation.min.js"></script>
 		<script src="/js/responsive-tables.js"></script>
 		<script src="/js/vendor/modernizr.js"></script>
-		<script>  $(document).foundation(); //Initialize Foundation </script>
+		<script> $(document).foundation(); //Initialize Foundation </script>
 		@yield('script')
 	</body>
 </html>

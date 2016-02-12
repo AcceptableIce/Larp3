@@ -81,7 +81,7 @@
 	<tbody>
 	@foreach($items as $character)
 		<tr>
-			<td>
+			<td class="character-actions">
 				@if(!$character->in_review)
 				<a href="/generator/{{$character->id}}"><i class="icon-pencil" data-tooltip data-options="disable_for_touch:true" title="Edit"></i></a>
 				@endif
@@ -89,7 +89,8 @@
 				<a href="/dashboard/storyteller/character/{{$character->id}}/changes"><i class="icon-check" data-tooltip data-options="disable_for_touch:true" title="Approve or Reject"></i></a>
 				@endif
 				<a href="/dashboard/character/{{$character->id}}/print"><i class="icon-print" data-tooltip data-options="disable_for_touch:true" title="Print"></i></a>
-				<a href="#" data-dropdown="drop-{{$character->id}}" data-options="align:bottom"><i class="icon-dot-3"></i></a>
+				<a href="#" data-dropdown="drop-{{$character->id}}" data-options="align:bottom" ><i class="icon-dot-3"></i></a>
+				<div class="character-dropdown-holder">
 				<ul id="drop-{{$character->id}}" data-dropdown-content class="f-dropdown small drop-bottom">
 					<li><a href="/dashboard/storyteller/character/{{$character->id}}/toggleNPC"><i class="icon-graduation-cap"></i> 
 					@if($character->is_npc) Remove NPC Status @else Give NPC Status	@endif
@@ -105,6 +106,7 @@
 					<li><a href="/dashboard/character/{{$character->id}}/versioncontrol"><i class="icon-back-in-time"></i> Version Control</a></li>
 				  	<li class="warning"><a href="#" data-bind="click: function() { promptDelete('{{$character->name}}', {{$character->id}}) }"><i class="icon-trash"></i> Delete Character</a></li>
 				</ul>
+				</div>
 			</td>
 			<td>{{$character->name}}</td>
 			<td>{{$character->owner->username}}</td>

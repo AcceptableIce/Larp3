@@ -90,6 +90,17 @@ b {
 	bottom: 5px;
 }
 
+.character-dropdown-holder {
+	position: relative;
+	width: 160px;	
+	display: block;
+}
+
+.character-actions {
+	width: 90px;
+	overflow-y: visible;
+	display: block;
+}
 .top-bar-section .dropdown li.parent-link a {
 	display: none;
 }
