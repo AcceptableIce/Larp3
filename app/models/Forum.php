@@ -64,7 +64,9 @@ class Forum extends Eloquent {
 
 	public function rawTopicsForUser($user_id) {
 		$user = User::find($user_id);
-		$query = DB::table('forums_topics')->where('forum_id', $this->id)->leftJoin('forums_posts as fpost', 'forums_topics.first_post', '=', 'fpost.id');
+		$query = DB::table('forums_topics')
+				->select(DB::raw("forums_topics.id, forum_id, title, first_post, is_complete, is_sticky, views, forums_topics.created_at, forums_topics.updated_at, fpost.topic_id"))
+				->where('forum_id', $this->id)->leftJoin('forums_posts as fpost', 'forums_topics.first_post', '=', 'fpost.id');
 		switch($this->category_id) {
 			case 5:
 			if(!$user->isStoryteller()) {
