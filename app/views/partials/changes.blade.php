@@ -97,12 +97,16 @@ foreach($differences as $key => $value) {
 		echo "<h5>Abilities</h5>";
 		foreach($value as $k => $v) {
 			echo '<b>'.RulebookAbility::find($k)->name.'</b>';
-			print_change(	"", 
-							@$v["amount"],
-							["Initial purchase of \1 Dots.", "[change] Dots from \1 -> \2.", "Removed all Dots."]);
-			print_change(	"", 
-							@$v["specialization"],
-							["Added specialization \1.", "Changed specialization from \1 -> \2.", "Removed specialization \1."]);
+			if(isset($v['amount'])) {
+				print_change(	"", 
+								@$v["amount"],
+								["Initial purchase of \1 Dots.", "[change] Dots from \1 -> \2.", "Removed all Dots."]);
+			}
+			if(isset($v['specialization']) && $v['specialization'][0] != $v['specialization'][1]) {
+				print_change(	"", 
+								@$v["specialization"],
+								["Added specialization \1.", "Changed specialization from \1 -> \2.", "Removed specialization \1."]);
+			}
 		}
 	}
 	if($key == "backgrounds") {
