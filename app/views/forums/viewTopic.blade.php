@@ -105,7 +105,6 @@
 	//variable hoisting
 	$first_poster_id = $topic->firstPost->posted_by; 
 	$isStoryteller = $user->isStoryteller();
-	$forum_category_id = $forum->category_id;
 ?>
 
 @foreach($listing as $post)
@@ -153,8 +152,8 @@
 				<a id="post{{$i}}"></a>{{$i}}
 				<span class="right">Posted {{Helpers::timestamp($post->created_at)}}</span>
 			</div>
-			<? 	$storyteller_reply = $isStoryteller && $poster_st && $forum_category_id == 5 && !$post->is_storyteller_reply; 
-				$user_reply = $isStoryteller && $forum_category_id == 5 && !$poster_st && !$storyteller_reply;
+			<? 	$storyteller_reply = $isStoryteller && $poster_st && $forum->asymmetric_replies && !$post->is_storyteller_reply; 
+				$user_reply = $isStoryteller && $forum->asymmetric_replies && !$poster_st && !$storyteller_reply;
 			?>
 			<div class="post-body {{$storyteller_reply ? 'storyteller-reply' : ''}} {{$user_reply ? 'user-reply' : ''}}">
 				<div class="post-content">{{$post->renderBody()}}</div>
@@ -165,7 +164,7 @@
 
 				<div class="forum-signature">{{$post->poster->getSettingValue("Forum Signature")}}</div>
 				<div class="post-options">
-					@if(($forum_category_id == 5 || $forum->id == 35) && $isStoryteller) <!-- Contact the STs -->
+					@if(($forum->asymmetric_replies  || $forum->id == 35) && $isStoryteller) <!-- Contact the STs -->
 						<a href="/forums/topic/{{$id}}/toggleComplete">
 							@if($topic->is_complete) <button class="button post-option tiny warning">Mark Incomplete</button>
 							@else <button class="button post-option tiny success">Mark Complete</button>
@@ -216,7 +215,7 @@
 					<input type="hidden" value="{{$id}}" name="topic_id" />
 					<textarea class="topic-body quick-reply-body" name="body" id="quick-post" placeholder="Type your message here..."></textarea>
 					<div class="post-actions">
-						@if($isStoryteller && $forum_category_id == 5)
+						@if($isStoryteller && $forum->asymmetric_replies)
 							<div class="switch post-option-switch">
 							  <input id="st-switch" name="st-reply" type="checkbox">
 							  <label for="st-switch"></label>

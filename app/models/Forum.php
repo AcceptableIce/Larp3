@@ -123,7 +123,7 @@ class Forum extends Eloquent {
 						->leftJoin('forums_posts as plist', 'forums_topics.id', '=', 'plist.topic_id')
 						->groupBy('forums_topics.id');
 			//$query = DB::table("forums_posts")->where('topic_id', $topic->topic_id);
-		if($this->category_id == 5 && !$user->isStoryteller()) {
+		if($this->asymmetric_replies && !$user->isStoryteller()) {
 			$query = $query->where('plist.is_storyteller_reply', false);
 		}
 		foreach($query->get() as $l) {
@@ -148,7 +148,7 @@ class Forum extends Eloquent {
 							})	
 							->join('forums_posts as plist', 'forums_topics.id', '=', 'plist.topic_id');
 
-		if($this->category_id == 5 && !Auth::user()->isStoryteller()) {
+		if($this->asymmetric_replies && !Auth::user()->isStoryteller()) {
 			$response = $response->where('plist.is_storyteller_reply', false);
 		}
 

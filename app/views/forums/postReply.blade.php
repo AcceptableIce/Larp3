@@ -48,7 +48,7 @@ if(isset($post_id)) {
 	@if(isset($id))<input type="hidden" value="{{$id}}" name="topic_id" />@endif
 	@if(isset($post_id)) <input type="hidden" value="{{$post_id}}" name="post_id" /> @endif
 	<textarea class="topic-body" name="body" placeholder="Type your message here..." id="post">{{isset($post) ? $post->body : $quoteValue}}</textarea>
-	@if(Auth::user()->isStoryteller() && $topic->forum->category->id == 5)
+	@if(Auth::user()->isStoryteller() && $topic->forum->asymmetric_replies)
 		<div class="switch post-option-switch">
 		  <input id="st-switch" name="st-reply" type="checkbox">
 		  <label for="st-switch"></label>

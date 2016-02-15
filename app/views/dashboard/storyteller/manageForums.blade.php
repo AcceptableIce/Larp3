@@ -24,6 +24,7 @@
 				<th>Reply Permission</th>					
 				<th>Private</th>
 				<th>On Todo List?</th>
+				<th>Asymmetric?</th>
 				<th>Allowed Characters</th>
 				<th>Position</th>
 			</thead>
@@ -55,7 +56,8 @@
 					<td>{{$forum->topic_permission ? PermissionDefinition::find($forum->topic_permission)->name : ''}}</td>		
 					<td>{{$forum->reply_permission ? PermissionDefinition::find($forum->reply_permission)->name : ''}}</td>					
 					<td>{{$forum->is_private ? "Yes" : "No"}}</td>
-					<td>{{$forum->show_on_st_todo_list ? "Yes" : "No"}}
+					<td>{{$forum->show_on_st_todo_list ? "Yes" : "No"}}</td>
+					<td>{{$forum->asymmetric_replies ? "Yes" : "No"}}</td>
 					<td>{{ForumCharacterPermission::where('forum_id', $forum->id)->count()}}</td>
 					<td>{{$forum->position}}</td>
 				</tr>
@@ -206,6 +208,17 @@
 				<div class="switch">
 				  <input id="todo_list" name="todo_list" type="checkbox" {{$forum && $forum->show_on_st_todo_list ? "checked" : ""}}>
 				  <label for="todo_list"></label>
+				</div> 
+			</div>
+		</div>		
+		<div class="row">
+			<div class="small-2 columns">
+				<label for="asymmetric" class="right inline">Asymmetric Replies?</label>	
+			</div>
+			<div class="small-10 columns">
+				<div class="switch">
+				  <input id="asymmetric" name="asymmetric" type="checkbox" {{$forum && $forum->asymmetric_replies ? "checked" : ""}}>
+				  <label for="asymmetric"></label>
 				</div> 
 			</div>
 		</div>		
