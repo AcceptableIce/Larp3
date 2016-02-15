@@ -23,7 +23,7 @@
 	  <form method="post" action="/dashboard/settings/save">
 	  <label for="user-email">Email
 		  	<input type="text" name="user-email" id="user-email" value="{{$user->email}}" />
-		  	<p class="setting-description">Your email adderss.</p>
+		  	<p class="setting-description">Your email address.</p>
 		  </label>
 	  @foreach(UserSettingDefinition::orderBy('position')->get() as $definition)
 	  	<label for="user-settings-{{$definition->id}}">{{$definition->name}}
