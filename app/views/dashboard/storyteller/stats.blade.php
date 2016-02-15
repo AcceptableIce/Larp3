@@ -177,11 +177,25 @@ function mmmr($array, $output = 'mean'){
 					return $character->getBackgroundDots($val);
 				};
 				break;
-			case "Experience":
+			case "Current Experience":
 				$labelSet = [];
 				for($i = 0; $i <= 100; $i++) $labelSet[] = $i;
 				$extractor = function($character) {
 					return $character->cachedExperience();
+				};
+				break;
+			case "Total Experience":
+				$labelSet = [];
+				for($i = 0; $i <= 100; $i++) $labelSet[] = $i;
+				$extractor = function($character) {
+					return $character->experience;
+				};
+				break;
+			case "Experience Spent":
+				$labelSet = [];
+				for($i = 0; $i <= 100; $i++) $labelSet[] = $i;
+				$extractor = function($character) {
+					return $character->getExperienceCost($character->activeVersion());
 				};
 				break;
 			case "Total Influence":
@@ -240,7 +254,7 @@ function mmmr($array, $output = 'mean'){
 	}	
 	
 ?>
-	self.statList = ["", "Experience", "Generation", "Appearance", "Contacts", "Fame", "Ghouls", "Herd", "Mentor", "Resources", "Retainers", "Bureaucracy", "Church", "Finance", "Health", "High Society", "Industry", "Media", "Neighborhood", "Occult", "Police", "Politics", "Transportation", "Underworld", "University", "Camarilla Lore", "Fae Lore", "Kindred Lore", "Sabbat Lore", "Werewolf Lore", "Total Influence"];
+	self.statList = ["", "Current Experience", "Total Experience", "Experience Spent", "Generation", "Appearance", "Contacts", "Fame", "Ghouls", "Herd", "Mentor", "Resources", "Retainers", "Bureaucracy", "Church", "Finance", "Health", "High Society", "Industry", "Media", "Neighborhood", "Occult", "Police", "Politics", "Transportation", "Underworld", "University", "Camarilla Lore", "Fae Lore", "Kindred Lore", "Sabbat Lore", "Werewolf Lore", "Total Influence"];
 	self.selectedX = ko.observable("{{$x}}");
 	self.selectedY = ko.observable("{{$y}}");
 
