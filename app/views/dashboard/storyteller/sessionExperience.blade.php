@@ -5,10 +5,18 @@
 	self.activeCharacters = ko.observableArray([]);
 	@if(isset($id))
 		<? $session = GameSession::find($id); ?>
-		@foreach(GameSessionCheckIn::where(['session_id' => $session->id])->with('character')->get()->sortBy('character.name') as $checkin)
-		self.activeCharacters.push(ko.observable({id: {{$checkin->character->id}}, name: "{{{$checkin->character->name}}}", player: "{{$checkin->character->owner->username}}", costume: ko.observable({{$checkin->costume ? 'true' : 'false'}}), 
-									nomination1: ko.observable({{$checkin->nominated ? 'true' : 'false'}}), nomination2: ko.observable({{$checkin->nominated_twice ? 'true' : 'false'}}), 
-									override: ko.observable({{$checkin->bonus}}) })); 
+		@foreach($session->checkins()->with('character')->get()->sortBy('character.name') as $checkin)
+		self.activeCharacters.push(ko.observable(
+			{
+				id: {{$checkin->character->id}}, 
+				name: "{{{$checkin->character->name}}}", 
+				player: "{{$checkin->character->owner->username}}", 
+				costume: ko.observable({{$checkin->costume ? 'true' : 'false'}}), 
+				nomination1: ko.observable({{$checkin->nominated ? 'true' : 'false'}}), 
+				nomination2: ko.observable({{$checkin->nominated_twice ? 'true' : 'false'}}), 
+				override: ko.observable({{$checkin->bonus}})
+			}
+		)); 
 		@endforeach
 	@endif
 	
@@ -84,7 +92,7 @@
 			<tr>
 				<td>{{$d->id}}</td>
 				<td>{{$d->date}}</td>
-				<td>{{$d->submitted ? "Awarded" : "<b>Incomplete</b>" }}
+				<td>{{$d->submitted ? "Awarded" : ($d->checkins->count() > 0 ? "<b>Pending Approval</b>" : "<i>Incomplete</i>") }}
 				<td><a href="/dashboard/storyteller/session/experience/{{$d->id}}"><button class="button small success">Award Experience...</button></a></td>
 			</tr>
 			@endforeach

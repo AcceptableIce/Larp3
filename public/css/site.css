@@ -96,6 +96,7 @@ b {
 	display: block;
 }
 
+
 .character-actions {
 	width: 90px;
 	overflow-y: visible;
@@ -445,6 +446,14 @@ input.checkin-experience-box {
 
 .mailto-link:hover {
 	color: #52291C;	
+}
+
+td .switch {
+	margin: 0 0;
+}
+
+td input[type=text] {
+	margin-top: -15px;
 }
 
 @media screen and (max-device-width : 736px) {
