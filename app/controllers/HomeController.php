@@ -180,6 +180,8 @@ class HomeController extends BaseController {
 				$setting->save();
 			}
 		}
+		$user->email = Input::get("user-email");
+		$user->save();
 		
 		return Redirect::to('/dashboard/settings');
 	}

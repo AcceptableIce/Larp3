@@ -21,6 +21,10 @@
 	<div class="small-12 columns">
 	  <h3>User Settings</h3>
 	  <form method="post" action="/dashboard/settings/save">
+	  <label for="user-email">Email
+		  	<input type="text" name="user-email" id="user-email" value="{{$user->email}}" />
+		  	<p class="setting-description">Your email adderss.</p>
+		  </label>
 	  @foreach(UserSettingDefinition::orderBy('position')->get() as $definition)
 	  	<label for="user-settings-{{$definition->id}}">{{$definition->name}}
 		  	{{$definition->createForm($user)}}
