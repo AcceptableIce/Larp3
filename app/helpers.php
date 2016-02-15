@@ -8,4 +8,18 @@ class Helpers {
 		}
 		return $timestamp->diffForHumans();
 	}
+	
+	static function nl_join(array $list, $conjunction = 'and') {
+		$last = array_pop($list);
+		if ($list) {
+			return implode(', ', $list) . ' ' . $conjunction . ' ' . $last;
+			}
+	  return $last;
+	}
+	
+	static function extractByKey($key, $collection) {
+		$list = []; 
+		foreach($collection as $u) $list[] = $u->$key;
+		return $list;
+	}
 }

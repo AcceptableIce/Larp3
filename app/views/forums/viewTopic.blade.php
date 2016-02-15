@@ -2,14 +2,6 @@
 <? 	$topic = ForumTopic::find($id); 
 	$forum = $topic->forum; 
 	$user = Auth::user();
-	
-	function nl_join(array $list, $conjunction = 'and') {
-	  $last = array_pop($list);
-	  if ($list) {
-	    return implode(', ', $list) . ' ' . $conjunction . ' ' . $last;
-	  }
-	  return $last;
-	}
 ?>
 @section('title', $topic->title)
 @section('forum-style') 
@@ -100,7 +92,7 @@
 <? $added_users = $topic->addedUsers; ?>
 @if($added_users->count() > 0)
 	<? $list = []; foreach($added_users as $u) $list[] = $u->user->username; ?>
-	<div class="added-user-list">{{nl_join($list)}} can also see this thread.</div>
+	<div class="added-user-list">{{Helpers::nl_join($list)}} can also see this thread.</div>
 @endif
 <?
 	$listing = $topic->postsForUser($user->id)->with("poster")->paginate(10);

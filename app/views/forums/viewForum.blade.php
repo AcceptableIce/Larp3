@@ -54,6 +54,11 @@ $forum = Forum::find($id);
 				<a href="{{$topic->getLinkForLastPost()}}"><i class="to-page-link icon-right-open"></i><i class="to-page-link icon-right-open"></i></a>
 				<br>
 			by {{$topic->posts()->first()->poster->mailtoLink()}}
+			<? $added_users = $topic->addedUsers; ?>
+			@if($added_users->count() > 0 && $user->isStoryteller()) 
+				<? $list = []; foreach($added_users as $u) $list[] = $u->user->username; ?>
+				<div class="added-user-subheader">Added: {{Helpers::nl_join($list)}}</div>
+			@endif
 		</div>
 		<div class="topic-row-data">
 			<? $count = $topic->postsForUser($user->id)->count(); ?>

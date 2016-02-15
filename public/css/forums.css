@@ -332,6 +332,10 @@ p + .handbook-page {
 	margin-top: 10px;
 }
 
+.added-user-list + .topic-pagination {
+	margin-top: 0px;
+}
+
 .topic-title {
 	max-width: 800px;
     float: left;
@@ -355,6 +359,12 @@ p + .handbook-page {
 	margin-right: 10px;
 	margin-bottom: 10px;
 	padding: 5px 10px;
+}
+
+.added-user-subheader {
+	font-size: 0.8em;
+	color: #666;
+	font-style: italic;
 }
 
 .forum-pagination {
