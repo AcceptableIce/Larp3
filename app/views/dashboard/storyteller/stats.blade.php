@@ -225,6 +225,24 @@ function mmmr($array, $output = 'mean'){
 					return @$character->path()->first()->virtue1;
 				};
 				break;
+			case "Physical Traits":
+				$labelSet = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
+				$extractor = function($character) {
+					return $character->attributes()->first()->physicals;
+				};
+				break;
+			case "Mental Traits":
+				$labelSet = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
+				$extractor = function($character) {
+					return $character->attributes()->first()->mentals;
+				};
+				break;	
+			case "Social Traits":
+				$labelSet = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
+				$extractor = function($character) {
+					return $character->attributes()->first()->socials;
+				};
+				break;							
 			case "Current Experience":
 				$labelSet = [];
 				for($i = 0; $i <= 100; $i++) $labelSet[] = $i;
@@ -316,7 +334,7 @@ function mmmr($array, $output = 'mean'){
 	}	
 	
 ?>
-	self.statList = ["", "Current Experience", "Total Experience", "Experience Spent", "Generation", "Morality", "Courage", "Self-Control/Instinct", "Conscience/Conviction", "Appearance", "Contacts", "Fame", "Ghouls", "Herd", "Mentor", "Resources", "Retainers", "Bureaucracy", "Church", "Finance", "Health", "High Society", "Industry", "Media", "Neighborhood", "Occult", "Police", "Politics", "Transportation", "Underworld", "University", "Camarilla Lore", "Fae Lore", "Kindred Lore", "Sabbat Lore", "Werewolf Lore", "Total Influence"];
+	self.statList = ["", "Current Experience", "Total Experience", "Experience Spent", "Generation", "Morality", "Courage", "Self-Control/Instinct", "Conscience/Conviction", "Physical Traits", "Mental Traits", "Social Traits", "Appearance", "Contacts", "Fame", "Ghouls", "Herd", "Mentor", "Resources", "Retainers", "Bureaucracy", "Church", "Finance", "Health", "High Society", "Industry", "Media", "Neighborhood", "Occult", "Police", "Politics", "Transportation", "Underworld", "University", "Camarilla Lore", "Fae Lore", "Kindred Lore", "Sabbat Lore", "Werewolf Lore", "Total Influence"];
 	self.selectedX = ko.observable("{{$x}}");
 	self.selectedY = ko.observable("{{$y}}");
 
