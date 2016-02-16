@@ -196,31 +196,31 @@ function mmmr($array, $output = 'mean'){
 			case "Kindred Lore":
 			case "Sabbat Lore":
 			case "Werewolf Lore":
-				$labelSet = [0, 1, 2, 3, 4, 5];
+				$labelSet = [1, 2, 3, 4, 5];
 				$extractor = function($character) use ($val) {
 					return $character->getBackgroundDots($val);
 				};
 				break;
 			case "Courage":
-				$labelSet = [0, 1, 2, 3, 4, 5];
+				$labelSet = [1, 2, 3, 4, 5];
 				$extractor = function($character) {
 					return @$character->path()->first()->virtue4;
 				};
 				break;
 			case "Morality":
-				$labelSet = [0, 1, 2, 3, 4, 5];
+				$labelSet = [1, 2, 3, 4, 5];
 				$extractor = function($character) {
 					return @$character->path()->first()->virtue3;
 				};
 				break;
 			case "Self-Control/Instinct":
-				$labelSet = [0, 1, 2, 3, 4, 5];
+				$labelSet = [1, 2, 3, 4, 5];
 				$extractor = function($character) {
 					return @$character->path()->first()->virtue2;
 				};
 				break;
 			case "Conscience/Conviction":
-				$labelSet = [0, 1, 2, 3, 4, 5];
+				$labelSet = [1, 2, 3, 4, 5];
 				$extractor = function($character) {
 					return @$character->path()->first()->virtue1;
 				};
