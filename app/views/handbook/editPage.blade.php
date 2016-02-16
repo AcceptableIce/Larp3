@@ -84,7 +84,7 @@ $(function() {
 							<label for="{{$type}}-sect-permission">Required Sect</label>
 							<select name="{{$type}}-sect-permission">
 								<option value="0"></option>
-								<?	$sectDefinition = $activeCharacter->sect()->first()->definition; 
+								<?	$sectDefinition = $activeCharacter ? $activeCharacter->sect()->first()->definition : null; 
 									$sectPermissionId = $activePermission ? $activePermission->sect_id: - 1; ?>
 								@foreach(RulebookSect::all() as $p)
 									<? 	$selected = $sectPermissionId == $p->id;
@@ -96,7 +96,7 @@ $(function() {
 							<label for="{{$type}}-clan-permission">Required Clan</label>
 							<select name="{{$type}}-clan-permission">
 								<option value="0"></option>
-								<?	$clanDefinition = $activeCharacter->clan()->first()->definition; 
+								<?	$clanDefinition = $activeCharacter ? $activeCharacter->clan()->first()->definition : null; 
 									$clanPermissionId = $activePermission ? $activePermission->clan_id : -1; ?>
 								@foreach(RulebookClan::all() as $p)
 									<? 	$selected = $clanPermissionId == $p->id;
