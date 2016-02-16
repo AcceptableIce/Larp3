@@ -7,6 +7,10 @@
   $(document).foundation();
 @stop
 
+@section('dashboard-style')
+	@yield('storyteller-style')
+@stop
+
 @section('dashboard-content')
   <nav class="top-bar sticky" id="storyteller-nav" data-topbar role="navigation">
     <ul class="title-area">

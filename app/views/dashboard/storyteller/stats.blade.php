@@ -126,6 +126,30 @@ function mmmr($array, $output = 'mean'){
 @extends('dashboard/storyteller')
 @section('title', 'Character Statistics')
 
+@section('storyteller-style')
+.include-npcs-switch {
+	display: block;
+	margin-top: 10px;
+
+}
+
+.include-npcs-switch .switch {
+	display: inline-block;
+	float: left; 
+}
+
+.include-npcs-switch .include-npcs-label {
+	display: inline-block;
+	margin-left: 10px;
+}
+
+.stats-submit {
+	display: relative;
+	float: right;
+	margin-top: -60px;
+}
+@stop
+
 @section('storyteller-script')
 <?
 	//Determine which stat we're using
@@ -175,6 +199,30 @@ function mmmr($array, $output = 'mean'){
 				$labelSet = [0, 1, 2, 3, 4, 5];
 				$extractor = function($character) use ($val) {
 					return $character->getBackgroundDots($val);
+				};
+				break;
+			case "Courage":
+				$labelSet = [0, 1, 2, 3, 4, 5];
+				$extractor = function($character) {
+					return @$character->path()->first()->virtue4;
+				};
+				break;
+			case "Morality":
+				$labelSet = [0, 1, 2, 3, 4, 5];
+				$extractor = function($character) {
+					return @$character->path()->first()->virtue3;
+				};
+				break;
+			case "Self-Control/Instinct":
+				$labelSet = [0, 1, 2, 3, 4, 5];
+				$extractor = function($character) {
+					return @$character->path()->first()->virtue2;
+				};
+				break;
+			case "Conscience/Conviction":
+				$labelSet = [0, 1, 2, 3, 4, 5];
+				$extractor = function($character) {
+					return @$character->path()->first()->virtue1;
 				};
 				break;
 			case "Current Experience":
@@ -237,6 +285,14 @@ function mmmr($array, $output = 'mean'){
 				$data[] = ["label" => $c->name, "data" => [["x" => $xDataValue, "y" => $yDataValue]]];
 				$pureData[] = ["name" => $c->name, "x" => $xDataValue, "y" => $yDataValue];
 			}
+			if(Input::get("include-npcs")) {
+				foreach(Character::activeNPCs()->orderBy('name')->get() as $c) {
+					$xDataValue = call_user_func($xData["extractor"], $c);
+					$yDataValue = call_user_func($yData["extractor"], $c);
+					$data[] = ["label" => $c->name, "data" => [["x" => $xDataValue, "y" => $yDataValue]]];
+					$pureData[] = ["name" => $c->name, "x" => $xDataValue, "y" => $yDataValue];
+				}
+			}
 		} else {
 			$xData = getDataSet($x);
 			$labels = $xData["labels"];
@@ -248,13 +304,19 @@ function mmmr($array, $output = 'mean'){
 				$xDataValue = call_user_func($xData["extractor"], $c);
 				$data[0]["data"][array_search($xDataValue, $labels)]++;
 				$pureData[] = ["name" => $c->name, "x" => $xDataValue];
-
+			}
+			if(Input::get("include-npcs")) {
+				foreach(Character::activeNPCs()->orderBy('name')->get() as $c) {
+					$xDataValue = call_user_func($xData["extractor"], $c);
+					$data[0]["data"][array_search($xDataValue, $labels)]++;
+					$pureData[] = ["name" => $c->name, "x" => $xDataValue];
+				}
 			}
 		}
 	}	
 	
 ?>
-	self.statList = ["", "Current Experience", "Total Experience", "Experience Spent", "Generation", "Appearance", "Contacts", "Fame", "Ghouls", "Herd", "Mentor", "Resources", "Retainers", "Bureaucracy", "Church", "Finance", "Health", "High Society", "Industry", "Media", "Neighborhood", "Occult", "Police", "Politics", "Transportation", "Underworld", "University", "Camarilla Lore", "Fae Lore", "Kindred Lore", "Sabbat Lore", "Werewolf Lore", "Total Influence"];
+	self.statList = ["", "Current Experience", "Total Experience", "Experience Spent", "Generation", "Morality", "Courage", "Self-Control/Instinct", "Conscience/Conviction", "Appearance", "Contacts", "Fame", "Ghouls", "Herd", "Mentor", "Resources", "Retainers", "Bureaucracy", "Church", "Finance", "Health", "High Society", "Industry", "Media", "Neighborhood", "Occult", "Police", "Politics", "Transportation", "Underworld", "University", "Camarilla Lore", "Fae Lore", "Kindred Lore", "Sabbat Lore", "Werewolf Lore", "Total Influence"];
 	self.selectedX = ko.observable("{{$x}}");
 	self.selectedY = ko.observable("{{$y}}");
 
@@ -280,7 +342,14 @@ function mmmr($array, $output = 'mean'){
 		<form class="panel" method="get" action="/dashboard/storyteller/stats">
 			Graph <select name="x" class="stats-select" data-bind="options: statList, value: selectedX"></select>
 			(vs <select name="y" class="stats-select" data-bind="options: statList, value: selectedY"></select>)
-			<input type="submit" class="button" value="Go!" />
+			<div class="include-npcs-switch">
+				<div class="switch">
+					<input id="include-npcs" name="include-npcs" type="checkbox" {{Input::get("include-npcs") ? "checked" : ""}}>
+					<label for="include-npcs"></label>
+				</div> 
+				<label class="include-npcs-label" for="include-npcs">Include NPCs</label>	
+			</div>
+			<input type="submit" class="button stats-submit" value="Go!" />
 		</form>
 	</div>
 </div>

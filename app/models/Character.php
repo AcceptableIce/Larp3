@@ -383,6 +383,10 @@ class Character extends Eloquent {
 		return Character::where(array('is_npc' => false, 'active' => true))->where('approved_version', '>', 0);
 	}
 
+	public static function activeNPCs() {
+		return Character::where(array('is_npc' => true, 'active' => true));
+	}
+	
 	public function getOptionValue($name) {
 		$setting = CharacterStorytellerOption::where('character_id', $this->id)->whereHas('definition', function ($q) use ($name) { $q->where('name', $name); })->first();
 		return $setting ? $setting->value : null;	

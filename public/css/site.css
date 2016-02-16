@@ -456,6 +456,8 @@ td input[type=text] {
 	margin-top: -15px;
 }
 
+
+
 @media screen and (max-device-width : 736px) {
 	.builder-nav a {
 		padding: 0.5rem;
