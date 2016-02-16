@@ -25,6 +25,7 @@
 				<th>Private</th>
 				<th>On Todo List?</th>
 				<th>Asymmetric?</th>
+				<th>Time Limited?</th>
 				<th>Allowed Characters</th>
 				<th>Position</th>
 			</thead>
@@ -58,6 +59,7 @@
 					<td>{{$forum->is_private ? "Yes" : "No"}}</td>
 					<td>{{$forum->show_on_st_todo_list ? "Yes" : "No"}}</td>
 					<td>{{$forum->asymmetric_replies ? "Yes" : "No"}}</td>
+					<td>{{$forum->time_limited ? "Yes" : "No"}}</td>
 					<td>{{ForumCharacterPermission::where('forum_id', $forum->id)->count()}}</td>
 					<td>{{$forum->position}}</td>
 				</tr>
@@ -222,6 +224,17 @@
 				</div> 
 			</div>
 		</div>		
+		<div class="row">
+			<div class="small-2 columns">
+				<label for="time-limited" class="right inline">Time Limited?</label>	
+			</div>
+			<div class="small-10 columns">
+				<div class="switch">
+				  <input id="time-limited" name="time-limited" type="checkbox" {{$forum && $forum->time_limited ? "checked" : ""}}>
+				  <label for="time-limited"></label>
+				</div> 
+			</div>
+		</div>			
 		<div class="row">
 			<div class="small-2 columns">
 				<label for="position" class="right inline">Position</label>	

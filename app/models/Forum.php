@@ -67,8 +67,22 @@ class Forum extends Eloquent {
 		$query = DB::table('forums_topics')
 				->select(DB::raw("forums_topics.id, forum_id, title, first_post, is_complete, is_sticky, views, forums_topics.created_at, forums_topics.updated_at, fpost.topic_id"))
 				->where('forum_id', $this->id)->leftJoin('forums_posts as fpost', 'forums_topics.first_post', '=', 'fpost.id');
-		switch($this->category_id) {
-			case 5:
+		if($this->time_limited) {
+			$char = $user->activeCharacter();
+			if($char) {
+				$timestamp = 0;
+				$date_added = ForumCharacterPermission::where(['forum_id' => $this->id, 'character_id' => $char->id]);
+				if($date_added->exists()) {
+					$timestamp = $date_added->first()->created_at;
+				} else if(!$this->is_private) {
+					$timestamp = $char->approved_at;
+				}
+				$query = $query->where('fpost.created_at', '>', $timestamp);
+			} else {
+				$query = $query->where('fpost.id', '<', 0);
+			}
+		}
+		if($this->category_id == 5)  {
 			if(!$user->isStoryteller()) {
 				$query = $query->leftJoin("forums_topics_added_users as added", function($join) use($user_id) {
 					$join->on("added.topic_id", "=", "forums_topics.id")->where('added.user_id', '=', $user_id);	
@@ -76,18 +90,6 @@ class Forum extends Eloquent {
 					$q->where('fpost.posted_by', $user_id)->orWhereNotNull('added.user_id');
 				});
 			}
-			break;
-			case 7:
-			if(!$user->isStoryteller())  {
-				$char = $user->activeCharacter();
-				if($char) {
-					$query = $query->where('fpost.created_at', '>', $char->approved_at);
-				} else {
-					//Select none.
-					$query = $query->where('fpost.id', '<', 0);
-				}
-			}
-			break;
 		}
 		return $query;
 	}

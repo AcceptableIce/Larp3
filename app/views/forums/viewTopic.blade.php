@@ -89,10 +89,36 @@
 <a href="/forums/topic/{{$id}}/post" class="button info small right"><i class="icon-plus"></i> Post Reply</a>
 @endif
 <h3 class="topic-title">{{$topic->title}}</h3>
-<? $added_users = $topic->addedUsers; ?>
-@if($added_users->count() > 0)
-	<? $list = []; foreach($added_users as $u) $list[] = $u->user->username; ?>
-	<div class="added-user-list">{{Helpers::nl_join($list)}} can also see this thread.</div>
+<? 	$added_users = $topic->addedUsers; 
+	$added_successfully = [];
+	$added_failure = [];
+	$before_time = [];
+	foreach($added_users as $u) {
+		if($u->user->canAccessTopic($topic->id)) {
+			$added_successfully[] = $u->user->username;
+		} else {
+			$added_failure[] = $u->user->username;
+		}
+	}
+	if($forum->is_private) {
+		foreach(ForumCharacterPermission::where(['forum_id' => $forum->id])->get() as $c) {
+			if(!$c->character->owner->canAccessTopic($topic->id)) $before_time[] = $c->character->name;
+		}
+	}
+	
+?>
+@if(count($added_successfully) > 0 || count($added_failure) > 0 || count($before_time) > 0)
+	<div class="added-user-list">
+		@if(count($added_successfully) > 0)
+			{{Helpers::nl_join($added_successfully)}} can also see this thread.<br>
+		@endif
+		@if(count($added_failure) > 0)
+			{{Helpers::nl_join($added_failure)}} {{count($added_failure) == 1 ? "has" : "have"}} been added, but can't view the thread.<br>
+		@endif
+		@if(count($before_time) > 0)
+			{{Helpers::nl_join($before_time)}} {{count($before_time) == 1 ? "has" : "have"}} access to the board, but this thread predates them.<br>
+		@endif				
+	</div>
 @endif
 <?
 	$listing = $topic->postsForUser($user->id)->with("poster")->paginate(10);

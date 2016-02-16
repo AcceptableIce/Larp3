@@ -316,6 +316,7 @@ class StorytellerController extends BaseController {
 			$forum->is_private = Input::get("private") ? 1 : 0;
 			$forum->show_on_st_todo_list = Input::get("todo_list") ? 1 : 0;
 			$forum->asymmetric_replies = Input::get("asymmetric") ? 1 : 0;
+			$forum->time_limited = Input::get("time-limited") ? 1 : 0;
 			$forum->position = Input::get("position");
 			$forum->save();
 			Cache::flush(); 
