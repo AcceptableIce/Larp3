@@ -6,6 +6,12 @@ class SaveController extends BaseController {
 		$character_data = Input::get('sheet');
 		$user = Auth::user();
 		$continue_save = Input::get("continue");
+		
+		// Make sure we have a name.
+		if(strlen(trim($character_data["name"])) == 0) {
+			return Response::json(["success" => false, "mode" => 2, "message" => "Characters must have a name."]);
+		}
+		
 		DB::beginTransaction();
 		$character_exists = Character::where('id', Input::get('characterId'))->exists();
 		if($character_exists) {

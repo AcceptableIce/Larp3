@@ -696,7 +696,7 @@ class Character extends Eloquent {
 	public function verify($version, $isChargen = false) {
 
 		//Make sure the character has a name...
-		$this->assert(strlen($this->name) > 0, "Characters must have a name.");
+		$this->assert(strlen(trim($this->name)) > 0, "Characters must have a name.");
 
 		//Make sure that the character has a sect.
 		$this->assert($this->sect($version)->first() != null, "No clan selected.");

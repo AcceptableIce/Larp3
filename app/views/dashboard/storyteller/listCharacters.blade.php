@@ -28,18 +28,21 @@
 			}
 		});
 	}
+	
+	
 
 @stop
 @section('storyteller-content')
-	<?
-		$request = [
-					"all" => Character::where('id', '>', 0),
-					"complete" => Character::where(array('is_npc' => false, 'in_review' => false, 'active' => true))->where('approved_version', '>', 0),
-					"changed" => Character::where(array('is_npc' => false,  'in_review' => true, 'active' => true))->where('approved_version', '>', 0),
-					"new" => Character::where(array('is_npc' => false,  'in_review' => true, 'active' => false)),
-					"npcs" => Character::where(array('is_npc' => true)),
-					"npcs-active" => Character::where(array('is_npc' => true, 'active' => true))];
-	?>
+<?
+	$request = [
+		"all" => Character::where('id', '>', 0),
+		"complete" => Character::where(array('is_npc' => false, 'in_review' => false, 'active' => true))->where('approved_version', '>', 0),
+		"changed" => Character::where(array('is_npc' => false,  'in_review' => true, 'active' => true))->where('approved_version', '>', 0),
+		"new" => Character::where(array('is_npc' => false,  'in_review' => true, 'active' => false)),
+		"npcs" => Character::where(array('is_npc' => true)),
+		"npcs-active" => Character::where(array('is_npc' => true, 'active' => true))
+	];
+?>
 <div id="delete-modal" class="reveal-modal" data-reveal aria-labelledby="deleteModalTitle" aria-hidden="true" role="dialog">
   <h2 id="deleteModalTitle">Delete <span data-bind="text: promptDeleteName"></span>?</h2>
   <p>Are you sure you wish to delete <span data-bind="text: promptDeleteName"></span>? <b>This cannot be undone.</b></p>
