@@ -56,7 +56,7 @@ class Forum extends Eloquent {
 				if(!$user->isStoryteller()) {
 					$query = $query->where('created_at', '>', $user->activeCharacter()->approved_at);
 				}
-				break;
+			break;
 		}
 		return $query;
 	}
@@ -67,7 +67,7 @@ class Forum extends Eloquent {
 		$query = DB::table('forums_topics')
 				->select(DB::raw("forums_topics.id, forum_id, title, first_post, is_complete, is_sticky, views, forums_topics.created_at, forums_topics.updated_at, fpost.topic_id"))
 				->where('forum_id', $this->id)->leftJoin('forums_posts as fpost', 'forums_topics.first_post', '=', 'fpost.id');
-		if($this->time_limited) {
+		if($this->time_limited && !$user->isStoryteller()) {
 			$char = $user->activeCharacter();
 			if($char) {
 				$timestamp = 0;
