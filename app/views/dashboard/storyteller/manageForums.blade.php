@@ -113,7 +113,8 @@
 							{{$sect->name}}
 						</option>
 					@endforeach
-				</select>		
+				</select>	
+				<p class="description">Characters without this Sect cannot see this board.</p>	
 			</div>
 		</div>	
 		<div class="row">
@@ -128,7 +129,8 @@
 							{{$clan->name}}
 						</option>
 					@endforeach
-				</select>		
+				</select>	
+				<p class="description">Characters without this Clan cannot see this board.</p>	
 			</div>
 		</div>
 		<div class="row">
@@ -143,7 +145,8 @@
 							{{$background->name}}
 						</option>
 					@endforeach
-				</select>		
+				</select>
+				<p class="description">Characters without this Background cannot see this board.</p>			
 			</div>
 		</div>	
 		<div class="row">
@@ -158,7 +161,8 @@
 							{{$permission->name}}
 							</option>
 					@endforeach
-				</select>		
+				</select>
+				<p class="description">Users without this permission cannot see this board.</p>				
 			</div>
 		</div>
 		<div class="row">
@@ -173,7 +177,8 @@
 							{{$permission->name}}
 							</option>
 					@endforeach
-				</select>		
+				</select>	
+				<p class="description">Users without this permission cannot post new threads this board.</p>								
 			</div>
 		</div>	
 		<div class="row">
@@ -189,6 +194,7 @@
 							</option>
 					@endforeach
 				</select>		
+				<p class="description">Users without this permission cannot reply to topics in this board.</p>							
 			</div>
 		</div>				
 		<div class="row">
@@ -200,6 +206,7 @@
 				  <input id="private" name="private" type="checkbox" {{$forum && $forum->is_private ? "checked" : ""}}>
 				  <label for="private"></label>
 				</div> 
+				<p class="description">Characters must be explicitly added to view this board.</p>								
 			</div>
 		</div>
 		<div class="row">
@@ -211,6 +218,7 @@
 				  <input id="todo_list" name="todo_list" type="checkbox" {{$forum && $forum->show_on_st_todo_list ? "checked" : ""}}>
 				  <label for="todo_list"></label>
 				</div> 
+				<p class="description">Threads on this board will appear on the ST Todo List if not marked complete.</p>	
 			</div>
 		</div>		
 		<div class="row">
@@ -222,6 +230,8 @@
 				  <input id="asymmetric" name="asymmetric" type="checkbox" {{$forum && $forum->asymmetric_replies ? "checked" : ""}}>
 				  <label for="asymmetric"></label>
 				</div> 
+				<p class="description">STs can post to themselves on this board, 
+				with a special toggle to have specific posts appear to players.</p>
 			</div>
 		</div>		
 		<div class="row">
@@ -232,7 +242,8 @@
 				<div class="switch">
 				  <input id="time-limited" name="time-limited" type="checkbox" {{$forum && $forum->time_limited ? "checked" : ""}}>
 				  <label for="time-limited"></label>
-				</div> 
+				</div> 			
+				<p class="description">Characters cannot view threads on this board that were created before they were added to it.</p>	
 			</div>
 		</div>			
 		<div class="row">

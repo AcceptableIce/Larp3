@@ -456,7 +456,16 @@ td input[type=text] {
 	margin-top: -15px;
 }
 
+.description {
+	font-size: 0.8em;
+	color: #666;
+	font-style: italic;
+	margin-top: -15px;
+}
 
+.switch + .description {
+	margin-top: -30px;
+}
 
 @media screen and (max-device-width : 736px) {
 	.builder-nav a {
