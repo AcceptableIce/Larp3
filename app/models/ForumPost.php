@@ -16,8 +16,7 @@ class ForumPost extends Eloquent {
 		return $this->hasMany('ForumEdit', 'post_id', 'id');
 	}
 
-	public function renderBody() {
-		$body = $this->body;
+	public static function render($body) {
 		//First off, look for tags.
 		$matches = [];
 		$body = preg_replace_callback("/\[\[([\w\W]+?)\]\]/", function($match) {
@@ -56,6 +55,28 @@ class ForumPost extends Eloquent {
 								return $char->getBackgroundDots($value);
 						}
 					}
+				break;
+				case "deadline":
+					//Determine if we're past the deadline.
+					$now = new DateTime;
+					$now->setTime(0, 0); 
+					$nextGame = GameSession::where('date', '>=', $now)->orderBy('date')->first();
+ 
+					if($nextGame) {
+						$date = new DateTime($nextGame->date);
+						$date->setTimezone(new DateTimeZone("America/Chicago"));
+						$date->modify("6 hours"); //Fix timezone offset
+						$date->setTime(19, 00);
+						$deadlineDate = new DateTime($nextGame->date);
+						$deadlineDate->setTimezone(new DateTimeZone("America/Chicago"));
+						$deadlineDate->modify('previous Wednesday, 6 PM CST');
+						if((new DateTime) > $deadlineDate) {
+							return '<span class="past-deadline">No more changes can be submitted this cycle.</span>';
+						}
+						return 'Changes can still be submitted.';
+					}
+					return 'Could not find the next session';
+				break;
 			}
 			return $match[0];
 			}, $body);

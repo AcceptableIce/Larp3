@@ -68,7 +68,7 @@
 </ul>
 <form method="post" action="/forums/topic/post">
 	@if(strlen($forum->post_header) > 0)
-		<div class="list-header">{{$forum->post_header}}</div>		
+		<div class="list-header">{{ForumPost::render($forum->post_header)}}</div>		
 	@endif
 	<div class="forum-title">{{isset($topic_id) ? "Edit" : "New"}} Topic</div>
 

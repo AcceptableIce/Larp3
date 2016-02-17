@@ -182,7 +182,7 @@
 				$user_reply = $isStoryteller && $forum->asymmetric_replies && !$poster_st && !$storyteller_reply;
 			?>
 			<div class="post-body {{$storyteller_reply ? 'storyteller-reply' : ''}} {{$user_reply ? 'user-reply' : ''}}">
-				<div class="post-content">{{$post->renderBody()}}</div>
+				<div class="post-content">{{ForumPost::render($post->body)}}</div>
 
 				@foreach($post->edits()->orderBy('created_at')->take(3)->get() as $edit) 
 					<div class="edit-notification"><i>Edited {{Helpers::timestamp($edit->created_at)}} by {{$edit->user->username}}</i></div>
