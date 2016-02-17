@@ -32,7 +32,8 @@ class StorytellerController extends BaseController {
 				$character->save();
 			}
 			Cache::forget('forum-listing-'.$character->owner->id);
-			return Redirect::to('/dashboard/storyteller/characters');
+			return Redirect::to($_SERVER['HTTP_REFERER']);
+			//return Redirect::to('/dashboard/storyteller/characters');
 		} else {
 			return "An error occured while accepting this character (Could not be found). Please try again later.";
 		}
