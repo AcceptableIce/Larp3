@@ -253,8 +253,40 @@
 			<div class="small-10 columns">
 				<input type="text"  id="position" name="position" value="{{$forum ? $forum->position : '0'}}" />
 			</div>
-		</div>		
+		</div>	
+			
 		<hr>
+		
+		<div class="row">
+			<div class="small-2 columns">
+				<label for="list-header" class="right inline">Listing Header</label>	
+			</div>
+			<div class="small-10 columns">
+				<textarea id="list-header" name="list-header">{{$forum ? $forum->list_header : '0'}}</textarea>
+				<p class="description">Text to display at the top of the topic listing for the board.</p>	
+			</div>
+		</div>	
+		<div class="row">
+			<div class="small-2 columns">
+				<label for="post-header" class="right inline">Post Header</label>	
+			</div>
+			<div class="small-10 columns">
+				<textarea id="post-header" name="post-header">{{$forum ? $forum->post_header : '0'}}</textarea>
+				<p class="description">Text to display at the top of the "New Topic" page for the board.</p>	
+			</div>
+		</div>		
+		<div class="row">
+			<div class="small-2 columns">
+				<label for="thread-template" class="right inline">Thread Template</label>	
+			</div>
+			<div class="small-10 columns">
+				<textarea id="thread-template" name="thread-template">{{$forum ? $forum->thread_template : '0'}}</textarea>
+				<p class="description">Default text for the "New Topic" textarea.</p>	
+			</div>
+		</div>	
+				
+		<hr>
+		
 		<input type="submit" class="button small success" value="Save" />
 	</form>
 	@endif

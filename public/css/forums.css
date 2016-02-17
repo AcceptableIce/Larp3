@@ -67,6 +67,11 @@
 	margin-left: -21px;
 }
 
+.list-header {
+	clear: both;
+	float: left;
+}
+
 input.topic-field {
 	border-top: none;
 	border-bottom: none;

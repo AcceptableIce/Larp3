@@ -39,6 +39,9 @@ $forum = Forum::find($id);
 @if($pagination->count() == 0) 
 	<p style="clear: both;">There are no topics here. Be the first to post!</p>
 @else
+	@if(strlen($forum->list_header) > 0)
+		<div class="list-header">{{$forum->list_header}}</div>
+	@endif
 	<div class="forum-title">Topics</div>
 	<div class="topics-list">
 	@foreach($pagination as $tp_data)

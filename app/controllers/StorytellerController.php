@@ -318,6 +318,9 @@ class StorytellerController extends BaseController {
 			$forum->asymmetric_replies = Input::get("asymmetric") ? 1 : 0;
 			$forum->time_limited = Input::get("time-limited") ? 1 : 0;
 			$forum->position = Input::get("position");
+			$forum->list_header = trim(Input::get("list-header"));
+			$forum->post_header = trim(Input::get("post-header"));	
+			$forum->thread_template = trim(Input::get("thread-template"));				
 			$forum->save();
 			Cache::flush(); 
 			return Redirect::to('dashboard/storyteller/manage/forums');

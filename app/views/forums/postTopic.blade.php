@@ -67,9 +67,8 @@
 
 </ul>
 <form method="post" action="/forums/topic/post">
-	@if($forum->id == 35)
-		<div class="panel callout bug-report-disclaimer"><b>Bug reports are public.</b> Do not include any information that you don't wish other players to see.
-		If you can't report the bug without revealing sensitive information, post to us in <a href="/forums/36">General Messages</a>.</div>
+	@if(strlen($forum->post_header) > 0)
+		<div class="list-header">{{$forum->post_header}}</div>		
 	@endif
 	<div class="forum-title">{{isset($topic_id) ? "Edit" : "New"}} Topic</div>
 
@@ -78,14 +77,11 @@
 	<input type="text" class="topic-field" name="title" placeholder="Subject" value="{{isset($topic) ? $topic->title : ''}}" />
 	<div class="topic-divider"></div>
 	<textarea id="post" class="topic-body" name="body" placeholder="Type your message here...">
-		<?  if(isset($topic)) {
-				echo $topic->firstPost->body;
-			} else if($forum->id == 35) { 
-				echo 	"<strong>Status: &nbsp;</strong>New<br /><strong>Comment:<br />".
-						"</strong><br /><strong>Description<br /></strong><br /><br /><strong>Steps to Reproduce".
-						"</strong><br /><br /><br /><strong>Relevant Items</strong><br />".
-						"<br /><br /><strong>Related Issues</strong><br />"; 
-			}//35 = Website Issues ?>
+		@if(isset($topic)) 
+			{{$topic->firstPost->body}}
+		@elseif(strlen($forum->thread_template) > 0)
+			{{$forum->thread_template}}
+		@endif
 	</textarea>
 	@if(Auth::user()->isStoryteller())
 		<div class="post-as-box">
