@@ -73,6 +73,10 @@
 	float: left;
 }
 
+.influence-0 {
+	display: none;
+}
+
 input.topic-field {
 	border-top: none;
 	border-bottom: none;
