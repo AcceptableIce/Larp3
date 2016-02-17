@@ -468,6 +468,26 @@ class StorytellerController extends BaseController {
 			return Response::json(['success' => false, 'message' => 'Invalid permissions.']);					
 		}	
 	}
+	
+	public function transferExperience($id) {
+		if(Auth::user()->isStoryteller()) {
+			$from = Character::find(Input::get("from"));
+			$to = Character::find($id);
+			if($from != null && $to != null) {
+				$to->experience += $from->availableExperience();
+				$from->experience -= $from->availableExperience();
+				$to->save();
+				$from->save();
+				Cache::forget("character-experience-".$to->id);
+				Cache::forget("character-experience-".$from->id);				
+				return Redirect::to("dashboard/storyteller/characters");
+			} else {
+				return Response::json(['success' => false, 'message' => 'Invalid data.']);					
+			}
+		} else {
+			return Response::json(['success' => false, 'message' => 'Invalid permissions.']);					
+		}	
+	}
 
 	//This is the only method in this class that is available to non-STs
 	public function contactStorytellers() {
