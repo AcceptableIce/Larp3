@@ -46,7 +46,7 @@ class ForumPost extends Eloquent {
 					}
 				break;
 				case "character":
-					$char = $this->poster->activeCharacter();
+					$char = Auth::user()->activeCharacter();
 					if(sizeof($arguments) == 3 && $char) {
 						$type = $arguments[1];
 						$value = $arguments[2];
