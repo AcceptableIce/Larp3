@@ -49,10 +49,17 @@ $forum = Forum::find($id);
 	<div class="topic-row {{$topic->is_complete && $user->isStoryteller() ? 'completed' : ''}}">
 		<div class="unread-topic-container"><div class="unread-topics {{$topic->hasUnreadPosts($user->id) ? 'unread' : ''}}"></div></div>
 		<div class="topic-row-title">
-			<a href="/forums/topic/{{$topic->id}}">@if($topic->is_complete && ($forum->id == 35 || $user->isStoryteller()))<label class="label success">Complete</label> @endif
-				@if($topic->is_sticky) <label class="label success">Stickied</label>@endif {{$topic->title}}</a>
-				<a href="{{$topic->getLinkForLastPost()}}"><i class="to-page-link icon-right-open"></i><i class="to-page-link icon-right-open"></i></a>
-				<br>
+			<a class="topic-name" href="/forums/topic/{{$topic->id}}">
+				@if($topic->is_complete && ($forum->id == 35 || $user->isStoryteller()))<label class="label success">Complete</label> @endif
+				@if($topic->is_sticky) <label class="label success">Stickied</label>@endif 
+				{{$topic->title}}
+			</a>
+			<a href="{{$topic->getLinkForLastPost()}}">
+				<i class="to-page-link icon-right-open"></i>
+				<i class="to-page-link icon-right-open"></i>
+			</a>
+			
+			<br>
 			by {{$topic->posts()->first()->poster->mailtoLink()}}
 			<? $added_users = $topic->addedUsers; ?>
 			@if($added_users->count() > 0 && $user->isStoryteller()) 

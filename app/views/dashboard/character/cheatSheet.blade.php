@@ -166,6 +166,13 @@
 					@endforeach
 					<hr>
 				@endforeach
+				@if($character->rituals($version)->count() > 0)				
+					<h2>Rituals</h2>
+					@foreach($character->rituals($version)->with('definition')->get()->sortBy('definition.name') as $ritual)
+						<b>{{$ritual->definition->name}}</b><br>
+						{{$ritual->definition->description}}<br>
+					@endforeach
+				@endif
 				@if($character->merits($version)->count() > 0)
 					<h2>Merits</h2>
 					@foreach($character->merits($version)->with('definition')->get()->sortBy('definition.name') as $merit)
