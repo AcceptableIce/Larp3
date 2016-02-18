@@ -75,7 +75,8 @@ class Forum extends Eloquent {
 				if($date_added->exists()) {
 					$timestamp = $date_added->first()->created_at;
 				} else if(!$this->is_private) {
-					$timestamp = $char->approved_at;
+					//Get version 1 creation date.
+					$timestamp = CharacterVersion::where(['character_id' => $char->id, 'version' => 1])->first()->created_at;
 				}
 				$query = $query->where('fpost.created_at', '>', $timestamp);
 			} else {
