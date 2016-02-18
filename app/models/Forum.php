@@ -83,7 +83,7 @@ class Forum extends Eloquent {
 				$query = $query->where('fpost.id', '<', 0);
 			}
 		}
-		if($this->category_id == 5)  {
+		if($this->player_specific_threads)  {
 			if(!$user->isStoryteller()) {
 				$query = $query->leftJoin("forums_topics_added_users as added", function($join) use($user_id) {
 					$join->on("added.topic_id", "=", "forums_topics.id")->where('added.user_id', '=', $user_id);	

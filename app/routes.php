@@ -10,7 +10,11 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
-
+Route::get('/test', function() {
+	foreach(Forum::where('category_id', 5)->get() as $f) {
+		$f->player_specific_threads = true; $f->save(); 
+	}
+});
 Route::get('/', function() {
 	if(Auth::user()) {
 		return Redirect::to('dashboard');

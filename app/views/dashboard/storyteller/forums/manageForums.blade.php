@@ -26,6 +26,7 @@
 				<th>On Todo List?</th>
 				<th>Asymmetric?</th>
 				<th>Time Limited?</th>
+				<th>Player Specific?</th>
 				<th>Allowed Characters</th>
 				<th>Position</th>
 			</thead>
@@ -60,6 +61,7 @@
 					<td>{{$forum->show_on_st_todo_list ? "Yes" : "No"}}</td>
 					<td>{{$forum->asymmetric_replies ? "Yes" : "No"}}</td>
 					<td>{{$forum->time_limited ? "Yes" : "No"}}</td>
+					<td>{{$forum->player_specific_threads ? "Yes" : "No"}}</td>	
 					<td>{{ForumCharacterPermission::where('forum_id', $forum->id)->count()}}</td>
 					<td>{{$forum->position}}</td>
 				</tr>
@@ -245,7 +247,19 @@
 				</div> 			
 				<p class="description">Characters cannot view threads on this board that were created before they were added to it.</p>	
 			</div>
-		</div>			
+		</div>
+		<div class="row">
+			<div class="small-2 columns">
+				<label for="player-specific-threads" class="right inline">Player Specific Threads?</label>	
+			</div>
+			<div class="small-10 columns">
+				<div class="switch">
+				  <input id="player-specific-threads" name="player-specific-threads" type="checkbox" {{$forum && $forum->player_specific_threads ? "checked" : ""}}>
+				  <label for="player-specific-threads"></label>
+				</div> 			
+				<p class="description">Users cannot see threads unless they've created them, or they were explicitly added.</p>	
+			</div>
+		</div>						
 		<div class="row">
 			<div class="small-2 columns">
 				<label for="position" class="right inline">Position</label>	

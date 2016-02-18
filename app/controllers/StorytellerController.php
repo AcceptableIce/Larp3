@@ -8,11 +8,11 @@ class StorytellerController extends BaseController {
 				$character->in_review = false;
 				//Inactivate all other characters this player owns.
 				if(!$character->owner->isStoryteller()) {
+					$was_active = $character->active;
 					foreach(Character::where('user_id', $character->owner->id)->get() as $c) {
 						$c->active = false;
 						$c->save();
 					}
-					$was_active = $character->active;
 					$character->active = true;
 					if(!$was_active) {
 						//This is a new character
@@ -319,6 +319,7 @@ class StorytellerController extends BaseController {
 			$forum->show_on_st_todo_list = Input::get("todo_list") ? 1 : 0;
 			$forum->asymmetric_replies = Input::get("asymmetric") ? 1 : 0;
 			$forum->time_limited = Input::get("time-limited") ? 1 : 0;
+			$forum->player_specific_threads = Input::get("player-specific-threads") ? 1 : 0;
 			$forum->position = Input::get("position");
 			$forum->list_header = trim(Input::get("list-header"));
 			$forum->post_header = trim(Input::get("post-header"));	
