@@ -55,7 +55,8 @@ class StorytellerController extends BaseController {
 													" You can now access your character and make further changes as necessary. If you have any questions, please post in the \"General Messages\" forum.");		
 				}
 			}
-			return Redirect::to('/dashboard/storyteller/characters');
+			return Redirect::to($_SERVER['HTTP_REFERER']);
+			//return Redirect::to('/dashboard/storyteller/characters');
 		} else {
 			return "An error occured while accepting this character (Could not be found). Please try again later.";
 		}
