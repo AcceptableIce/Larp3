@@ -59,7 +59,7 @@ class ForumTopic extends Eloquent {
 
 	public function getLinkForPost($position) {
 		$page = ceil($position / 10);
-		return "http://larp.illini-rp.net/forums/topic/$this->id?page=$page#post$position";
+		return "/forums/topic/$this->id?page=$page#post$position";
 	}
 
 	public function getLinkForPostById($id) {
@@ -68,9 +68,9 @@ class ForumTopic extends Eloquent {
 		return $this->getLinkForPost($position + 1);
 	}
 
-	public function getLinkForLastPost() {
-		$post = $this->posts()->count();
-		return $this->getLinkForPost($post);
+	public function getLinkForLastPost($user) {
+		$post = $this->postsForUser($user->id)->orderBy('id', 'desc')->first();
+		return $this->getLinkForPostById($post->id);
 	}
 
 	public function hasUnreadPosts($user_id) {

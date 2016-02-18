@@ -123,7 +123,7 @@ class ForumController extends BaseController {
 				$edit->save();
 
 				if(Input::get("watch") == "on") $this->subscribeToTopic($post->topic->id);			
-				return Redirect::to('/forums/topic/'.$post->topic->id.'?page='.ceil($post->topic->posts()->count() / 10));
+				return Redirect::to($post->topic->getLinkForLastPost($user));
 			} else {
 				return "Post does not belong to user";
 			}
@@ -160,7 +160,7 @@ class ForumController extends BaseController {
 						//Check for @mentions.
 						$this->alertMentions($poster_id, $body, $topic);
 
-						return Redirect::to('/forums/topic/'.$topic_id.'?page='.ceil($post->topic->posts()->count() / 10));
+						return Redirect::to($post->topic->getLinkForLastPost($user));
 					} else {
 						return 'No write permission';
 					}
@@ -180,7 +180,7 @@ class ForumController extends BaseController {
 			if(strtolower($m) == "andrew") $m = "Crap. I am Malevolent.";
 			$user = User::where('username', 'like', $m)->first();
 			if($user && $user->getSettingValue("Disable @Mentions") != 1) {
-				$link = $topic->getLinkForLastPost();
+				$link = "http://larp.illini-rp.net/".$topic->getLinkForLastPost($user);
 				$user->sendMessage($poster_id, 
 					"Mentioned in topic $topic->title", 
 					"Hello $user->username,<br><br>You have been mentioned by $poster->username in the topic".

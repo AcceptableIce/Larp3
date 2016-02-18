@@ -57,7 +57,7 @@ $forum = Forum::find($id);
 				@if($topic->is_sticky) <label class="label success">Stickied</label>@endif 
 				{{$topic->title}}
 			</a>
-			<a href="{{$topic->getLinkForLastPost()}}">
+			<a href="{{$topic->getLinkForLastPost($user)}}">
 				<i class="to-page-link icon-right-open"></i>
 				<i class="to-page-link icon-right-open"></i>
 			</a>
