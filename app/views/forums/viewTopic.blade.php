@@ -2,6 +2,9 @@
 <? 	$topic = ForumTopic::find($id); 
 	$forum = $topic->forum; 
 	$user = Auth::user();
+	
+	$listing = $topic->postsForUser($user->id)->with("poster")->paginate(10);
+	$i = $listing->getFrom() - 1;	
 ?>
 @section('title', $topic->title)
 @section('forum-style') 
@@ -9,7 +12,7 @@
 @stop
 
 @section('forum-script')
-	tinymce.init({
+	var editor = tinymce.init({
 		selector: "#quick-post",
 		plugins: "textcolor link hr image emoticons table preview fullscreen print searchreplace visualblocks code",
 		toolbar1: "undo redo | styleselect removeformat | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
@@ -17,7 +20,16 @@
 		image_advtab: true,
     	forced_root_block : '',
     	statusbar: false,
-    	menubar: false
+    	menubar: false,
+    	setup: function(editor) {
+	    	editor.on('keydown', function(e) {
+		    	if((e.metaKey || e.ctrlKey) && e.keyIdentifier === "Enter") {
+		    		e.preventDefault();
+					e.stopPropagation();
+			    	$("#quick-reply-form").submit();
+		    	}
+	    	});
+    	}
 	});
 
 	self.promptDeleteId = ko.observable();
@@ -35,8 +47,54 @@
 	self.showAlertSTsModal = function(id) {
 		$("#alert-sts-modal").foundation('reveal', 'open');
 	}
-
-
+	
+	var startPoint = {{$i + 1}};
+	var selectedPost = -1;
+	$(document).keydown(function(e) {
+		if($("textarea").is(":focus")) return;
+		var keyCode = e.keyCode;
+		console.log(keyCode);
+		if(keyCode >= 48 && keyCode <= 57) {
+			if(keyCode == 48) keyCode = 58; //Offset 0 to 10
+			var offset = startPoint + (keyCode - 49);
+			$(document).scrollTop($("#post" + offset).offset().top - 50);
+			selectedPost = offset;
+			$(".post-row").removeClass("active")
+			$("#post-row-" + offset).addClass("active");
+		} else {
+			switch(keyCode) {
+				case 82: // R
+					if(!e.metaKey && !e.ctrlKey) {
+						e.preventDefault();
+						e.stopPropagation();	
+						tinyMCE.activeEditor.focus();
+						$(document).scrollTop($(".quick-reply").offset().top);
+					}
+					break;
+				case 69: // Ctrl+E
+					e.preventDefault();
+					e.stopPropagation();
+					if((e.metaKey || e.ctrlKey) && selectedPost > 0) {
+						$("#edit-post-" + selectedPost).click();
+					}
+					break;
+				case 65: // Ctrl+A
+					e.preventDefault();
+					e.stopPropagation();
+					if((e.metaKey || e.ctrlKey) && selectedPost > 0) {
+						$("#quote-post-" + selectedPost).click();
+					}
+					break;
+				case 83: //Ctrl+S
+					e.preventDefault();
+					e.stopPropagation();
+					if(e.metaKey || e.ctrlKey) {
+						$(".toggle-complete").first().click();
+					}
+					break;
+			}
+		}
+	})
 @stop
 
 @section('forum-content')
@@ -120,13 +178,8 @@
 		@endif				
 	</div>
 @endif
-<?
-	$listing = $topic->postsForUser($user->id)->with("poster")->paginate(10);
-	$i = $listing->getFrom() - 1;	
-?>
+
 <div class="topic-pagination">{{$listing->links()}}</div>
-
-
 <? 
 	//variable hoisting
 	$first_poster_id = $topic->firstPost->posted_by; 
@@ -136,7 +189,8 @@
 @foreach($listing as $post)
 <? $poster = $post->poster; ?>
 <? $i++ ?>
-<div class="row post-row small-collapse medium-uncollapse">
+<a id="post{{$i}}"></a>
+<div id="post-row-{{$i}}" class="row post-row small-collapse medium-uncollapse">
 	<div class="small-12 medium-3 columns post-user-column">
 		<div class="user-card">
 			<div class="user-name">
@@ -175,7 +229,7 @@
 	<div class="small-12 medium-9 columns">
 		<div class="post-data">
 			<div class="post-title">
-				<a id="post{{$i}}"></a>{{$i}}
+				{{$i}}
 				<span class="right">Posted {{Helpers::timestamp($post->created_at)}}</span>
 			</div>
 			<? 	$storyteller_reply = $isStoryteller && $poster_st && $forum->asymmetric_replies && !$post->is_storyteller_reply; 
@@ -192,8 +246,10 @@
 				<div class="post-options">
 					@if(($forum->asymmetric_replies  || $forum->id == 35) && $isStoryteller) <!-- Contact the STs -->
 						<a href="/forums/topic/{{$id}}/toggleComplete">
-							@if($topic->is_complete) <button class="button post-option tiny warning">Mark Incomplete</button>
-							@else <button class="button post-option tiny success">Mark Complete</button>
+							@if($topic->is_complete) 
+								<button class="button post-option tiny warning toggle-complete">Mark Incomplete</button>
+							@else
+								<button class="button post-option tiny success toggle-complete">Mark Complete</button>
 							@endif
 						</a>
 					@endif
@@ -205,9 +261,13 @@
 						</a>
 						<button data-bind="click: $root.showAlertSTsModal" class="button post-option tiny warning">Alert STs</button>
 					@endif
-					<a href="/forums/topic/{{$id}}/post?quote={{$post->id}}"><button class="button post-option tiny">Quote</button></a>
+					<a href="/forums/topic/{{$id}}/post?quote={{$post->id}}">
+						<button id="quote-post-{{$i}}" class="button post-option tiny">Quote</button>
+					</a>
 					@if($post->posted_by == $user->id || $isStoryteller) 
-						<a href="/forums/{{$i == 1 ? 'topic/'.$topic->id : 'post/'.$post->id}}/edit"><button class="button post-option tiny">Edit</button></a>
+						<a href="/forums/{{$i == 1 ? 'topic/'.$topic->id : 'post/'.$post->id}}/edit">
+							<button id="edit-post-{{$i}}" class="button post-option tiny">Edit</button>
+						</a>
 					@endif
 					<a href="#" data-bind="click: function() { promptDelete({{$post->id}}, {{$i == 1 ? "true " : "false"}}); }"<button class="button post-option alert tiny">Delete</button></a>
 				</div>
@@ -237,7 +297,7 @@
 				Quick Reply
 			</div>
 			<div class="post-body quick-reply">
-				<form method="post" action="/forums/reply/post">
+				<form method="post" id="quick-reply-form" action="/forums/reply/post">
 					<input type="hidden" value="{{$id}}" name="topic_id" />
 					<textarea class="topic-body quick-reply-body" name="body" id="quick-post" placeholder="Type your message here..."></textarea>
 					<div class="post-actions">

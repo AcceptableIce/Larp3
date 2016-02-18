@@ -138,6 +138,10 @@ input.topic-field {
 	margin-bottom: 10px;
 }
 
+.post-row.active .post-body {
+	background-color: rgba(246, 255, 108, 0.5);
+}
+
 .character-name {
 	font-size: 0.9em;
 }
