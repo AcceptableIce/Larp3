@@ -14,7 +14,7 @@ Route::get('/', function() {
 	if(Auth::user()) {
 		return Redirect::to('dashboard');
 	} else {
-		return Redirect::to('/handbook/Welcome to Carpe Noctem');
+		return View::make('handbook/viewPage')->with('name', "Welcome to Carpe Noctem");
 	}
 });
 
@@ -23,10 +23,10 @@ Route::get("/calendar", function() { return View::make('calendar'); });
 Route::get("/contact", function() { return View::make('contact'); });
 Route::get("/influence", function() { return View::make('influence'); });
 
-Route::get("/larp101", function() { return Redirect::to(ApplicationSetting::where('name', 'LARP 101 PDF')->first()->value); });
-Route::get("/larp101/doc", function() { return Redirect::to(ApplicationSetting::where('name', 'LARP 101 Google Doc')->first()->value); });
-Route::get("/larp201", function() { return Redirect::to(ApplicationSetting::where('name', 'LARP 201 PDF')->first()->value); });
-Route::get("/larp201/doc", function() { return Redirect::to(ApplicationSetting::where('name', 'LARP 201 Google Doc')->first()->value); });
+Route::get("/larp101", function() { return Redirect::to(ApplicationSetting::get('LARP 101 PDF')); });
+Route::get("/larp101/doc", function() { return Redirect::to(ApplicationSetting::get('LARP 101 Google Doc')); });
+Route::get("/larp201", function() { return Redirect::to(ApplicationSetting::get('LARP 201 PDF')); });
+Route::get("/larp201/doc", function() { return Redirect::to(ApplicationSetting::get('LARP 201 Google Doc')); });
 
 Route::get("/uploads/{file}", 'HomeController@showUpload');
 Route::post("/contact/send", 'StorytellerController@contactStorytellers');

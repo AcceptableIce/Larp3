@@ -13,6 +13,10 @@ class ApplicationSetting extends Eloquent {
 		}
 		return "<input type='$field' name='application-setting-$this->id' value='$value'/>";
 	}
+	
+	public static function get($key) {
+		return ApplicationSetting::where('name', $key)->first()->value;
+	}
 }
 
 ?>

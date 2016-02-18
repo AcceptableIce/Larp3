@@ -143,7 +143,7 @@ class HomeController extends BaseController {
 			$user = $user->first(); 
 			if($user->password == hash('SHA256', Input::get('password'))) {
 				Auth::login($user, true);
-				return Redirect::to('/');
+				return Redirect::intended('/');
 			} else {
 				return Redirect::to('login')->with('login_errors', true)->withErrors(array('message' => 'Invalid username or password.'));
 			}
