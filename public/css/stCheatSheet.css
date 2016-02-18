@@ -1,0 +1,124 @@
+* {
+	-webkit-print-color-adjust: exact;
+}
+
+html {
+	font-size: 0.7em;
+}
+h1, h2, h3, h4, h5, h6, .character-box, .character-row, .path-box {
+	font-family: "Cabin", Helvetica, Tahoma, sans-serif;
+}
+
+.character-row    { page-break-inside:avoid; page-break-after:auto }
+
+ul, li {
+	font-size: 0.9em;
+}
+
+.merit-list {
+	font-size: 1.0em;
+	margin: 0 0;
+}
+
+.merit-list li {
+	list-style: none;
+}
+
+.merit-list li:before {
+	content: '-';
+	display: inline-block;
+	margin: 0 5px;
+}
+
+.path-box {
+	width: 48%;
+	float: left;
+}
+.path-box:nth-child(2n+1) {
+	float: right;
+}
+
+.small-12 {
+	clear: both;
+}
+
+.character-row {
+	display: flex;
+}
+
+.character-box {
+	width: 50%;
+	vertical-align: top;
+	padding: 1em 1em;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	display: inline-block;
+	float: left;
+}
+
+.character-row .character-box{
+	border-bottom: 1px solid #c0c0c0;
+}
+
+.character-listing .character-row:first-of-type .character-box {
+	border-top: 1px solid #c0c0c0;
+}
+
+.character-row .character-box:first-child {
+	border-left: 1px solid #c0c0c0;
+}
+
+.character-row .character-box {
+	border-right: 1px solid #c0c0c0;
+}
+
+
+.character-row:nth-child(2n) .character-box:nth-child(2n), .character-row:nth-child(2n+1) .character-box:nth-child(2n+1) {
+	background-color: #f0f0f0;
+}
+
+.description {
+	font-size: 0.9em;
+	padding-left: 25px;
+	margin-top: -3px;
+	margin-bottom: 2px;
+	line-height: 12px;
+}
+
+.manage-link {
+	position: absolute;
+	left: 250px;
+}
+.red, .red:hover {
+	background-color: rgba(255, 0, 0, 0.2);
+}
+.blue, .blue:hover {
+	background-color: rgba(0, 0, 255, 0.2);
+}
+.yellow, .yellow:hover {
+	background-color: rgba(255, 255, 0, 0.4);
+}
+.orange, .orange:hover {
+	background-color: rgba(255, 128, 0, 0.4);
+}
+.pink, .pink:hover {
+	background-color: rgba(255, 0, 255, 0.3);
+}
+.green, .green:hover {
+	background-color: rgba(0, 255, 0, 0.3);
+}
+.purple, .purple:hover {
+	background-color: rgba(128, 0, 128, 0.3);
+}
+.none, .none:hover {
+	background-color: rgba(255, 255, 255, 0);
+}
+@media print {
+	.character-row:nth-child(2n) .character-box:nth-child(2n), .character-row:nth-child(2n+1) .character-box:nth-child(2n+1) {
+		background-color: #f0f0f0 !important;
+		-webkit-print-color-adjust: exact;
+	}
+	.small-6 {
+	    width: 50%;
+	}
+}

@@ -4,8 +4,17 @@
 <div class="row left">
 	@if($mode == "management")
 	<h2>Forum Management</h2>
-	<a href="/dashboard/storyteller/manage/forums/new"><button class="button small right"><i class="icon-plus"></i>New Forum</button></a>
-	<p>Note: Trashed forums are recoverable; they're flagged as hidden.</p>
+	<a href="/dashboard/storyteller/manage/forums/new">
+		<button class="button small right">
+			<i class="icon-plus"></i>
+			New Forum
+		</button>
+	</a>
+	
+	<p>
+		Note: Trashed forums are recoverable; they're flagged as hidden.
+	</p>
+	
 	<? 	$categories = ForumCategory::orderBy('display_order')->get();
 		$categories->add((object) ['name' => "Trashed", 'id' => 0]);
 		$categories->add((object) ['name' => 'Unassociated', 'id' => 0]);
@@ -40,30 +49,66 @@
 					}
 				?>
 				@foreach($collection as $forum)
-				<tr>
-					<td>
-						<a href="/dashboard/storyteller/manage/forums/{{$forum->id}}/edit" data-tooltip title="Edit"><i class="icon-pencil"></i></a>
-						<a href="/dashboard/storyteller/manage/forums/{{$forum->id}}/characters" data-tooltip title="Permitted Characters"><i class="icon-users"></i></a>
-						@if($category->name == "Trashed")
-							<a href="/dashboard/storyteller/manage/forums/{{$forum->id}}/restore" data-tooltip title="Restore"><i class="icon-flash"></i></a>
-						@else 
-							<a href="/dashboard/storyteller/manage/forums/{{$forum->id}}/delete" data-tooltip title="Trash"><i class="icon-trash"></i></a>
-						@endif
-					</td>
-					<td>{{$forum->name}}</td>
-					<td>{{$forum->sect_id ? RulebookSect::find($forum->sect_id)->name : ''}}</td>
-					<td>{{$forum->clan_id ? RulebookClan::find($forum->clan_id)->name : ''}}</td>
-					<td>{{$forum->background_id ? RulebookBackground::find($forum->background_id)->name : ''}}</td>
-					<td>{{$forum->read_permission ? PermissionDefinition::find($forum->read_permission)->name : ''}}</td>
-					<td>{{$forum->topic_permission ? PermissionDefinition::find($forum->topic_permission)->name : ''}}</td>		
-					<td>{{$forum->reply_permission ? PermissionDefinition::find($forum->reply_permission)->name : ''}}</td>					
-					<td>{{$forum->is_private ? "Yes" : "No"}}</td>
-					<td>{{$forum->show_on_st_todo_list ? "Yes" : "No"}}</td>
-					<td>{{$forum->asymmetric_replies ? "Yes" : "No"}}</td>
-					<td>{{$forum->time_limited ? "Yes" : "No"}}</td>
-					<td>{{$forum->player_specific_threads ? "Yes" : "No"}}</td>	
-					<td>{{ForumCharacterPermission::where('forum_id', $forum->id)->count()}}</td>
-					<td>{{$forum->position}}</td>
+					<tr>
+						<td>
+							<a href="/dashboard/storyteller/manage/forums/{{$forum->id}}/edit" data-tooltip title="Edit">
+								<i class="icon-pencil"></i>
+							</a>
+							<a href="/dashboard/storyteller/manage/forums/{{$forum->id}}/characters" data-tooltip title="Permitted Characters">
+								<i class="icon-users"></i>
+							</a>
+							@if($category->name == "Trashed")
+								<a href="/dashboard/storyteller/manage/forums/{{$forum->id}}/restore" data-tooltip title="Restore">
+									<i class="icon-flash"></i>
+								</a>
+							@else 
+								<a href="/dashboard/storyteller/manage/forums/{{$forum->id}}/delete" data-tooltip title="Trash">
+									<i class="icon-trash"></i>
+								</a>
+								@endif
+						</td>
+						<td>
+							{{$forum->name}}
+						</td>
+						<td>
+							{{$forum->sect_id ? RulebookSect::find($forum->sect_id)->name : ''}}
+						</td>
+						<td>
+							{{$forum->clan_id ? RulebookClan::find($forum->clan_id)->name : ''}}
+						</td>
+						<td>
+							{{$forum->background_id ? RulebookBackground::find($forum->background_id)->name : ''}}
+						</td>
+						<td>
+							{{$forum->read_permission ? PermissionDefinition::find($forum->read_permission)->name : ''}}
+						</td>
+						<td>
+							{{$forum->topic_permission ? PermissionDefinition::find($forum->topic_permission)->name : ''}}
+						</td>		
+						<td>
+							{{$forum->reply_permission ? PermissionDefinition::find($forum->reply_permission)->name : ''}}
+						</td>					
+						<td>
+							{{$forum->is_private ? "Yes" : "No"}}
+						</td>
+						<td>
+							{{$forum->show_on_st_todo_list ? "Yes" : "No"}}
+						</td>
+						<td>
+							{{$forum->asymmetric_replies ? "Yes" : "No"}}
+						</td>
+						<td>
+							{{$forum->time_limited ? "Yes" : "No"}}
+						</td>
+						<td>
+							{{$forum->player_specific_threads ? "Yes" : "No"}}
+						</td>	
+						<td>
+							{{ForumCharacterPermission::where('forum_id', $forum->id)->count()}}
+						</td>
+						<td>
+							{{$forum->position}}
+						</td>
 				</tr>
 				@endforeach
 			</tbody>
@@ -96,7 +141,7 @@
 			<div class="small-10 columns">
 				<select class="right-label" name="category">
 					@foreach(ForumCategory::all() as $category)
-						<option value="{{$category->id}}" @if($forum && $category->id == $forum->category_id)selected="selected"@endif>
+						<option value="{{$category->id}}" @if($forum && $category->id == $forum->category_id) selected="selected" @endif>
 							{{$category->name}}
 						</option>
 					@endforeach

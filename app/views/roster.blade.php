@@ -67,8 +67,12 @@
 		<div class="small-12 columns">
 			<h1>Character Roster</h1>
 			<p>
-				Player Characters are in black. NPCs are in <span class="npc">blue</span>.<br>
-				<b>This is an out-of-character reference. Please take care to not confuse your knowledge of clan and position with your character's.</b>
+				Player Characters are in black. 
+				NPCs are in <span class="npc">blue</span>.<br>
+				<b>
+					This is an out-of-character reference. 
+					Please take care to not confuse your knowledge of clan and position with your character's.
+				</b>
 			</p>
 			<?
 				$query =	DB::table('characters')->select('hidden_id')->where('active', true)
@@ -84,10 +88,14 @@
 			<? $i = 0; ?>
 			@foreach($query->get() as $q) 
 				<? $i = ($i + 1) % 2; ?>
-				@if($i == 1) <div class="row large-uncollapse clan-row"> @endif
+				@if($i == 1) 
+					<div class="row large-uncollapse clan-row"> 
+				@endif
 		
 				<div class="columns small-12 medium-6">
-					<div class="clan-title"> {{RulebookClan::find($q->hidden_id)->name}}</div>
+					<div class="clan-title">
+						{{RulebookClan::find($q->hidden_id)->name}}
+					</div>
 					<div class="clan-members">
 						<?
 							$member_query = DB::table('characters')->select('characters.id')->where('active', true)
@@ -116,7 +124,9 @@
 										<div class="columns small-6">
 											{{$character->printName()}}
 										</div>
-										<div class="columns small-6">{{$character->owner->mailtoLink()}}</div>
+										<div class="columns small-6">
+											{{$character->owner->mailtoLink()}}
+										</div>
 									</div>
 									<? $positions= CharacterPosition::with('definition')->where('character_id', $character->id)->get(); ?>
 									@if($positions->count() > 0)
@@ -132,7 +142,9 @@
 					</div>	
 				</div>
 		
-				@if($i == 0) </div> @endif
+				@if($i == 0) 
+					</div>
+				@endif
 			@endforeach
 		</div>
 	</div>

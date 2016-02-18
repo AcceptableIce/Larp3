@@ -27,7 +27,8 @@
 				<div class="permission-row">
 					{{$def->name}}
 					<div class="permission-description">{{$def->definition}}</div>
-					<form method="post" action="/dashboard/storyteller/manage/permissions/delete" class="remove-permission-form remove-permission-def-form">
+					<form method="post" action="/dashboard/storyteller/manage/permissions/delete" 
+						  class="remove-permission-form remove-permission-def-form">
 						<input type="hidden" name="definition" value="{{$def->id}}" />
 						<input type="submit" class="button alert tiny remove-permission" value="Delete Permission" />
 					</form>
@@ -49,7 +50,9 @@
 		<select name="permission">
 			@foreach(PermissionDefinition::all() as $p)
 				<? $count = Permission::where('permission_id', $p->id)->count(); ?>
-				<option value="{{$p->id}}">{{$p->name}} ({{$count}} user{{$count == 1 ? '' : 's'}} with permission)</option>
+				<option value="{{$p->id}}">
+					{{$p->name}} ({{$count}} user{{$count == 1 ? '' : 's'}} with permission)
+				</option>
 			@endforeach
 		</select>
 		<input type="submit" class="button small" value="Grant Permission" />

@@ -49,12 +49,13 @@
 				<div class="post-content search-content">{{nl2br(strip_tags(trim(br2nl($post->body))))}}</div>
 
 				@foreach($post->edits()->orderBy('created_at')->take(3)->get() as $edit) 
-					<div class="edit-notification"><i>Edited {{$edit->created_at->diffForHumans()}} by {{$edit->user->username}}</i></div>
+					<div class="edit-notification">
+						<i>Edited {{$edit->created_at->diffForHumans()}} by {{$edit->user->username}}</i>
+					</div>
 				@endforeach
 			</div>
 		</div>
 	</div>
 </div>
 @endforeach
-
 @stop

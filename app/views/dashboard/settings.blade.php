@@ -26,9 +26,12 @@
 		  	<p class="setting-description">Your email address.</p>
 		  </label>
 	  @foreach(UserSettingDefinition::orderBy('position')->get() as $definition)
-	  	<label for="user-settings-{{$definition->id}}">{{$definition->name}}
-		  	{{$definition->createForm($user)}}
-		  	<p class="setting-description">{{$definition->description}}</p>
+	  	<label for="user-settings-{{$definition->id}}">
+	  		{{$definition->name}}
+	  		{{$definition->createForm($user)}}
+		  	<p class="setting-description">
+				{{$definition->description}}
+			</p>
 	  	</label>
 	  @endforeach
 	  <hr>

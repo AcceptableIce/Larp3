@@ -67,7 +67,9 @@ ko.applyBindings(new dashboardVM());
 <div class="icon-bar vertical five-up builder-nav">
 	<a class="item" data-bind="css: { 'active': $root.activeTab() == 'mail' }" href="/dashboard/mail">
 		<? $unread = Auth::user()->unreadMail()->count(); ?>
-		@if($unread > 0) <label class="label round radius success">{{$unread}}</label> @endif
+		@if($unread > 0) 
+			<label class="label round radius success">{{$unread}}</label> 
+		@endif
 		<i class="icon-mail"></i>
 		<label class="hide-for-small">Mail</label>
 	</a>
@@ -76,10 +78,10 @@ ko.applyBindings(new dashboardVM());
 		<label class="hide-for-small">Characters</label>
 	</a>
 	@if(Auth::user()->isStoryteller())
-	<a class="item" data-bind="css: { 'active': $root.activeTab() == 'storyteller' }" href="/dashboard/storyteller">
-		<i class="icon-tools"></i>
-		<label class="hide-for-small">Storyteller<br>Tools</label>
-	</a>
+		<a class="item" data-bind="css: { 'active': $root.activeTab() == 'storyteller' }" href="/dashboard/storyteller">
+			<i class="icon-tools"></i>
+			<label class="hide-for-small">Storyteller<br>Tools</label>
+		</a>
 	@endif
 	<a class="item" data-bind="css: { 'active': $root.activeTab() == 'settings' }" href="/dashboard/settings">
 		<i class="icon-cog"></i>

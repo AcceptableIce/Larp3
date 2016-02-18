@@ -460,6 +460,10 @@ class Character extends Eloquent {
 		}
 		return $cost;
 	}
+	
+	public function printOptions($user, $filter = 'none') {
+		return View::make('partials/characterOptions', ['character' => $this, 'user' => $user, 'filter' => $filter])->render();
+	}
 	public function getVersion($version, $ignoreZeros = true) {
 		if($version == 0) return null;
 		$out = [];

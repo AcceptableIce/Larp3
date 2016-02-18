@@ -205,7 +205,9 @@
 				<div class="calendar-columns columns">
 					{{build_calendar((8 + $i) % 12, $i > 4 ? $year + 1 : $year, [])}}
 				</div>
-				@if($i == 4)</div><div class="row collapse calendar-row">@endif
+				@if($i == 4)
+					</div><div class="row collapse calendar-row">
+				@endif
 			@endfor
 		</div>
 	</div>

@@ -12,17 +12,23 @@
 		</thead>
 		<tbody>
 			@foreach(RulebookPosition::all() as $d)
-			<tr>
-				<td>{{$d->id}}</td>
-				<td>{{$d->name}}</td>
-				<td>{{CharacterPosition::where('position_id', $d->id)->count()}}</td>
-				<td>
-					<form method="post" action="/dashboard/storyteller/manage/positions/delete">
-						<input type="hidden" name="id" value="{{$d->id}}" />
-						<input type="submit" class="button small alert" value="Delete Position" />
-					</form>
-				</td>
-			</tr>
+				<tr>
+					<td>
+						{{$d->id}}
+					</td>
+					<td>
+						{{$d->name}}
+					</td>
+					<td>
+						{{CharacterPosition::where('position_id', $d->id)->count()}}
+					</td>
+					<td>
+						<form method="post" action="/dashboard/storyteller/manage/positions/delete">
+							<input type="hidden" name="id" value="{{$d->id}}" />
+							<input type="submit" class="button small alert" value="Delete Position" />
+						</form>
+					</td>
+				</tr>
 			@endforeach
 		</tbody>
 	</table>

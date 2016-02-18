@@ -132,59 +132,68 @@ $(function() {
 @stop
 @section('content')
 <div id="main-modal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
-  <h2 id="modalTitle">Forgot your password?</h2>
-  <p>Enter your email address and we'll send you a link to reset it.</p>
-  <form action="{{ action('RemindersController@postRemind') }}" method="POST">
-    <input type="email" name="email">
-    <input type="submit" class="button success" value="Send Reminder">
-</form>
-  <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+	<h2 id="modalTitle">Forgot your password?</h2>
+	<p>
+		Enter your email address and we'll send you a link to reset it.
+	</p>
+	<form action="{{ action('RemindersController@postRemind') }}" method="POST">
+		<input type="email" name="email">
+		<input type="submit" class="button success" value="Send Reminder">
+	</form>
+	<a class="close-reveal-modal" aria-label="Close">&#215;</a>
 </div>
 <div class="existing-account" data-bind="visible: $root.loginMode() == 0">
 	<div class="login-subtitle">Login to an Existing Account
-		<div class="mode-switch" data-bind="click: function() { return $root.setLoginMode(1); }">...or create a new account.</div>
+		<div class="mode-switch" data-bind="click: function() { return $root.setLoginMode(1); }">
+			...or create a new account.
+		</div>
 	</div>
 
 	<div class="form-holder">
-	{{ Form::open(array('url' => 'login', 'autocomplete' => 'off')) }}
+		{{ Form::open(array('url' => 'login', 'autocomplete' => 'off')) }}
+		
+			<p class="login-errors"> 
+				@if (Session::has('error'))
+					{{ trans(Session::get('error')) }}
+				@elseif (Session::has('status'))
+					An email with the password reset has been sent.
+				@endif
+				<div class="error">{{ $errors->first('username') }}</div>
+				<div class="error">{{ $errors->first('password') }}</div>
+				<div class="error">{{ $errors->first('message') }}</div>
+			</p>
 	
-		<p class="login-errors"> 
-			@if (Session::has('error'))
-			  {{ trans(Session::get('error')) }}
-			@elseif (Session::has('status'))
-			  An email with the password reset has been sent.
-			@endif
-			<div class="error">{{ $errors->first('username') }}</div>
-			<div class="error">{{ $errors->first('password') }}</div>
-			<div class="error">{{ $errors->first('message') }}</div>
-		</p>
-
 			{{ Form::label('username', 'Username') }}
 			{{ Form::text('username', Input::old('username'), array('placeholder' => '')) }}
-
+	
 			{{ Form::label('password', 'Password') }}
 			{{ Form::password('password') }}
-			<div class="password-forgot"><a data-bind="click: showLoginModal">Forgot your password?</a></div>
-		<button type="submit"><i class="icon-right"></i></button>
-
-	{{ Form::close() }}
+			<div class="password-forgot">
+				<a data-bind="click: showLoginModal">Forgot your password?</a>
+			</div>
+			
+			<button type="submit"><i class="icon-right"></i></button>
+	
+		{{ Form::close() }}
 	</div>
 
 </div>
 <div class="new-account" data-bind="visible: $root.loginMode() == 1">
 	<div class="login-subtitle">Create a New Account
-		<div class="mode-switch" data-bind="click: function() { return $root.setLoginMode(0); }">...or login to an existing account.</div>
+		<div class="mode-switch" data-bind="click: function() { return $root.setLoginMode(0); }">
+			...or login to an existing account.
+		</div>
 	</div>
 	<div class="form-holder">
 	{{ Form::open(array('url' => 'createAccount', 'autocomplete' => 'off')) }}
 
-	<p class="register-errors">
-		<div class="error">{{ $errors->first('register_username') }}</div>
-		<div class="error">{{ $errors->first('register_password') }}</div>
-		<div class="error">{{ $errors->first('register_password_confirmation') }}</div>
-		<div class="error">{{ $errors->first('register_email') }}</div>
-
-	</p>
+		<p class="register-errors">
+			<div class="error">{{ $errors->first('register_username') }}</div>
+			<div class="error">{{ $errors->first('register_password') }}</div>
+			<div class="error">{{ $errors->first('register_password_confirmation') }}</div>
+			<div class="error">{{ $errors->first('register_email') }}</div>
+	
+		</p>
 
 		{{ Form::label('register_username', 'Username') }}
 		{{ Form::text('register_username', Input::old('register_username'), array('placeholder' => '')) }}

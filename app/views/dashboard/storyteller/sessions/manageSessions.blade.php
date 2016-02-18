@@ -11,16 +11,20 @@
 		</thead>
 		<tbody>
 			@foreach(GameSession::where('date', '>=', new DateTime)->get() as $d)
-			<tr>
-				<td>{{$d->id}}</td>
-				<td>{{$d->date}}</td>
-				<td>
-					<form method="post" action="/dashboard/storyteller/manage/sessions/delete">
-						<input type="hidden" name="id" value="{{$d->id}}" />
-						<input type="submit" class="button small alert" value="Delete Session" />
-					</form>
-				</td>
-			</tr>
+				<tr>
+					<td>
+						{{$d->id}}
+					</td>
+					<td>
+						{{$d->date}}
+					</td>
+					<td>
+						<form method="post" action="/dashboard/storyteller/manage/sessions/delete">
+							<input type="hidden" name="id" value="{{$d->id}}" />
+							<input type="submit" class="button small alert" value="Delete Session" />
+						</form>
+					</td>
+				</tr>
 			@endforeach
 		</tbody>
 	</table>
@@ -41,10 +45,14 @@
 			<th></th>
 		</thead>
 		<tbody>
-			@foreach(GameSession::where('date', '<', new DateTime)->get() as $d)
+			@foreach(GameSession::where('date', "<", new DateTime)->get() as $d)
 			<tr>
-				<td>{{$d->id}}</td>
-				<td>{{$d->date}}</td>
+				<td>
+					{{$d->id}}
+				</td>
+				<td>
+					{{$d->date}}
+				</td>
 				<td>
 					<form method="post" action="/dashboard/storyteller/manage/sessions/delete">
 						<input type="hidden" name="id" value="{{$d->id}}" />

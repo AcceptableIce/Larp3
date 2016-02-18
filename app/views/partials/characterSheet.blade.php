@@ -1,296 +1,4 @@
-<style type="text/css">
-	body, label {
-		font-size: 16px;
-	}
-	.character-sheet {
-		padding: 10px 20px;
-	}
-
-	.character-sheet-row {
-		margin: 0 0;
-		max-width: 1200px;
-		width: 1200px;
-		padding: 10px 0;
-		border-bottom: 1px solid #ccc;
-	}
-
-	.character-sheet-row:last-child {
-		border-bottom: none;
-	}
-
-	.character-sheet-row .columns {
-		padding: 0 0;
-	}
-
-	.character-sheet-row label {
-		display: inline-block;
-		width: 90px;
-		margin-right: 10px;
-	}
-
-	.dot {
-		display: inline-block;
-		font-size: 1.5em;
-	    position: relative;
-	    top: 10px;
-	    line-height: 1px;
-	    vertical-align: top;
-	}
-
-	.cross {
-		text-decoration: line-through;
-		color: #999;
-	}
-
-	.damage-track {
-		padding-left: 15px !important;
-	}
-	.damage-track-box {
-		width: 22px;
-		height: 22px;
-		border: 1px solid #000;
-		border-bottom: none;
-		line-height: 20px;
-		text-align: center;
-		position: relative;
-		-webkit-box-sizing: border-box;
-		box-sizing: border-box;
-	}
-
-	.damage-track-marker {
-		position: absolute;
-		display: inline-block;
-	}
-
-	.track-marker-left {
-		left: -27px;
-		text-align: right;
-		width: 20px;
-	}
-
-	.track-marker-right {
-		left: 25px;
-		top: 0px;
-	}
-
-	.damage-track-last-row {
-		position: relative;
-		left: -22px;
-	}
-
-	.damage-track-last-row .damage-track-box {
-		display: inline-block;
-		border-bottom: 1px solid #000;
-		border-right: none;
-		float: left;
-	}
-
-
-	.damage-track-last-row .damage-track-box:last-child {
-		border-right: 1px solid #000;
-	}
-
-	[class*="column"] + [class*="column"]:last-child {
-	     float:left;
-	}
-
-	.attribute-row {
-		line-height: 22px;
-	}
-
-	.stats {
-		width: 20%;
-	}
-
-	.damage-track {
-		width: 7%;
-	}
-
-	.attributes {
-		width: 25%;
-	}
-
-	.sins {
-		width: 23%;
-	}
-
-	.frenzy-triggers {
-		width: 23%;
-	}
-
-	.abilities label, .backgrounds label {
-		width: 100px;
-	}
-
-	.rotschreck-triggers {
-		width: 20%;
-	}
-
-	.discipline {
-		width: 20%;
-	}
-
-	.discipline-row {
-		font-size: 0.9em;
-	}
-
-	.merit-flaw-box {
-		font-size: 0.9em;
-		line-height: 20px;
-	}
-
-	.merit-flaw-box .specialization {
-		margin-top: -4px;
-	}
-
-	.retest {
-		font-size: 0.85em;
-	}
-
-	.requires-chop {
-		position: fixed;
-		right: 50px;
-		top: 50px;
-		width: 250px;
-		min-height: 50px;
-		padding: 1em .5em;
-		font-size: 0.9em;
-		border: 1px solid #c0c0c0;
-		background-color: #f0f0f0;
-	}
-
-	.requires-chop-disclaimer {
-		color: #777;
-		font-style: italic;
-	}
-
-	.list-label {
-		font-size: 0.9em;
-		color: #000;
-		line-height: 15px;
-	}
-
-	.specialization {
-		color: #444;
-		font-size: 0.9em;
-		font-style: italic;
-	}
-
-	.list-label {
-		width: 45%;
-		float: left;
-		clear: left;
-		margin-top: 5px;
-		margin-right: 5px;
-	}
-
-	.list-dots {
-		float: left;
-		vertical-align: top;
-	}
-
-	.background-spacer {
-		clear: both;
-		height: 10px;
-	}
-
-	.character-data {
-		width: 50%;
-		font-size: 0.9em;
-		margin-top: 5px;
-		vertical-align: top;
-		line-height: 15px;
-	}
-
-	.character-stat {
-		width: 40%;
-	}
-
-	@media print {
-		.requires-chop {
-			display: none;
-		}
-		
-		.character-sheet-row {
-			max-width: 1400px;
-			width: 1400px;
-		}
-	}
-	
-	@page {
-		size: A4;
-		margin: 0;
-		size: landscape;
-	}
-
-	.sins, .frenzy-triggers {
-		margin-top: -22px;
-		padding-right: 5px !important;
-	}
-	
-	.sins, .rotschreck-triggers, .frenzy-triggers, .resources {
-		font-size: .9em;
-	}
-
-	.sins b, .rotschreck-triggers b, .frenzy-triggers b, .resources b {
-		font-size: 1.1em;
-	}
-	
-	.backgrounds {
-  	  width: 15%;
-	}
-
-	.backgrounds .list-label, .abilities .list-label {
-		width: 50%;
-		text-align: right;
-		padding-right: 2px;
-	}
-
-
-	.merits {
-	    width: 15%;
-	}
-
-	.flaws {
-	    width: 15%;
-	}
-
-	.abilities {
-	    width: 15%;
-	}
-
-	.rotschreck-triggers {
-	    width: 17%;
-	}
-
-	.resources {
-		width: 23%;
-	}
-
-	.resource-row {
-		font-size: 0.85em;
-	}
-
-	b.resource-total {
-		font-size: 1.0em;
-	}
-
-	.sin-count {
-		width: 10px;
-		display: inline-block;
-		text-align: right;
-		vertical-align: top;
-	}
-
-	.sin-value {
-		display: inline-block;
-		width: calc(100% - 14px);
-	}
-
-	.discipline-path-name {
-		font-size: 0.9em;
-	}
-</style>
+<link rel="stylesheet" type="text/css" href="/css/characterSheet.css" />
 <div class="character-sheet">
 <? 
 	function print_dots($total, $crossAmt) {
@@ -301,6 +9,7 @@
 		}
 		return $out;
 	}
+	
 	if(!$character) {
 		echo '<h3>Character not found.</h3>';
 		die();
@@ -313,28 +22,75 @@
 
 	$requires_chop = $character->derangements($version)->whereHas('definition', function($q) { $q->where('requires_chop', true); })->exists();
 ?> 
-<h3>{{$character->name}} @if($version != $character->approved_version) (Version {{$version}}) @endif </h3>
+<h3>
+	{{$character->name}} 
+	@if($version != $character->approved_version) 
+		(Version {{$version}}) 
+	@endif 
+</h3>
 <div class="row character-sheet-row collapse">
 	<div class="stats columns">
-		<div class="list-label character-stat">Player:</div><div class="list-dots character-data">{{$character->owner->username}}</div>
-		<div class="list-label character-stat">Sect:</div><div class="list-dots character-data">{{$character->sect($version)->first()->definition->name}}</div>
-		<div class="list-label character-stat">Clan:</div><div class="list-dots character-data">{{$character->clan($version)->first()->definition->name}}</div>
+		<div class="list-label character-stat">
+			Player:
+		</div>
+		<div class="list-dots character-data">
+			{{$character->owner->username}}
+		</div>
+		
+		<div class="list-label character-stat">
+			Sect:
+		</div>
+		<div class="list-dots character-data">
+			{{$character->sect($version)->first()->definition->name}}
+		</div>
+		
+		<div class="list-label character-stat">
+			Clan:
+		</div>
+		<div class="list-dots character-data">
+			{{$character->clan($version)->first()->definition->name}}
+		</div>
+		
 		<? $path = $character->path($version)->first(); ?>
 		@if($path)
-		<div class="list-label character-stat">Path:</div>
-		<div class="list-dots character-data">{{str_replace(["The Path of the", "The Path of"], "", $path->definition->name)}}</div>
+			<div class="list-label character-stat">
+				Path:
+			</div>
+			<div class="list-dots character-data">
+				{{str_replace(["The Path of the", "The Path of"], "", $path->definition->name)}}
+			</div>
 		@endif
 
-		<div class="list-label character-stat">Nature:</div><div class="list-dots character-data">{{$character->nature($version)->first()->definition->name}}</div>
-		<? 	$gen = $character->backgrounds($version)->whereHas('definition', function($q) { $q->where('name', 'Generation'); })->first();
+		<div class="list-label character-stat">
+			Nature:
+		</div>
+		<div class="list-dots character-data">
+			{{$character->nature($version)->first()->definition->name}}
+		</div>
+		
+		<? 	$gen = $character->backgrounds($version)->whereHas('definition', function($q) { 
+				$q->where('name', 'Generation'); 
+			})->first();
+			
 			$gen_amt = $gen ? $gen->amount : 0; 
 			if($character->hasFlaw("Fourteenth Generation")) $gen_amt = -1;
 			if($character->hasFlaw("Fifteenth Generation")) $gen_amt = -2; 
 		?>
-		<div class="list-label character-stat">Generation:</div><div class="list-dots character-data">{{13 - $gen_amt}}</div>
+		<div class="list-label character-stat">
+			Generation:
+		</div>
+		<div class="list-dots character-data">
+			{{13 - $gen_amt}}
+		</div>
+		
 		<? $willpower = $character->willpower($version)->first(); ?>
-		<div class="list-label character-stat">Willpower:</div>
-		<div class="list-dots">{{print_dots($willpower->willpower_total, $willpower->willpower_total - $willpower->willpower_current);}}</div>
+		<div class="list-label character-stat">
+			Willpower:
+		</div>
+		<div class="list-dots">
+			{{print_dots($willpower->willpower_total, $willpower->willpower_total - $willpower->willpower_current)}}
+		</div>
+		
 		<? 	//We start at 10. Higher generation characters get more blood, 1 per generation.
 			$blood_pool = 10 + max(0, $gen_amt);
 			$st_chop = mt_rand(0, 2);
@@ -347,23 +103,37 @@
 				$blood = $blood_pool - 1;
 			}
 			//If we have the Stigmata flaw, we lose another blood.
-			if($character->flaws($version)->whereHas('definition', function($q) { $q->where('name', 'Stigmata'); })->exists()) $blood--;			
-			//If we have ghouls, we lose one point per ghoul. There... isn't really a good way of doing this for an odd number of ghouls, so I round up.
-			//Sorry players.
+			if($character->flaws($version)->whereHas('definition', function($q) { 
+				$q->where('name', 'Stigmata'); 
+			})->exists()) $blood--;			
+			
+			//If we have ghouls, we lose one point per ghoul. There... isn't really a good way of doing this 
+			//for an odd number of ghouls, so I round up. Sorry players.
 			if($character->clan($version)->first()->definition->name != 'Tsimisce') {
-				$blood -= ceil($character->backgrounds($version)->whereHas('definition', function($q) { $q->where('name', 'Ghouls'); })->count() / 2);
+				$blood -= ceil($character->backgrounds($version)->whereHas('definition', function($q) { 
+					$q->where('name', 'Ghouls'); 
+				})->count() / 2);
 			}
 		?>
-		<div class="list-label character-stat">Blood:</div><div class="list-dots character-data">{{$blood}}/{{$blood_pool}}</div>
+		
+		<div class="list-label character-stat">
+			Blood:
+		</div>
+		<div class="list-dots character-data">
+			{{$blood}}/{{$blood_pool}}
+		</div>
+		
 		@if($character->hasDiablerizedRecently())
-		<p>Recently Diablerized</p>
+			<p>Recently Diablerized</p>
 		@endif
 	</div>
 	<div class="damage-track columns">
 		<?
 		//Now we build the damage track. If a character has the Huge Size merit or Fort 2, they get an additional box (for each!);
 		$hugesize = $character->hasMerit('Huge Size');
-		$fort_request = $character->disciplines($version)->whereHas('definition', function($q) { $q->where('name', 'Fortitude'); })->first();
+		$fort_request = $character->disciplines($version)->whereHas('definition', function($q) { 
+			$q->where('name', 'Fortitude'); 
+		})->first();
 		$fortitude_1 = $fort_request && $fort_request->ranks >= 1;
 		$fortitude_2 = $fort_request && $fort_request->ranks >= 2;
 
@@ -379,11 +149,19 @@
 		@foreach($boxes as $key => $value)
 			@for($i = 0; $i < $value; $i++)
 				<div class="damage-track-box">
-				@if($i == 0 && $key == "B")<div class="damage-track-marker track-marker-left">+0</div>@endif
-				@if($i == 0 && $key == "W" && !$fortitude_1)<div class="damage-track-marker track-marker-left">+1</div>@endif				
-				<span>{{$key}}</span>
-				@if($i == 0 && $key == "B")<div class="damage-track-marker track-marker-right">-1</div>@endif
-				@if($i == 0 && $key == "W" && !$fortitude_1)<div class="damage-track-marker track-marker-right">LT</div>@endif		
+					@if($i == 0 && $key == "B")
+						<div class="damage-track-marker track-marker-left">+0</div>
+					@endif
+					@if($i == 0 && $key == "W" && !$fortitude_1)
+						<div class="damage-track-marker track-marker-left">+1</div>
+					@endif				
+					<span>{{$key}}</span>
+					@if($i == 0 && $key == "B")
+						<div class="damage-track-marker track-marker-right">-1</div>
+					@endif
+					@if($i == 0 && $key == "W" && !$fortitude_1)
+						<div class="damage-track-marker track-marker-right">LT</div>
+					@endif		
 				</div>		
 			@endfor
 		@endforeach
@@ -396,45 +174,86 @@
 	</div>
 	<div class="attributes columns">
 		<? $traits = $character->attributes($version)->first(); ?>
-		<div class="attribute-row"><label class="list-label">({{$traits->physicals}}) Physical:</label> {{print_dots($traits->physicals, 0)}}</div>
-		<div class="attribute-row"><label class="list-label">({{$traits->mentals}}) Mental:</label> {{print_dots($traits->mentals, 0)}}</div>
-		<div class="attribute-row"><label class="list-label">({{$traits->socials}}) Social:</label> {{print_dots($traits->socials, 0)}}</div>
-		@if($path)<br>
-		<? $virtues = $path->definition->stats();?>
-		<div class="attribute-row"><label class="list-label">{{$virtues[2]}}:</label> {{print_dots($path->virtue3, 0)}}</div>
-		<div class="attribute-row"><label class="list-label">{{$virtues[0]}}:</label> {{print_dots($path->virtue1, 0)}}</div>
-		<div class="attribute-row"><label class="list-label">{{$virtues[1]}}:</label> {{print_dots($path->virtue2, 0)}}</div>
-		<div class="attribute-row"><label class="list-label">{{$virtues[3]}}:</label> {{print_dots($path->virtue4, 0)}}</div>
+		<div class="attribute-row">
+			<label class="list-label">({{$traits->physicals}}) Physical:</label> 
+			{{print_dots($traits->physicals, 0)}}
+		</div>
+		<div class="attribute-row">
+			<label class="list-label">({{$traits->mentals}}) Mental:</label> 
+			{{print_dots($traits->mentals, 0)}}
+		</div>
+		<div class="attribute-row">
+			<label class="list-label">({{$traits->socials}}) Social:</label> 
+			{{print_dots($traits->socials, 0)}}
+		</div>
+		
+		@if($path)
+			<br>
+			<? $virtues = $path->definition->stats();?>
+			<div class="attribute-row">
+				<label class="list-label">{{$virtues[2]}}:</label> 
+				{{print_dots($path->virtue3, 0)}}
+			</div>
+			<div class="attribute-row">
+				<label class="list-label">{{$virtues[0]}}:</label> 
+				{{print_dots($path->virtue1, 0)}}
+			</div>
+			<div class="attribute-row">
+				<label class="list-label">{{$virtues[1]}}:</label> 
+				{{print_dots($path->virtue2, 0)}}
+			</div>
+			<div class="attribute-row">
+				<label class="list-label">{{$virtues[3]}}:</label> 
+				{{print_dots($path->virtue4, 0)}}
+			</div>
 		@endif
 	</div>
 	@if($path)
-	<div class="sins columns">
-		<b>Sins</b><br> <? $i = 5; ?>
-		@foreach($path->definition->sins() as $s)
-			<div class="sin-count">{{$i--}}:</div> <div class="sin-value">{{$s}}</div>
-		@endforeach
-	</div> 
+		<div class="sins columns">
+			<b>Sins</b><br> 
+			<? $i = 5; ?>
+			@foreach($path->definition->sins() as $s)
+				<div class="sin-count">{{$i--}}:</div> 
+				<div class="sin-value">{{$s}}</div>
+			@endforeach
+		</div> 
 	@endif
 	<div class="frenzy-triggers columns">
 		<b>Frenzy Triggers</b><br>
-		<div class="sin-count">5:</div>	<div class="sin-value">Outright humiliation; mortal insults</div>
-		<div class="sin-count">4:</div>	<div class="sin-value">Loved one in danger; humilation</div>
-		<div class="sin-count">3:</div> <div class="sin-value">Physical provocation or attacks; taste of blood when hungry</div>
-		<div class="sin-count">2:</div> <div class="sin-value">Sight of blood when hungry; harassed; life-threatening situations</div>
-		<div class="sin-count">1:</div>	<div class="sin-value"> Being bullied; smell of blood when hungry (Blood &le; 4)</div>
+		<div class="sin-count">5:</div>	
+		<div class="sin-value">Outright humiliation; mortal insults</div>
+		
+		<div class="sin-count">4:</div>	
+		<div class="sin-value">Loved one in danger; humilation</div>
+		
+		<div class="sin-count">3:</div> 
+		<div class="sin-value">Physical provocation or attacks; taste of blood when hungry</div>
+		
+		<div class="sin-count">2:</div> 
+		<div class="sin-value">Sight of blood when hungry; harassed; life-threatening situations</div>
+		
+		<div class="sin-count">1:</div>	
+		<div class="sin-value"> Being bullied; smell of blood when hungry (Blood &le; 4)</div>
 	</div>
 </div>
 <div class="row character-sheet-row collapse">
 	<div class="columns abilities">
-		<b>Abilities</b><br>
+		<b>Abilities</b> <br>
 		<? 	$abilities = $character->abilities($version)->with('definition')->get();
 			$abilities = $abilities->sortBy('definition.name');
 		?>
 		@foreach($abilities as $ability) 
-			<div class="list-label">{{$ability->definition->name}} 
-			@if($ability->specialization)<div class="specialization">{{$ability->specialization}}</div>@endif
+			<div class="list-label">
+				{{$ability->definition->name}} 
+				@if($ability->specialization)
+					<div class="specialization">
+						{{$ability->specialization}}
+					</div>
+				@endif
 			</div> 
-			<div class="list-dots">{{print_dots($ability->amount, 0)}}</div>
+			<div class="list-dots">
+				{{print_dots($ability->amount, 0)}}
+			</div>
 		@endforeach
 	</div>
 	<div class="columns backgrounds">
@@ -446,10 +265,17 @@
 		@foreach($order as $key)
 			@if(isset($backgrounds[$key]))
 				@foreach($backgrounds[$key] as $background) 
-					<div class="list-label">{{$background->definition->name}}
-					@if($background->description)<div class="specialization">{{$background->description}}</div>@endif
+					<div class="list-label">
+						{{$background->definition->name}}
+						@if($background->description)
+							<div class="specialization">
+								{{$background->description}}
+							</div>
+						@endif
 					</div>
-					<div class="list-dots">{{print_dots($background->amount, 0)}}</div>
+					<div class="list-dots">
+						{{print_dots($background->amount, 0)}}
+					</div>
 				@endforeach
 			<div class="background-spacer"></div>
 			@endif
@@ -459,10 +285,15 @@
 		<b>Merits</b><br>
 		@foreach($character->merits($version)->with('definition')->get()->sortBy('definition.name') as $merit) 
 			<div class="merit-flaw-box">
-			{{$merit->definition->name}}
-			@if($merit->description)<div class="specialization">{{$merit->description}}</div>@endif
+				{{$merit->definition->name}}
+				@if($merit->description)
+					<div class="specialization">
+						{{$merit->description}}
+					</div>
+				@endif
 			</div>
 		@endforeach
+		
 		<? $rituals = $character->rituals($version)->with('definition')->get()->sortBy('definition.name')->sortBy('definition.group'); ?>
 		<br>
 		@if($rituals->count() > 0)
@@ -479,13 +310,19 @@
 		@if($character->clan($version)->first()->definition->name == "Ventrue")
 			<div class="merit-flaw-box">
 				Feeding Restriction
-				<div class="specialization">{{$character->clanOptions($version)->first()->option1}}</div>
+				<div class="specialization">
+					{{$character->clanOptions($version)->first()->option1}}
+				</div>
 			</div>
 		@endif
 		@foreach($character->flaws($version)->with('definition')->get()->sortBy('definition.name') as $flaw) 
 			<div class="merit-flaw-box">
 				{{$flaw->definition->name}}
-				@if($flaw->description)<div class="specialization">{{$flaw->description}}</div>@endif
+				@if($flaw->description)
+					<div class="specialization">
+						{{$flaw->description}}
+					</div>
+				@endif
 			</div>
 		@endforeach
 		<br>
@@ -495,18 +332,31 @@
 			@foreach($derangements as $der) 
 				<div class="merit-flaw-box">
 					{{$der->definition->name}}
-					@if($der->description)<div class="specialization">{{$der->description}}</div>@endif
+					@if($der->description)
+						<div class="specialization">
+							{{$der->description}}
+						</div>
+					@endif
 			</div>
 			@endforeach
 		@endif
 	</div>	
 	<div class="columns rotschreck-triggers">
 		<b>R&ouml;tschreck Triggers</b><br>
-		<div class="sin-count">5:</div>	<div class="sin-value"> Trapped in a burning building; direct sunlight</div>
-		<div class="sin-count">4:</div>	<div class="sin-value"> House fire; being burned</div>
-		<div class="sin-count">3:</div>	<div class="sin-value"> Bonfire; uncovered window during daylight</div>
-		<div class="sin-count">2:</div> <div class="sin-value"> Torch; obscured sunlight</div>
-		<div class="sin-count">1:</div>	<div class="sin-value"> Cigarette lighter; sunrise</div>
+		<div class="sin-count">5:</div>	
+		<div class="sin-value"> Trapped in a burning building; direct sunlight</div>
+		
+		<div class="sin-count">4:</div>	
+		<div class="sin-value"> House fire; being burned</div>
+		
+		<div class="sin-count">3:</div>	
+		<div class="sin-value"> Bonfire; uncovered window during daylight</div>
+		
+		<div class="sin-count">2:</div> 
+		<div class="sin-value"> Torch; obscured sunlight</div>
+		
+		<div class="sin-count">1:</div>	
+		<div class="sin-value"> Cigarette lighter; sunrise</div>
 	</div>	
 
 	
@@ -517,26 +367,48 @@
 			$cutoffs = [[], [20], [20, 500], [30, 1000, 2000], [40, 2500, 5000, 7500], [50, 6000, 12000, 18000, 24000]];
 			$resource_dots = $character->getBackgroundDots("Resources", $version);
 		 ?>
-		 <b class="resource-total">You have ${{number_format($resources_to_money[$resource_dots])}} tonight.</b><br>
+		 <b class="resource-total">
+		 	You have ${{number_format($resources_to_money[$resource_dots])}} tonight.
+		 </b>
+		 <br>
 		 @for($i = 0; $i < $resource_dots; $i++)
-		 	<div class="resource-row">If you spend more than <b>${{number_format($cutoffs[$resource_dots][$i])}}</b>, mark off {{$i + 1}} Trait{{$i == 0 ? "" : "s"}}.</div>
+		 	<div class="resource-row">
+		 		If you spend more than <b>${{number_format($cutoffs[$resource_dots][$i])}}</b>, 
+		 		mark off {{$i + 1}} Trait{{$i == 0 ? "" : "s"}}.
+		 	</div>
 		 @endfor
 	</div>		
 </div>
+
 <? $elders = $character->elderPowers()->get(); ?>
 <div class="row character-sheet-row collapse">
 	@foreach($character->disciplines($version)->with('definition')->get()->sortBy('definition.name') as $discipline)
 	<div class="columns discipline">
-		<? $path = $discipline->path_id ? RulebookDisciplinePath::find($discipline->path_id) : null; 
+		<?  $path = $discipline->path_id ? RulebookDisciplinePath::find($discipline->path_id) : null; 
 			$ranks = $path ? $path->ranks()->get() : $discipline->definition->ranks()->get();
 		?>
-		<b>{{$discipline->definition->name}}@if($discipline->path_id): <span class="discipline-path-name">{{$path->name}}</span>@endif</b><br>
-		<i class="retest">@if($discipline->definition->retest != "None") Retested with {{$discipline->definition->retest}} @else No Retest @endif</i><br>
+		<b>
+			{{$discipline->definition->name}}
+			@if($discipline->path_id)
+				: <span class="discipline-path-name">{{$path->name}}</span>
+			@endif
+		</b><br>
+		
+		<i class="retest">
+			@if($discipline->definition->retest != "None") 
+				Retested with {{$discipline->definition->retest}} 
+			@else 
+				No Retest 
+			@endif
+		</i><br>
+		
 		@for($i = 0; $i < $discipline->ranks; $i++)
 			<div class="discipline-row">{{$ranks[$i]->name}}</div>
 		@endfor
 		@foreach($elders as $elder)
-			@if($elder->definition->discipline_id == $discipline->definition->id)<div class="discipline-row">{{$elder->definition->name}}</div>@endif
+			@if($elder->definition->discipline_id == $discipline->definition->id)
+				<div class="discipline-row">{{$elder->definition->name}}</div>
+			@endif
 		@endforeach
 	</div>
 	@endforeach
@@ -544,9 +416,13 @@
 @if($requires_chop)
 <div class="requires-chop">
 	This character requires a chop for the following derangements:<br>
-	@foreach($character->derangements($version)->whereHas('definition', function($q) { $q->where('requires_chop', true); })->get() as $d)
+	
+	@foreach($character->derangements($version)->whereHas('definition', function($q) { 
+		$q->where('requires_chop', true); 
+	})->get() as $d)
 		<div class="discipline-row">- {{$d->definition->name}}</div>
 	@endforeach
+	
 	<div class="requires-chop-disclaimer">This box will not be printed.</div>
 </div>
 @endif

@@ -12,8 +12,12 @@
 		<tbody>
 			@foreach(ForumCharacterPermission::where('forum_id', $id)->get() as $d)
 			<tr>
-				<td>{{$d->character->name}}</td>
-				<td>{{$d->character->owner->username}}</td>
+				<td>
+					{{$d->character->name}}
+				</td>
+				<td>
+					{{$d->character->owner->username}}
+				</td>
 				<td>
 					<form method="post" action="/dashboard/storyteller/manage/forum/{{$id}}/character/remove">
 						<input type="hidden" name="character" value="{{$d->character->id}}" />
@@ -29,8 +33,12 @@
 		<h4>Grant Permission</h4>
 		<label>Character Name
 			<select name="character">
-				@foreach(Character::activeCharacters()->whereHas("permittedForums", function($q) use ($id) { $q->where('forum_id', $id); }, '=', 0)->orderBy('name')->get() as $character)
-					<option value="{{$character->id}}">{{$character->name}} ({{$character->owner->username}})</option>
+				@foreach(Character::activeCharacters()->whereHas("permittedForums", function($q) use ($id) { 
+					$q->where('forum_id', $id); 
+				}, '=', 0)->orderBy('name')->get() as $character)
+					<option value="{{$character->id}}">
+						{{$character->name}} ({{$character->owner->username}})
+					</option>
 				@endforeach
 			</select>
 		</label>

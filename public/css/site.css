@@ -19,13 +19,38 @@ b {
 .main {
 	margin-bottom: 40px;
 }
+
+.strikethrough {
+	text-decoration: line-through;
+}
+
+.hidden {
+	display: none;
+}
+
+.button.submit-journal {
+	padding: 5px 5px;
+	margin: 0 auto;
+}
+
+.journal-grid {
+   -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
 .toast-error, .toast-success {
 	opacity: 1.0 !important;
 	box-shadow: none !important;
 }
+
 #toast-container.toast-top-full-width>div {
 	width: 50%;
 }
+
 #toast-container>.toast-error, #toast-container>.toast-success {
 	background-image: none !important;
 }
@@ -49,8 +74,10 @@ b {
 	z-index: 9999999;
 }
 
-.category-display-order {
+.save-category {
 	float: left;
+	left: 10px;	
+	top: 9px;
 }
 
 .character-pagination {
@@ -74,12 +101,6 @@ b {
 
 .user-settings-switch {
 	margin-bottom: 0;
-}
-
-.save-category {
-	float: left;
-	margin-top: 10px;
-	margin-left: 10px;
 }
 
 .page-build-time {
@@ -304,11 +325,6 @@ input.checkin-experience-box {
 	font-weight: 300;
 }
 
-.costume-switch {
-	position: relative;
-	top: 15px;
-}
-
 #primary-nav {
 	position: fixed;
 	top: 0px;
@@ -465,6 +481,13 @@ td input[type=text] {
 
 .switch + .description {
 	margin-top: -30px;
+}
+
+
+input[type=text].category-display-order {
+	float: left;
+	vertical-align: middle;
+	margin-top: 0px;
 }
 
 @media screen and (max-device-width : 736px) {

@@ -229,17 +229,20 @@
 @stop
 @section('dashboard-content')
 <div id="message-modal" class="reveal-modal"aria-labelled by="messageModalTitle" aria-hidden="true" role="dialog">
-  <h2 id="messageModalTitle">New Message</h2>
+	<h2 id="messageModalTitle">New Message</h2>
   
-  <input type="text" class="message-to" placeholder="To" data-bind="value: $root.messageRecipient, " />
-  <div class="mail-user-checker label"><i class="icon-user"></i> Waiting to verify username...</div>
+	<input type="text" class="message-to" placeholder="To" data-bind="value: $root.messageRecipient, " />
+	<div class="mail-user-checker label">
+		<i class="icon-user"></i> 
+		Waiting to verify username...
+	</div>
   
-  <input type="text" class="message-title" placeholder="Subject" data-bind="value: $root.messageSubject" />
-  <textarea class="message-body" id="mail-message" placeholder="Type your message here..."></textarea>
+	<input type="text" class="message-title" placeholder="Subject" data-bind="value: $root.messageSubject" />
+	<textarea class="message-body" id="mail-message" placeholder="Type your message here..."></textarea>
 
-  <hr>
-  <button class="button small right send-mail-submit" data-bind="click: $root.sendMail" disabled>Send</button>
-  <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+	<hr>
+	<button class="button small right send-mail-submit" data-bind="click: $root.sendMail" disabled>Send</button>
+	<a class="close-reveal-modal" aria-label="Close">&#215;</a>
 </div>
 <div class="mail-panel-left" data-bind="css: {'mobile-hidden': $root.activeMail}">
 	<div class="mail-options mail-left-options">
@@ -247,7 +250,10 @@
 			<option value="Inbox">Inbox</option>
 			<option value="Outbox">Outbox</option>
 		</select>
-		<a class="mail-option mark-all-read-option" href="/mail/markallread" title="Mark all read" data-bind="visible: $root.selectedMailbox() == 'Inbox'"><i class="icon-box"></i></a>
+		<a class="mail-option mark-all-read-option" href="/mail/markallread" title="Mark all read" 
+		   data-bind="visible: $root.selectedMailbox() == 'Inbox'">
+			<i class="icon-box"></i>
+		</a>
 	</div>
 	<div class="mail-listing" data-bind="foreach: $root.activeList">
 		<div class="mail-item" data-bind="click: $root.showMail, css: { 'active': $root.activeMail() == $data }">
@@ -262,10 +268,21 @@
 
 <div class="mail-panel-right">
 	<div class="mail-options">
-		<a class="mail-option mobile-only" href="#" title="Back" data-bind="click: function() { $root.activeMail(null) }"><i class="icon-left"></i><span class="mail-option-text">Back</span></a>
-		<a class="mail-option" href="#" title="Compose new message" data-bind="click: function() { $root.showMessageModal('') }"><i class="icon-plus"></i></a>		
-		<a class="mail-option" href="#" title="Reply to message" data-bind="css: {'disabled': !$root.activeMail()}, click: $root.reply, visible: $root.selectedMailbox() == 'Inbox'"><i class="icon-reply"></i></a>
-		<a class="mail-option" href="#" title="Trash this message" data-bind="css: {'disabled': !$root.activeMail()}, click: $root.deleteMail, visible: $root.selectedMailbox() == 'Inbox' "><i class="icon-trash"></i></a>		
+		<a class="mail-option mobile-only" href="#" title="Back" data-bind="click: function() { $root.activeMail(null) }">
+			<i class="icon-left"></i>
+			<span class="mail-option-text">Back</span>
+		</a>
+		<a class="mail-option" href="#" title="Compose new message" data-bind="click: function() { $root.showMessageModal('') }">
+			<i class="icon-plus"></i>
+		</a>		
+		<a class="mail-option" href="#" title="Reply to message" 
+		   data-bind="css: {'disabled': !$root.activeMail()}, click: $root.reply, visible: $root.selectedMailbox() == 'Inbox'">
+			<i class="icon-reply"></i>
+		</a>
+		<a class="mail-option" href="#" title="Trash this message" 
+		   data-bind="css: {'disabled': !$root.activeMail()}, click: $root.deleteMail, visible: $root.selectedMailbox() == 'Inbox' ">
+			<i class="icon-trash"></i>
+		</a>		
 	</div>
 	<div class="displaying-mail" data-bind="with: $root.activeMail">
 		<h3 data-bind="text: title"></h3>

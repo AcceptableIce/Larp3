@@ -54,15 +54,21 @@
 
 	@foreach($pagination as $page)
 	<div class="handbook-page">
-		<div class="handbook-title"><a href="/handbook/{{$page->getUrlReadyLink($page->title)}}">{{$page->title}}</a></div>
+		<div class="handbook-title">
+			<a href="/handbook/{{$page->getUrlReadyLink($page->title)}}">{{$page->title}}</a>
+		</div>
 		<div class="handbook-preview">{{{substr($page->body, 0, 400)}}}</div>
 		@if($st)
 			<div class="handbook-creator">Created by {{$page->createdBy->username}}</div>
 			@if($page->read_permission && $page->readPermission->hasRestrictions())
-				<div class="handbook-permissions">Read restricted to {{$page->readPermissionList()}}</div>
+				<div class="handbook-permissions">
+					Read restricted to {{$page->readPermissionList()}}
+				</div>
 			@endif
 			@if($page->write_permission && $page->writePermission->hasRestrictions())
-				<div class="handbook-permissions">Write restricted to {{$page->writePermissionList()}}</div>
+				<div class="handbook-permissions">
+					Write restricted to {{$page->writePermissionList()}}
+				</div>
 			@endif			
 		@endif
 

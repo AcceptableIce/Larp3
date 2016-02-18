@@ -6,9 +6,14 @@
 	@if(isset($id))
 		<? $session = GameSession::find($id); ?>
 		@foreach(Character::activeCharacters()->orderBy('name')->get() as $c)
-		@if(GameSessionCheckIn::where(['session_id' => $session->id, 'character_id' => $c->id])->count() == 0)
-		self.activeCharacters.push({id: {{$c->id}}, name: "{{{$c->name}}}", player: "{{$c->owner->username}}", costume: ko.observable(false) }); 
-		@endif
+			@if(GameSessionCheckIn::where(['session_id' => $session->id, 'character_id' => $c->id])->count() == 0)
+				self.activeCharacters.push({
+					id: {{$c->id}}, 
+					name: "{{{$c->name}}}", 
+					player: "{{$c->owner->username}}", 
+					costume: ko.observable(false) 
+				}); 
+			@endif
 		@endforeach
 	@endif
 
@@ -57,11 +62,13 @@
 					<td data-bind="text: player"></td>
 					<td>
 						<div class="switch costume-switch">
-						  <input type="checkbox" data-bind="checked: costume, attr: {'id': id+'CostumeSwitch' }">
-						  <label data-bind="attr: {'for': id+'CostumeSwitch' }"></label>
+							<input type="checkbox" data-bind="checked: costume, attr: {'id': id+'CostumeSwitch' }">
+							<label data-bind="attr: {'for': id+'CostumeSwitch' }"></label>
 						</div>
 					</td>
-					<td><button class="button small success" data-bind="click: $root.checkCharacterIn">Check In</button></td>
+					<td>
+						<button class="button small success" data-bind="click: $root.checkCharacterIn">Check In</button>
+					</td>
 				</tr>
 			</tbody>
 		</table>
@@ -79,9 +86,17 @@
 			?>
 			@foreach(GameSession::where('date', '>=', $now)->get() as $d)
 			<tr>
-				<td>{{$d->id}}</td>
-				<td>{{$d->date}}</td>
-				<td><a href="/dashboard/storyteller/session/checkin/{{$d->id}}"><button class="button small success">Check-In Session</button></a></td>
+				<td>
+					{{$d->id}}
+				</td>
+				<td>
+					{{$d->date}}
+				</td>
+				<td>
+					<a href="/dashboard/storyteller/session/checkin/{{$d->id}}">
+						<button class="button small success">Check-In Session</button>
+					</a>
+				</td>
 			</tr>
 			@endforeach
 		</tbody>

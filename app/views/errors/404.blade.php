@@ -13,13 +13,15 @@
 				"Quick, go through my memories and find where I left it.",
 				"This is more aggrivating than... uh... fire.",
 				"Maybe it's just in Obs.",
-				"Are pages irreplacable like item cards?",
+				"Are pages irreplaceable like item cards?",
 				"Anyone have Heightened Senses?"]; ?>
 <div class="row">
 	<div class="small-12 columns">
 		<h1>404? <span class="slightly-smaller">{{$options[array_rand($options)]}}</span></h1>
-		<p>The URL you requested doesn't exist.<br>
-			Feel free to go <a href="javascript:history.go(-1)">right back to where you were.</a></p>
+		<p>
+			The URL you requested doesn't exist.<br>
+			Feel free to go <a href="javascript:history.go(-1)">right back to where you were.</a>
+		</p>
 	</div>
 </div>
 @stop	

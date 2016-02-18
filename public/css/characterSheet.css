@@ -1,0 +1,295 @@
+* {
+	font-family: Cabin, Tahoma, sans-serif !important;
+}
+
+body, label {
+	font-size: 16px;
+}
+.character-sheet {
+	padding: 10px 20px;
+}
+
+.character-sheet-row {
+	margin: 0 0;
+	max-width: 1200px;
+	width: 1200px;
+	padding: 10px 0;
+	border-bottom: 1px solid #ccc;
+}
+
+.character-sheet-row:last-child {
+	border-bottom: none;
+}
+
+.character-sheet-row .columns {
+	padding: 0 0;
+}
+
+.character-sheet-row label {
+	display: inline-block;
+	width: 90px;
+	margin-right: 10px;
+}
+
+.dot {
+	display: inline-block;
+	font-size: 1.5em;
+    position: relative;
+    top: 10px;
+    line-height: 1px;
+    vertical-align: top;
+}
+
+.cross {
+	text-decoration: line-through;
+	color: #999;
+}
+
+.damage-track {
+	padding-left: 15px !important;
+}
+.damage-track-box {
+	width: 22px;
+	height: 22px;
+	border: 1px solid #000;
+	border-bottom: none;
+	line-height: 20px;
+	text-align: center;
+	position: relative;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.damage-track-marker {
+	position: absolute;
+	display: inline-block;
+}
+
+.track-marker-left {
+	left: -27px;
+	text-align: right;
+	width: 20px;
+}
+
+.track-marker-right {
+	left: 25px;
+	top: 0px;
+}
+
+.damage-track-last-row {
+	position: relative;
+	left: -22px;
+}
+
+.damage-track-last-row .damage-track-box {
+	display: inline-block;
+	border-bottom: 1px solid #000;
+	border-right: none;
+	float: left;
+}
+
+
+.damage-track-last-row .damage-track-box:last-child {
+	border-right: 1px solid #000;
+}
+
+[class*="column"] + [class*="column"]:last-child {
+     float:left;
+}
+
+.attribute-row {
+	line-height: 22px;
+}
+
+.stats {
+	width: 20%;
+}
+
+.damage-track {
+	width: 7%;
+}
+
+.attributes {
+	width: 25%;
+}
+
+.sins {
+	width: 23%;
+}
+
+.frenzy-triggers {
+	width: 23%;
+}
+
+.abilities label, .backgrounds label {
+	width: 100px;
+}
+
+.rotschreck-triggers {
+	width: 20%;
+}
+
+.discipline {
+	width: 20%;
+}
+
+.discipline-row {
+	font-size: 0.9em;
+}
+
+.merit-flaw-box {
+	font-size: 0.9em;
+	line-height: 20px;
+}
+
+.merit-flaw-box .specialization {
+	margin-top: -4px;
+}
+
+.retest {
+	font-size: 0.85em;
+}
+
+.requires-chop {
+	position: fixed;
+	right: 50px;
+	top: 50px;
+	width: 250px;
+	min-height: 50px;
+	padding: 1em .5em;
+	font-size: 0.9em;
+	border: 1px solid #c0c0c0;
+	background-color: #f0f0f0;
+}
+
+.requires-chop-disclaimer {
+	color: #777;
+	font-style: italic;
+}
+
+.list-label {
+	font-size: 0.9em;
+	color: #000;
+	line-height: 15px;
+}
+
+.specialization {
+	color: #444;
+	font-size: 0.9em;
+	font-style: italic;
+}
+
+.list-label {
+	width: 45%;
+	float: left;
+	clear: left;
+	margin-top: 5px;
+	margin-right: 5px;
+}
+
+.list-dots {
+	float: left;
+	vertical-align: top;
+}
+
+.background-spacer {
+	clear: both;
+	height: 10px;
+}
+
+.character-data {
+	width: 50%;
+	font-size: 0.9em;
+	margin-top: 5px;
+	vertical-align: top;
+	line-height: 15px;
+}
+
+.character-stat {
+	width: 40%;
+}
+
+@media print {
+	.requires-chop {
+		display: none;
+	}
+	
+	.character-sheet-row {
+		max-width: 1400px;
+		width: 1400px;
+	}
+}
+
+@page {
+	size: A4;
+	margin: 0;
+	size: landscape;
+}
+
+.sins, .frenzy-triggers {
+	margin-top: -22px;
+	padding-right: 5px !important;
+}
+
+.sins, .rotschreck-triggers, .frenzy-triggers, .resources {
+	font-size: .9em;
+}
+
+.sins b, .rotschreck-triggers b, .frenzy-triggers b, .resources b {
+	font-size: 1.1em;
+}
+
+.backgrounds {
+	  width: 15%;
+}
+
+.backgrounds .list-label, .abilities .list-label {
+	width: 50%;
+	text-align: right;
+	padding-right: 2px;
+}
+
+
+.merits {
+    width: 15%;
+}
+
+.flaws {
+    width: 15%;
+}
+
+.abilities {
+    width: 15%;
+}
+
+.rotschreck-triggers {
+    width: 17%;
+}
+
+.resources {
+	width: 23%;
+}
+
+.resource-row {
+	font-size: 0.85em;
+}
+
+b.resource-total {
+	font-size: 1.0em;
+}
+
+.sin-count {
+	width: 10px;
+	display: inline-block;
+	text-align: right;
+	vertical-align: top;
+}
+
+.sin-value {
+	display: inline-block;
+	width: calc(100% - 14px);
+}
+
+.discipline-path-name {
+	font-size: 0.9em;
+}

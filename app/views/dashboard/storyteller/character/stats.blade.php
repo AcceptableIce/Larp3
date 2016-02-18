@@ -1,7 +1,6 @@
 <?
 //Stats helpers
-function Correlation($arr1, $arr2)
-{        
+function Correlation($arr1, $arr2) {        
     $correlation = 0;
     
     $k = SumProductMeanDeviation($arr1, $arr2);
@@ -17,82 +16,71 @@ function Correlation($arr1, $arr2)
     return $correlation;
 }
 
-function SumProductMeanDeviation($arr1, $arr2)
-{
+function SumProductMeanDeviation($arr1, $arr2) {
     $sum = 0;
     
     $num = count($arr1);
     
-    for($i=0; $i<$num; $i++)
-    {
+    for($i=0; $i<$num; $i++) {
         $sum = $sum + ProductMeanDeviation($arr1, $arr2, $i);
     }
     
     return $sum;
 }
 
-function ProductMeanDeviation($arr1, $arr2, $item)
-{
+function ProductMeanDeviation($arr1, $arr2, $item) {
     return (MeanDeviation($arr1, $item) * MeanDeviation($arr2, $item));
 }
 
-function SumSquareMeanDeviation($arr)
-{
+function SumSquareMeanDeviation($arr) {
     $sum = 0;
     
     $num = count($arr);
     
-    for($i=0; $i<$num; $i++)
-    {
+    for($i=0; $i<$num; $i++) {
         $sum = $sum + SquareMeanDeviation($arr, $i);
     }
     
     return $sum;
 }
 
-function SquareMeanDeviation($arr, $item)
-{
+function SquareMeanDeviation($arr, $item) {
     return MeanDeviation($arr, $item) * MeanDeviation($arr, $item);
 }
 
-function SumMeanDeviation($arr)
-{
+function SumMeanDeviation($arr) {
     $sum = 0;
     
     $num = count($arr);
     
-    for($i=0; $i<$num; $i++)
-    {
+    for($i=0; $i<$num; $i++) {
         $sum = $sum + MeanDeviation($arr, $i);
     }
     
     return $sum;
 }
 
-function MeanDeviation($arr, $item)
-{
+function MeanDeviation($arr, $item) {
     $average = Average($arr);
     
     return $arr[$item] - $average;
 }    
 
-function Average($arr)
-{
+function Average($arr) {
     $sum = Sum($arr);
     $num = count($arr);
     
     return $sum/$num;
 }
 
-function Sum($arr)
-{
+function Sum($arr) {
     return array_sum($arr);
 }
 
 function mmmr($array, $output = 'mean'){ 
     if(!is_array($array)){ 
         return FALSE; 
-    }else{ 
+    } else { 
         switch($output){ 
             case 'mean': 
                 $count = count($array); 
@@ -293,42 +281,32 @@ function mmmr($array, $output = 'mean'){
 	$hasX = isset($x) && strlen(trim($x)) > 0;
 	$hasY = isset($y) && strlen(trim($y)) > 0;
 	if($hasX) {
+		$results = Character::activeCharacters()->get();
+		if(Input::get("include-npcs")) {
+			$results = $results->merge(Character::activeNPCs()->get());
+		}
 		if($hasY) {
 			$mode = "Scatter";
 			$xData = getDataSet($x);
 			$yData = getDataSet($y);
-			foreach(Character::activeCharacters()->orderBy('name')->get() as $c) {
+			
+			foreach($results as $c) {
 				$xDataValue = call_user_func($xData["extractor"], $c);
 				$yDataValue = call_user_func($yData["extractor"], $c);
 				$data[] = ["label" => $c->name, "data" => [["x" => $xDataValue, "y" => $yDataValue]]];
 				$pureData[] = ["name" => $c->name, "x" => $xDataValue, "y" => $yDataValue];
 			}
-			if(Input::get("include-npcs")) {
-				foreach(Character::activeNPCs()->orderBy('name')->get() as $c) {
-					$xDataValue = call_user_func($xData["extractor"], $c);
-					$yDataValue = call_user_func($yData["extractor"], $c);
-					$data[] = ["label" => $c->name, "data" => [["x" => $xDataValue, "y" => $yDataValue]]];
-					$pureData[] = ["name" => $c->name, "x" => $xDataValue, "y" => $yDataValue];
-				}
-			}
 		} else {
 			$xData = getDataSet($x);
 			$labels = $xData["labels"];
-			$data =	[["label" => $x, "fillColor" => "rgba(151,187,205,0.5)", "strokeColor" => "rgba(151,187,205,0.8)",
+			$data =	[[	"label" => $x, "fillColor" => "rgba(151,187,205,0.5)", "strokeColor" => "rgba(151,187,205,0.8)",
 						"highlightFill" => "rgba(151,187,205,0.75)", "highlightStroke" => "rgba(151,187,205,1)",
 						"data" => []]];
 			foreach($labels as $l) $data[0]["data"][] = 0;	
-			foreach(Character::activeCharacters()->orderBy('name')->get() as $c) {
+			foreach($results as $c) {
 				$xDataValue = call_user_func($xData["extractor"], $c);
 				$data[0]["data"][array_search($xDataValue, $labels)]++;
 				$pureData[] = ["name" => $c->name, "x" => $xDataValue];
-			}
-			if(Input::get("include-npcs")) {
-				foreach(Character::activeNPCs()->orderBy('name')->get() as $c) {
-					$xDataValue = call_user_func($xData["extractor"], $c);
-					$data[0]["data"][array_search($xDataValue, $labels)]++;
-					$pureData[] = ["name" => $c->name, "x" => $xDataValue];
-				}
 			}
 		}
 	}	
@@ -373,14 +351,13 @@ function mmmr($array, $output = 'mean'){
 </div>
 <div class="row left">
 	<h2>
-		<? 	if($hasX && $hasY) {
-				echo $x.' vs '.$y.' for Active Characters';
-			} else if($hasX) {
-				echo $x.' for Active Characters';
-			} else{
-				echo 'Character Statistics';
-			}
-		?>
+		@if($hasX && $hasY) 
+			{{$x}} vs {{$y}} for Active Characters
+		@elseif($hasX)
+			{{$x}} for Active Characters
+		@else
+			Character Statistics
+		@endif
 	</h2>
 	<div class="small-8 columns">
 		<canvas id="chart" style="width: 100%" height="250"></canvas>
