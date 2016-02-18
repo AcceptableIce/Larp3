@@ -4,8 +4,9 @@ class Character extends Eloquent {
 
 	protected $table = 'characters';
 
-	protected $appends = ['sect', 'clan', 'nature', 'willpower', 'attributes', 'abilities', 'disciplines', 'rituals', 'backgrounds', 'path', 'derangements', 'merits', 'flaws'];
-	protected $fillable = array('user_id', 'name');
+	protected $appends = [	'sect', 'clan', 'nature', 'willpower', 'attributes', 'abilities', 'disciplines', 'rituals', 'backgrounds', 'path', 
+							'derangements', 'merits', 'flaws'];
+	protected $fillable = ['user_id', 'name'];
 
 	public function activeVersion() {
 		if($this->approved_version == 0) return 1;
@@ -17,7 +18,7 @@ class Character extends Eloquent {
 	}
 
 	public function version($version) {
-		return CharacterVersion::where(array('character_id' => $this->id, 'version' => $version));
+		return CharacterVersion::where(['character_id' => $this->id, 'version' => $version]);
 	}
 
 	public function versions() {
@@ -206,7 +207,9 @@ class Character extends Eloquent {
 
 	public function hasDiablerized() {
 		if(CharacterDiablerieExperience::where('character_id', $this->id)->exists()) return true;
-		if(CharacterFlaw::where('character_id', $this->id)->whereHas('definition', function($q) { $q->where('name', 'Prior Diablerie'); })->exists()) return true;
+		if(CharacterFlaw::where('character_id', $this->id)->whereHas('definition', function($q) { 
+			$q->where('name', 'Prior Diablerie'); 
+		})->exists()) return true;
 		return false;
 	}
 
@@ -316,7 +319,7 @@ class Character extends Eloquent {
 		return $out;
 	}
 	function arrayRecursiveDiff($aArray1, $aArray2) {
-	  $aReturn = array();
+	  $aReturn = [];
 	  $restrict_array = ["version", "comment", "created_at", "updated_at", "id", "free_points", "lost_points", "version_id"];
 	  if($aArray1 == null) return $this->putArrayInSlot($aArray2, 1);
 	  if($aArray2 == null) return $this->putArrayInSlot($aArray1, 0);
@@ -376,15 +379,15 @@ class Character extends Eloquent {
 
 	public function versionInfo($version = -1) {
 		if($version == -1) $version = $this->activeVersion();
-		return CharacterVersion::where(array('character_id' => $this->id, 'version' => $version))->first();
+		return CharacterVersion::where(['character_id' => $this->id, 'version' => $version])->first();
 	}
 
 	public static function activeCharacters() {
-		return Character::where(array('is_npc' => false, 'active' => true))->where('approved_version', '>', 0);
+		return Character::where(['is_npc' => false, 'active' => true])->where('approved_version', '>', 0);
 	}
 
 	public static function activeNPCs() {
-		return Character::where(array('is_npc' => true, 'active' => true));
+		return Character::where(['is_npc' => true, 'active' => true]);
 	}
 	
 	public function getOptionValue($name) {
@@ -459,7 +462,7 @@ class Character extends Eloquent {
 	}
 	public function getVersion($version, $ignoreZeros = true) {
 		if($version == 0) return null;
-		$out = array();
+		$out = [];
 		$out["id"] = $this->id;
 		$out["name"] = $this->name;
 		$out["version"] = $this->versionInfo($version);
@@ -467,7 +470,7 @@ class Character extends Eloquent {
 		$out["clan"] = $this->clan($version)->first();
 		$out["nature"] = $this->nature($version)->first();
 		$willpower = $this->willpower($version)->first();
-		$out["willpower"] = $willpower ? array("traits" => $willpower->willpower_current, "dots" => $willpower->willpower_total) : null;
+		$out["willpower"] = $willpower ? ["traits" => $willpower->willpower_current, "dots" => $willpower->willpower_total] : null;
 		$out["attributes"] = $this->attributes($version)->first();
 		$out["abilities"] = $this->abilities($version,  $ignoreZeros)->get();
 		$out["disciplines"] = $this->disciplines($version, $ignoreZeros)->get();
@@ -582,7 +585,7 @@ class Character extends Eloquent {
 		$rituals = $this->rituals($version)->get();
 		$freeBasic = false;
 		foreach($rituals as $r) {
-			$ritual_cost = array("Basic" => 2, "Intermediate" => 4, "Advanced" => 6);
+			$ritual_cost = ["Basic" => 2, "Intermediate" => 4, "Advanced" => 6];
 			$experience_cost += $ritual_cost[$r->definition->group];
 			if(!$freeBasic && $r->definition->group == "Basic" && $r->definition->name != "Rite of Introduction") {
 				$experience_cost -= 2;
@@ -729,7 +732,8 @@ class Character extends Eloquent {
 
 		//If we are at character gen, the attribute total must be at least 15, or you're not using all your attribute points.
 		if($isChargen) {
-			$this->assert($attributes->physicals + $attributes->mentals + $attributes->socials >= 15, "You must spend at least 15 attribute points at character creation.");
+			$this->assert($attributes->physicals + $attributes->mentals + $attributes->socials >= 15, 
+				"You must spend at least 15 attribute points at character creation.");
 			//Additionally, we cannot have below 3 in any attribute.
 			$this->assert($attributes->physicals >= 3, "You must have at least 3 Physical Dots at character creation.");
 			$this->assert($attributes->mentals >= 3, "You must have at least 3 Mental Dots at character creation.");
@@ -789,7 +793,8 @@ class Character extends Eloquent {
 		$path_data = $path->definition;
 		if($path_data->stats()[0] == "Conviction" || $path_data->stats()[0] == "Instinct") $virtue_total++;
 		if($path_data->stats()[1] == "Conviction" || $path_data->stats()[1] == "Instinct") $virtue_total++;
-		$this->assert($path->virtue1 > 0 && $path->virtue2 > 0 && $path->virtue3 > 0 && $path->virtue4 > 0, "All virtues must have at least one Dot.");
+		$this->assert($path->virtue1 > 0 && $path->virtue2 > 0 && $path->virtue3 > 0 && $path->virtue4 > 0, 
+			"All virtues must have at least one Dot.");
 
 		if($isChargen) $this->assert($virtue_total >= 10, "You must have spent all 7 of your virtue points at character creation.");
 		//We must also check that morality is either the average of virtue 1 and 2, or one less at char gen.

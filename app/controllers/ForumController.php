@@ -13,6 +13,7 @@ class ForumController extends BaseController {
 			return "Access denied.";
 		}
 	}
+	
 	function postTopic() {
 		if(!Auth::check()) return Redirect::to("/forums");
 		$topic_id = Input::get("topic_id");
@@ -65,7 +66,8 @@ class ForumController extends BaseController {
 				return "failed.";
 			} else {
 				$forum = Forum::find($forum_id);
-				if(!$forum->topic_permission || Auth::user()->hasPermission(PermissionDefinition::find($forum->topic_permission)->name) || Auth::user()->isStoryteller()) {
+				$permission = PermissionDefinition::find($forum->topic_permission);
+				if(!$forum->topic_permission || Auth::user()->hasPermission($permission->name) || Auth::user()->isStoryteller()) {
 					$posted_by = Input::get("post-as");
 					$body = ForumPost::replaceSpecialTerms($body);
 					$topic = $forum->post($title, $body, User::find($posted_by));
@@ -105,9 +107,10 @@ class ForumController extends BaseController {
 			if(!$user->canAccessTopic($post->topic_id)) return "Access denied.";
 			if($post->posted_by == $user->id || $user->isStoryteller()) {
 				$body = ForumPost::replaceSpecialTerms(Input::get("body"));
-
 				$post->body = $body;
-				if($user->isStoryteller()) $post->is_storyteller_reply = Input::get("st-reply") == "on" ? 0 : 1;
+				if($user->isStoryteller()) {
+					$post->is_storyteller_reply = Input::get("st-reply") == "on" ? 0 : 1;
+				}
 				$post->save();
 
 				//Save an edit record
@@ -136,7 +139,8 @@ class ForumController extends BaseController {
 				$topic = ForumTopic::find($topic_id);
 				if($user->canAccessForum($topic->forum_id)) {
 					$forum = $topic->forum;
-					if(!$forum->reply_permission || Auth::user()->hasPermission(PermissionDefinition::find($forum->reply_permission)->name) || Auth::user()->isStoryteller()) {
+					$permission = PermissionDefinition::find($forum->reply_permission);
+					if(!$forum->reply_permission || Auth::user()->hasPermission($permission->name) || Auth::user()->isStoryteller()) {
 						$posted_by = Input::get("post-as");
 						$poster_id = $posted_by ? $posted_by : $user->id;
 						$body = ForumPost::replaceSpecialTerms($body);
@@ -149,7 +153,9 @@ class ForumController extends BaseController {
 						$topic->is_complete = false;
 						$topic->save();
 						$this->messageSubscribers($post);
-						if(Input::get("watch") == "on") $this->subscribeToTopic($post->topic->id);
+						if(Input::get("watch") == "on") {
+							$this->subscribeToTopic($post->topic->id);
+						}
 
 						//Check for @mentions.
 						$this->alertMentions($poster_id, $body, $topic);
@@ -175,8 +181,11 @@ class ForumController extends BaseController {
 			$user = User::where('username', 'like', $m)->first();
 			if($user && $user->getSettingValue("Disable @Mentions") != 1) {
 				$link = $topic->getLinkForLastPost();
-				$user->sendMessage($poster_id, "Mentioned in topic $topic->title", "Hello $user->username,<br><br>You have been mentioned by $poster->username in the topic".
-												" <a href='$link'>$topic->title</a>.<br><br>They said:<blockquote>$body</blockquote>");
+				$user->sendMessage($poster_id, 
+					"Mentioned in topic $topic->title", 
+					"Hello $user->username,<br><br>You have been mentioned by $poster->username in the topic".
+					" <a href='$link'>$topic->title</a>.<br><br>They said:<blockquote>$body</blockquote>"
+				);
 			}
 		}
 	}
@@ -190,9 +199,12 @@ class ForumController extends BaseController {
 				//Make sure the user still has access to this post.
 				if($user->canAccessTopic($topic->id)) {
 					if($post->is_storyteller_reply && !$user->isStoryteller()) continue;
-					Mail::send("emails.forumWatch", ['user' => $user, 'topic' => $topic, 'post' => $post], function($message) use ($user, $topic) {
-						$message->to($user->email, $user->username)->subject("The topic $topic->title has been updated.");
-					});
+					Mail::send("emails.forumWatch", 
+						['user' => $user, 'topic' => $topic, 'post' => $post], 
+						function($message) use ($user, $topic) {
+							$message->to($user->email, $user->username)->subject("The topic $topic->title has been updated.");
+						}
+					);
 				}
 			}
 		}
@@ -331,7 +343,7 @@ class ForumController extends BaseController {
  					return Redirect::to("/forums/".$post_forum->id);
  				}
 			} else {	
-				return Response::json(["success" => false, "message" => "Insufficient priviledges."]);
+				return Response::json(["success" => false, "message" => "Insufficient privileges."]);
 			}
 		} else {
 			return Response::json(["success" => false, "message" => "No post found with that ID."]);
@@ -349,9 +361,13 @@ class ForumController extends BaseController {
 				if($response == "on") $sendTo[] = $st;
 			}
 			foreach($sendTo as $st) {
-				$st->sendMessage(null, "Carpe Noctem Topic Alert", "Hello, $st->username,<br><br>This message has been sent to you by $user->username to".
-				" your bring attention to the topic <a href='http://larp3.acceptableice.com/forums/topic/$topic->id'>$topic->title</a>.".($message ? " $user->username had this to say about the topic:<br><br>".
-				"<blockquote>$message</blockquote>" : ""));
+				$st->sendMessage(null, 
+					"Carpe Noctem Topic Alert", 
+					"Hello, $st->username,<br><br>This message has been sent to you by $user->username to".
+					" your bring attention to the topic <a href='http://larp3.acceptableice.com/forums/topic/$topic->id'>".
+					"$topic->title</a>.".
+					($message ? " $user->username had this to say about the topic:<br><br>"."<blockquote>$message</blockquote>" : "")
+				);
 			}
 			return Redirect::to('/forums/topic/'.$topic->id);
 		} else {

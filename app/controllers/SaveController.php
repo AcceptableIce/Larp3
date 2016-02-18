@@ -21,7 +21,9 @@ class SaveController extends BaseController {
 		}
 		try {
 			$character = $this->save($character_data, $user);
-			if(Input::get("review") && !($character->getOptionValue("Ignore Validation") || $user->isStoryteller())) $character->verify($character->approved_version + 1, $character->approved_version == 0);
+			if(Input::get("review") && !($character->getOptionValue("Ignore Validation") || $user->isStoryteller())) {
+				$character->verify($character->approved_version + 1, $character->approved_version == 0);
+			}
 		} catch (Exception $e) {
 			DB::rollback();
 			if(get_class($e) == "CharacterValidationException") {
@@ -43,7 +45,9 @@ class SaveController extends BaseController {
 			if(!$character->is_active) 	$character->approved_at = new DateTime;
 			$character->save();
 		}
-		return Response::json(array("success" => true, "mode" => $continue_save ? 1 : 0, "message" => (Input::get("review") ? "In review queue." : "Saved successfully.")));
+		return Response::json([	"success" => true, 
+								"mode" => $continue_save ? 1 : 0, 
+								"message" => (Input::get("review") ? "In review queue." : "Saved successfully.")]);
 	}
 
 	public function deleteCharacter() {
@@ -205,10 +209,6 @@ class SaveController extends BaseController {
 			CharacterClan::character($character_id)->version($active_version)->delete();
 			if(isset($clan)) {
 				$newClan = $clan->replicate();
-				/*if(!$user->isStoryteller()) {
-					//$newClan->clan_id = $character_data["clan"]["selected"];
-					$newClan->hidden_id = $character_data["clan"]["displaying"];
-				}*/
 				$newClan->version_id = $active_version_id;
 				$newClan->save();
 			} else if($active_version == 1) {

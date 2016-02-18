@@ -33,24 +33,18 @@ App::after(function($request, $response)
 |
 */
 
-Route::filter('auth', function()
-{
-	if (Auth::guest())
-	{
-		if (Request::ajax())
-		{
+Route::filter('auth', function() {
+	if (Auth::guest()) {
+		if (Request::ajax()) {
 			return Response::make('Unauthorized', 401);
-		}
-		else
-		{
+		} else {
 			return Redirect::guest('login');
 		}
 	}
 });
 
 
-Route::filter('auth.basic', function()
-{
+Route::filter('auth.basic', function() {
 	return Auth::basic();
 });
 
@@ -89,8 +83,7 @@ Route::filter('updateUserLastNoticed', function($route) {
 |
 */
 
-Route::filter('guest', function()
-{
+Route::filter('guest', function() {
 	if (Auth::check()) return Redirect::to('/');
 });
 
@@ -105,10 +98,8 @@ Route::filter('guest', function()
 |
 */
 
-Route::filter('csrf', function()
-{
-	if (Session::token() !== Input::get('_token'))
-	{
+Route::filter('csrf', function() {
+	if (Session::token() !== Input::get('_token')) {
 		throw new Illuminate\Session\TokenMismatchException;
 	}
 });

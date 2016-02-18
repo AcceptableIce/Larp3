@@ -208,4 +208,27 @@ class HomeController extends BaseController {
 			App::abort(404); 
 		}
 	}
+	
+	public function contactStorytellers() {
+		$name = Input::get("name");
+		$email = Input::get("email");
+		$subject = Input::get("subject");
+		$message = Input::get("message");
+		$validator = Validator::make(
+			['name' => $name, 'email' => $email, 'subject' => $subject, 'message' => $message],
+			['name' => 'required', 'email' => 'required|email', 'subject' => 'required', 'message' => 'required']);
+		if($validator->passes()) {
+			foreach(User::listStorytellers() as $st) {
+				$st->sendMessage(null, 	
+					"Contact the STs Form Message", 
+					"The following message was sent via the Contact the Storytellers form.<br><br>".
+					"<b>Name: </b> $name<br><b>Email: </b><a href='mailto:$email'>$email</a><br><b>".
+					"Subject: </b>$subject<br><br>$message"
+				); 
+			}
+			return View::make('/contact')->with(['response' => true]);
+		} else {
+			return Redirect::to('/contact')->withErrors($validator);
+		}
+	}
 }

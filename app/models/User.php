@@ -9,19 +9,9 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 	use UserTrait, RemindableTrait;
 
-	/**
-	 * The database table used by the model.
-	 *
-	 * @var string
-	 */
 	protected $table = 'users';
 
-	/**
-	 * The attributes excluded from the model's JSON form.
-	 *
-	 * @var array
-	 */
-	protected $hidden = array('password', 'email');
+	protected $hidden = ['password', 'email'];
 
     public function permissions() {
         return $this->hasMany("Permission");
@@ -48,7 +38,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	}
 
 	public function activeCharacter() {
-		return Character::where(array("user_id" => $this->id, "active"=> true))->first();
+		return Character::where(["user_id" => $this->id, "active"=> true])->first();
 	}
 	
 	public function forums() {

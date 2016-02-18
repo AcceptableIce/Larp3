@@ -66,7 +66,8 @@ class Forum extends Eloquent {
 		$user = User::find($user_id);
 		$query = DB::table('forums_topics')
 				->select(DB::raw("forums_topics.id, forum_id, title, first_post, is_complete, is_sticky, views, forums_topics.created_at, forums_topics.updated_at, fpost.topic_id"))
-				->where('forum_id', $this->id)->leftJoin('forums_posts as fpost', 'forums_topics.first_post', '=', 'fpost.id');
+				->where('forum_id', $this->id)
+				->leftJoin('forums_posts as fpost', 'forums_topics.first_post', '=', 'fpost.id');
 		if($this->time_limited && !$user->isStoryteller()) {
 			$char = $user->activeCharacter();
 			if($char) {
@@ -96,19 +97,12 @@ class Forum extends Eloquent {
 	}
 
 	public function topicsForUserInOrder($user_id) {
-		/*$topics = $this->getTopicsInOrder()->get();
-		$out = new PaginateCollection;
-		$validTopics = $this->topicsForUser($user_id)->get();
-		foreach($topics as $topic) {
-			foreach($validTopics as $validTopic) {
-				if($validTopic->id == $topic->id) $out->add($topic);
-			}
-		}
-		return $out;*/
-		return $this->rawTopicsForUser($user_id)->leftJoin(DB::raw('(SELECT id, topic_id, MAX(created_at) AS latestDate FROM forums_posts GROUP BY topic_id) AS posts'), function($join) {
-											$join->on('forums_topics.id','=','posts.topic_id');
-										})
-										->orderBy('is_sticky', 'desc')->orderBy('latestDate', 'desc');
+		return $this->rawTopicsForUser($user_id)
+			->leftJoin(DB::raw('(SELECT id, topic_id, MAX(created_at) AS latestDate FROM forums_posts GROUP BY topic_id) AS posts'), 
+			function($join) {
+				$join->on('forums_topics.id','=','posts.topic_id');
+			})
+			->orderBy('is_sticky', 'desc')->orderBy('latestDate', 'desc');
 	}
 
 	public function postCount() {
@@ -122,10 +116,11 @@ class Forum extends Eloquent {
 	public function postCountForUser($user_id) {
 		$count = 0;
 		$user = User::find($user_id);
-		$query = $this	->rawTopicsForUser($user_id)->select(DB::raw('COUNT(plist.id) AS posts'))
-						->leftJoin('forums_posts as plist', 'forums_topics.id', '=', 'plist.topic_id')
-						->groupBy('forums_topics.id');
-			//$query = DB::table("forums_posts")->where('topic_id', $topic->topic_id);
+		$query = $this->rawTopicsForUser($user_id)
+					->select(DB::raw('COUNT(plist.id) AS posts'))
+					->leftJoin('forums_posts as plist', 'forums_topics.id', '=', 'plist.topic_id')
+					->groupBy('forums_topics.id');
+					
 		if($this->asymmetric_replies && !$user->isStoryteller()) {
 			$query = $query->where('plist.is_storyteller_reply', false);
 		}
@@ -141,15 +136,18 @@ class Forum extends Eloquent {
 	}
 	
 	public function lastUpdatedTopicForUser($user_id) {
-		return $this->rawTopicsForUser($user_id)->leftJoin('forums_posts as plist', 'forums_topics.id', '=', 'plist.topic_id')->orderBy('plist.created_at', 'DESC')->first();
+		return $this->rawTopicsForUser($user_id)
+				->leftJoin('forums_posts as plist', 'forums_topics.id', '=', 'plist.topic_id')
+				->orderBy('plist.created_at', 'DESC')->first();
 	}
 
 	public function hasUnreadPosts($user_id) {
-		$response = $this	->rawTopicsForUser($user_id)->select('title', 'watch.mark_read', DB::raw('MAX(plist.created_at) as maxca'))
-							->leftJoin('forums_track_reads as watch', function($j) use ($user_id) {
-								$j->on('forums_topics.id', '=', 'watch.topic_id')->where('watch.user_id', '=', $user_id);
-							})	
-							->join('forums_posts as plist', 'forums_topics.id', '=', 'plist.topic_id');
+		$response = $this->rawTopicsForUser($user_id)
+						->select('title', 'watch.mark_read', DB::raw('MAX(plist.created_at) as maxca'))
+						->leftJoin('forums_track_reads as watch', function($j) use ($user_id) {
+							$j->on('forums_topics.id', '=', 'watch.topic_id')->where('watch.user_id', '=', $user_id);
+						})	
+						->join('forums_posts as plist', 'forums_topics.id', '=', 'plist.topic_id');
 
 		if($this->asymmetric_replies && !Auth::user()->isStoryteller()) {
 			$response = $response->where('plist.is_storyteller_reply', false);
@@ -166,17 +164,21 @@ class Forum extends Eloquent {
 	public function markForumRead($user_id) {
 		$user = User::find($user_id);
 		foreach($this->topicsForUser($user_id)->get() as $topic) {
-			if($topic->hasUnreadPosts($user_id)) $topic->markAsRead($user);
+			if($topic->hasUnreadPosts($user_id)) {
+				$topic->markAsRead($user);
+			}
 		}
 	}
 	
 	public function getTopicsInOrder() {
-		 return DB::table("forums_topics AS topics")->select(DB::raw("DISTINCT topics.id"))
-		 								->where('forum_id', $this->id)
-										->leftJoin(DB::raw('(SELECT id, topic_id, MAX(created_at) AS latestDate FROM forums_posts GROUP BY topic_id) AS posts'), function($join) {
-											$join->on('topics.id','=','posts.topic_id');
-										})
-										->orderBy('is_sticky', 'desc')->orderBy('latestDate', 'desc');
+		 return DB::table("forums_topics AS topics")
+		 		->select(DB::raw("DISTINCT topics.id"))
+		 		->where('forum_id', $this->id)
+				->leftJoin(DB::raw('(SELECT id, topic_id, MAX(created_at) AS latestDate FROM forums_posts GROUP BY topic_id) AS posts'), 							function($join) {
+						$join->on('topics.id','=','posts.topic_id');
+					}
+				)
+				->orderBy('is_sticky', 'desc')->orderBy('latestDate', 'desc');
 	}
 	
 	public function description() {
@@ -186,7 +188,11 @@ class Forum extends Eloquent {
 			switch(strtolower($arguments[0])) {
 				case 'influence':
 					$capName = $arguments[1];
-					return InfluenceCap::whereHas('definition', function($q) use ($capName) { $q->where('name', $capName); })->first()->capacityString();
+					return InfluenceCap::whereHas('definition', 
+						function($q) use ($capName) { 
+							$q->where('name', $capName); 
+						}
+					)->first()->capacityString();
 			}
 		}, $description);
 		return $description;

@@ -82,14 +82,16 @@ class ForumPost extends Eloquent {
 			}, $body);
 
 		//Check for @mentions
-		$body = preg_replace_callback("/(?<=^|(?<=[^a-zA-Z0-9-_\.]))@([A-Za-z0-9!#$%\-^&*]+|{[A-Za-z]+[A-Za-z0-9 !#$%\-^&*]+})/", function($match) {
-			$username = $match[1];
-			if(strtolower($username) == "andrew") $username = "Crap. I am Malevolent.";
-			if($username[0] == "{") $username = substr($username, 1, strlen($username) - 2);
-			$user = User::where('username', 'like', $username)->first();
-			if($user) return "<div class='mention'>@".$user->mailtoLink()."</div>";
-			return $username;
-		}, $body);
+		$body = preg_replace_callback("/(?<=^|(?<=[^a-zA-Z0-9-_\.]))@([A-Za-z0-9!#$%\-^&*]+|{[A-Za-z]+[A-Za-z0-9 !#$%\-^&*]+})/", 
+			function($match) {
+				$username = $match[1];
+				if(strtolower($username) == "andrew") $username = "Crap. I am Malevolent.";
+				if($username[0] == "{") $username = substr($username, 1, strlen($username) - 2);
+				$user = User::where('username', 'like', $username)->first();
+				if($user) return "<div class='mention'>@".$user->mailtoLink()."</div>";
+				return $username;
+			}, 
+		$body);
 
 		return $body;
 	}
@@ -109,6 +111,7 @@ class ForumPost extends Eloquent {
 				}
 			}, $body);
 		}
+		
 		$body = preg_replace_callback("/\[\[([\w\W]+?)\]\]/", function($match) {
 			$arguments = explode("/", $match[1]);
 			switch(strtolower($arguments[0])) {
@@ -119,7 +122,6 @@ class ForumPost extends Eloquent {
 					return $match[0];
 			}
 		}, $body);
-
 
 		return $body;
 	}

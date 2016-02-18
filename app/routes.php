@@ -10,6 +10,7 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
+
 Route::get('/', function() {
 	if(Auth::user()) {
 		return Redirect::to('dashboard');
@@ -29,7 +30,7 @@ Route::get("/larp201", function() { return Redirect::to(ApplicationSetting::get(
 Route::get("/larp201/doc", function() { return Redirect::to(ApplicationSetting::get('LARP 201 Google Doc')); });
 
 Route::get("/uploads/{file}", 'HomeController@showUpload');
-Route::post("/contact/send", 'StorytellerController@contactStorytellers');
+Route::post("/contact/send", 'HomeController@contactStorytellers');
 
 Route::group(['prefix' => 'handbook'], function() {
 	Route::get('/', function() { return View::make('handbook/viewPage')->with('name', 'The Handbook'); });
@@ -52,17 +53,17 @@ Route::group(['prefix' => 'handbook'], function() {
 	});
 });
 
-Route::group(array('before' => 'auth'), function() {
+Route::group(['before' => 'auth'], function() {
 	Route::get('rulebook/{owner}', 'HomeController@buildRulebook');
 
 	Route::post('characters/save', 'SaveController@saveCharacter');
 
-	Route::group(array('before' => 'ownsCharacter'), function() {
+	Route::group(['before' => 'ownsCharacter'], function() {
 		Route::post('characters/delete', 'SaveController@deleteCharacter');
 		Route::post('characters/revert', 'SaveController@revertCharacter');		
 	});
 
-	Route::group(array('prefix' => 'mail'), function() {
+	Route::group(['prefix' => 'mail'], function() {
 		Route::post('markread', 'MailController@markRead');
 		Route::get('markallread', 'MailController@markAllRead');		
 		Route::post('send', 'MailController@sendMessage');		
@@ -83,7 +84,7 @@ Route::group(array('before' => 'auth'), function() {
 	});
 
 
-	Route::group(array('prefix' => 'dashboard'), function() {
+	Route::group(['prefix' => 'dashboard'], function() {
 		Route::get('/', function() { return View::make('dashboard/mail'); });
 		Route::get('/characters', function() { return View::make('dashboard/characters'); });	
 		Route::get('/mail', function() { return View::make('dashboard/mail'); });
@@ -91,17 +92,26 @@ Route::group(array('before' => 'auth'), function() {
 		
 		Route::post('/settings/save', 'HomeController@saveSettings');
 		
-		Route::group(array('prefix' => 'character/{id}/', 'before' => 'ownsCharacter'), function() {
-			Route::get('/print/{version?}', function($id, $version = -1) { return View::make('dashboard/character/print')->with(["character_id" => $id, 'version' => $version]); });
-			Route::get('/cheatsheet/{version?}', function($id, $version = -1) { return View::make('dashboard/character/cheatSheet')->with(["character_id" => $id, 'version' => $version]); });
-			
-			Route::get('/biography', function($id) { return View::make('dashboard/character/questionnaire')->with(["character_id" => $id]); });
-			Route::get('/versioncontrol', function($id) { return View::make('dashboard/character/versioncontrol')->with(["character_id" => $id]); });
-			Route::get('/lores', function($id) { return View::make('dashboard/character/lores')->with(["character_id" => $id]); });
+		Route::group(['prefix' => 'character/{id}/', 'before' => 'ownsCharacter'], function() {
+			Route::get('/print/{version?}', function($id, $version = -1) { 
+				return View::make('dashboard/character/print')->with(["character_id" => $id, 'version' => $version]); 
+			});
+			Route::get('/cheatsheet/{version?}', function($id, $version = -1) { 
+				return View::make('dashboard/character/cheatSheet')->with(["character_id" => $id, 'version' => $version]); 
+			});
+			Route::get('/biography', function($id) { 
+				return View::make('dashboard/character/questionnaire')->with(["character_id" => $id]); 
+			});
+			Route::get('/versioncontrol', function($id) {
+				return View::make('dashboard/character/versioncontrol')->with(["character_id" => $id]); 
+			});
+			Route::get('/lores', function($id) { 
+				return View::make('dashboard/character/lores')->with(["character_id" => $id]);
+			});
 			Route::post('/biography/submit', 'SaveController@saveBiography');
 		});
 
-		Route::group(array('prefix' => 'storyteller', 'before' => 'storyteller'), function() {
+		Route::group(['prefix' => 'storyteller', 'before' => 'storyteller'], function() {
 			Route::get('/', function() { 
 				return View::make('dashboard/storyteller/storytellerHome'); 
 			});
@@ -222,15 +232,18 @@ Route::group(array('before' => 'auth'), function() {
 			Route::get('/manage/forums/{id}/restore', 'StorytellerController@restoreForum');	
 			Route::get('/manage/forums/{id}/delete', 'StorytellerController@deleteForum');	
 
-			Route::post('/manage/forums/{id}/save', 'StorytellerController@saveForum');	
-			Route::post('/manage/forums/save', 'StorytellerController@saveForum');
-			Route::post('/manage/forum/{id}/character/add', 'StorytellerController@grantCharacterForumPermission');	
-			Route::post('/manage/forum/{id}/character/remove', 'StorytellerController@removeCharacterForumPermission');	
-
+			Route::get('/character/{id}/toggleNPC', 'StorytellerController@toggleNPCStatus');		
+			Route::get('/character/{id}/toggleActive', 'StorytellerController@toggleActiveStatus');	
+		
 			Route::get('/cache/clear', function() { 
 				Cache::flush(); 
 				return Redirect::to('/dashboard/storyteller'); 
 			});
+			
+			Route::post('/manage/forums/{id}/save', 'StorytellerController@saveForum');	
+			Route::post('/manage/forums/save', 'StorytellerController@saveForum');
+			Route::post('/manage/forum/{id}/character/add', 'StorytellerController@grantCharacterForumPermission');	
+			Route::post('/manage/forum/{id}/character/remove', 'StorytellerController@removeCharacterForumPermission');	
 
 			Route::post('/settings/application/save', 'StorytellerController@saveApplicationSettings');		
 
@@ -265,15 +278,13 @@ Route::group(array('before' => 'auth'), function() {
 			Route::post('/character/{id}/positions/remove', 'StorytellerController@removeCharacterPosition');		
 			Route::post('/character/{id}/timeout/set', 'StorytellerController@setCharacterTimeoutDate');	
 			Route::post('/character/{id}/experience/transfer', 'StorytellerController@transferExperience');
-
-			Route::get('/character/{id}/toggleNPC', 'StorytellerController@toggleNPCStatus');		
-			Route::get('/character/{id}/toggleActive', 'StorytellerController@toggleActiveStatus');		
+	
 			Route::post('/character/{id}/accept', 'StorytellerController@acceptChanges');		
 			Route::post('/character/{id}/reject', 'StorytellerController@rejectChanges');		
 		});
 	});
 
-	Route::group(array('prefix' => 'forums', 'before' => 'updateUserLastNoticed'), function() {
+	Route::group(['prefix' => 'forums', 'before' => 'updateUserLastNoticed'], function() {
 		Route::get('/', function() { return View::make('forums/forums'); });
 		Route::get('/{id}', function($id) { 
 			if(Auth::user()->canAccessForum($id)) {
@@ -284,7 +295,7 @@ Route::group(array('before' => 'auth'), function() {
 		});
 		Route::get('/{id}/post', function($id) { 
 			if(Auth::user()->canAccessForum($id)) {
-				return View::make('forums/postTopic')->with(array('id' => $id)); 
+				return View::make('forums/postTopic')->with('id', $id); 
 			} else {
 				return "Access denied.";
 			}
@@ -292,7 +303,7 @@ Route::group(array('before' => 'auth'), function() {
 		Route::get('/topic/{id}/post', function($id) { 
 			$topic = ForumTopic::find($id);
 			if($topic && Auth::user()->canAccessTopic($id)) {
-				return View::make('forums/postReply')->with(array('id' => $id)); 
+				return View::make('forums/postReply')->with('id', $id); 
 			} else {
 				return "Access denied.";
 			}
@@ -300,7 +311,7 @@ Route::group(array('before' => 'auth'), function() {
 		Route::get('/post/{id}/edit', function($id) { 
 			$post = ForumPost::find($id);
 			if($post && Auth::user()->canAccessTopic($post->topic_id)) {
-				return View::make('forums/postReply')->with(array('post_id' => $id)); 
+				return View::make('forums/postReply')->with('post_id', $id); 
 			} else {
 				return "Access denied.";
 			}
@@ -308,7 +319,7 @@ Route::group(array('before' => 'auth'), function() {
 		Route::get('/topic/{id}/edit', function($id) { 
 			$topic = ForumTopic::find($id);
 			if($topic && Auth::user()->canAccessTopic($id)) {
-				return View::make('forums/postTopic')->with(array('topic_id' => $id)); 
+				return View::make('forums/postTopic')->with('topic_id', $id); 
 			} else {
 				return "Access denied.";
 			}
@@ -316,7 +327,7 @@ Route::group(array('before' => 'auth'), function() {
 
 		Route::get('/search/{query}', function($query) {
 			if(Auth::user()->isStoryteller()) {
-				return View::make('forums/search')->with(['query' => $query]);
+				return View::make('forums/search')->with('query', $query);
 			} else {
 				return "Access denied.";
 			}
@@ -345,20 +356,21 @@ Route::group(array('before' => 'auth'), function() {
 	Route::get('generator', function() { return View::make('generator'); });
 	Route::get('generator/beta', function() { return View::make('generator-beta'); });
 
-	Route::group(array('before' => 'ownsCharacter'), function() {
+	Route::group(['before' => 'ownsCharacter'], function() {
 		Route::get('generator/{id}', function($id) { return View::make('generator')->with("character_id", $id); });
-		Route::post('generator/{id}/reset', 'SaveController@resetCurrentChanges');	
-		Route::group(array('before' => 'storyteller'), function() {
+		Route::post('generator/{id}/reset', 'SaveController@resetCurrentChanges');
+			
+		Route::group(['before' => 'storyteller'], function() {
 			Route::post('generator/{id}/options/save', 'SaveController@saveStorytellerOptions');
 		});
 	});
 });
 
 Route::get('login', function() { return View::make('login'); });
-Route::post('login', array('uses' => 'HomeController@doLogin'));
+Route::post('login', ['uses' => 'HomeController@doLogin']);
 
-Route::get('logout', array('uses' => 'HomeController@doLogout'));
-Route::post('createAccount', array('uses' => 'HomeController@createAccount'));
+Route::get('logout', ['uses' => 'HomeController@doLogout']);
+Route::post('createAccount', ['uses' => 'HomeController@createAccount']);
 
 Route::get('rulebook', 'HomeController@buildRulebook');
 
@@ -371,6 +383,6 @@ Route::get('character/verify/{id}/{version?}', function($id, $version = -1) {
 
 Route::controller('password', 'RemindersController');
 
-App::missing(function($exception) { return Response::view('errors/404', array(), 404); });
+App::missing(function($exception) { return Response::view('errors/404', [], 404); });
 
 /* This is a comment! -rabyrd */
