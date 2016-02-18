@@ -62,15 +62,15 @@ class ForumTopic extends Eloquent {
 		return "/forums/topic/$this->id?page=$page#post$position";
 	}
 
-	public function getLinkForPostById($id) {
-		$listing = array_pluck($this->posts()->get()->toArray(), "id");
+	public function getLinkForPostById($user, $id) {
+		$listing = array_pluck($this->postsForUser($user->id)->get()->toArray(), "id");
 		$position = array_search($id, $listing);
 		return $this->getLinkForPost($position + 1);
 	}
 
 	public function getLinkForLastPost($user) {
 		$post = $this->postsForUser($user->id)->orderBy('id', 'desc')->first();
-		return $this->getLinkForPostById($post->id);
+		return $this->getLinkForPostById($user, $post->id);
 	}
 
 	public function hasUnreadPosts($user_id) {
