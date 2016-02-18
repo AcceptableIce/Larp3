@@ -61,15 +61,18 @@
 				 'Incomplete' => $user->characters()->where(['in_review' => false, 'active' => false, 'approved_version' => 0, 'is_npc' => false]),
 				];
 ?>
-
-<h2 class="character-title">My Characters</h2>
-
-<a href="/generator">
-	<button class="button small new-character">
-		<i class="icon-plus"></i> 
-		New Character
-	</button>
-</a>
+<div class="row left">
+	<div class="small-12">
+		<h2 class="character-title">My Characters</h2>
+		
+		<a href="/generator">
+			<button class="button small new-character">
+				<i class="icon-plus"></i> 
+				New Character
+			</button>
+		</a>
+	</div>
+</div>
 
 @foreach($sections as $key => $value)
 <? $count = $value->count(); if($count == 0) continue; ?>
