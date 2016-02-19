@@ -146,6 +146,18 @@ body, label {
 	margin-top: -4px;
 }
 
+.short-description {
+	font-size: 0.8em;	
+	margin-top: -3px;
+	margin-left: 2px;
+}
+
+.short-description:before {
+	content: "\21B3";
+	position: relative;
+	top: 1px;
+}
+
 .retest {
 	font-size: 0.85em;
 }

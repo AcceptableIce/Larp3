@@ -10,6 +10,26 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
+
+Route::get('/test', function() {
+	$data = json_decode('[{"name":"Acute Sense: Sight","desc":"+1, any involving sight"},{"name":"Acute Sense: Touch","desc":"+1, any involving touch"},{"name":"Acute Sense: Hearing","desc":"+1, any involving hearing"}, {"name":"Acute Sense: Smell and Taste","desc":"+1, any involving Sm & Ta"},{"name":"Catlike Balance","desc":"+2, balance"},{"name":"Daredevil","desc":"+1, risky or difficult"},{"name":"Iron Will","desc":"+1M, defending"},{"name":"Calm Heart","desc":"+2, Self Control/Instinct"},{"name":"Fire Dancer","desc":"+2, Courage"},{"name":"Bruiser","desc":"+1, intimidation"},{"name":"Friendly Face","desc":"+1S, strangers"},{"name":"Natural Leader","desc":"+2, leadership"},{"name":"Blasé","desc":"+1S, defending"},{"name":"Enchanting Voice","desc":"+2S, using voice"},{"name":"Magic Resistance","desc":"+2, against magic"},{"name":"Bad Sight (Uncorrectable)","desc":"-2, careful eyesight"},{"name":"Bad Sight (Correctable)","desc":"-2, careful eyesight"},{"name":"Clumsy","desc":"-2, balance"},{"name":"Hard of Hearing","desc":"-2, hearing"},{"name":"Smell of the Grave","desc":"-1S, mortals, not intimidation"},{"name":"Disfigured","desc":"-2S, mortals, not intimidation"},{"name":"Flesh of the Corpse","desc":"-1S, all night, stacks"},{"name":"Glowing Eyes","desc":"-2S/+2S, mortals, not intimidation"},{"name":"One Eye","desc":"-2, sight"},{"name":"Permanent Fangs","desc":"-2S, mortals, not intimidation"},{"name":"Vulnerability to Silver","desc":"-1, all when touching"},{"name":"Deformity","desc":"-1P/-2S, all"},{"name":"Lazy","desc":"-1, spontaneous"},{"name":"Child","desc":"-2S, adults"},{"name":"Deaf","desc":"-3, alertness"},{"name":"Nightmares","desc":"-1, everything"},{"name":"Speech Impediment","desc":"-2, speaking"},{"name":"Short Fuse","desc":"-1, SelfControl/Instinct"},{"name":"Shy","desc":"-2S/-3S, 3/10 people"},{"name":"Vulgar","desc":"-2S, all"},{"name":"Arrogant","desc":"-2S, convince or charm"},{"name":"Infamous","desc":"-2S,non-aggressive vs vamps"},{"name":"Lecherous","desc":"-XS, appearance"},{"name":"Aura of Suspicion","desc":"-2S, first meet"},{"name":"Cold Breeze","desc":"-1S, mortals"},{"name":"Beacon of the Unholy","desc":"-2, on holy ground"},{"name":"Deathsight","desc":"-2S, all and some sight"},{"name":"Eerie Presence","desc":"-2S, mortals"},{"name":"Fallen","desc":"retest wins on holy ground"},{"name":"Lord of the Flies","desc":"-1, social and stealth"}]');
+	foreach($data as $d) {
+		$merit = RulebookMerit::where('name', $d->name)->first();
+		if($merit) {
+			$merit->short_description = $d->desc;
+			$merit->save();
+		} else {
+			$flaw = RulebookFlaw::where('name', $d->name)->first();
+			if($flaw) {
+				$flaw->short_description = $d->desc;
+				$flaw->save();
+			} else {
+				echo 'Not found '.$d->name.'<br>';
+			}
+		}
+	}
+	
+});
 Route::get('/', function() {
 	if(Auth::user()) {
 		return Redirect::to('dashboard');

@@ -291,6 +291,11 @@
 						{{$merit->description}}
 					</div>
 				@endif
+				@if($merit->definition->short_description)
+					<div class="short-description">
+						{{$merit->definition->short_description}}
+					</div>
+				@endif
 			</div>
 		@endforeach
 		
@@ -321,6 +326,11 @@
 				@if($flaw->description)
 					<div class="specialization">
 						{{$flaw->description}}
+					</div>
+				@endif
+				@if($flaw->definition->short_description)
+					<div class="short-description">
+						{{$flaw->definition->short_description}}
 					</div>
 				@endif
 			</div>
