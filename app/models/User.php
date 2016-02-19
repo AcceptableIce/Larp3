@@ -45,48 +45,53 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		//Everyone has access to unrestricted forums.
 		$collection = Forum::with('category')->whereNotNull('category_id')->orderBy('position')->get();
 		$character = $this->activeCharacter();
-		foreach($collection as $k => $c) {
-			$allowed = true;
-			if($c->sect_id != null) {
-				if($character == null || $character->sect() == null) {
-					$allowed = false;
-				} else {
-					$sect = $character->sect()->first();
-					$sect_id = $sect->hidden_id ? $sect->hidden_id : $sect->sect_id;
-					if($sect_id != $c->sect_id) $allowed = false;
-				}
-			}
-
-			if($c->clan_id != null) { 
-				if($character == null || $character->clan() == null) {
-					$allowed = false;
-				} else {
-					$clan = $character->clan()->first();
-					$clan_id = $clan->hidden_id ? $clan->hidden_id : $clan->clan_id;
-					if($clan_id != $c->clan_id) $allowed = false;
+		$sect = $character ? $character->sect()->first() : null;
+		$clan = $character ? $character->clan()->first() : null;
+		
+		if(!$this->isStoryteller()) {
+			foreach($collection as $k => $c) {
+				$allowed = true;
+				if($c->sect_id != 0) {
+					if($sect) {
+						$sect_id = $sect->hidden_id ? $sect->hidden_id : $sect->sect_id;
+						if($sect_id != $c->sect_id) $allowed = false;
+					} else {
+						$allowed = false;
 					}
-			}
-			if($c->background_id != null) {
-				if($character == null) {
-					$allowed = false;	
-				} else {			
-					if($character->backgrounds()->where('background_id', $c->background_id)->count() == 0) $allowed = false;
+					
 				}
-			}
-
-			if($c->read_permission != null) {
-				if(!$this->hasPermissionById($c->read_permission)) $allowed = false;
-			}
-
-			if($c->is_private) {
-				if($this->activeCharacter() == null) {
-				 	$allowed = false;
-				} else if(!ForumCharacterPermission::where(['forum_id' => $c->id, 'character_id' => $this->activeCharacter()->id])->exists()) {
-					$allowed = false;
+				
+				if($c->clan_id != null) { 
+					if($clan) {
+						$clan_id = $clan->hidden_id ? $clan->hidden_id : $clan->clan_id;
+						if($clan_id != $c->clan_id) $allowed = false;
+					} else {
+						$allowed = false;
+					}
 				}
+				
+				if($c->background_id != null) {
+					if($character == null) {
+						$allowed = false;	
+					} else {			
+						if($character->backgrounds()->where('background_id', $c->background_id)->count() == 0) $allowed = false;
+					}
+				}
+	
+				if($c->read_permission != null) {
+					if(!$this->hasPermissionById($c->read_permission)) $allowed = false;
+				}
+	
+				if($c->is_private) {
+					if($character == null) {
+					 	$allowed = false;
+					} else if(!ForumCharacterPermission::where(['forum_id' => $c->id, 'character_id' => $character->id])->exists()) {
+						$allowed = false;
+					}
+				}
+				
+				if(!$allowed) $collection->forget($k);
 			}
-
-			if(!$allowed && !$this->isStoryteller()) $collection->forget($k);
 		}
 
 		return $collection;
@@ -108,7 +113,10 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	}
 
 	public function getSettingValue($name) {
-		$setting = UserSetting::where('user_id', $this->id)->whereHas('definition', function ($q) use ($name) { $q->where('name', $name); })->first();
+		$setting = UserSetting::where('user_id', $this->id)->whereHas('definition', function ($q) use ($name) { 
+			$q->where('name', $name); 
+		})->first();
+		
 		return $setting ? $setting->value : null;	
 	}
 

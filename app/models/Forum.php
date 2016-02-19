@@ -39,6 +39,7 @@ class Forum extends Eloquent {
 			return false;
 		}
 	}
+	
 	public function topicsForUser($user_id) {
 		//Depending on what type of forum this is, the posts may be limited in some way
 		$user = User::find($user_id);
@@ -130,7 +131,6 @@ class Forum extends Eloquent {
 		return $count;
 	}
 
-
 	public function topicCountForUser($user_id) {
 		return $this->rawTopicsForUser($user_id)->count();
 	}
@@ -139,6 +139,17 @@ class Forum extends Eloquent {
 		return $this->rawTopicsForUser($user_id)
 				->leftJoin('forums_posts as plist', 'forums_topics.id', '=', 'plist.topic_id')
 				->orderBy('plist.created_at', 'DESC')->first();
+	}
+	
+	public function getMostRecentPostForUserMetadata($user_id) {
+		$query = $this->rawTopicsForUser($user_id)
+				->select(DB::raw("plist.created_at, plist.posted_by"))
+				->leftJoin('forums_posts as plist', 'forums_topics.id', '=', 'plist.topic_id')
+				->orderBy('plist.created_at', 'DESC');
+		if($this->asymmetric_replies && !User::find($user_id)->isStoryteller()) {
+			$query = $query->where('plist.is_storyteller_reply', false);
+		}
+		return $query->first();
 	}
 
 	public function hasUnreadPosts($user_id) {

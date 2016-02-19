@@ -49,10 +49,12 @@
 				{{$posts}} post{{$posts == 1 ? '' : 's'}}<br>	
 			</div>
 			<div class="topic-row-last-post">
-				<? $topic = $forum->lastUpdatedTopicForUser($user_id); ?>
-				@if($topic)
-					<? $last_post = ForumTopic::find($topic->topic_id)->lastUpdatedPostForUser($user_id); ?>
-					<span class="hide-for-small">Last updated </span> {{Helpers::timestamp($last_post->created_at) }}<br><span class="hide-for-small">by </span> {{$last_post->poster->mailtoLink()}}
+				<? $last_post = $forum->getMostRecentPostForUserMetadata($user_id); ?>
+				@if($last_post)
+					<span class="hide-for-small">Last updated </span> 
+					{{Helpers::timestamp(Carbon\Carbon::parse($last_post->created_at))}}<br>
+					<span class="hide-for-small">by </span> 
+					{{User::find($last_post->posted_by)->mailtoLink()}}
 				@endif
 			</div>
 		</div>
@@ -66,9 +68,9 @@
 	<div class="forum-statistics-box">
 		<div class="online-users">
 			<b>The following users are online:</b>
-			<? $users = User::where('last_online', '>=', new DateTime('2 minutes ago'))->get(); ?>
+			<? $users = User::where('last_online', '>=', new DateTime('5 minutes ago'))->get(); ?>
 			@foreach($users as $index => $u) 
-			{{$u->username}}{{$index != $users->count() - 1 ? "," : ""}}
+				{{$u->username}}{{$index != $users->count() - 1 ? "," : ""}}
 			@endforeach
 		</div>
 		<div class="columns small-3 forum-statistic">
