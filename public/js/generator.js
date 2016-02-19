@@ -285,6 +285,10 @@ function chargenVM() {
 			}
 		}
 
+		//Malkavians trigger the "explain your derangment" prompt when they change 
+		//disciplines if not accounted for.
+		var previousMalkavianData = null;
+
 		self.updateClanOptions = function() {
 			var clan = self.characterSheet.clan.selected();	
 			if(clan) {	
@@ -302,7 +306,11 @@ function chargenVM() {
 						break;
 					case "Malkavian":
 						self.giveClanOptionAbilityByName("Awareness", 1);
-						self.giveClanOptionDerangementByName(self.clanOptionValues.malkavian[0]());						
+						if(previousMalkavianData && previousMalkavianData.data.name == self.clanOptionValues.malkavian[0]()) {
+							self.characterSheet.derangements.push(previousMalkavianData);
+						} else {
+							self.giveClanOptionDerangementByName(self.clanOptionValues.malkavian[0]());	
+						}					
 						break;
 					case "Nosferatu":
 						self.giveClanOptionAbilityByName("Stealth", 1);
@@ -406,7 +414,6 @@ function chargenVM() {
 			}
 		}
 
-
 		self.clearClanOptions = function() {
 			var clan = self.characterSheet.clan.selected();	
 			if(clan) {		
@@ -425,6 +432,9 @@ function chargenVM() {
 						break;
 					case "Malkavian":
 						self.removeClanOptionAbilityByName("Awareness", 1);		
+						previousMalkavianData = _.findWhere(self.characterSheet.derangements(), function(item) {
+							return item.data.name == self.clanOptionValues.malkavian[0]();
+						})
 						self.removeClanOptionDerangementByName(self.clanOptionValues.malkavian[0]());	
 						break;
 					case "Nosferatu":
@@ -661,8 +671,13 @@ function chargenVM() {
 			if(name && name.length > 0) {
 				var derangement = self.getDerangementByName(name);
 				if(derangement) {
-					self.removeLimit("derangement", derangement.id, 1);					
-					self.removeDerangement(derangement.id);
+					for(var i = 0; i < self.characterSheet.derangements().length; i++) {
+						var csDerangement = self.characterSheet.derangements()[i];
+						if(csDerangement.data.id == derangement.id) {
+							self.removeLimit("derangement", derangement.id, 1);					
+							self.removeDerangement(csDerangement);
+						}
+					}
 				} 
 			}
 		}
@@ -1021,12 +1036,23 @@ function chargenVM() {
 		}
 		
 		self.addDerangement = function(id) {
+			var derangement = self.getDerangementById(id);
 			if(self.getFlawTotal() <= 5 || self.approvedVersion() > 0) {
-				self.characterSheet.derangements.push(id);
-				self.activeDerangement(undefined);
-				self.updateExperienceSpent();
+					if(derangement.requires_description == 1) {
+					self.showInputModal("Enter Derangement Description", "Please enter a short description for this derangement.", 
+					"Description...", function(value) {
+						self.characterSheet.derangements.push({data: derangement, description: value});
+						self.activeDerangement(undefined);
+						self.updateExperienceSpent();
+					});
+				} else {
+					self.characterSheet.derangements.push({data: derangement, description: ""});
+					self.activeDerangement(undefined);
+					self.updateExperienceSpent();
+				} 
+
 			} else {
-				self.showModal("Invalid Purchase", "You cannot have more than 7 points of Flaws at character creation.");				
+				self.showModal("Invalid Purchase", "You cannot have more than 7 points of Flaws/Derangements at character creation.");				
 			}	
 		}
 		
@@ -1145,16 +1171,22 @@ function chargenVM() {
 			}
 		});
 		
-		self.removeDerangement = function(id) {
-			var derangement = _.indexOf(self.characterSheet.derangements(), {id: id});
-			if(derangement) {
-				if(!self.isStoryteller() && _.findWhere(self.clanSelectionDependentLimits, {type: "derangement", id: id})) {
-					self.showModal("Cannot remove Derangement.", "Your selected Clan Options means you must have have the Derangement you selected.");
-							return;
+		self.removeDerangement = function(item) {
+			if(!self.isStoryteller()) {
+				if(_.findWhere(self.clanSelectionDependentLimits, {type: "derangement", id: item.data.id})) {
+					self.showModal(
+						"Cannot remove Derangement.", 
+						"Your selected Clan Options means you must have have the Derangement <i>" + item.data.name + "</i>."
+					);
+					return;
 				}
-				self.characterSheet.derangements.remove(id);
-				self.updateExperienceSpent();			
+				if(self.approvedVersion() > 0) {
+					self.showModal("Cannot remove Derangement.", "Only Storytellers can remove derangements after character creation.");
+					return;
+				}
 			}
+			self.characterSheet.derangements.remove(item);	
+			self.updateExperienceSpent();		
 		}		
 		
 		self.removeRitual = function(id) {
@@ -1378,9 +1410,10 @@ function chargenVM() {
 		
 		self.availableDerangements = ko.computed(function() {
 			return _.difference(_.map(self.derangements(), function(item) {
-				if(_.indexOf(self.characterSheet.derangements(), item.id) === -1) {
-					return item;
-				}
+				var found = _.find(self.characterSheet.derangements(), function(characterDerangement) {
+					return characterDerangement.data.id == item.id;
+				});
+				if(!found) return item;
 			}), [undefined]);
 		});
 				
@@ -1465,13 +1498,17 @@ function chargenVM() {
 		}
 				
 		self.getInfluenceCount = function() {
-			var items = _.filter(self.characterSheet.backgrounds(), function(item) { return self.getBackgroundById(item.id).group == "Influence"; });
+			var items = _.filter(self.characterSheet.backgrounds(), function(item) { 
+				return self.getBackgroundById(item.id).group == "Influence"; 
+			});
 			return _.reduce(items, function(memo, item) { return memo + item.count; }, 0);
 		}
 
 		
 		self.getInfluenceLimit = function() {
-			var items = _.filter(self.characterSheet.backgrounds(), function(item) { return item.name == "Retainers" || item.name.indexOf("Ghoul") !== -1; });
+			var items = _.filter(self.characterSheet.backgrounds(), function(item) { 
+				return item.name == "Retainers" || item.name.indexOf("Ghoul") !== -1; 
+			});
 			return self.attributePointsSpent() + _.reduce(items, function(memo, item) { return memo + item.count; }, 0);
 		}
 
@@ -1485,8 +1522,10 @@ function chargenVM() {
 					var influenceCount = self.getInfluenceCount();
 					var influenceLimit = self.getInfluenceLimit();
 					if(influenceCount + 1 > influenceLimit && !self.isStoryteller()) {
-						self.showModal("Cannot increase Influence.", "You cannot have more Dots of Influence than the total of your " +
-										"Attributes plus Dots of Ghouls plus your Dots of Retainers.");
+						self.showModal("Cannot increase Influence.", 
+							"You cannot have more Dots of Influence than the total of your \
+							Attributes plus Dots of Ghouls plus your Dots of Retainers."
+						);
 						return;
 					}
 				}
@@ -1498,8 +1537,13 @@ function chargenVM() {
 				});
 				if(limit.length && !self.isStoryteller()) {
 					item.count = limit.amount;
-					self.showModal("Cannot lower Background.", 	limit[0].message ? limit[0].message : "Your selected Sect or Clan Options means you must have at least " + limit[0].amount + " Dot" + 
-																(limit[0].amount > 1 ? "s" : "") + " of the Background <i>" + background.name + "</i>.");
+					self.showModal(
+						"Cannot lower Background.", 	
+						limit[0].message ?
+							limit[0].message : 
+							"Your selected Sect or Clan Options means you must have at least " + limit[0].amount + " Dot" + 
+							(limit[0].amount > 1 ? "s" : "") + " of the Background <i>" + background.name + "</i>."
+					);
 					return;
 				}
 				if(item.count <= 0) {
@@ -1665,14 +1709,17 @@ function chargenVM() {
 		}
 
 		self.openSpecializationModal = function(data) {
-			self.showInputModal("Add Specialization","You are adding a Specialization to the Ability <i>" + data.name + "</i>.", "Specialization name", function(input) {
-				var ability = _.findWhere(self.characterSheet.abilities(), {id: data.id});
-				if(ability) {
-					ability.specialization = input;
-					self.updateExperienceSpent();
-					self.characterSheet.abilities.refresh();
+			self.showInputModal("Add Specialization",
+				"You are adding a Specialization to the Ability <i>" + data.name + "</i>.", "Specialization name", 
+				function(input) {
+					var ability = _.findWhere(self.characterSheet.abilities(), {id: data.id});
+					if(ability) {
+						ability.specialization = input;
+						self.updateExperienceSpent();
+						self.characterSheet.abilities.refresh();
+					}
 				}
-			});
+			);
 		}
 		
 		self.showConfirmModal = function(title, body, callback) {
@@ -1708,13 +1755,23 @@ function chargenVM() {
 		}
 
 		self.addElderPower = function() {
-			self.characterSheet.elderPowers.push({id: self.getElderPowerId(), discipline: self.elderModal.discipline().id, name: self.elderModal.name(), description: self.elderModal.description()});
+			self.characterSheet.elderPowers.push({
+				id: self.getElderPowerId(), 
+				discipline: self.elderModal.discipline().id, 
+				name: self.elderModal.name(), 
+				description: self.elderModal.description()
+			});
 			self.updateExperienceSpent();				
 			$("#elder-modal").foundation('reveal', 'close');
 		}
 
 		self.addCustomRitual = function() {
-			var newRitual = {id:  self.getCustomRitualId(), type: self.ritualModal.type(), name: self.ritualModal.name(), description: self.ritualModal.description()};
+			var newRitual = {
+				id: self.getCustomRitualId(), 
+				type: self.ritualModal.type(), 
+				name: self.ritualModal.name(), 
+				description: self.ritualModal.description()
+			};
 			self.rulebook.customRituals.push(newRitual);
 			self.newRituals.push(newRitual);
 			self.characterSheet.rituals.push(newRitual.id);
@@ -1770,16 +1827,30 @@ function chargenVM() {
 				}),
 				rituals: self.characterSheet.rituals(),
 				backgrounds: _.map(self.characterSheet.backgrounds(), function(background) {
-					return { "id": background.id, "count": background.count, 'description': (background.description && background.description.length) > 0 ? background.description : null };
+					return { 
+						"id": background.id, 
+						"count": background.count, 
+						"description": (background.description && background.description.length) > 0 ? background.description : null 
+					};
 				}),
 				path: self.characterSheet.path() ? self.characterSheet.path().id : null,
 				virtues: self.characterSheet.virtues(),
-				derangements: self.characterSheet.derangements(),
-				merits: _.map(self.characterSheet.merits(), function(merit) {
-					return { id: merit.data.id, description: (merit.description && merit.description.length > 0) ? merit.description : null };
+				derangements: _.map(self.characterSheet.derangements(), function(derangement) {
+					return { 
+						id: derangement.data.id, 
+						description: (derangement.description && derangement.description.length > 0) ? derangement.description : null 
+					};
+				}),				merits: _.map(self.characterSheet.merits(), function(merit) {
+					return { 
+						id: merit.data.id, 
+						description: (merit.description && merit.description.length > 0) ? merit.description : null 
+					};
 				}),
 				flaws: _.map(self.characterSheet.flaws(), function(flaw) {
-					return { id: flaw.data.id, description: (flaw.description && flaw.description.length > 0) ? flaw.description : null };
+					return { 
+						id: flaw.data.id, 
+						description: (flaw.description && flaw.description.length > 0) ? flaw.description : null 
+					};
 				}),
 				hasDroppedMorality: self.characterSheet.hasDroppedMorality(),
 				elderPowers: self.characterSheet.elderPowers(),
@@ -1826,7 +1897,9 @@ function chargenVM() {
 				var derangement = self.getDerangementByName(opt);
 				self.showModal(derangement.name, derangement.description);
 			} else {
-				self.showModal("Malkavian Derangements", "When you've selected a Derangement, click on this question mark to learn more about it. Feel free to select a new Derangement if it's not to your liking!");
+				self.showModal("Malkavian Derangements", 
+				"When you've selected a Derangement, click on this question mark to learn more about it. \
+				Feel free to select a new Derangement if it's not to your liking!");
 			}
 		}
 		var startedSaving = false;
@@ -1917,7 +1990,11 @@ function chargenVM() {
 					self.characterSheet.willpower.traits(parseInt(preloaded.cData.willpower.traits, 10));
 					self.characterSheet.willpower.dots(parseInt(preloaded.cData.willpower.dots, 10));
 
-					self.characterSheet.attributes([preloaded.cData.attributes.physicals, preloaded.cData.attributes.mentals, preloaded.cData.attributes.socials]);
+					self.characterSheet.attributes([
+						preloaded.cData.attributes.physicals, 
+						preloaded.cData.attributes.mentals, 
+						preloaded.cData.attributes.socials
+					]);
 
 					for(var i = 0; i < preloaded.cData.abilities.length; i++) {
 						var ability = preloaded.cData.abilities[i];
@@ -1929,8 +2006,11 @@ function chargenVM() {
 
 					for(var i = 0; i < preloaded.cData.disciplines.length; i++) {
 						var discipline = preloaded.cData.disciplines[i];
-						self.characterSheet.disciplines.push({	id: discipline.discipline_id, count: discipline.ranks, 
-																name: self.getDisciplineById(discipline.discipline_id).name, path: discipline.path_id});
+						self.characterSheet.disciplines.push({	
+							id: discipline.discipline_id, count: discipline.ranks, 
+							name: self.getDisciplineById(discipline.discipline_id).name, 
+							path: discipline.path_id
+						});
 					}
 
 					for(var i = 0; i < preloaded.cData.rituals.length; i++) {
@@ -1939,18 +2019,29 @@ function chargenVM() {
 
 					for(var i = 0; i < preloaded.cData.backgrounds.length; i++) {
 						var background = preloaded.cData.backgrounds[i];
-						self.characterSheet.backgrounds.push({ 	id: background.background_id, count: background.amount, 
-																name: self.getBackgroundById(background.background_id).name, description: background.description});
+						self.characterSheet.backgrounds.push({ 	
+							id: background.background_id, 
+							count: background.amount, 
+							name: self.getBackgroundById(background.background_id).name, 
+							description: background.description
+						});
 					}
 					if(preloaded.cData.path) {
 						self.characterSheet.path(self.getPathById(preloaded.cData.path.path_id));
-						self.characterSheet.virtues([	parseInt(preloaded.cData.path.virtue1, 10), parseInt(preloaded.cData.path.virtue2, 10), 
-														parseInt(preloaded.cData.path.virtue3, 10), parseInt(preloaded.cData.path.virtue4, 10)]);
+						self.characterSheet.virtues([	
+							parseInt(preloaded.cData.path.virtue1, 10), 
+							parseInt(preloaded.cData.path.virtue2, 10), 
+							parseInt(preloaded.cData.path.virtue3, 10), 
+							parseInt(preloaded.cData.path.virtue4, 10)
+						]);
 					}
 
-					console.log('derangements', preloaded.cData.derangements);
 					for(var i = 0; i < preloaded.cData.derangements.length; i++) {
-						self.characterSheet.derangements.push(preloaded.cData.derangements[i].derangement_id);
+						var derangement = preloaded.cData.derangements[i];
+						self.characterSheet.derangements.push({
+							data: self.getDerangementById(derangement.derangement_id), 
+							description: derangement.description 
+						});
 					}
 
 					for(var i = 0; i < preloaded.cData.merits.length; i++) {
@@ -1994,13 +2085,24 @@ function chargenVM() {
 					for(var i = 0; i < preloaded.cData.elderPowers.length; i++) {
 						var elderPower = preloaded.cData.elderPowers[i];
 						var elderPowerData = self.getElderPowerById(elderPower.elder_id);
-						self.characterSheet.elderPowers.push({ id: elderPowerData.id, discipline: elderPowerData.discipline_id, name: elderPowerData.name, description: elderPowerData.description });
+						self.characterSheet.elderPowers.push({ 
+							id: elderPowerData.id, 
+							discipline: elderPowerData.discipline_id, 
+							name: elderPowerData.name, 
+							description: elderPowerData.description 
+						});
 					}
 					for(var i = 0; i < preloaded.cData.comboDisciplines.length; i++) {
 						var comboDiscipline = preloaded.cData.comboDisciplines[i];
 						var comboDisciplineData = self.getComboDisciplineById(comboDiscipline.combo_id);
-						self.characterSheet.comboDisciplines.push({ id: comboDiscipline.id, option1: comboDisciplineData.option1, option2: comboDisciplineData.option2, 
-																	option3: comboDisciplineData.option3, name: comboDisciplineData.name, description: comboDisciplineData.description });
+						self.characterSheet.comboDisciplines.push({ 
+							id: comboDiscipline.id, 
+							option1: comboDisciplineData.option1, 
+							option2: comboDisciplineData.option2, 
+							option3: comboDisciplineData.option3, 
+							name: comboDisciplineData.name, 
+							description: comboDisciplineData.description 
+						});
 					}					
 
 					self.characterSheet.name(preloaded.cData.name);
@@ -2021,8 +2123,12 @@ function chargenVM() {
 
 					for(var key in self.clanOptionValues) {
 						for(var i in self.clanOptionValues[key]) {
-							self.clanOptionValues[key][i].subscribe(function(oldValue){ console.log("Update ID", update++); self.lockAndClearClanOptions(); }, this, 'beforeChange');
-							self.clanOptionValues[key][i].subscribe(function(newValue){ console.log("Update ID", update++);  self.unlockAndUpdateClanOptions(); });
+							self.clanOptionValues[key][i].subscribe(function(oldValue){ 
+								console.log("Update ID", update++); self.lockAndClearClanOptions(); 
+							}, this, 'beforeChange');
+							self.clanOptionValues[key][i].subscribe(function(newValue){ 
+								console.log("Update ID", update++);  self.unlockAndUpdateClanOptions(); 
+							});
 						}
 					}
 					self.clanOptionValues.caitiff[0].subscribe(function(newValue) {

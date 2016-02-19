@@ -656,7 +656,8 @@
 					<h5>Selected Derangements</h5>
 					<div data-bind="foreach: $root.characterSheet.derangements">
 						<div class="remove-button" data-bind="click: function() { $root.removeDerangement($data) } ">&times;</div>
-						<div class="discipline-selected-item" data-bind="text: $root.getDerangementById($data).name"></div><br>
+						<div class="discipline-selected-item" data-bind="text: $root.getDerangementById(data.id).name"></div><br>
+						<div class="merit-description" data-bind=" visible: $data.description, text: $data.description"></div>
 					</div>
 				</div>
 				<div class="small-12 medium-4 medium-pull-4 column">

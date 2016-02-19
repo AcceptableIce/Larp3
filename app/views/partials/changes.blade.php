@@ -134,9 +134,23 @@ foreach($differences as $key => $value) {
 	if($key == "derangements") {
 		echo "<h5>Derangements</h5>";
 		foreach($value as $k => $v) {
-			print_change(	"", 
-							!isset($v["character_id"]) || $v["character_id"][0] == null ? [null, RulebookDerangement::find($k)->name] : [RulebookDerangement::find($k)->name, null],
-							["Purchased \1.", "[change]", "Removed \1."]);
+			$description = "";
+			if(isset($v['description'][0])) {
+				$description = " (Description: <i> ".$v["description"][0]."</i>)";
+			} else if(isset($v['description'][1])) {
+				$description = " (Description: <i> ".$v["description"][1]."</i>)";
+			}
+			if(isset($v["character_id"])) {
+				print_change(	"", 
+					!isset($v["character_id"]) || $v["character_id"][0] == null ? [null, RulebookDerangement::find($k)->name] : [RulebookDerangement::find($k)->name, null],
+								["Purchased \1$description.", "[change]", "Removed \1$description."]);
+			} else if(isset($v["bought_off"])) {
+				print_change("", [RulebookDerangement::find($k)->name, null],
+							 ["","","Bought off \1$description."]);
+			} else if (isset($v["description"])) {
+				print_change("", [null, RulebookDerangement::find($k)->name],
+						 ["Changed description of \1 to $description.","",""]);
+			}
 		}
 	}
 

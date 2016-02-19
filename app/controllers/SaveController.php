@@ -216,7 +216,7 @@ class SaveController extends BaseController {
 					$clan = new CharacterClan;
 					$clan->character_id = $character_id;
 					$clan->clan_id = $character_data["clan"]["selected"];
-					$clan->hidden_id = $character_data["clan"]["displaying"];
+					$clan->hidden_id = $character_data["clan"]["displaying"] ? $character_data["clan"]["displaying"] : $character_data["clan"]["selected"];
 					$clan->version_id = $active_version_id;
 					$clan->save();
 				}
@@ -596,7 +596,8 @@ class SaveController extends BaseController {
 					} else {
 						$derangement = new CharacterDerangement;
 						$derangement->character_id = $character_id;
-						$derangement->derangement_id = $dr;
+						$derangement->derangement_id = $dr["id"];
+						if(isset($dr["description"]) && strlen($dr["description"]) > 0) $derangement->description = $dr["description"];
 						if($user->isStoryteller() || $active_version > 1) {
 							//If a ST added this or it was added after character gen, do not award experience for it.
 							$derangement->lost_points += 2;
