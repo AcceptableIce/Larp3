@@ -10,9 +10,6 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
-Route::get('/test', function() {
-	return User::find(-1)->getName();
-});
 
 Route::get('/', function() {
 	if(Auth::user()) {
