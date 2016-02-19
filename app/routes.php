@@ -10,7 +10,6 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
-awer
 Route::get('/', function() {
 	if(Auth::user()) {
 		return Redirect::to('dashboard');
