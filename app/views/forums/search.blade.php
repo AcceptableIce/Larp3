@@ -42,7 +42,7 @@
 	<div class="small-12 medium-9 columns">
 		<div class="post-data">
 			<div class="post-title">
-				<a href="{{$post->topic->getLinkForPostById($post->id)}}">{{$post->topic->title}}</a>
+				<a href="{{$post->topic->getLinkForPostById($user, $post->id)}}">{{$post->topic->title}}</a>
 				<span class="right">Posted {{$post->created_at->diffForHumans()}}</span>
 			</div>
 			<div class="post-body">
