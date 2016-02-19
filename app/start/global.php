@@ -45,9 +45,20 @@ Log::useFiles(storage_path().'/logs/laravel.log');
 |
 */
 
-App::error(function(Exception $exception, $code)
-{
+//Change this, future developer.
+$error_email = "jakeroussel@mac.com";
+
+App::error(function(Exception $exception, $code) use ($error_email) {
 	Log::error($exception);
+	
+	if (Config::getEnvironment() == 'production') {
+	    $data = array('exception' => $exception);
+	    Mail::send('emails.error', $data, function($message) use ($error_email) {
+	        $message->to($error_email)->subject("[Bug Report] Carpe Noctem Error");
+	    });
+	    Log::info('Error Email sent to '.$error_email);
+	    return Response::view('errors.500', array(), 500);
+	}
 });
 
 /*

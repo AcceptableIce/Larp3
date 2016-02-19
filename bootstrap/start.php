@@ -24,11 +24,15 @@ $app = new Illuminate\Foundation\Application;
 |
 */
 
-$env = $app->detectEnvironment(array(
-
-	'local' => array('homestead'),
-
-));
+$env = $app->detectEnvironment(function() {
+    $httpHost = ( isset($_SERVER['HTTP_HOST']) ) ? $_SERVER['HTTP_HOST'] : 'local.dev'; // Use a fallback of your choice
+    switch($httpHost) {
+        case 'larp.illini-rp.net':
+            return 'production';                 
+        default:
+            return 'local'; 
+    }
+});
 
 /*
 |--------------------------------------------------------------------------
