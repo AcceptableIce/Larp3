@@ -43,20 +43,27 @@ Log::useFiles(storage_path().'/logs/laravel.log');
 | exceptions. If nothing is returned, the default error view is
 | shown, which includes a detailed stack trace during debug.
 |
+| When an error occurs, all the emails in the developers_to_email array
+| are sent an email containing the error data.
+|
 */
 
-//Change this, future developer.
-$error_email = "jakeroussel@mac.com";
+//Change this, future developer aka Rebecca.
+$developers_to_email = [
+	"jakeroussel@mac.com"
+];
 
-App::error(function(Exception $exception, $code) use ($error_email) {
+App::error(function(Exception $exception, $code) use ($developers_to_email) {
 	Log::error($exception);
 	
 	if (Config::getEnvironment() == 'production') {
 	    $data = array('exception' => $exception);
-	    Mail::send('emails.error', $data, function($message) use ($error_email) {
-	        $message->to($error_email)->subject("[Bug Report] Carpe Noctem Error");
-	    });
-	    Log::info('Error Email sent to '.$error_email);
+	    foreach($developers_to_email as $d) {
+		    Mail::send('emails.error', $data, function($message) use ($d) {
+		        $message->to($d)->subject("[Bug Report] Carpe Noctem Error");
+		    });
+		  }
+	    Log::info('Error Emails sent to '.Helpers::nl_join($developers_to_email));
 	    return Response::view('errors.500', array(), 500);
 	}
 });
@@ -72,8 +79,7 @@ App::error(function(Exception $exception, $code) use ($error_email) {
 |
 */
 
-App::down(function()
-{
+App::down(function() {
 	return Response::make("Be right back!", 503);
 });
 
