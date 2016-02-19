@@ -6,7 +6,7 @@ class HandbookPage extends Eloquent {
 
 	protected $table = 'handbook_pages';
     protected $dates = ['deleted_at'];
-
+    
 	public static function getByTitle($title, $initial = true) {
 		if($initial) Session::forget('redirect');
 		$page = HandbookPage::where('title', 'LIKE', $title)->first();
@@ -27,6 +27,7 @@ class HandbookPage extends Eloquent {
 					}
 				}
 			}, $page->body);
+			
 			if($found) {
 				Session::set('redirect', $page->title);
 				return HandbookPage::getByTitle($found, false);
@@ -45,7 +46,8 @@ class HandbookPage extends Eloquent {
 						$source_page = HandbookPage::where('title', $parts[1])->first();
 						if($source_page) {
 							if(Input::get('redirect') == "no") {
-								return 'This page redirects to <a href="/handbook/'.HandbookPage::getURLReadyLink($parts[1]).'">'.$source_page->title.'</a>.';
+								return 'This page redirects to <a href="/handbook/'.HandbookPage::getURLReadyLink($parts[1]).'">'.
+										$source_page->title.'</a>.';
 							} else {
 								return 'Redirecting...';
 							}

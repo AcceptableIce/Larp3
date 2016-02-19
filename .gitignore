@@ -5,6 +5,7 @@
 # Configuration
 /app/config
 /app/storage
+/app/uploads
 
 # Composer
 composer.phar

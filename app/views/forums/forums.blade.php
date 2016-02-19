@@ -1,10 +1,5 @@
 @extends('forums/forumLayout')
 @section('title', 'Forums')
-@section('forum-style') 
-<style type="text/css">
-
-</style>
-@stop
 @section('forum-script')
 	function fireSearch() {
 		document.location = "/forums/search/" + $("#search-query").val();
