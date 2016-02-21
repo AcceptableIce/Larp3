@@ -15,7 +15,7 @@ class ForumTopic extends Eloquent {
 
 	public function postsForUser($user_id) {
 		$query = $this->posts();
-		//If this belongs to Forum 5 (Contact the Storytellers), do not show ST-only replies.
+		//If this topic belongs to a forum with asymmetric posting, do not show ST-only replies.	
 		if($this->forum->asymmetric_replies && !User::find($user_id)->isStoryteller()) {
 			$query = $query->where('is_storyteller_reply', false);
 		}

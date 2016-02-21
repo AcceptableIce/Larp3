@@ -1,5 +1,13 @@
 @extends('forums/forumLayout')
-<? 	$listing = DB::table('forums_posts')->where('body', 'LIKE', '%'.$query.'%')->orderBy('created_at', 'desc')->paginate(15);
+<? 	$listing = DB::table('forums_posts')
+		->select(DB::raw("forums_posts.id as id"))
+		->where('body', 'LIKE', '%'.$query.'%')
+		->leftJoin('forums_topics', 'forums_topics.id', '=', 'forums_posts.topic_id')
+		->leftJoin('forums', 'forums.id', '=', 'forums_topics.forum_id')
+		->whereNull('forums.deleted_at')
+		->orderBy('forums_posts.created_at', 'desc')
+		->paginate(15);
+		
 	$user = Auth::user(); 
 	function br2nl( $input ) {
      $out = str_replace( "<br>", "\n", $input );
