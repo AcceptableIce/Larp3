@@ -68,6 +68,9 @@
             	<a href="#">Data Management</a>
 				<ul class="dropdown">
 					<li>
+						<a href="/dashboard/storyteller/rulebook">Edit Rulebook Records</a>
+					</li>
+					<li>
 						<a href="/dashboard/storyteller/manage/positions">Edit Positions</a>
 					</li>
 					<li>

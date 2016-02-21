@@ -234,7 +234,23 @@ Route::group(['before' => 'auth'], function() {
 
 			Route::get('/character/{id}/toggleNPC', 'StorytellerController@toggleNPCStatus');		
 			Route::get('/character/{id}/toggleActive', 'StorytellerController@toggleActiveStatus');	
+			
+			Route::get('/rulebook', function() {
+				return View::make('dashboard/storyteller/rulebook/viewAll');
+			});
 		
+			Route::get('/rulebook/{key}', function($key) {
+				return View::make('dashboard/storyteller/rulebook/viewType')->with("key", $key);
+			});
+			
+			Route::get('/rulebook/{key}/new', function($key) {
+				return View::make('dashboard/storyteller/rulebook/editItem')->with(["key" => $key]);
+			});
+			
+			Route::get('/rulebook/{key}/{id}', function($key, $id) {
+				return View::make('dashboard/storyteller/rulebook/editItem')->with(["key" => $key, "id" => $id]);
+			});
+			
 			Route::get('/cache/clear', function() { 
 				Cache::flush(); 
 				return Redirect::to('/dashboard/storyteller'); 
@@ -281,6 +297,9 @@ Route::group(['before' => 'auth'], function() {
 	
 			Route::post('/character/{id}/accept', 'StorytellerController@acceptChanges');		
 			Route::post('/character/{id}/reject', 'StorytellerController@rejectChanges');		
+			
+			Route::post('/rulebook/{key}/{id}/edit', 'StorytellerController@saveRulebookItem');
+			Route::post('/rulebook/{key}/{id}/delete', 'StorytellerController@deleteRulebookItem');
 		});
 	});
 

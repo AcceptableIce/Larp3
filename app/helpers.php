@@ -22,4 +22,25 @@ class Helpers {
 		foreach($collection as $u) $list[] = $u->$key;
 		return $list;
 	}
+	
+	public static	$rulebook_items = [
+		"sects" => "RulebookSect",
+		"clans" => "RulebookClan",
+		"disciplines" => "RulebookDiscipline",
+		"discipline_powers" => "RulebookDisciplineRank",
+		"discipline_paths" => "RulebookDisciplinePath",
+		"abilities" => "RulebookAbility",
+		"backgrounds" => "RulebookBackground",
+		"merits" => "RulebookMerit",
+		"flaws" => "RulebookFlaw",
+		"derangements" => "RulebookDerangement",
+		"rituals" => "RulebookRitual",
+		"lores" => "RulebookLore",
+		"natures" => "RulebookNature",
+		"paths" => "RulebookPath",
+		"questionnaire" => "RulebookQuestionnaire",
+		"storyteller_options" => "RulebookStorytellerOption",
+		"elder_powers" => "RulebookElderPower",
+		"combo_disciplines" => "RulebookComboDiscipline"
+	];
 }

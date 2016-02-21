@@ -2,6 +2,7 @@
 
 class RulebookSect extends Eloquent {
 	protected $table = 'rulebook_sects';
+	protected $fillable = ['name', 'description', 'common_clans', 'uncommon_clans'];
 	
 	public function commonClans() {
 		$clan_ids = explode(",", $this->common_clans);
