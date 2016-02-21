@@ -154,9 +154,10 @@ class Forum extends Eloquent {
 
 	public function markForumRead($user_id) {
 		$user = User::find($user_id);
-		foreach($this->topicsForUser($user_id)->get() as $topic) {
-			if($topic->hasUnreadPosts($user_id)) {
-				$topic->markAsRead($user);
+		foreach($this->rawTopicsForUser($user_id)->get() as $topic) {
+			$realTopic = ForumTopic::find($topic->id);
+			if($realTopic->hasUnreadPosts($user_id)) {
+				$realTopic->markAsRead($user);
 			}
 		}
 	}
