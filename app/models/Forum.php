@@ -39,29 +39,6 @@ class Forum extends Eloquent {
 			return false;
 		}
 	}
-	
-	public function topicsForUser($user_id) {
-		//Depending on what type of forum this is, the posts may be limited in some way
-		$user = User::find($user_id);
-		$query = $this->topics();
-		$forum_type = $this->category ? $this->category->id : 0;
-		switch($forum_type) {
-			case 5: //Contact the Storytellers
-				if(!$user->isStoryteller()) {
-					$query = $query->whereHas('firstPost', function($q) use ($user_id) {
-						$q->where('posted_by', $user_id);
-					});
-				}
-				break;
-			case 7: //Influence
-				if(!$user->isStoryteller()) {
-					$query = $query->where('created_at', '>', $user->activeCharacter()->approved_at);
-				}
-			break;
-		}
-		return $query;
-	}
-
 
 	public function rawTopicsForUser($user_id) {
 		$user = User::find($user_id);
@@ -80,7 +57,10 @@ class Forum extends Eloquent {
 					//Get version 1 creation date.
 					$timestamp = CharacterVersion::where(['character_id' => $char->id, 'version' => 1])->first()->created_at;
 				}
-				$query = $query->where('fpost.created_at', '>', $timestamp);
+				$query = $query->where(function($q) use ($timestamp) {
+					$q->where('fpost.created_at', '>', $timestamp);
+					$q->orWhere('forums_topics.is_sticky', true);
+				});
 			} else {
 				$query = $query->where('fpost.id', '<', 0);
 			}
