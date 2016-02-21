@@ -115,6 +115,9 @@ Route::group(['before' => 'auth'], function() {
 			Route::get('/', function() { 
 				return View::make('dashboard/storyteller/storytellerHome'); 
 			});
+			
+			Route::get('/mail', function() { return View::make('dashboard/mail')->with("mode", "all"); });
+
 			Route::get('/characters/all', function() { 
 				return View::make('dashboard/storyteller/character/listCharacters')->with('filter', 'all'); 
 			});		

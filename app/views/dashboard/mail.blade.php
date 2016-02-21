@@ -1,5 +1,5 @@
 @extends('dashboard')
-@section('title', 'Mailbox')
+@section('title', 'Storyteller Mailbox')
 @section('dashboard-style')
 .dash-main {
 	padding: 0 0;
@@ -39,6 +39,10 @@
     left: 27px;
 }
 
+.st-selector {
+	width: 170px;
+}
+
 @media screen and (max-device-width : 736px) {
 	.dash-main {
 		padding: 0 0;
@@ -64,12 +68,13 @@
 	}
 }
 @stop
+<? $st_mode = isset($mode) && $mode == "all" && Auth::user()->isStoryteller(); ?>
 @section('dashboard-script')
-	self.activeTab("mail");
+	self.activeTab("{{$st_mode ? "storyteller" : "mail"}}");
 	self.mailList = ko.observableArray([]);
 	self.sentList = ko.observableArray([]);
 
-	self.selectedMailbox = ko.observable("Inbox");
+	self.selectedMailbox = ko.observable("{{$st_mode ? "Storyteller Inbox" : "Inbox"}}");
 
 	self.activeMail = ko.observable();
 
@@ -103,7 +108,9 @@
 
 	self.activeList = ko.computed(function() {
 		switch(self.selectedMailbox()) {
-			case "Inbox": return self.mailList();
+			case "Inbox": 
+			case "Storyteller Inbox":
+				return self.mailList();
 			case "Outbox": return self.sentList();
 		}
 	});
@@ -213,13 +220,40 @@
 		tinyMCE.get("mail-message").setContent("<blockquote>" + self.activeMail().body + "</blockquote><p></p>");
 		$('#message-modal').show();
 	}
-
-	@foreach(Auth::user()->mail()->orderBy('created_at', 'desc')->get() as $mail)
-	self.mailList.push({id: {{$mail->id}}, title: "{{{$mail->title}}}", from: "{{$mail->from()}}", time: "{{$mail->created_at->diffForHumans()}}", time_full: "{{$mail->created_at->format('l, F jS Y \a\t g:i A')}}", from_id: "{{$mail->from_id}}", read: ko.observable({{$mail->read() == 1 ? 'true' : 'false'}}), body: {{json_encode(nl2br($mail->body))}} });
+	<? 
+	$user = Auth::user();
+	if($st_mode) {
+		$inbox_results = ForumMail::orderBy('created_at', 'desc')->get();
+		$outbox_results = ForumMail::whereNotNull("from_id")->orderBy('created_at', 'desc')->get();
+	} else {
+		$inbox_results = $user->mail()->orderBy('created_at', 'desc')->get();
+		$outbox_results = ForumMail::where('from_id', $user->id)->orderBy('created_at', 'desc')->get();
+	}
+	?>
+	@foreach($inbox_results as $mail)
+		self.mailList.push({
+			id: {{$mail->id}}, 
+			title: "{{{$mail->title}}}", 
+			from: "{{$mail->from()}}", 
+			time: "{{$mail->created_at->diffForHumans()}}", 
+			time_full: "{{$mail->created_at->format('l, F jS Y \a\t g:i A')}}", 
+			from_id: "{{$mail->from_id}}", 
+			read: ko.observable({{$mail->read() == 1 ? 'true' : 'false'}}), 
+			body: {{json_encode(nl2br($mail->body))}} 
+		});
 	@endforeach
 
-	@foreach(ForumMail::where('from_id', Auth::user()->id)->orderBy('created_at', 'desc')->get() as $mail)
-	self.sentList.push({id: {{$mail->id}}, title: "{{{$mail->title}}}", from: "{{$mail->from()}}", to: "{{$mail->to->username}}", time: "{{$mail->created_at->diffForHumans()}}", time_full: "{{$mail->created_at->format('l, F jS Y \a\t g:i A')}}", from_id: "{{$mail->from_id}}", read: ko.observable({{$mail->read() == 1 ? 'true' : 'false'}}), body: {{json_encode(nl2br($mail->body))}} });
+	@foreach($outbox_results as $mail)
+		self.sentList.push({
+			id: {{$mail->id}}, 
+			title: "{{{$mail->title}}}",
+			from: "{{$mail->from()}}", 
+			to: "{{$mail->to->username}}", 
+			time: "{{$mail->created_at->diffForHumans()}}", 
+			time_full: "{{$mail->created_at->format('l, F jS Y \a\t g:i A')}}",
+			from_id: "{{$mail->from_id}}", read: ko.observable({{$mail->read() == 1 ? 'true' : 'false'}}), 
+			body: {{json_encode(nl2br($mail->body))}} 
+		});
 	@endforeach
 	
 	@if(Input::get("mailto") != null)
@@ -246,10 +280,17 @@
 </div>
 <div class="mail-panel-left" data-bind="css: {'mobile-hidden': $root.activeMail}">
 	<div class="mail-options mail-left-options">
-		<select class="mailbox-selector" data-bind="value: $root.selectedMailbox">
-			<option value="Inbox">Inbox</option>
-			<option value="Outbox">Outbox</option>
-		</select>
+		@if($st_mode)
+			<select class="mailbox-selector st-selector" data-bind="value: $root.selectedMailbox">
+				<option value="Inbox">All</option>
+				<option value="Outbox">No System Messages</option>
+			</select>		
+		@else
+			<select class="mailbox-selector" data-bind="value: $root.selectedMailbox">
+				<option value="Inbox">Inbox</option>
+				<option value="Outbox">Outbox</option>
+			</select>
+		@endif
 		<a class="mail-option mark-all-read-option" href="/mail/markallread" title="Mark all read" 
 		   data-bind="visible: $root.selectedMailbox() == 'Inbox'">
 			<i class="icon-box"></i>
@@ -258,7 +299,9 @@
 	<div class="mail-listing" data-bind="foreach: $root.activeList">
 		<div class="mail-item" data-bind="click: $root.showMail, css: { 'active': $root.activeMail() == $data }">
 			<div class="mail-read" data-bind="css: {'unread': !read()}"></div>
-			<div class="mail-sender" data-bind="text: $root.selectedMailbox() == 'Inbox' ? $data.from : $data.to"></div>
+			<div class="mail-sender" 
+				data-bind="text: $root.selectedMailbox().indexOf('Inbox') !== -1 ? $data.from : $data.to">
+			</div>
 			<div class="mail-time" data-bind="text: time"></div>
 			<div class="mail-title" data-bind="html: title"></div>
 			<div class="mail-preview" data-bind="html: $root.previewBody(body)"></div>
