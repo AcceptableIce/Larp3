@@ -981,6 +981,7 @@ function chargenVM() {
 					return;
 				}
 			}
+			console.log(self.getFlawTotal(), flaw.cost);
 			if(self.getFlawTotal() + Number(flaw.cost) <= 7 || self.approvedVersion() > 0 || self.isStoryteller()) {
 				if(flawName == "Sect Ignorance") {
 					console.log('Applying Sect Ignorance rules');
@@ -1028,7 +1029,7 @@ function chargenVM() {
 		
 		self.getFlawTotal = function() {
 			var total = _.reduce(self.characterSheet.flaws(), function(memo, item) { return memo + Number(item.data.cost); }, 0);
-			total += self.characterSheet.derangements().length;
+			total += self.characterSheet.derangements().length * 2;
 			if(self.characterSheet.clan.selected() && self.characterSheet.clan.selected().name == "Malkavian") total -= 2;
 			return total;
 		}
