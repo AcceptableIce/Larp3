@@ -1,5 +1,6 @@
 @extends('dashboard')
-@section('title', 'Storyteller Mailbox')
+<? $st_mode = isset($mode) && $mode == "all" && Auth::user()->isStoryteller(); ?>
+@section('title', $st_mode ? 'Storyteller Mailbox' : 'Mailbox')
 @section('dashboard-style')
 .dash-main {
 	padding: 0 0;
@@ -68,7 +69,6 @@
 	}
 }
 @stop
-<? $st_mode = isset($mode) && $mode == "all" && Auth::user()->isStoryteller(); ?>
 @section('dashboard-script')
 	self.activeTab("{{$st_mode ? "storyteller" : "mail"}}");
 	self.mailList = ko.observableArray([]);

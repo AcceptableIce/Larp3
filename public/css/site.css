@@ -237,7 +237,7 @@ input.checkin-experience-box {
 }
 
 .mail-read.unread:before {
-	content: '●';
+	content: '\2022';
 	font-size: 1.7em;
 	color: #3D95B3;
 	top: 2px;
