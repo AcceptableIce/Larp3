@@ -94,10 +94,12 @@
 	<a class="item" data-bind="click: function() { $root.activeTab('disciplines') }"><label>Disciplines</label></a>
 	<a class="item" data-bind="click: function() { $root.activeTab('rituals') }"><label>Rituals</label></a>
 	<a class="item" data-bind="click: function() { $root.activeTab('backgrounds') }"><label>Backgrounds</label></a>
-	<a class="item" data-bind="click: function() { $root.activeTab('paths') }"><label>Path and <br>Virtues</label></a>
+	<a class="item" data-bind="click: function() { $root.activeTab('paths') }"><label>Path and	<br>Virtues</label></a>
 	<a class="item" data-bind="click: function() { $root.activeTab('derangements') }"><label>Derangements</label></a>
 	<a class="item" data-bind="click: function() { $root.activeTab('merits') }"><label>Merits and<br>Flaws</label></a>
-	<a class="item" data-bind="visible: $root.isStoryteller(), click: function() { $root.activeTab('storyteller') }"><label>Storyteller<br>Options</label></a>
+	<a class="item" data-bind="visible: $root.isStoryteller(), click: function() { $root.activeTab('storyteller') }">
+		<label>Storyteller<br>Options</label>
+	</a>
 	<a class="item" data-bind="click: function() { $root.activeTab('finish') }"><label>Finish and<br>Submit</label></a>
 </div>
 <ul class="side-nav builder-nav small-builder-nav fixed show-for-small-only">
@@ -221,7 +223,8 @@
 									<option>Subterfuge</option>
 								</select>
 								<div data-bind="if: $root.clanOptionValues.toreador[$index()]() == 'Crafts' || $root.clanOptionValues.toreador[$index()]() == 'Perform'">
-									<input type="text" data-bind="value: $root.clanOptionValues.toreador[$index() + 2], enable: $root.approvedVersion() == 0" placeholder="Describe..." />
+									<input type="text" data-bind="value: $root.clanOptionValues.toreador[$index() + 2], 
+										enable: $root.approvedVersion() == 0" placeholder="Describe..." />
 								</div>
 							</div>
 						</div>
@@ -286,7 +289,9 @@
 				</div>
 				<div class="small-12 medium-3 medium-pull-3 columns">
 					<h5>Available Clans</h5>
-					<select data-bind="groupedOptions: { groups: { coll: $root.availableClans }, optionsCaption: '- Please select -', value: $root.activeClan }"></select>
+					<select data-bind="groupedOptions: { groups: { coll: $root.availableClans }, 
+						optionsCaption: '- Please select -', 
+						value: $root.activeClan }"></select>
 				</div>
 				<div class="small-12 small-push-12 medium-6 medium-pull-3 columns">
 					<div class="callout panel" data-bind="visible: $root.approvedVersion() > 0 && !$root.isStoryteller()"><b>You cannot change your clan after character creation.</b></div>
@@ -296,7 +301,8 @@
 						<div data-bind="html: advantages.replace('\n', '<br><br>')"></div><br>
 						<b>Disadvantages:</b>
 						<div data-bind="text: disadvantages"></div><br>
-						<input type="button" class="button medium" data-bind="value: 'Select Clan ' + name, click: $root.selectClan, visible: ($root.approvedVersion() == 0 || $root.isStoryteller())" />
+						<input type="button" class="button medium" data-bind="value: 'Select Clan ' + name, 
+							click: $root.selectClan, visible: ($root.approvedVersion() == 0 || $root.isStoryteller())" />
 						<input type="button" class="button small info" data-bind="value: 'Masquerade as Clan ' + name, click: $root.masqueradeClan" />
 					</div>
 				</div>
@@ -307,7 +313,10 @@
 			<h3>Nature and Willpower</h3>
 			<div class="row">
 				<div class="panel info radius">
-				  <p>Your nature is a one-word description of your character that simply lets the Storytellers know exactly what motivates your character.</p>
+				  <p>
+					  Your nature is a one-word description of your character that simply lets the 
+					  Storytellers know exactly what motivates your character.
+					</p>
 				</div>
 				<div class="small-12 medium-3 medium-push-9 columns panel callout">
 					<label>Selected</label>
@@ -330,7 +339,9 @@
 			<hr>
 			<div class="row">
 				<h4>Willpower</h4>
-					<div class="panel info radius">At character creation, you can purchase an additional dot AND a trait for three experience points.</div>
+					<div class="panel info radius">
+						At character creation, you can purchase an additional dot AND a trait for three experience points.
+					</div>
 					<div class="willpower-option">
 						<label>Willpower Traits </label> 
 						<div class="button tiny success" data-bind="click: function() { tickWillpower(-1, 'traits') } ">-</div>
@@ -350,12 +361,18 @@
 			<div class="row">
 				<div class="small-12 columns">
 					<div class="panel info radius" data-bind="visible: $root.approvedVersion() == 0">
-					  <p>	<span class="hide-for-small">A character's attributes are split into three categories: physical, mental, and social traits. 
-							At character creation, each category must be specfied as of primary, secondary, or tertiary importance.</span>
-							   	You get 15 points for free.
-							<span class="hide-for-small">We recommend seven free traits in your primary category, five in your secondary, and three in your tertiary.</span>
-							   	Additional traits can be purchased for one experience point each.</p>
+					  <p>	
+						  <span class="hide-for-small">
+						  	A character's attributes are split into three categories: physical, mental, and social traits. 
+								At character creation, each category must be specified as of primary, secondary, or tertiary importance.
+							</span>
+							You get 15 points for free.
+							<span class="hide-for-small">
+								We recommend seven free traits in your primary category, five in your secondary, and three in your tertiary.
+							</span>
+							Additional traits can be purchased for one experience point each.</p>
 							<b>You have <span data-bind="text: Math.max(0, 15 - $root.attributePointsSpent())"></span> free points remaining.</b>
+						</p>
 					</div>
 					<div class="small-12">
 						<div class="row hide-for-small">
@@ -368,7 +385,9 @@
 								<b class="trait-label">Physicals</b>
 							</div>
 							<div class="small-12 medium-11 columns" data-bind="foreach: $root.getTraitLoop()">
-								<div class="trait-box physical" data-bind="click: function() { $root.setAttribute(0, $data) }, css: {'filled': $data < $root.characterSheet.attributes()[0]}, text: ($data == $root.characterSheet.attributes()[0] - 1) ? $root.characterSheet.attributes()[0] : ''"></div>
+								<div class="trait-box physical" data-bind="click: function() { $root.setAttribute(0, $data) }, 
+									css: {'filled': $data < $root.characterSheet.attributes()[0]}, 
+									text: ($data == $root.characterSheet.attributes()[0] - 1) ? $root.characterSheet.attributes()[0] : ''"></div>
 							</div>
 						</div>
 						<div class="row">
@@ -376,7 +395,9 @@
 								<b class="trait-label">Mentals</b>
 							</div>
 							<div class="small-12 medium-11 columns" data-bind="foreach: $root.getTraitLoop()">
-								<div class="trait-box mental" data-bind="click: function() { $root.setAttribute(1, $data) }, css: {'filled': $data < $root.characterSheet.attributes()[1]}, text: ($data == $root.characterSheet.attributes()[1] - 1) ? $root.characterSheet.attributes()[1] : ''"></div>
+								<div class="trait-box mental" data-bind="click: function() { $root.setAttribute(1, $data) }, 
+									css: {'filled': $data < $root.characterSheet.attributes()[1]}, 
+									text: ($data == $root.characterSheet.attributes()[1] - 1) ? $root.characterSheet.attributes()[1] : ''"></div>
 							</div>
 						</div>
 						<div class="row ">
@@ -384,7 +405,9 @@
 								<b class="trait-label">Socials</b>
 							</div>
 							<div class="small-12 medium-11 columns" data-bind="foreach: $root.getTraitLoop()">
-								<div class="trait-box social" data-bind="click: function() { $root.setAttribute(2, $data) }, css: {'filled': $data < $root.characterSheet.attributes()[2]}, text: ($data == $root.characterSheet.attributes()[2] - 1) ? $root.characterSheet.attributes()[2] : ''"></div>
+								<div class="trait-box social" data-bind="click: function() { $root.setAttribute(2, $data) }, 
+									css: {'filled': $data < $root.characterSheet.attributes()[2]}, 
+									text: ($data == $root.characterSheet.attributes()[2] - 1) ? $root.characterSheet.attributes()[2] : ''"></div>
 							</div>
 						</div>
 					</div>
@@ -397,8 +420,9 @@
 
 			<div class="row">
 				<div class="small-12 panel info radius" data-bind="visible: $root.approvedVersion() == 0">
-					<p>	At character creation, you get five dots of Abilities for free. 
-						<b >You have <span data-bind="text: Math.max(0, 5 - $root.abilityPointsSpent())"></span> free points remaining.</b>
+					<p>
+						At character creation, you get five dots of Abilities for free. 
+						<b> You have <span data-bind="text: Math.max(0, 5 - $root.abilityPointsSpent())"></span> free points remaining.</b>
 					</p>
 				</div>
 				<div class="small-12 medium-8 medium-push-4 columns" data-bind="foreach: characterSheet.abilities">
@@ -425,7 +449,10 @@
 					<!-- /ko -->
 					<br><br>
 					<h5>Custom Ability</h5>
-					<p>If you'd like an ability that isn't covered above, enter it here. Be prepared to describe to the Storytellers how and when this ability applies.</p>
+					<p>
+						If you'd like an ability that isn't covered above, enter it here. 
+						Be prepared to describe to the Storytellers how and when this ability applies.
+					</p>
 					<input type="text" data-bind="value: $root.customAbility" placeholder="Ability Name..." /> 
 					<button class="button small" data-bind="click: function() { $root.addCustomAbility($root.customAbility()) }">Add Custom Ability</button>
 
@@ -438,7 +465,12 @@
 			<h3 class="subheader" data-bind="visible: characterSheet.clan.selected() === undefined">No clan selected.</h3>
 			<div class="row" data-bind="visible: characterSheet.clan.selected() !== undefined">
 				<div class="panel info radius">
-					<p>At character creation, you get three in-clan basic disciplines for free. You can buy additional basic disciplines for three experience points or intermediates for six. Some out-of-clan disciplines cost an additional point, and you must specify who taught you these disciplines.</p>
+					<p>
+						At character creation, you get three in-clan basic disciplines for free. 
+						You can buy additional basic disciplines for three experience points or 
+						intermediates for six. Some out-of-clan disciplines cost an additional point, 
+						and you must specify who taught you these disciplines.
+					</p>
 				</div>
 				<div class="small-12 medium-3 medium-push-9 columns panel callout">
 					<div data-bind="foreach: characterSheet.disciplines">
@@ -487,7 +519,9 @@
 					<div data-bind="with: getDisciplineById($root.activeDiscipline() ? $root.activeDiscipline().Value : -1)">
 						<b data-bind="text: name"></b><br>
 						Retests with <i><span data-bind="text: retest"></span></i><br>
-						You have <span data-bind="text: $root.getCharacterDiscipline(id) ? $root.getCharacterDisciplineRanks(id) : 'no'"></span> ranks of <span data-bind="text: name"></span>.<br><br>
+						You have <span data-bind="text: $root.getCharacterDiscipline(id) ? $root.getCharacterDisciplineRanks(id) : 'no'"></span> 
+						ranks of <span data-bind="text: name"></span>.
+						<br><br>
 						<div data-bind="with: $root.getNextDisciplineRank(id)">
 							The next rank is <b data-bind="html: name"></b>.<br>
 							<i data-bind="html: description"></i><br>
@@ -525,7 +559,9 @@
 				<h3 data-magellan-destination="rituals">Rituals</h3>
 					<div data-bind="visible: !$root.canUseRituals()">
 						<div class="panel callout radius">
-							<p>Only those characters who posses either Thaumaturgy or Necromancy have access to rituals.</p>
+							<p>
+								Only those characters who posses either Thaumaturgy or Necromancy have access to rituals.
+							</p>
 						</div>
 					</div>
 					<div class="row" data-bind="visible: $root.canUseRituals()">
@@ -557,11 +593,14 @@
 			<h3>Backgrounds</h3>
 			<div class="row">
 				<div class="panel info radius" data-bind="visible: $root.approvedVersion() == 0">
-					<p>	At character creation, you get five dots of Backgrounds for free. 
+					<p>
+						At character creation, you get five dots of Backgrounds for free. 
 						Each dot in a Background costs 1 Experience except for Generation. 
-						<span class="hide-for-small">The first two dots of Generation cost 1 Experience, the third costs 2 Experience, the fourth costs 4 Experience, 
-							and the fifth costs 8 Experience, for a total of 16 Experience to reach 5 Dots of Generation.</span>
-						<b >You have <span data-bind="text: Math.max(0, 5 - $root.backgroundPointsSpent())"></span> free points remaining.</b>
+						<span class="hide-for-small">
+							The first two dots of Generation cost 1 Experience, the third costs 2 Experience, the fourth costs 4 Experience, 
+							and the fifth costs 8 Experience, for a total of 16 Experience to reach 5 Dots of Generation.
+						</span>
+						<b> You have <span data-bind="text: Math.max(0, 5 - $root.backgroundPointsSpent())"></span> free points remaining.</b>
 				</p>
 				</div>
 				<div class="small-12 medium-8 medium-push-4 columns" data-bind="foreach: characterSheet.backgrounds">
@@ -590,7 +629,10 @@
 			<h3>Paths</h3>
 			<div class="row">
 				<div class="panel info radius">
-					<p>A character's path defines its sins. We strongly recommend that the majority of players stay on the Path of Humanity, but you can change it with ST approval.</p>
+					<p>
+						A character's path defines its sins. We strongly recommend that the majority of players 
+						stay on the Path of Humanity, but you can change it with ST approval.
+					</p>
 				</div>
 				<div class="small-12 medium-4 columns">
 					<h5>Available Paths</h5>
@@ -600,7 +642,11 @@
 						<h4 class="subheader">Virtues</h4>
 						<div data-bind="with: characterSheet.path">
 							<b data-bind="text: 'You are on the ' + name"></b><br>
-							<p>At character creation, you have seven points to spread among your three virtues and Morality will be the average of the first two. Thereafter, you can purchase Morality traits for two experience and Virtue traits for three.</p>
+							<p>
+								At character creation, you have seven points to spread among your three virtues and 
+								Morality will be the average of the first two. Thereafter, you can purchase Morality 
+								traits for two experience and Virtue traits for three.
+							</p>
 							<div data-bind="visible: $root.approvedVersion() == 0">
 								<b>You have <span data-bind="text: Math.max(0, 7 - $root.virtuePointsSpent())"></span> free points remaining.</b>
 							</div>
@@ -650,7 +696,9 @@
 			<h3 >Derangements</h3>
 			<div class="row">
 				<div class="panel info radius">
-					<p>At character generation, each Derangement is equivalent to a single 2-Point Flaw.</p>
+					<p>
+						At character generation, each Derangement is equivalent to a single 2-Point Flaw.
+					</p>
 				</div>
 				<div class="small-12 medium-4 medium-push-8 column panel callout">
 					<h5>Selected Derangements</h5>
@@ -681,7 +729,10 @@
 			<h3>Merits and Flaws</h3>
 			<div class="row">
 				<div class="panel info radius">
-					<p>At character creation, you can pick up to seven points worth of Merits and seven points of Flaws. Thereafter, you can purchase Merits or buy-off flaws for twice the base cost of the merit (or flaw) and ST approval.</p>
+					<p>
+						At character creation, you can pick up to seven points worth of Merits and seven points of Flaws. 
+						Thereafter, you can purchase Merits or buy-off flaws for twice the base cost of the merit (or flaw) and ST approval.
+					</p>
 				</div>
 				<div class="small-12 medium-4 medium-push-8 column panel callout">
 					<h5>Selected Merits</h5>

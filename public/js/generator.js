@@ -935,7 +935,9 @@ function chargenVM() {
 					return;
 				}
 			}
-			if(self.getMeritTotal() + Number(merit.cost) <= 7 || self.approvedVersion() > 0 || self.isStoryteller()) {
+			var meritCost = clanName != null && clanName.indexOf("Gangrel") !== -1 && meritName == "Inoffensive to Animals" ? 0 : Number(merit.cost);
+			console.log(meritCost, self.getMeritTotal());
+			if(self.getMeritTotal() + meritCost <= 7 || self.approvedVersion() > 0 || self.isStoryteller()) {
 				if(merit.requires_description == 1) {
 					self.showInputModal("Enter Merit Description", "Please enter a short description for this merit.", "Description...", function(value) {
 						self.characterSheet.merits.push({data: merit, description: value});
@@ -1032,7 +1034,14 @@ function chargenVM() {
 		}
 		
 		self.getMeritTotal = function() {
-			return _.reduce(self.characterSheet.merits(), function(memo, item) { return memo + Number(item.data.cost); }, 0);
+			var isGangrel = self.characterSheet.clan.selected() && self.characterSheet.clan.selected().name.indexOf("Gangrel") !== -1;
+			return _.reduce(self.characterSheet.merits(), function(memo, item) {
+				if(item.data.name == "Inoffensive to Animals" && isGangrel) {
+						return memo;
+					} else {
+						return memo + Number(item.data.cost); 
+					}
+			}, 0);
 		}
 		
 		self.addDerangement = function(id) {

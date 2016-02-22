@@ -814,7 +814,9 @@ class Character extends Eloquent {
 		$merits = $this->merits($version)->get();
 		$merits_cost = 0;
 		foreach($merits as $m) {
-			$merits_cost += $m->definition->cost;
+			if(strpos($this->clan($version)->first()->definition->name, "Gangrel") === false || $m->definition->name != "Inoffensive to Animals")  {
+				$merits_cost += $m->definition->cost;
+			}
 		}
 		//At character gen, we cannot have more than 7 points of merits.
 		if($isChargen) $this->assert($merits_cost <= 7, "You can only take a maximum of 7 points of Merits at character creation.");
