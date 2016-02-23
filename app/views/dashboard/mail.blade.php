@@ -235,6 +235,7 @@
 			id: {{$mail->id}}, 
 			title: "{{{$mail->title}}}", 
 			from: "{{$mail->from()}}", 
+			to: "{{$mail->to->username}}",
 			time: "{{$mail->created_at->diffForHumans()}}", 
 			time_full: "{{$mail->created_at->format('l, F jS Y \a\t g:i A')}}", 
 			from_id: "{{$mail->from_id}}", 
@@ -300,7 +301,7 @@
 		<div class="mail-item" data-bind="click: $root.showMail, css: { 'active': $root.activeMail() == $data }">
 			<div class="mail-read" data-bind="css: {'unread': !read()}"></div>
 			<div class="mail-sender" 
-				data-bind="text: $root.selectedMailbox().indexOf('Inbox') !== -1 ? $data.from : $data.to">
+				data-bind="text: $root.selectedMailbox() == 'Inbox' ? $data.from : $data.to">
 			</div>
 			<div class="mail-time" data-bind="text: time"></div>
 			<div class="mail-title" data-bind="html: title"></div>
@@ -329,7 +330,11 @@
 	</div>
 	<div class="displaying-mail" data-bind="with: $root.activeMail">
 		<h3 data-bind="text: title"></h3>
-		<div class="displaying-mail-from" data-bind="text: $root.selectedMailbox() == 'Inbox' ? 'From ' + from : 'To ' + to"></div>		
+		@if($st_mode)
+			<div class="displaying-mail-from" data-bind="html: 'To ' + to + '<br>From ' + from"></div>
+		@else 
+			<div class="displaying-mail-from" data-bind="text: $root.selectedMailbox() == 'Inbox' ? 'From ' + from : 'To ' + to"></div>		
+		@endif
 		<div class="displaying-mail-time" data-bind="text: time + ' at ' + time_full"></div>
 		<hr>
 		<div class="displaying-mail-body" data-bind="html: body"></div>
