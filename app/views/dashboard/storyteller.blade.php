@@ -92,9 +92,6 @@
             	<a href="#">Tools</a>
 				<ul class="dropdown">
 					<li>
-						<a href="/dashboard/storyteller/mail">All Mail</a>
-					</li>
-					<li>
 						<a href="/dashboard/storyteller/cheatsheet">Cheat Sheet</a>
 					</li>
 					<li>

@@ -1,6 +1,5 @@
 @extends('dashboard')
-<? $st_mode = isset($mode) && $mode == "all" && Auth::user()->isStoryteller(); ?>
-@section('title', $st_mode ? 'Storyteller Mailbox' : 'Mailbox')
+@section('title', 'Mailbox')
 @section('dashboard-style')
 .dash-main {
 	padding: 0 0;
@@ -70,11 +69,11 @@
 }
 @stop
 @section('dashboard-script')
-	self.activeTab("{{$st_mode ? "storyteller" : "mail"}}");
+	self.activeTab("mail");
 	self.mailList = ko.observableArray([]);
 	self.sentList = ko.observableArray([]);
 
-	self.selectedMailbox = ko.observable("{{$st_mode ? "Storyteller Inbox" : "Inbox"}}");
+	self.selectedMailbox = ko.observable("Inbox");
 
 	self.activeMail = ko.observable();
 
@@ -222,13 +221,8 @@
 	}
 	<? 
 	$user = Auth::user();
-	if($st_mode) {
-		$inbox_results = ForumMail::orderBy('created_at', 'desc')->get();
-		$outbox_results = ForumMail::whereNotNull("from_id")->orderBy('created_at', 'desc')->get();
-	} else {
-		$inbox_results = $user->mail()->orderBy('created_at', 'desc')->get();
-		$outbox_results = ForumMail::where('from_id', $user->id)->orderBy('created_at', 'desc')->get();
-	}
+	$inbox_results = $user->mail()->orderBy('created_at', 'desc')->get();
+	$outbox_results = ForumMail::where('from_id', $user->id)->orderBy('created_at', 'desc')->get();
 	?>
 	@foreach($inbox_results as $mail)
 		self.mailList.push({
@@ -281,17 +275,10 @@
 </div>
 <div class="mail-panel-left" data-bind="css: {'mobile-hidden': $root.activeMail}">
 	<div class="mail-options mail-left-options">
-		@if($st_mode)
-			<select class="mailbox-selector st-selector" data-bind="value: $root.selectedMailbox">
-				<option value="Inbox">All</option>
-				<option value="Outbox">No System Messages</option>
-			</select>		
-		@else
 			<select class="mailbox-selector" data-bind="value: $root.selectedMailbox">
 				<option value="Inbox">Inbox</option>
 				<option value="Outbox">Outbox</option>
 			</select>
-		@endif
 		<a class="mail-option mark-all-read-option" href="/mail/markallread" title="Mark all read" 
 		   data-bind="visible: $root.selectedMailbox() == 'Inbox'">
 			<i class="icon-box"></i>
@@ -330,11 +317,7 @@
 	</div>
 	<div class="displaying-mail" data-bind="with: $root.activeMail">
 		<h3 data-bind="text: title"></h3>
-		@if($st_mode)
-			<div class="displaying-mail-from" data-bind="html: 'To ' + to + '<br>From ' + from"></div>
-		@else 
-			<div class="displaying-mail-from" data-bind="text: $root.selectedMailbox() == 'Inbox' ? 'From ' + from : 'To ' + to"></div>		
-		@endif
+		<div class="displaying-mail-from" data-bind="text: $root.selectedMailbox() == 'Inbox' ? 'From ' + from : 'To ' + to"></div>		
 		<div class="displaying-mail-time" data-bind="text: time + ' at ' + time_full"></div>
 		<hr>
 		<div class="displaying-mail-body" data-bind="html: body"></div>
