@@ -209,6 +209,10 @@ class SaveController extends BaseController {
 			CharacterClan::character($character_id)->version($active_version)->delete();
 			if(isset($clan)) {
 				$newClan = $clan->replicate();
+				if($user->isStoryteller()) {
+					$newClan->hidden_id = $character_data["clan"]["displaying"] ? 
+						$character_data["clan"]["displaying"] : $character_data["clan"]["selected"];
+				}
 				$newClan->version_id = $active_version_id;
 				$newClan->save();
 			} else if($active_version == 1) {
