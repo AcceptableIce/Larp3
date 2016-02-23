@@ -141,9 +141,17 @@ function mmmr($array, $output = 'mean'){
 @section('storyteller-script')
 <?
 	//Determine which stat we're using
+	$all_backgrounds = RulebookBackground::all()->lists('name');
+	$all_abilities = RulebookAbility::where('isCustom', false)->get()->lists('name');	
+	
 	function getDataSet($val) {
+		
+		$all_backgrounds = RulebookBackground::all()->lists('name');
+		$all_abilities = RulebookAbility::where('isCustom', false)->get()->lists('name');	
+				
 		$extractor = null;
 		$labelSet = [];
+		
 		switch($val) {
 			case "Generation":
 				$labelSet = ["8th", "9th", "10th", "11th", "12th", "13th", "14th", "15th"];
@@ -155,38 +163,6 @@ function mmmr($array, $output = 'mean'){
 					} else {
 						return 13 - $character->getBackgroundDots("Generation");
 					}
-				};
-				break;
-			case "Appearance":
-			case "Contacts":
-			case "Fame":
-			case "Ghouls":
-			case "Herd":
-			case "Mentor":
-			case "Resources":
-			case "Retainers":
-			case "Bureaucracy":
-			case "Church":
-			case "Finance":
-			case "Health":
-			case "High Society":
-			case "Industry":
-			case "Media":
-			case "Neighborhood":
-			case "Occult":
-			case "Police":
-			case "Politics":
-			case "Transportation":
-			case "Underworld":
-			case "University":
-			case "Camarilla Lore":
-			case "Fae Lore":
-			case "Kindred Lore":
-			case "Sabbat Lore":
-			case "Werewolf Lore":
-				$labelSet = [1, 2, 3, 4, 5];
-				$extractor = function($character) use ($val) {
-					return $character->getBackgroundDots($val);
 				};
 				break;
 			case "Courage":
@@ -263,6 +239,19 @@ function mmmr($array, $output = 'mean'){
 					return $total;
 				};
 				break;
+			default:
+				if(in_array($val, $all_backgrounds)) {
+					$labelSet = [0, 1, 2, 3, 4, 5];
+					$extractor = function($character) use ($val) {
+						return $character->getBackgroundDots($val);
+					};
+				} else if (in_array($val, $all_abilities)) {
+					$labelSet = [0, 1, 2, 3, 4, 5];
+					$extractor = function($character) use ($val) {
+						return $character->getAbilityDots($val);
+					};
+				}
+				break;
 		}
 		return ["labels" => $labelSet, "extractor" => $extractor];
 		/*$dataSet = [];
@@ -312,7 +301,7 @@ function mmmr($array, $output = 'mean'){
 	}	
 	
 ?>
-	self.statList = ["", "Current Experience", "Total Experience", "Experience Spent", "Generation", "Morality", "Courage", "Self-Control/Instinct", "Conscience/Conviction", "Physical Traits", "Mental Traits", "Social Traits", "Appearance", "Contacts", "Fame", "Ghouls", "Herd", "Mentor", "Resources", "Retainers", "Bureaucracy", "Church", "Finance", "Health", "High Society", "Industry", "Media", "Neighborhood", "Occult", "Police", "Politics", "Transportation", "Underworld", "University", "Camarilla Lore", "Fae Lore", "Kindred Lore", "Sabbat Lore", "Werewolf Lore", "Total Influence"];
+	self.statList = ["", "Current Experience", "Total Experience", "Experience Spent", "Generation", "Morality", "Courage", "Self-Control/Instinct", "Conscience/Conviction", "Physical Traits", "Mental Traits", "Social Traits", "{{implode($all_abilities, "\",\"")}}", "{{implode($all_backgrounds, "\",\"")}}", "Total Influence"];
 	self.selectedX = ko.observable("{{$x}}");
 	self.selectedY = ko.observable("{{$y}}");
 

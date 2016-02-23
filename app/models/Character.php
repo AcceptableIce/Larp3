@@ -236,6 +236,12 @@ class Character extends Eloquent {
 		$val = $this->backgrounds($version)->whereHas('definition', function($q) use ($name) { $q->where('name', $name); })->first();
 		return $val ? $val->amount : 0;
 	}
+	
+	public function getAbilityDots($name, $version = -1) {
+		if($version == -1) $version = $this->activeVersion();		
+		$val = $this->abilities($version)->whereHas('definition', function($q) use ($name) { $q->where('name', $name); })->first();
+		return $val ? $val->amount : 0;
+	}
 
 	public function inClanDisciplines($version = -1) {
 		if($version == -1) $version = $this->activeVersion();
