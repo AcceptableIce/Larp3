@@ -576,7 +576,7 @@ class SaveController extends BaseController {
 			foreach(CharacterDerangement::character($character_id)->version($active_version - 1)->get() as $cd) {
 				$found = false;
 				foreach($derangements as $d) {
-					if($d == $cd->derangement_id) $found = true;
+					if($d["id"] == $cd->derangement_id) $found = true;
 				}
 				if(!$found) {
 					$new_cd = $cd->replicate();
@@ -592,7 +592,10 @@ class SaveController extends BaseController {
 			if(isset($character_data["derangements"])) {
 				$derangements = $character_data["derangements"];
 				foreach($derangements as $dr) {
-					$old_derangement = CharacterDerangement::character($character_id)->version($active_version - 1)->where('derangement_id', $dr)->first();
+					$old_derangement = CharacterDerangement::character($character_id)
+						->version($active_version - 1)
+						->where('derangement_id', $dr["id"])
+						->first();
 					if(isset($old_derangement)) {
 						$new_derangement = $old_derangement->replicate();
 						$new_derangement->version_id = $active_version_id;
