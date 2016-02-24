@@ -261,10 +261,10 @@ function chargenVM() {
 		});
 
 		var brujahAssociativeAbilities = {
-							"University": "Academics",
-							"Politics": "Politics",
-							"Neighborhood": "Streetwise"
-						}
+			"University": "Academics",
+			"Politics": "Politics",
+			"Neighborhood": "Streetwise"
+		}
 
 		self.updateSectOptions = function() {
 			var sect = self.characterSheet.sect.selected();	
@@ -320,7 +320,8 @@ function chargenVM() {
 						//Check selection 1 1
 						if((self.clanOptionValues.toreador[0]() == "Crafts" || self.clanOptionValues.toreador[0]() == "Perform")) {
 							if(self.clanOptionValues.toreador[2]()) {
-								if(self.clanOptionValues.toreador[0]() == self.clanOptionValues.toreador[1]() && self.clanOptionValues.toreador[2]() == self.clanOptionValues.toreador[3]()) {
+								if(self.clanOptionValues.toreador[0]() == self.clanOptionValues.toreador[1]() 
+								&& self.clanOptionValues.toreador[2]() == self.clanOptionValues.toreador[3]()) {
 									self.giveClanOptionCustomAbilityByName(self.clanOptionValues.toreador[0]() + ": " + self.clanOptionValues.toreador[2](), 2);
 									break;
 								} else {
@@ -443,7 +444,8 @@ function chargenVM() {
 						break;
 					case "Toreador":
 						if((self.clanOptionValues.toreador[0]() == "Crafts" || self.clanOptionValues.toreador[0]() == "Perform")) {
-							if(self.clanOptionValues.toreador[0]() == self.clanOptionValues.toreador[1]() && self.clanOptionValues.toreador[2]() == self.clanOptionValues.toreador[3]()) {
+							if(self.clanOptionValues.toreador[0]() == self.clanOptionValues.toreador[1]() 
+							&& self.clanOptionValues.toreador[2]() == self.clanOptionValues.toreador[3]()) {
 								self.removeClanOptionCustomAbilityByName(self.clanOptionValues.toreador[0]() + ": " + self.clanOptionValues.toreador[2](), 2);
 								break;
 							} else {
@@ -616,7 +618,6 @@ function chargenVM() {
 				for(var k in self.characterSheet.abilities()) {
 					var kItem = self.characterSheet.abilities()[k];
 					if(kItem.name == name) {
-						console.log('Removing', name);
 						self.removeLimit("ability", kItem.id, amount);
 						if(kItem.count == amount) {
 							self.characterSheet.abilities().splice(k, 1);
@@ -664,7 +665,6 @@ function chargenVM() {
 					self.addLimit("derangement", derangement.id, 1);
 				} 
 			}
-			console.log(" -- Finished derangement granting action --");
 		}
 
 		self.removeClanOptionDerangementByName = function(name) {
@@ -703,7 +703,12 @@ function chargenVM() {
 		}
 
 		self.addLimit = function(type, id, amount, message) {
-			self.clanSelectionDependentLimits.push({"type" : type, "id": id, "amount": amount, "message": message });
+			self.clanSelectionDependentLimits.push({
+				"type": type, 
+				"id": id, 
+				"amount": amount, 
+				"message": message 
+			});
 			console.log("[Limit] Added limit", {"type" : type, "id": id, "amount": amount});
 		}
 
@@ -812,7 +817,10 @@ function chargenVM() {
 
 		self.setAttribute = function(type, amount) {
 			if(self.approvedVersion() == 0 && (amount + 1) < 3 && !self.isStoryteller()) {
-				self.showModal("Invalid Purchase", "Characters must have at least 3 Dots in every Attribute at character creation.");
+				self.showModal(
+					"Invalid Purchase", 
+					"Characters must have at least 3 Dots in every Attribute at character creation."
+				);
 			} else {
 				self.characterSheet.attributes()[type] = amount + 1;
 				self.characterSheet.attributes.valueHasMutated();
@@ -822,7 +830,11 @@ function chargenVM() {
 
 		self.addAbility = function(id) {
 			var item = self.getAbilityById(id);
-			self.characterSheet.abilities.push({ id: item.id, name: item.name, count: 1 });
+			self.characterSheet.abilities.push({ 
+				id: item.id, 
+				name: item.name, 
+				count: 1 
+			});
 			self.activeAbility(undefined);
 			self.updateExperienceSpent();
 		}
@@ -839,7 +851,11 @@ function chargenVM() {
 				self.tickAbility(ability, 1);
 			} else {
 				var id = self.getCustomAbilityId(name);
-				self.characterSheet.abilities.push({ id: id, name: name, count: 1 });
+				self.characterSheet.abilities.push({ 
+					id: id, 
+					name: name, 
+					count: 1 
+				});
 			}
 			self.characterSheet.abilities.refresh();
 			self.updateExperienceSpent();	
@@ -883,35 +899,50 @@ function chargenVM() {
 		self.addBackground = function(id) {
 			var item = self.getBackgroundById(id);
 			if(!self.isStoryteller() && _.findWhere(self.clanSelectionDependentLimits, {type: "background", id: id, amount: 0})) {
-				self.showModal("Cannot add Background.", 	limit.message ? limit.message : "Your selected Clan Options means you must have at least " + limit.amount + " Dot" + 
-															(limit.amount > 1 ? "s" : "") + " of the <i>" + item.name + "</i> Ability.");
+				self.showModal(
+					"Cannot add Background.", 	
+					limit.message ? limit.message : "Your selected Clan Options means you must have at least " + limit.amount + " Dot" + 
+						(limit.amount > 1 ? "s" : "") + " of the <i>" + item.name + "</i> Ability."
+				);
 				return;
 			}
 			if(item.name == "Ghouls" || item.name == "Mentor") {
 				var nameData = item.name == "Ghouls" ? ["Ghoul", "ghoul"] : ["Mentor", "mentor"];
-				self.showInputModal("Enter " + nameData[0] + " Name", "Please enter the name of the " + nameData[1] + " you wish to add.", nameData[0] + " name...", function(value) {
-					var found = false;
-					var background = _.findWhere(self.characterSheet.backgrounds(), {name: item.name, description: value});
-					if(background) {
-						background.count++;
-						self.characterSheet.backgrounds.refresh();
-					} else {
-						self.characterSheet.backgrounds.push({ id: item.id, name: item.name, description: value, count: 1 });
+				self.showInputModal(
+					"Enter " + nameData[0] + " Name", 
+					"Please enter the name of the " + nameData[1] + " you wish to add.", 
+					nameData[0] + " name...", 
+					function(value) {
+						var found = false;
+						var background = _.findWhere(self.characterSheet.backgrounds(), {name: item.name, description: value});
+						if(background) {
+							background.count++;
+							self.characterSheet.backgrounds.refresh();
+						} else {
+							self.characterSheet.backgrounds.push({ id: item.id, name: item.name, description: value, count: 1 });
+						}
+						self.activeBackground(undefined);
+						self.updateExperienceSpent();	
 					}
-					self.activeBackground(undefined);
-					self.updateExperienceSpent();	
-				});
+				);
 			} else {
 				if(item.group == "Influence") {
 					var influenceCount = self.getInfluenceCount();
 					var influenceLimit = self.getInfluenceLimit();
 					if(influenceCount + 1 > influenceLimit && !self.isStoryteller()) {
-						self.showModal("Cannot increase Influence.", "You cannot have more Dots of Influence than the total of your " +
-										"Attributes plus Dots of Ghouls plus your Dots of Retainers.");
+						self.showModal(
+							"Cannot increase Influence.", 
+							"You cannot have more Dots of Influence than the total of your " +
+									"Attributes plus Dots of Ghouls plus your Dots of Retainers.");
 						return;
 					}
 				}
-				self.characterSheet.backgrounds.push({ id: item.id, name: item.name, description: "", count: 1 });
+				self.characterSheet.backgrounds.push({ 
+					id: item.id, 
+					name: item.name, 
+					description: "", 
+					count: 1 
+				});
 				self.activeBackground(undefined);
 				self.updateExperienceSpent();	
 			}
@@ -925,32 +956,54 @@ function chargenVM() {
 			if(clanName && !self.isStoryteller()) {
 				//Some merits are restricted to certain clans.
 				if(meritName == "Gliding" && clanName != "Gargoyle") {
-					self.showModal("Cannot purchase Merit.", "Only Gargoyles can have the Merit <i>Gliding</i>.");
+					self.showModal(
+						"Cannot purchase Merit.", 
+						"Only Gargoyles can have the Merit <i>Gliding</i>."
+					);
 					return;
 				} else if(meritName == "Disembodied Mentor" && clanName != "Malkavian") {
-					self.showModal("Cannot purchase Merit.", "Only Malkavians can have the Merit <i>Disembodied Mentor</i>.");
+					self.showModal(
+						"Cannot purchase Merit.", 
+						"Only Malkavians can have the Merit <i>Disembodied Mentor</i>."
+					);
 					return;
 				} else if (meritName == "Calm Heart" && clanName == "Brujah") {
-					self.showModal("Cannot purchase Merit.", "Brujah cannot have the Merit <i>Calm Heart</i>.");
+					self.showModal(
+						"Cannot purchase Merit.", 
+						"Brujah cannot have the Merit <i>Calm Heart</i>."
+					);
 					return;
 				}
 			}
 			var meritCost = clanName != null && clanName.indexOf("Gangrel") !== -1 && meritName == "Inoffensive to Animals" ? 0 : Number(merit.cost);
-			console.log(meritCost, self.getMeritTotal());
 			if(self.getMeritTotal() + meritCost <= 7 || self.approvedVersion() > 0 || self.isStoryteller()) {
 				if(merit.requires_description == 1) {
-					self.showInputModal("Enter Merit Description", "Please enter a short description for this merit.", "Description...", function(value) {
-						self.characterSheet.merits.push({data: merit, description: value});
-						self.activeMerit(undefined);
-						self.updateExperienceSpent();
-					});
+					self.showInputModal(
+						"Enter Merit Description", 
+						"Please enter a short description for this merit.", 
+						"Description...", 
+						function(value) {
+							self.characterSheet.merits.push({
+								data: merit, 
+								description: value
+							});
+							self.activeMerit(undefined);
+							self.updateExperienceSpent();
+						}
+					);
 				} else {
-					self.characterSheet.merits.push({data: merit, description: ""});
+					self.characterSheet.merits.push({
+						data: merit, 
+						description: ""
+					});
 					self.activeMerit(undefined);
 					self.updateExperienceSpent();
 				}
 			} else {
-				self.showModal("Invalid Purchase", "You cannot have more than 7 points of Merits at character creation.");						
+				self.showModal(
+					"Invalid Purchase", 
+					"You cannot have more than 7 points of Merits at character creation."
+				);						
 			}
 		}
 		
@@ -961,30 +1014,47 @@ function chargenVM() {
 			if(clanName && !self.isStoryteller()) {
 				//Some merits are restricted to certain clans.
 				if(flawName == "Flightless" && clanName != "Gargoyle") {
-					self.showModal("Cannot purchase Flaw.", "Only Gargoyles can have the Flaw <i>Flightless</i>.");
+					self.showModal(
+						"Cannot purchase Flaw.", 
+						"Only Gargoyles can have the Flaw <i>Flightless</i>."
+					);
 					return;
-				} else if(	(flawName == "Disfigured" || flawName == "Permanent Fangs" || flawName == "Monstrous") && 
-							(clanName == "Nosferatu" || clanName == "Gargoyle" || clanName == "Samedi" )) {
-					self.showModal("Cannot purchase Flaw.", clanName + (clanName == "Gargoyle" ? "s" : "") + " cannot have the Flaw <i>" + flawName +"</i>.");
+				} else if((flawName == "Disfigured" || flawName == "Permanent Fangs" || flawName == "Monstrous") && 
+									(clanName == "Nosferatu" || clanName == "Gargoyle" || clanName == "Samedi" )) {
+					self.showModal(
+						"Cannot purchase Flaw.", 
+						clanName + (clanName == "Gargoyle" ? "s" : "") + " cannot have the Flaw <i>" + flawName +"</i>."
+					);
 					return;
 				} else if (flawName == "Prey Exclusion" && clanName == "Ventrue") {
-					self.showModal("Cannot purchase Flaw.", "Ventrue cannot have the Flaw <i>Prey Exclusion</i>.");
+					self.showModal(
+						"Cannot purchase Flaw.", 
+						"Ventrue cannot have the Flaw <i>Prey Exclusion</i>."
+					);
 					return;
 				} else if (flawName == "Cannot Cross the Threshold" && clanName == "Tzimisce") {
-					self.showModal("Cannot purchase Flaw.", "Tzimisce cannot have the Flaw <i>Cannot Cross the Threshold</i>.");
+					self.showModal(
+						"Cannot purchase Flaw.", 
+						"Tzimisce cannot have the Flaw <i>Cannot Cross the Threshold</i>."
+					);
 					return;
 				} else if (flawName == "Cast No Reflection" && clanName == "Lasombra") {
-					self.showModal("Cannot purchase Flaw.", "Lasombra cannot have the Flaw <i>Cast No Reflection</i>.");
+					self.showModal(
+						"Cannot purchase Flaw.", 
+						"Lasombra cannot have the Flaw <i>Cast No Reflection</i>."
+					);
 					return;
 				} else if (flawName == "Grip of the Damned" && clanName == "Giovanni") {
-					self.showModal("Cannot purchase Flaw.", "Giovanni cannot have the Flaw <i>Grip of the Damned</i>.");
+					self.showModal(
+						"Cannot purchase Flaw.", 
+						"Giovanni cannot have the Flaw <i>Grip of the Damned</i>."
+					);
 					return;
 				}
 			}
 			console.log(self.getFlawTotal(), flaw.cost);
 			if(self.getFlawTotal() + Number(flaw.cost) <= 7 || self.approvedVersion() > 0 || self.isStoryteller()) {
 				if(flawName == "Sect Ignorance") {
-					console.log('Applying Sect Ignorance rules');
 					var camData = self.getBackgroundByName("Camarilla Lore");
 					var sabData = self.getBackgroundByName("Sabbat Lore");
 					self.lockXPUpdate = true;
@@ -999,7 +1069,6 @@ function chargenVM() {
 
 					self.lockXPUpdate = false;
 				} else if(flawName == "Kindred Ignorance") {
-					console.log('Applying Kindred Ignorance rules');
 					var kindData = self.getBackgroundByName("Kindred Lore");
 					self.lockXPUpdate = true;
 
@@ -1012,18 +1081,26 @@ function chargenVM() {
 				}
 
 				if(flaw.requires_description == 1) {
-					self.showInputModal("Enter Flaw Description", "Please enter a short description for this flaw.", "Description...", function(value) {
-						self.characterSheet.flaws.push({data: flaw, description: value});
-						self.activeFlaw(undefined);
-						self.updateExperienceSpent();
-					});
+					self.showInputModal(
+						"Enter Flaw Description", 
+						"Please enter a short description for this flaw.", 
+						"Description...", 
+						function(value) {
+							self.characterSheet.flaws.push({data: flaw, description: value});
+							self.activeFlaw(undefined);
+							self.updateExperienceSpent();
+						}
+					);
 				} else {
 						self.characterSheet.flaws.push({data: flaw, description: ""});
 						self.activeFlaw(undefined);
 						self.updateExperienceSpent();
 				} 
 			} else {
-				self.showModal("Invalid Purchase", "You cannot have more than 7 points of Flaws at character creation.");				
+				self.showModal(
+					"Invalid Purchase", 
+					"You cannot have more than 7 points of Flaws at character creation."
+				);				
 			}
 		}
 		
@@ -1049,28 +1126,46 @@ function chargenVM() {
 			var derangement = self.getDerangementById(id);
 			if(self.getFlawTotal() <= 5 || self.approvedVersion() > 0) {
 					if(derangement.requires_description == 1) {
-					self.showInputModal("Enter Derangement Description", "Please enter a short description for this derangement.", 
-					"Description...", function(value) {
-						self.characterSheet.derangements.push({data: derangement, description: value});
-						self.activeDerangement(undefined);
-						self.updateExperienceSpent();
-					});
+					self.showInputModal(
+						"Enter Derangement Description", 
+						"Please enter a short description for this derangement.", 
+						"Description...",
+						function(value) {
+							self.characterSheet.derangements.push({data: derangement, description: value});
+							self.activeDerangement(undefined);
+							self.updateExperienceSpent();
+						}
+					);
 				} else {
-					self.characterSheet.derangements.push({data: derangement, description: ""});
+					self.characterSheet.derangements.push({
+						data: derangement, 
+						description: ""
+					});
 					self.activeDerangement(undefined);
 					self.updateExperienceSpent();
 				} 
 
 			} else {
-				self.showModal("Invalid Purchase", "You cannot have more than 7 points of Flaws/Derangements at character creation.");				
+				self.showModal(
+					"Invalid Purchase", 
+					"You cannot have more than 7 points of Flaws/Derangements at character creation."
+				);				
 			}	
 		}
 		
 		self.addRitual = function(id) {
 			var definition = self.getRitualById(id);
-			var groupLevel = { "Basic" : 1, "Intermediate": 2, "Advanced": 3}
+			var groupLevel = { 
+				"Basic" : 1, 
+				"Intermediate": 2, 
+				"Advanced": 3
+			
+			}
 			if(groupLevel[definition.group] > self.getMaximumRitualRank() && definition.name != "Rite of Introduction") {
-				self.showModal("Invalid Purchase", "You cannot buy rituals that are more advanced than the Thaumaturgy or Necromancy you know.");
+				self.showModal(
+					"Invalid Purchase", 
+					"You cannot buy rituals that are more advanced than the Thaumaturgy or Necromancy you know."
+				);
 			} else {
 				self.characterSheet.rituals.push(id);
 				self.activeRitual(undefined);
@@ -1085,14 +1180,20 @@ function chargenVM() {
 				//Trying to tick morality
 				if(self.characterSheet.hasDroppedMorality()) {
 					if(amount == -1 && counts[place] != 1) {
-						self.showModal("Cannot drop Morality.", "You cannot drop your Morality more than one Dot at character creation.");
+						self.showModal(
+							"Cannot drop Morality.", 
+							"You cannot drop your Morality more than one Dot at character creation."
+						);
 						return;
 					} else {
 						self.characterSheet.hasDroppedMorality(false);
 					}
 				} else {
 					if(amount == 1) {
-						self.showModal("Cannot drop Morality.", "You can only raise your Morality at character creation if you have previously lowered it.");
+						self.showModal(
+							"Cannot drop Morality.", 
+							"You can only raise your Morality at character creation if you have previously lowered it."
+						);
 						return;
 					} else {
 						self.characterSheet.hasDroppedMorality(true);
@@ -1103,7 +1204,9 @@ function chargenVM() {
 			if(counts[place] < 1) counts[place] = 1;
 			if(counts[place] > 5 ) counts[place] = 5;
 			//Recalculate morality if we're in gen
-			if(self.approvedVersion() == 0) counts[2] = Math.ceil((counts[0] + counts[1]) / 2) - (self.characterSheet.hasDroppedMorality() ? 1 : 0) ;
+			if(self.approvedVersion() == 0) {
+				counts[2] = Math.ceil((counts[0] + counts[1]) / 2) - (self.characterSheet.hasDroppedMorality() ? 1 : 0) ;
+			}
 			//Update character sheet
 			self.characterSheet.virtues(counts);
 			self.updateExperienceSpent();		
@@ -1121,7 +1224,9 @@ function chargenVM() {
 			var limit = 0;
 			for(var i in self.characterSheet.disciplines()) {
 				var disc = self.characterSheet.disciplines()[i];
-				if(disc.name == "Thaumaturgy" || disc.name == "Necromancy") if(disc.count > limit) limit = disc.count;
+				if(disc.name == "Thaumaturgy" || disc.name == "Necromancy") {
+					if(disc.count > limit) limit = disc.count;
+				}
 			}
 			return limit >= 5 ? 3 : limit >= 3 ? 2 : limit >= 1 ? 1 : 0;
 		}
@@ -1165,6 +1270,7 @@ function chargenVM() {
 			}
 			return false;
 		}
+		
 		self.clanOptions = ko.computed(function() {
 			var selClan = self.characterSheet.clan.selected();
 			if(selClan) {
@@ -1191,7 +1297,10 @@ function chargenVM() {
 					return;
 				}
 				if(self.approvedVersion() > 0) {
-					self.showModal("Cannot remove Derangement.", "Only Storytellers can remove derangements after character creation.");
+					self.showModal(
+						"Cannot remove Derangement.", 
+						"Only Storytellers can remove derangements after character creation."
+					);
 					return;
 				}
 			}
@@ -1203,7 +1312,10 @@ function chargenVM() {
 			var ritual = _.indexOf(self.characterSheet.rituals(), {id: id});
 			if(ritual) {
 				if(!self.isStoryteller() && _.findWhere(self.clanSelectionDependentLimits, {type: "ritual", id: id})) {
-					self.showModal("Cannot remove Ritual.", "Tremere must always have the Rite of Introduction ritual.");
+					self.showModal(
+						"Cannot remove Ritual.", 
+						"Tremere must always have the Rite of Introduction ritual."
+					);
 					return;
 				}
 				self.characterSheet.rituals.remove(id);
@@ -1214,11 +1326,17 @@ function chargenVM() {
 		self.removeMerit = function(item) {
 			if(!self.isStoryteller()) {
 				if(_.findWhere(self.clanSelectionDependentLimits, {type: "merit", id: item.data.id})) {
-					self.showModal("Cannot remove Merit.", 	"Your selected Clan Options means you must have have the Merit <i>" + item.data.name + "</i>.");
+					self.showModal(
+						"Cannot remove Merit.", 	
+						"Your selected Clan Options means you must have have the Merit <i>" + item.data.name + "</i>."
+					);
 					return;
 				}
 				if(self.approvedVersion() > 0) {
-					self.showModal("Cannot remove Merit.", "Only Storytellers can remove merits after character creation.");
+					self.showModal(
+						"Cannot remove Merit.", 
+						"Only Storytellers can remove merits after character creation."
+					);
 					return;
 				}
 			}
@@ -1237,7 +1355,10 @@ function chargenVM() {
 			if(myDisc) {
 				myDisc.count++;
 				if(self.approvedVersion() == 0 && myDisc.count > 3 && !self.isStoryteller()) {
-					self.showModal("Invalid Purchase", "Characters cannot possess Disciplines past the third rank at character creation.");
+					self.showModal(
+						"Invalid Purchase", 
+						"Characters cannot possess Disciplines past the third rank at character creation."
+					);
 					myDisc.count--;
 				}
 				self.characterSheet.disciplines.refresh();
@@ -1245,12 +1366,16 @@ function chargenVM() {
 			} else {
 				var data = self.getDisciplineById(id);
 				if(self.getDisciplineSplit().inClan.indexOf(data) == -1 && !self.isStoryteller()) {
-					self.showInputModal("Name Teacher", "The Discipline <i>" + data.name + "</i> is out-of-clan for you, so you must list who taught it to you. " +
-										"This can be either a PC or an NPC.", "Teacher's name...", function(input) {
-						self.characterSheet.disciplines.push({ id: data.id, name: data.name, count: 1, path: path, mentor: [input] });
-						self.characterSheet.disciplines.refresh();
-						self.updateExperienceSpent();
-					});
+					self.showInputModal(
+						"Name Teacher", 
+						"The Discipline <i>" + data.name + "</i> is out-of-clan for you, so you must list who taught it to you. " +
+						"This can be either a PC or an NPC.", "Teacher's name...", 
+						function(input) {
+							self.characterSheet.disciplines.push({ id: data.id, name: data.name, count: 1, path: path, mentor: [input] });
+							self.characterSheet.disciplines.refresh();
+							self.updateExperienceSpent();
+						}
+					);
 				} else {
 					var data = self.getDisciplineById(id);
 					self.characterSheet.disciplines.push({ id: data.id, name: data.name, count: 1, path: path });
@@ -1290,8 +1415,18 @@ function chargenVM() {
 			var out = [{ Label: "Common Clans", Options: [] }, { Label: "Uncommon Clans", Options: [] }];
 			var ref = [];
 			if(!self.characterSheet.sect.selected()) return [];
-			out[0].Options = _.map(self.characterSheet.sect.selected().common_clans, function(item) { return { Text: item.name, Value: item.id} });
-			out[1].Options = _.map(self.characterSheet.sect.selected().uncommon_clans, function(item) { return { Text: item.name, Value: item.id} });
+			out[0].Options = _.map(self.characterSheet.sect.selected().common_clans, function(item) { 
+				return { 
+					Text: item.name, 
+					Value: item.id
+				}; 
+			});
+			out[1].Options = _.map(self.characterSheet.sect.selected().uncommon_clans, function(item) { 
+				return { 
+					Text: item.name, 
+					Value: item.id
+				}; 
+			});
 			if(self.isStoryteller()) {
 				var associatedList = _.union(_.pluck(self.characterSheet.sect.selected().common_clans, "id"), 
 											 _.pluck(self.characterSheet.sect.selected().uncommon_clans, "id"));
@@ -1323,8 +1458,10 @@ function chargenVM() {
 						}
 					}
 				} else {
-					if(disc.name == self.clanOptionValues.caitiff[0]() || disc.name == self.clanOptionValues.caitiff[1]() || disc.name == self.clanOptionValues.caitiff[2]()) {
-						found = true;
+					if(disc.name == self.clanOptionValues.caitiff[0]() || 
+						 disc.name == self.clanOptionValues.caitiff[1]() || 
+						 disc.name == self.clanOptionValues.caitiff[2]()) {
+						 	found = true;
 					}
 				}
 				out[found ? "inClan" : "offClan"].push(disc);
@@ -1490,8 +1627,10 @@ function chargenVM() {
 				});
 				if(limit.length && !self.isStoryteller()) {
 					ability.count = limit[0].amount;
-					self.showModal("Cannot lower Ability.", "Your selected Clan Options means you must have at least " + 
-					limit[0].amount + " Dot" + (limit[0].amount > 1 ? "s" : "") + " of the <i>" + ability.name + "</i> Ability.");
+					self.showModal("Cannot lower Ability.", 
+						"Your selected Clan Options means you must have at least " + 
+						limit[0].amount + " Dot" + (limit[0].amount > 1 ? "s" : "") + " of the <i>" + ability.name + "</i> Ability."
+					);
 				}
 				if(ability.count == 0) {
 					self.characterSheet.abilities.remove(ability);
@@ -1547,12 +1686,11 @@ function chargenVM() {
 				});
 				if(limit.length && !self.isStoryteller()) {
 					item.count = limit.amount;
-					self.showModal(
-						"Cannot lower Background.", 	
+					self.showModal("Cannot lower Background.", 	
 						limit[0].message ?
 							limit[0].message : 
-							"Your selected Sect or Clan Options means you must have at least " + limit[0].amount + " Dot" + 
-							(limit[0].amount > 1 ? "s" : "") + " of the Background <i>" + background.name + "</i>."
+							("Your selected Sect or Clan Options means you must have at least " + limit[0].amount + " Dot" + 
+							(limit[0].amount > 1 ? "s" : "") + " of the Background <i>" + background.name + "</i>.")
 					);
 					return;
 				}
@@ -1691,15 +1829,27 @@ function chargenVM() {
 		}
 				
 		self.getMeritById = function(id) {
-			return _.findWhere(_.flatten(_.pluck(self.rulebook.merits(), "options"), true), {id: id});
+			return _.findWhere(
+				_.flatten(
+					_.pluck(self.rulebook.merits(), "options"),
+				true), 
+			{id: id});
 		}
 		
 		self.getMeritByName = function(name) {
-			return _.findWhere(_.flatten(_.pluck(self.rulebook.merits(), "options"), true), {name: name});
+			return _.findWhere(
+				_.flatten(
+					_.pluck(self.rulebook.merits(), "options"),
+				true), 
+			{name: name});
 		}
 
 		self.getFlawById = function(id) {
-			return _.findWhere(_.flatten(_.pluck(self.rulebook.flaws(), "options"), true), {id: id});
+			return _.findWhere(
+				_.flatten(
+					_.pluck(self.rulebook.flaws(), "options"), 
+				true), 
+			{id: id});
 		}
 
 		self.showModal = function(title, body) {
@@ -1790,8 +1940,14 @@ function chargenVM() {
 		}
 
 		self.addComboDiscipline = function() {
-			self.characterSheet.comboDisciplines.push({ id: self.getComboDisciplineId(), option1: self.comboModal.option1(), option2: self.comboModal.option2(), option3: self.comboModal.option3(),
-														name: self.comboModal.name(), description: self.comboModal.description() });
+			self.characterSheet.comboDisciplines.push({ 
+				id: self.getComboDisciplineId(), 
+				option1: self.comboModal.option1(), 
+				option2: self.comboModal.option2(), 
+				option3: self.comboModal.option3(),
+				name: self.comboModal.name(), 
+				description: self.comboModal.description() 
+			});
 			self.updateExperienceSpent();				
 			$("#combo-modal").foundation('reveal', 'close');
 		}
@@ -1830,10 +1986,19 @@ function chargenVM() {
 				},
 				attributes: _.object(["physicals", "mentals", "socials"], self.characterSheet.attributes()),
 				abilities: _.map(self.characterSheet.abilities(), function(ability) {
-					return { "id": ability.id, "count": ability.count, "name": ability.name, "specialization": ability.specialization };
+					return { 
+						"id": ability.id, 
+						"count": ability.count, 
+						"name": ability.name, 
+						"specialization": ability.specialization 
+					};
 				}),
 				disciplines: _.map(self.characterSheet.disciplines(), function(discipline) {
-					return { "id": discipline.id, "count": discipline.count, "path": discipline.path };
+					return { 
+						"id": discipline.id, 
+						"count": discipline.count, 
+						"path": discipline.path 
+					};
 				}),
 				rituals: self.characterSheet.rituals(),
 				backgrounds: _.map(self.characterSheet.backgrounds(), function(background) {
@@ -1889,17 +2054,6 @@ function chargenVM() {
 			}
 			return out;
 		}
-		
-		/*$(window).bind('keydown', function(event) {
-		    if (event.ctrlKey || event.metaKey) {
-		        switch (String.fromCharCode(event.which).toLowerCase()) {
-		        case 's':
-		            event.preventDefault();
-		            self.save(false, true);
-		            break;
-		     	}
-		    }
-		});*/
 
 		self.showMalkavianDerangementDescription = function() {
 			var opt = self.clanOptionValues.malkavian[0]();

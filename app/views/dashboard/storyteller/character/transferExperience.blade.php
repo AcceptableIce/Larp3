@@ -1,6 +1,5 @@
 @extends('dashboard/storyteller')
 @section('storyteller-content')
-<? $character = Character::find($id); ?>
 @section('title', 'Positions for '.$character->name)
 
 <div class="row left">
@@ -26,7 +25,7 @@
 					{{@$c->availableExperience()}}
 				</td>
 				<td>
-					<form method="post" action="/dashboard/storyteller/character/{{$id}}/experience/transfer">
+					<form method="post" action="/dashboard/storyteller/character/{{$character->id}}/experience/transfer">
 						<input type="hidden" name="from" value="{{$c->id}}" />
 						<input type="submit" class="button small success" value="Transfer" />
 					</form>

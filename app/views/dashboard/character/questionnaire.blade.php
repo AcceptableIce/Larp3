@@ -19,12 +19,12 @@
 		This questionnaire is worth an experience point when all ten questions are filled out. 
 		You can come back and edit your entries, but you only receive experience for the first time.
 	</p>
-	<form action="/dashboard/character/{{$character_id}}/biography/submit" method="post" enctype="multipart/form-data">
+	<form action="/dashboard/character/{{$character->id}}/biography/submit" method="post" enctype="multipart/form-data">
 		@foreach(RulebookQuestionnaire::all() as $index => $q) 
 			<div class="panel">
 				<b>{{$index + 1}}. {{$q->question}}</b>
 				<input type="hidden" name="ids[]" value="{{$q->id}}" />
-				<? $response = CharacterQuestionnaire::where(['character_id' => $character_id, 'questionnaire_id' => $q->id])->first(); ?>
+				<? $response = CharacterQuestionnaire::where(['character_id' => $character->id, 'questionnaire_id' => $q->id])->first(); ?>
 				<textarea name="replies[]" class="questionnaire-reply">
 					{{$response ? $response->response : ""}}
 				</textarea>

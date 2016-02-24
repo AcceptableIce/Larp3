@@ -1,15 +1,11 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the Closure to execute when that URI is requested.
-|
-*/
+// Define the classes that routes can accept.
+Route::model('character', 'Character');
+Route::model('session', 'GameSession');
+Route::model('forum', 'Forum');
+Route::model('topic', 'ForumTopic');
+Route::model('post', 'ForumPost');
 
 Route::get('/', function() {
 	if(Auth::user()) {
@@ -64,8 +60,9 @@ Route::group(['before' => 'auth'], function() {
 	});
 
 	Route::group(['prefix' => 'mail'], function() {
-		Route::post('markread', 'MailController@markRead');
-		Route::get('markallread', 'MailController@markAllRead');		
+		Route::get('markallread', 'MailController@markAllRead');	
+		
+		Route::post('markread', 'MailController@markRead');	
 		Route::post('send', 'MailController@sendMessage');		
 		Route::post('delete', 'MailController@deleteMessage');
 		
@@ -75,9 +72,10 @@ Route::group(['before' => 'auth'], function() {
 	Route::post('characters/cost', 'SaveController@getCost');
 
 
-	Route::get('character/{id}/{version?}', function($id, $version = -1) {
-		$character = Character::find($id);
-		if(!$character || ($character->user_id != Auth::user()->id && !Auth::user()->isStoryteller())) return Redirect::to("/");
+	Route::get('character/{character}/{version?}', function(Character $character, $version = -1) {
+		if($character->user_id != Auth::user()->id && !Auth::user()->isStoryteller()) {
+			 return App::abort(403);
+		}
 		if($version == -1) $version = $character->approved_version;
 
 		return Response::json($character->getVersion($version));
@@ -92,21 +90,21 @@ Route::group(['before' => 'auth'], function() {
 		
 		Route::post('/settings/save', 'HomeController@saveSettings');
 		
-		Route::group(['prefix' => 'character/{id}/', 'before' => 'ownsCharacter'], function() {
-			Route::get('/print/{version?}', function($id, $version = -1) { 
-				return View::make('dashboard/character/print')->with(["character_id" => $id, 'version' => $version]); 
+		Route::group(['prefix' => 'character/{character}/', 'before' => 'ownsCharacter'], function() {
+			Route::get('/print/{version?}', function(Character $character, $version = -1) { 
+				return View::make('dashboard/character/print')->with(["character" => $character, 'version' => $version]); 
 			});
-			Route::get('/cheatsheet/{version?}', function($id, $version = -1) { 
-				return View::make('dashboard/character/cheatSheet')->with(["character_id" => $id, 'version' => $version]); 
+			Route::get('/cheatsheet/{version?}', function(Character $character, $version = -1) { 
+				return View::make('dashboard/character/cheatSheet')->with(["character" => $character, 'version' => $version]); 
 			});
-			Route::get('/biography', function($id) { 
-				return View::make('dashboard/character/questionnaire')->with(["character_id" => $id]); 
+			Route::get('/biography', function(Character $character) { 
+				return View::make('dashboard/character/questionnaire')->with(["character" => $character]); 
 			});
-			Route::get('/versioncontrol', function($id) {
-				return View::make('dashboard/character/versioncontrol')->with(["character_id" => $id]); 
+			Route::get('/versioncontrol', function(Character $character) {
+				return View::make('dashboard/character/versioncontrol')->with(["character" => $character]); 
 			});
-			Route::get('/lores', function($id) { 
-				return View::make('dashboard/character/lores')->with(["character_id" => $id]);
+			Route::get('/lores', function(Character $character) { 
+				return View::make('dashboard/character/lores')->with(["character" => $character]);
 			});
 			Route::post('/biography/submit', 'SaveController@saveBiography');
 		});
@@ -136,20 +134,20 @@ Route::group(['before' => 'auth'], function() {
 			});	
 			
 			
-			Route::get('/character/{id}/experience', function($id) { 
-				return View::make('dashboard/storyteller/character/awardCharacterExperience')->with('id', $id); 
+			Route::get('/character/{character}/experience', function(Character $character) { 
+				return View::make('dashboard/storyteller/character/awardCharacterExperience')->with('character', $character); 
 			});						
-			Route::get('/character/{id}/changes', function($id) { 
-				return View::make('dashboard/storyteller/character/approveCharacter')->with('id', $id); 
+			Route::get('/character/{character}/changes', function(Character $character) { 
+				return View::make('dashboard/storyteller/character/approveCharacter')->with('character', $character);
 			});			
-			Route::get('/character/{id}/timeout', function($id) { 
-				return View::make('dashboard/storyteller/character/characterTimeout')->with('id', $id); 
+			Route::get('/character/{character}/timeout', function(Character $character) { 
+				return View::make('dashboard/storyteller/character/characterTimeout')->with('character', $character); 
 			});						
-			Route::get('/character/{id}/positions', function($id) { 
-				return View::make('dashboard/storyteller/character/manageCharacterPositions')->with('id', $id); 
+			Route::get('/character/{character}/positions', function(Character $character) { 
+				return View::make('dashboard/storyteller/character/manageCharacterPositions')->with('character', $character);
 			});
-			Route::get('/character/{id}/experience/transfer', function($id) { 
-				return View::make('dashboard/storyteller/character/transferExperience')->with('id', $id); 
+			Route::get('/character/{character}/experience/transfer', function(Character $character) { 
+				return View::make('dashboard/storyteller/character/transferExperience')->with('character', $character); 
 			});	
 
 			Route::get('/experience/journal', function() { 
@@ -165,14 +163,14 @@ Route::group(['before' => 'auth'], function() {
 			Route::get('/session/checkin/', function() { 
 				return View::make('dashboard/storyteller/sessions/sessionCheckin'); 
 			});		
-			Route::get('/session/checkin/{id}', function($id) { 
-				return View::make('dashboard/storyteller/sessions/sessionCheckin')->with('id', $id); 
+			Route::get('/session/checkin/{session}', function(GameSession $session) { 
+				return View::make('dashboard/storyteller/sessions/sessionCheckin')->with('session', $session); 
 			});		
 			Route::get('/session/experience/', function() { 
 				return View::make('dashboard/storyteller/sessions/sessionExperience');
 			});		
-			Route::get('/session/experience/{id}', function($id) { 
-				return View::make('dashboard/storyteller/sessions/sessionExperience')->with('id', $id); 
+			Route::get('/session/experience/{session}', function(GameSession $session) { 
+				return View::make('dashboard/storyteller/sessions/sessionExperience')->with('session', $session); 
 			});	
 				
 			Route::get('/manage/positions', function() { 
@@ -203,7 +201,7 @@ Route::group(['before' => 'auth'], function() {
 			Route::get('/manage/files/{id}/edit', function($id) { 
 				return View::make('dashboard/storyteller/tools/manageFiles')->with(['mode' => 'edit', 'id' => $id]); 
 			});						
-			Route::get('/manage/files/{id}/delete', 'StorytellerController@deleteFile');						
+			Route::get('/manage/files/{id}/delete', 'StorytellerApplicationController@deleteFile');						
 
 			Route::get('/settings/application', function() { 
 				return View::make('dashboard/storyteller/tools/applicationSettings'); 
@@ -217,11 +215,11 @@ Route::group(['before' => 'auth'], function() {
 				return View::make('dashboard/storyteller/influence/influenceCaps'); 
 			});	
 			
-			Route::get('/manage/forums/{id}/edit', function($id) { 
-				return View::make('dashboard/storyteller/forums/manageForums')->with(['mode' => 'edit', 'id' => $id]); 
+			Route::get('/manage/forums/{forum}/edit', function(Forum $forum) { 
+				return View::make('dashboard/storyteller/forums/manageForums')->with(['mode' => 'edit', 'forum' => $forum]); 
 			});
-			Route::get('/manage/forums/{id}/characters', function($id) { 
-				return View::make('dashboard/storyteller/forums/manageForumCharacters')->with(['id' => $id]); 
+			Route::get('/manage/forums/{forum}/characters', function(Forum $forum) { 
+				return View::make('dashboard/storyteller/forums/manageForumCharacters')->with(['forum' => $forum]); 
 			});				
 			Route::get('/manage/forums/new', function() { 
 				return View::make('dashboard/storyteller/forums/manageForums')->with(['mode' => 'edit']); 
@@ -230,11 +228,11 @@ Route::group(['before' => 'auth'], function() {
 			Route::get('/stats', function() { 
 				return View::make('dashboard/storyteller/character/stats'); 
 			});
-			Route::get('/manage/forums/{id}/restore', 'StorytellerController@restoreForum');	
-			Route::get('/manage/forums/{id}/delete', 'StorytellerController@deleteForum');	
+			Route::get('/manage/forums/{id}/restore', 'StorytellerForumController@restoreForum');	
+			Route::get('/manage/forums/{forum}/delete', 'StorytellerForumController@deleteForum');	
 
-			Route::get('/character/{id}/toggleNPC', 'StorytellerController@toggleNPCStatus');		
-			Route::get('/character/{id}/toggleActive', 'StorytellerController@toggleActiveStatus');	
+			Route::get('/character/{character}/toggleNPC', 'StorytellerCharacterController@toggleNPCStatus');		
+			Route::get('/character/{character}/toggleActive', 'StorytellerCharacterController@toggleActiveStatus');	
 			
 			Route::get('/rulebook', function() {
 				return View::make('dashboard/storyteller/rulebook/viewAll');
@@ -257,91 +255,91 @@ Route::group(['before' => 'auth'], function() {
 				return Redirect::to('/dashboard/storyteller'); 
 			});
 			
-			Route::post('/manage/forums/{id}/save', 'StorytellerController@saveForum');	
-			Route::post('/manage/forums/save', 'StorytellerController@saveForum');
-			Route::post('/manage/forum/{id}/character/add', 'StorytellerController@grantCharacterForumPermission');	
-			Route::post('/manage/forum/{id}/character/remove', 'StorytellerController@removeCharacterForumPermission');	
+			Route::post('/manage/forums/{id}/save', 'StorytellerForumController@saveForum');	
+			Route::post('/manage/forums/save', 'StorytellerForumController@saveForum');
+			Route::post('/manage/forum/{forum}/character/add', 'StorytellerForumController@grantCharacterForumPermission');	
+			Route::post('/manage/forum/{forum}/character/remove', 'StorytellerForumController@removeCharacterForumPermission');	
 
-			Route::post('/settings/application/save', 'StorytellerController@saveApplicationSettings');		
+			Route::post('/settings/application/save', 'StorytellerApplicationController@saveApplicationSettings');		
 
-			Route::post('/experience/character/award', 'StorytellerController@awardCharacterExperience');		
-			Route::post('/experience/journal/award', 'StorytellerController@awardJournalExperience');		
-			Route::post('/experience/biographies/award', 'StorytellerController@awardBiographyExperience');		
-			Route::post('/experience/diablerie/award', 'StorytellerController@awardDiablerieExperience');		
+			Route::post('/experience/character/award', 'StorytellerCharacterController@awardCharacterExperience');		
+			Route::post('/experience/journal/award', 'StorytellerCharacterController@awardJournalExperience');		
+			Route::post('/experience/biographies/award', 'StorytellerCharacterController@awardBiographyExperience');		
+			Route::post('/experience/diablerie/award', 'StorytellerCharacterController@awardDiablerieExperience');		
 
-			Route::post('/session/checkin/{id}/character', 'StorytellerController@checkInCharacter');
-			Route::post('/session/experience/{id}/award', 'StorytellerController@awardExperience');		
+			Route::post('/session/checkin/{session}/character', 'StorytellerSessionController@checkInCharacter');
+			Route::post('/session/experience/{session}/award', 'StorytellerSessionController@awardExperience');		
 			
-			Route::post('/manage/sessions/create', 'StorytellerController@createSession');		
-			Route::post('/manage/sessions/delete', 'StorytellerController@deleteSession');		
-			Route::post('/manage/positions/create', 'StorytellerController@createPosition');		
-			Route::post('/manage/positions/delete', 'StorytellerController@deletePosition');	
-			Route::post('/manage/permissions/grant', 'StorytellerController@grantPermission');	
-			Route::post('/manage/permissions/remove', 'StorytellerController@removePermission');	
-			Route::post('/manage/permissions/create', 'StorytellerController@createPermission');	
-			Route::post('/manage/permissions/delete', 'StorytellerController@deletePermission');
-			Route::post('/manage/forums/categories/update', 'StorytellerController@updateForumCategory');
-			Route::post('/manage/forums/categories/create', 'StorytellerController@createForumCategory');
-			Route::post('/manage/forums/categories/remove', 'StorytellerController@deleteForumCategory');
-			Route::post('/manage/cheatsheet/save', 'StorytellerController@saveCheatSheet');						
-
-			Route::post('/influence/caps/add', 'StorytellerController@addInfluenceField');	
-			Route::post('/influence/caps/update', 'StorytellerController@updateInfluenceFields');	
-			Route::post('/influence/caps/remove', 'StorytellerController@removeInfluenceField');	
-
-			Route::post('/manage/files/upload', 'StorytellerController@uploadFile');						
-
-			Route::post('/character/{id}/positions/add', 'StorytellerController@grantCharacterPosition');	
-			Route::post('/character/{id}/positions/remove', 'StorytellerController@removeCharacterPosition');		
-			Route::post('/character/{id}/timeout/set', 'StorytellerController@setCharacterTimeoutDate');	
-			Route::post('/character/{id}/experience/transfer', 'StorytellerController@transferExperience');
-	
-			Route::post('/character/{id}/accept', 'StorytellerController@acceptChanges');		
-			Route::post('/character/{id}/reject', 'StorytellerController@rejectChanges');		
+			Route::post('/manage/sessions/create', 'StorytellerSessionController@createSession');		
+			Route::post('/manage/sessions/delete', 'StorytellerSessionController@deleteSession');		
 			
-			Route::post('/rulebook/{key}/{id}/edit', 'StorytellerController@saveRulebookItem');
-			Route::post('/rulebook/{key}/{id}/delete', 'StorytellerController@deleteRulebookItem');
+			Route::post('/manage/positions/create', 'StorytellerPositionController@createPosition');		
+			Route::post('/manage/positions/delete', 'StorytellerPositionController@deletePosition');	
+			
+			Route::post('/manage/permissions/grant', 'StorytellerPermissionController@grantPermission');	
+			Route::post('/manage/permissions/remove', 'StorytellerPermissionController@removePermission');	
+			Route::post('/manage/permissions/create', 'StorytellerPermissionController@createPermission');	
+			Route::post('/manage/permissions/delete', 'StorytellerPermissionController@deletePermission');
+			
+			Route::post('/manage/forums/categories/update', 'StorytellerForumController@updateForumCategory');
+			Route::post('/manage/forums/categories/create', 'StorytellerForumController@createForumCategory');
+			Route::post('/manage/forums/categories/remove', 'StorytellerForumController@deleteForumCategory');
+			
+			Route::post('/manage/cheatsheet/save', 'StorytellerApplicationController@saveCheatSheet');						
+
+			Route::post('/influence/caps/add', 'StorytellerInfluenceController@addInfluenceField');	
+			Route::post('/influence/caps/update', 'StorytellerInfluenceController@updateInfluenceFields');	
+			Route::post('/influence/caps/remove', 'StorytellerInfluenceController@removeInfluenceField');	
+
+			Route::post('/manage/files/upload', 'StorytellerApplicationController@uploadFile');						
+
+			Route::post('/character/{character}/positions/add', 'StorytellerPositionController@grantCharacterPosition');	
+			Route::post('/character/{character}/positions/remove', 'StorytellerPositionController@removeCharacterPosition');		
+			Route::post('/character/{character}/timeout/set', 'StorytellerCharacterController@setCharacterTimeoutDate');	
+			Route::post('/character/{character}/experience/transfer', 'StorytellerCharacterController@transferExperience');
+			Route::post('/character/{character}/accept', 'StorytellerCharacterController@acceptChanges');		
+			Route::post('/character/{character}/reject', 'StorytellerCharacterController@rejectChanges');		
+			
+			Route::post('/rulebook/{key}/{id}/edit', 'StorytellerRulebookController@saveRulebookItem');
+			Route::post('/rulebook/{key}/{id}/delete', 'StorytellerRulebookController@deleteRulebookItem');
 		});
 	});
 
 	Route::group(['prefix' => 'forums', 'before' => 'updateUserLastNoticed'], function() {
 		Route::get('/', function() { return View::make('forums/forums'); });
-		Route::get('/{id}', function($id) { 
-			if(Auth::user()->canAccessForum($id)) {
-				return View::make('forums/viewForum')->with('id', $id); 
+		Route::get('/{forum}', function(Forum $forum) { 
+			if(Auth::user()->canAccessForum($forum->id)) {
+				return View::make('forums/viewForum')->with('forum', $forum); 
 			} else {
-				return "Access denied.";
+				return App::abort(404);
 			}
 		});
-		Route::get('/{id}/post', function($id) { 
-			if(Auth::user()->canAccessForum($id)) {
-				return View::make('forums/postTopic')->with('id', $id); 
+		Route::get('/{forum}/post', function(Forum $forum) { 
+			if(Auth::user()->canAccessForum($forum->id)) {
+				return View::make('forums/postTopic')->with('forum', $forum); 
 			} else {
-				return "Access denied.";
+				return App::abort(404);
 			}
 		});	
-		Route::get('/topic/{id}/post', function($id) { 
-			$topic = ForumTopic::find($id);
-			if($topic && Auth::user()->canAccessTopic($id)) {
-				return View::make('forums/postReply')->with('id', $id); 
+		Route::get('/topic/{topic}/post', function(ForumTopic $topic) { 
+			if(Auth::user()->canAccessTopic($topic->id)) {
+				return View::make('forums/postReply')->with('topic', $topic); 
 			} else {
-				return "Access denied.";
+				return App::abort(404);
 			}
 		});
-		Route::get('/post/{id}/edit', function($id) { 
-			$post = ForumPost::find($id);
-			if($post && Auth::user()->canAccessTopic($post->topic_id)) {
-				return View::make('forums/postReply')->with('post_id', $id); 
+		Route::get('/post/{post}/edit', function(ForumPost $post) { 
+			if(Auth::user()->canAccessTopic($post->topic_id)) {
+				return View::make('forums/postReply')->with('post', $post); 
 			} else {
-				return "Access denied.";
+				return App::abort(404);
 			}
 		});		
-		Route::get('/topic/{id}/edit', function($id) { 
-			$topic = ForumTopic::find($id);
-			if($topic && Auth::user()->canAccessTopic($id)) {
-				return View::make('forums/postTopic')->with('topic_id', $id); 
+		Route::get('/topic/{topic}/edit', function(ForumTopic $topic) { 
+			if(Auth::user()->canAccessTopic($topic->id)) {
+				return View::make('forums/postTopic')->with('topic', $topic); 
 			} else {
-				return "Access denied.";
+				return App::abort(404);
 			}
 		});
 
@@ -349,11 +347,11 @@ Route::group(['before' => 'auth'], function() {
 			if(Auth::user()->isStoryteller()) {
 				return View::make('forums/search')->with('query', $query);
 			} else {
-				return "Access denied.";
+				return App::abort(403);
 			}
 		});
 
-		Route::get('/topic/{id}', 'ForumController@showTopic');
+		Route::get('/topic/{topic}', 'ForumController@showTopic');
 
 		Route::get('/topic/{id}/toggleComplete', 'ForumController@toggleTopicComplete');
 		Route::get('/topic/{id}/toggleSticky', 'ForumController@toggleTopicSticky');
@@ -377,16 +375,17 @@ Route::group(['before' => 'auth'], function() {
 	Route::get('generator/beta', function() { return View::make('generator-beta'); });
 
 	Route::group(['before' => 'ownsCharacter'], function() {
-		Route::get('generator/{id}', function($id) { return View::make('generator')->with("character_id", $id); });
-		Route::post('generator/{id}/reset', 'SaveController@resetCurrentChanges');
+		Route::get('generator/{character}', function(Character $character) { return View::make('generator')->with("character", $character); });
+		Route::post('generator/{character}/reset', 'SaveController@resetCurrentChanges');
 			
 		Route::group(['before' => 'storyteller'], function() {
-			Route::post('generator/{id}/options/save', 'SaveController@saveStorytellerOptions');
+			Route::post('generator/{character}/options/save', 'SaveController@saveStorytellerOptions');
 		});
 	});
 });
 
 Route::get('login', function() { return View::make('login'); });
+
 Route::post('login', ['uses' => 'HomeController@doLogin']);
 
 Route::get('logout', ['uses' => 'HomeController@doLogout']);
@@ -394,15 +393,19 @@ Route::post('createAccount', ['uses' => 'HomeController@createAccount']);
 
 Route::get('rulebook', 'HomeController@buildRulebook');
 
-Route::get('character/verify/{id}/{version?}', function($id, $version = -1) {
-	$character = Character::find($id);
+Route::get('character/verify/{character}/{version?}', function(Character $character, $version = -1) {
 	if($version == -1) $version = $character->approved_version;
-
 	return Response::json($character->verify($version, true));
 });
 
 Route::controller('password', 'RemindersController');
 
-App::missing(function($exception) { return Response::view('errors/404', [], 404); });
+App::missing(function($exception) { 
+	return Response::view('errors/404', [], 404); 
+});
 
-/* This is a comment! -rabyrd */
+App::error(function($error, $code) {
+	if ($code != 500 || Config::getEnvironment() == 'production') {
+		return Response::view('errors.'.$code, [], $code);
+	}
+});

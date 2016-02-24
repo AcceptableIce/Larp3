@@ -54,7 +54,7 @@
 				<span class="right">Posted {{$post->created_at->diffForHumans()}}</span>
 			</div>
 			<div class="post-body">
-				<div class="post-content search-content">{{nl2br(strip_tags(trim(br2nl($post->body))))}}</div>
+				<div class="post-content search-content">{{nl2br(trim(strip_tags(trim(br2nl($post->body)))))}}</div>
 
 				@foreach($post->edits()->orderBy('created_at')->take(3)->get() as $edit) 
 					<div class="edit-notification">

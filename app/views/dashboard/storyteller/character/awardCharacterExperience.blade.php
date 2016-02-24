@@ -1,7 +1,6 @@
 @extends('dashboard/storyteller')
 
 @section('storyteller-content')
-<? $character = Character::find($id); ?>
 <div class="row left">
 	<h2>Award Experience to {{$character->name}}</h2>
 	<form method="post" action="/dashboard/storyteller/experience/character/award" class="panel">

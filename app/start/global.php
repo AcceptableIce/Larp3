@@ -64,7 +64,7 @@ App::error(function(Exception $exception, $code) use ($developers_to_email) {
 		    });
 		  }
 	    Log::info('Error Emails sent to '.Helpers::nl_join($developers_to_email));
-	    return Response::view('errors.500', array(), 500);
+	    return App::abort(500);
 	}
 });
 

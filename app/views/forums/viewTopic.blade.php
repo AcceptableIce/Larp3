@@ -1,5 +1,5 @@
 @extends('forums/forumLayout')
-<? 	$topic = ForumTopic::find($id); 
+<?
 	$forum = $topic->forum; 
 	$user = Auth::user();
 	
@@ -144,7 +144,7 @@
 </ul>
 <? $reply_permission = !$forum->reply_permission || $user->hasPermissionById($forum->reply_permission); ?>
 @if($reply_permission)
-<a href="/forums/topic/{{$id}}/post" class="button info small right"><i class="icon-plus"></i> Post Reply</a>
+<a href="/forums/topic/{{$topic->id}}/post" class="button info small right"><i class="icon-plus"></i> Post Reply</a>
 @endif
 <h3 class="topic-title">{{$topic->title}}</h3>
 <? 	$added_users = $topic->addedUsers; 
@@ -245,7 +245,7 @@
 				<div class="forum-signature">{{$post->poster->getSettingValue("Forum Signature")}}</div>
 				<div class="post-options">
 					@if(($forum->asymmetric_replies  || $forum->id == 35) && $isStoryteller) <!-- Contact the STs -->
-						<a href="/forums/topic/{{$id}}/toggleComplete">
+						<a href="/forums/topic/{{$topic->id}}/toggleComplete">
 							@if($topic->is_complete) 
 								<button class="button post-option tiny warning toggle-complete">Mark Incomplete</button>
 							@else
@@ -254,14 +254,14 @@
 						</a>
 					@endif
 					@if($isStoryteller)
-						<a href="/forums/topic/{{$id}}/toggleSticky">
+						<a href="/forums/topic/{{$topic->id}}/toggleSticky">
 						@if($topic->is_sticky)<button class="button post-option tiny">Unstick</button>
 						@else <button class="button post-option tiny">Stick</button>
 						@endif
 						</a>
 						<button data-bind="click: $root.showAlertSTsModal" class="button post-option tiny warning">Alert STs</button>
 					@endif
-					<a href="/forums/topic/{{$id}}/post?quote={{$post->id}}">
+					<a href="/forums/topic/{{$topic->id}}/post?quote={{$post->id}}">
 						<button id="quote-post-{{$i}}" class="button post-option tiny">Quote</button>
 					</a>
 					@if($post->posted_by == $user->id || $isStoryteller) 
@@ -298,7 +298,7 @@
 			</div>
 			<div class="post-body quick-reply">
 				<form method="post" id="quick-reply-form" action="/forums/reply/post">
-					<input type="hidden" value="{{$id}}" name="topic_id" />
+					<input type="hidden" value="{{$topic->id}}" name="topic_id" />
 					<textarea class="topic-body quick-reply-body" name="body" id="quick-post" placeholder="Type your message here..."></textarea>
 					<div class="post-actions">
 						@if($isStoryteller && $forum->asymmetric_replies)
@@ -321,10 +321,10 @@
 <div class="row topic-options">
 	<div class="small-12 columns">
 		@if($reply_permission)
-			<a href="/forums/topic/{{$id}}/post" class="button info small right bottom-reply"><i class="icon-plus"></i> Post Reply</a>
+			<a href="/forums/topic/{{$topic->id}}/post" class="button info small right bottom-reply"><i class="icon-plus"></i> Post Reply</a>
 		@endif
 		<div class="topic-option">
-			<a href="/forums/topic/{{$id}}/toggleWatch">@if($topic->userIsWatching($user->id)) Stop Watching This Topic @else Watch This Topic @endif</a>
+			<a href="/forums/topic/{{$topic->id}}/toggleWatch">@if($topic->userIsWatching($user->id)) Stop Watching This Topic @else Watch This Topic @endif</a>
 		</div>
 	</div>
 

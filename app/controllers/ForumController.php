@@ -1,16 +1,15 @@
 <?php
 class ForumController extends BaseController {
 
-	function showTopic($id) {
-		$topic = ForumTopic::find($id);
+	function showTopic(ForumTopic $topic) {
 		$topic->views++;
 		$topic->save();
 
 		$topic->markAsRead(Auth::user());
-		if(Auth::user()->canAccessTopic($id)) {
-			return View::make('forums/viewTopic')->with('id', $id); 
+		if(Auth::user()->canAccessTopic($topic->id)) {
+			return View::make('forums/viewTopic')->with('topic', $topic); 
 		} else {
-			return "Access denied.";
+			return App::abort(404);
 		}
 	}
 	

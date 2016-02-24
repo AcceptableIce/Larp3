@@ -1,7 +1,4 @@
 @extends('forums/forumLayout')
-<? 
-$forum = Forum::find($id); 
-?>
 @section('title', $forum->name)
 @section('forum-style') 
 
@@ -17,7 +14,7 @@ $forum = Forum::find($id);
 </ul>
 
 @if($forum->topic_permission == null || Auth::user()->hasPermissionById($forum->topic_permission))
-<a href="/forums/{{$id}}/post" class="button secondary small right"><i class="icon-plus"></i> New Topic</a>
+<a href="/forums/{{$forum->id}}/post" class="button secondary small right"><i class="icon-plus"></i> New Topic</a>
 @endif
 
 <h3 class="topic-title">{{$forum->name}}</h3>
@@ -78,11 +75,12 @@ $forum = Forum::find($id);
 		</div>
 		<div class="topic-row-last-post">
 			<? $post = $topic->lastUpdatedPostForUser($user->id); ?>
-			<span class="hide-for-small">Last updated</span> {{ Helpers::timestamp($post->created_at) }}<br><span class="hide-for-small"> by </span> {{$post->poster->mailtoLink()}}
+			<span class="hide-for-small">Last updated</span> {{ Helpers::timestamp($post->created_at) }}<br>
+			<span class="hide-for-small"> by </span> {{$post->poster->mailtoLink()}}
 		</div>
 	</div>
 	@endforeach
 	</div>
-	<a class="mark-read right" href="/forums/{{$id}}/read">Mark forum as read.</a>
+	<a class="mark-read right" href="/forums/{{$forum->id}}/read">Mark forum as read.</a>
 @endif
 @stop

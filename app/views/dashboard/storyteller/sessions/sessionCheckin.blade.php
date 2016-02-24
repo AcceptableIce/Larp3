@@ -3,8 +3,7 @@
 
 @section('storyteller-script')
 	self.activeCharacters = ko.observableArray([]);
-	@if(isset($id))
-		<? $session = GameSession::find($id); ?>
+	@if(isset($session))
 		@foreach(Character::activeCharacters()->orderBy('name')->get() as $c)
 			@if(GameSessionCheckIn::where(['session_id' => $session->id, 'character_id' => $c->id])->count() == 0)
 				self.activeCharacters.push({
@@ -19,7 +18,7 @@
 
 	self.checkCharacterIn = function(data) {
 		$.ajax({
-			url: "/dashboard/storyteller/session/checkin/{{isset($id) ? $id : -1}}/character",
+			url: "/dashboard/storyteller/session/checkin/{{isset($session) ? $session->id : -1}}/character",
 			type: 'post',
 			data: {
 				id: data.id,
@@ -47,7 +46,7 @@
 @endsection
 @section('storyteller-content')
 <div class="row left">
-	@if(isset($id))
+	@if(isset($session))
 		<h2>Check-In for {{$session->date}}</h2>
 		<table class="responsive">
 			<thead>

@@ -1,6 +1,5 @@
 @extends('dashboard/storyteller')
 @section('storyteller-content')
-<? $character = Character::find($id); ?>
 @section('title', 'Positions for '.$character->name)
 
 <div class="row left">
@@ -25,7 +24,7 @@
 						{{CharacterPosition::where('position_id', $d->id)->count()}}
 					</td>
 					<td>
-						<form method="post" action="/dashboard/storyteller/character/{{$id}}/positions/remove">
+						<form method="post" action="/dashboard/storyteller/character/{{$character->id}}/positions/remove">
 							<input type="hidden" name="position" value="{{$d->definition->id}}" />
 							<input type="submit" class="button small alert" value="Remove from Position" />
 						</form>
@@ -35,7 +34,7 @@
 		</tbody>
 	</table>
 
-	<form method="post" action="/dashboard/storyteller/character/{{$id}}/positions/add" class="panel">
+	<form method="post" action="/dashboard/storyteller/character/{{$character->id}}/positions/add" class="panel">
 		<? $positions = RulebookPosition::all(); 
 			foreach($positions as $key => $p) {
 				if(CharacterPosition::where(['character_id' => $character->id, 'position_id' => $p->id])->exists()) {

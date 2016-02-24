@@ -1,4 +1,3 @@
-<? $character = Character::find($character_id); ?>
 <!DOCTYPE html>
 <html>
 	<head>

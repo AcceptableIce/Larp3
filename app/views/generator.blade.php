@@ -21,7 +21,8 @@
   <!-- ko if: $root.modal.mode() == 1 -->
   	<hr>
   	<button class="button small" data-bind="click: function() { $('#main-modal').foundation('reveal', 'close'); }">No</button>
-  	<button class="button success small" data-bind="click: function() { $root.modal.callback(); $('#main-modal').foundation('reveal', 'close'); }">Yes</button>
+  	<button class="button success small" 
+  		data-bind="click: function() { $root.modal.callback(); $('#main-modal').foundation('reveal', 'close'); }">Yes</button>
   <!-- /ko -->
   <a class="close-reveal-modal" aria-label="Close">&#215;</a>
 </div>
@@ -40,13 +41,19 @@
  	 	<input type="text" name="combo-name" data-bind="value: $root.comboModal.name" />
   </label>
   <label for="combo-opt-1">Discipline 1 (Required)
-  		<select data-bind="groupedOptions: { groups: { coll: $root.listAllDisciplines }, optionsCaption: '- Please select -'}, value: $root.comboModal.option1"></select>
+  		<select data-bind="groupedOptions: { groups: { coll: $root.listAllDisciplines }, 
+	  		optionsCaption: '- Please select -'}, value: $root.comboModal.option1">
+  		</select>
   </label>
   <label for="combo-opt-1">Discipline 2 (Required)
-  		<select data-bind="groupedOptions: { groups: { coll: $root.listAllDisciplines }, optionsCaption: '- Please select -'}, value: $root.comboModal.option2"></select>
+  		<select data-bind="groupedOptions: { groups: { coll: $root.listAllDisciplines },
+	  		optionsCaption: '- Please select -'}, value: $root.comboModal.option2">
+		  </select>
   </label>
   <label for="combo-opt-1">Discipline 3
-  		<select data-bind="groupedOptions: { groups: { coll: $root.listAllDisciplines }, optionsCaption: '- Please select -'}, value: $root.comboModal.option3"></select>
+  		<select data-bind="groupedOptions: { groups: { coll: $root.listAllDisciplines }, 
+	  		optionsCaption: '- Please select -'}, value: $root.comboModal.option3">
+		  </select>
   </label>
   <label for="combo-desc">Description
  	 <textarea name="combo-desc" data-bind="value: $root.comboModal.description"></textarea>
@@ -198,7 +205,8 @@
 							</select>
 						</div>						
 						<div data-bind="if: $root.showClanOption('Malkavian')">
-							Select Derangement: <i class="icon-help-circled discipline-help" data-bind="click: $root.showMalkavianDerangementDescription"></i> 
+							Select Derangement: 
+							<i class="icon-help-circled discipline-help" data-bind="click: $root.showMalkavianDerangementDescription"></i> 
 							<select data-bind='value: $root.clanOptionValues.malkavian[0], enable: $root.approvedVersion() == 0'>
 								<option></option>
 								@foreach(RulebookDerangement::all() as $d)
@@ -222,7 +230,8 @@
 									<option>Perform</option>
 									<option>Subterfuge</option>
 								</select>
-								<div data-bind="if: $root.clanOptionValues.toreador[$index()]() == 'Crafts' || $root.clanOptionValues.toreador[$index()]() == 'Perform'">
+								<div data-bind="if: $root.clanOptionValues.toreador[$index()]() == 'Crafts' || 
+									$root.clanOptionValues.toreador[$index()]() == 'Perform'">
 									<input type="text" data-bind="value: $root.clanOptionValues.toreador[$index() + 2], 
 										enable: $root.approvedVersion() == 0" placeholder="Describe..." />
 								</div>
@@ -294,13 +303,18 @@
 						value: $root.activeClan }"></select>
 				</div>
 				<div class="small-12 small-push-12 medium-6 medium-pull-3 columns">
-					<div class="callout panel" data-bind="visible: $root.approvedVersion() > 0 && !$root.isStoryteller()"><b>You cannot change your clan after character creation.</b></div>
+					<div class="callout panel" data-bind="visible: $root.approvedVersion() > 0 && !$root.isStoryteller()">
+						<b>You cannot change your clan after character creation.</b>
+					</div>
 					<div data-bind="with: $root.getClanById($root.activeClan() ? $root.activeClan().Value : -1)">
 						<b data-bind="text: name"></b><br>
+						
 						<b>Advantages:</b>
 						<div data-bind="html: advantages.replace('\n', '<br><br>')"></div><br>
+						
 						<b>Disadvantages:</b>
 						<div data-bind="text: disadvantages"></div><br>
+						
 						<input type="button" class="button medium" data-bind="value: 'Select Clan ' + name, 
 							click: $root.selectClan, visible: ($root.approvedVersion() == 0 || $root.isStoryteller())" />
 						<input type="button" class="button small info" data-bind="value: 'Masquerade as Clan ' + name, click: $root.masqueradeClan" />
@@ -422,7 +436,7 @@
 				<div class="small-12 panel info radius" data-bind="visible: $root.approvedVersion() == 0">
 					<p>
 						At character creation, you get five dots of Abilities for free. 
-						<b> You have <span data-bind="text: Math.max(0, 5 - $root.abilityPointsSpent())"></span> free points remaining.</b>
+						<b>You have <span data-bind="text: Math.max(0, 5 - $root.abilityPointsSpent())"></span> free points remaining.</b>
 					</p>
 				</div>
 				<div class="small-12 medium-8 medium-push-4 columns" data-bind="foreach: characterSheet.abilities">
@@ -442,7 +456,8 @@
 				</div>
 				<div class="small-12 medium-4 medium-pull-8 columns">
 					<h5>Available Abilities</h5>
-					<select data-bind="groupedOptions: { groups: { coll: $root.availableAbilities }, optionsCaption: '- Please select -', value: $root.activeAbility }"></select><br><br>
+					<select data-bind="groupedOptions: { groups: { coll: $root.availableAbilities }, 
+						optionsCaption: '- Please select -', value: $root.activeAbility }"></select><br><br>
 					<!-- ko if: $root.activeAbility -->
 					<input type="button" class="button small" data-bind="click: function() { addAbility($root.activeAbility().Value) }, 
 																		 value: 'Add ' + getAbilityById($root.activeAbility().Value).name" />
@@ -506,10 +521,12 @@
 				</div>				
 				<div class="small-12 medium-3 medium-pull-3 columns">
 					<h5>Available Disciplines</h5>
-					<select data-bind="groupedOptions: { groups: { coll: $root.availableDisciplines }, optionsCaption: '- Please select -', value: $root.activeDiscipline }"></select>
+					<select data-bind="groupedOptions: { groups: { coll: $root.availableDisciplines }, 
+						optionsCaption: '- Please select -', value: $root.activeDiscipline }"></select>
 					<!-- ko if: $root.hasPaths() -->
 					<br><br><h5>Paths of <span data-bind="text: $root.activeDiscipline().Text"></span></h5>
-					<select data-bind="groupedOptions: { groups: { coll: $root.availablePathDisciplines }, optionsCaption: '- Please select -', value: $root.activeDisciplinePath }"></select>
+					<select data-bind="groupedOptions: { groups: { coll: $root.availablePathDisciplines }, 
+						optionsCaption: '- Please select -', value: $root.activeDisciplinePath }"></select>
 					<!-- /ko -->
 					<button class="button small" data-bind="click: $root.showComboModal">Create Combo Discipline</button>
 
@@ -525,7 +542,8 @@
 						<div data-bind="with: $root.getNextDisciplineRank(id)">
 							The next rank is <b data-bind="html: name"></b>.<br>
 							<i data-bind="html: description"></i><br>
-							<input type="button" class="button small" data-bind="value: 'Purchase ' + name, click: function() { $root.purchaseDiscipline($parent.id) }" /><br>
+							<input type="button" class="button small" data-bind="value: 'Purchase ' + name, 
+								click: function() { $root.purchaseDiscipline($parent.id) }" /><br>
 						</div>
 						<div data-bind="visible: $root.getNextDisciplineRank(id) === undefined">
 							You have reached the maximum rank of <span data-bind="text: name"></span>.
@@ -538,12 +556,17 @@
 					<!-- ko if: $root.hasPaths() && $root.activeDiscipline() && $root.activeDisciplinePath() -->
 					<div data-bind="with: $root.getDisciplinePathById($root.activeDiscipline().Value, $root.activeDisciplinePath().Value)">
 						<b data-bind="text: $root.getDisciplineById($root.activeDiscipline().Value).name"></b>: <i data-bind="text: name"></i><br>
+						
 						Retests with <i><span data-bind="text: $root.getDisciplineById($root.activeDiscipline().Value).retest"></span></i><br><br>
+						
 						<div data-bind="with: $root.getNextDisciplineRank($root.activeDiscipline().Value, id)">
 							The next rank is <b data-bind="html: name"></b>.<br>
 							<i data-bind="html: description"></i><br>
-							<input type="button" class="button small" data-bind="value: 'Purchase ' + name, click: function() { $root.purchaseDiscipline($root.activeDiscipline().Value, $root.activeDisciplinePath().Value) }" /><br>
+							<input type="button" class="button small" data-bind="value: 'Purchase ' + name, 
+								click: function() { $root.purchaseDiscipline($root.activeDiscipline().Value, $root.activeDisciplinePath().Value) }" />
+							<br>
 						</div>
+						
 						<div data-bind="visible: $root.getNextDisciplineRank($root.activeDiscipline().Value, id) === undefined">
 							You have reached the maximum rank of <span data-bind="text: name"></span>.
 						</div>
@@ -567,7 +590,9 @@
 					<div class="row" data-bind="visible: $root.canUseRituals()">
 						<div class="small-4 columns">
 							<b>Available Rituals</b>
-							<select data-bind="groupedOptions: { groups: { coll: $root.availableRituals }, optionsCaption: '- Please select -', value: $root.activeRitual }"></select>
+							<select data-bind="groupedOptions: { groups: { coll: $root.availableRituals }, 
+								optionsCaption: '- Please select -', value: $root.activeRitual }">
+							</select>
 							<button class="button small success" data-bind="click: $root.showRitualModal">Add Custom Ritual</button>
 						</div>
 						<div class="small-4 columns">
@@ -612,12 +637,13 @@
 				</div>				
 				<div class="small-12 medium-4 medium-pull-8 columns">
 					<b>Available Backgrounds</b>
-					<select data-bind="groupedOptions: { groups: { coll: $root.availableBackgrounds }, optionsCaption: '- Please select -', value: $root.activeBackground }">
-			
-					</select><br><br>
+					<select data-bind="groupedOptions: { groups: { coll: $root.availableBackgrounds }, 
+						optionsCaption: '- Please select -', value: $root.activeBackground }">
+					</select>
+					<br><br>
 					<!-- ko if: $root.activeBackground -->
 					<input type="button" class="button small" data-bind="click: function() { addBackground($root.activeBackground().Value) }, 
-																		 value: 'Add ' + getBackgroundById($root.activeBackground().Value).name" />
+						value: 'Add ' + getBackgroundById($root.activeBackground().Value).name" />
 					<!-- /ko -->
 
 				</div>
@@ -670,7 +696,9 @@
 								<b class="ability-list-selected-name" data-bind="text: stats[3] + ' (' + $root.characterSheet.virtues()[3] + ')'"></b>
 								<div class="ability-list-icon minus" data-bind="click: function() { $root.onVirtueMinus(3) }">-</div>
 							</div>
-							<p class="small-desc">If you lost a virtue point, and would like to immediately repurchase it, tell the Storytellers.</p>
+							<p class="small-desc">
+								If you lost a virtue point, and would like to immediately repurchase it, tell the Storytellers.
+							</p>
 						</div>
 						<!-- ko if: characterSheet.path() === undefined -->
 							<p>No path selected.</p>
@@ -717,8 +745,8 @@
 					<div data-bind="with: activeDerangementData">
 						<b data-bind="text: name"></b><br>
 						<i data-bind="text: description"></i><br>
-						<input type="button" class="button small" data-bind="click: function() { $root.addDerangement($root.activeDerangement()) }, 
-																		 value: 'Add ' + name" />
+						<input type="button" class="button small" 
+							data-bind="click: function() { $root.addDerangement($root.activeDerangement()) }, value: 'Add ' + name" />
 					</div>
 				</div>
 
@@ -745,14 +773,16 @@
 				</div>
 				<div class="small-12 medium-4 medium-pull-4 column">
 					<h5>Available Merits</h5>
-						<select data-bind="groupedOptions: { groups: { coll: $root.availableMerits }, optionsCaption: '- Please select -', value: $root.activeMerit }"></select>			
+						<select data-bind="groupedOptions: { groups: { coll: $root.availableMerits }, 
+							optionsCaption: '- Please select -', value: $root.activeMerit }">
+						</select>			
 				</div>
 				<div class="small-12 medium-4 medium-pull-4 column">
 					<div data-bind="with: activeMerit">
 						<b data-bind="text: Name"></b><br>
 						<i data-bind="html: $root.getMeritById(Value).description"></i><br>
-						<input type="button" class="button small" data-bind="click: function() { $root.addMerit($root.activeMerit()) }, 
-																		 value: 'Add ' + Name" />						
+						<input type="button" class="button small" 
+							data-bind="click: function() { $root.addMerit($root.activeMerit()) }, value: 'Add ' + Name" />						
 					</div>
 				</div>
 			</div>
@@ -768,14 +798,16 @@
 				</div>				
 				<div class="small-12 medium-4 medium-pull-4 column">
 					<h5>Available Flaws</h5>
-					<select data-bind="groupedOptions: { groups: { coll: $root.availableFlaws }, optionsCaption: '- Please select -', value: $root.activeFlaw }"></select>	
+					<select data-bind="groupedOptions: { groups: { coll: $root.availableFlaws }, 
+						optionsCaption: '- Please select -', value: $root.activeFlaw }">	
+					</select>	
 				</div>
 				<div class="small-12 medium-4 medium-pull-4 column">
 					<div data-bind="with: activeFlaw">
 						<b data-bind="text: Text"></b><br>
 						<i data-bind="html: $root.getFlawById(Value).description"></i><br>
-						<input type="button" class="button small" data-bind="click: function() { $root.addFlaw($root.activeFlaw()) }, 
-																		 value: 'Add ' + Text" />						
+						<input type="button" class="button small" 
+							data-bind="click: function() { $root.addFlaw($root.activeFlaw()) }, value: 'Add ' + Text" />						
 					</div>
 				</div>
 
@@ -787,9 +819,8 @@
 			<p>Storyteller Options are not versioned.</p>
 			<div class="row left">
 				<div class="small-12 columns">
-					@if(isset($character_id))
-					  <? $character = Character::find($character_id); ?>
-					  <form method="post" action="/generator/{{$character_id}}/options/save">
+					@if(isset($character))
+					  <form method="post" action="/generator/{{$character->id}}/options/save">
 					  @foreach(RulebookStorytellerOption::all() as $definition)
 					  	<label for="storyteller-option-{{$definition->id}}">{{$definition->name}}
 						  	{{$definition->createForm($character)}}
@@ -827,7 +858,10 @@
 				          <label for="commit-message" class="right inline">Change Description</label>
 				        </div>
 				        <div class="small-8 medium-10 columns">
-							<textarea id="commit-message" placeholder="Write any additional information you think the STs should know." data-bind="value: $root.versionComment"></textarea>	        
+							<textarea id="commit-message" 
+								placeholder="Write any additional information you think the STs should know." 
+								data-bind="value: $root.versionComment">
+							</textarea>	        
 						</div>
 					</div>
 				</div>
@@ -837,31 +871,42 @@
 				<div class="small-12 medium-6 columns">
 					<div class="panel callout save-exit-prompt">
 						<b>Save and Exit</b>
-						<p class="save-instructions">If you want to save your work and exit the builder, click the button below. This will not send the changes you've made to the storytellers, 
-							but they will appear on your printed sheet,so please finalize your character as quickly as possible. Only use this button if you want to 
-							return to this system later to continue working on your character.</p>
+						<p class="save-instructions">
+							If you want to save your work and exit the builder, click the button below. 
+							This will not send the changes you've made to the storytellers, 
+							but they will appear on your printed sheet,so please finalize your character 
+							as quickly as possible. Only use this button if you want to 
+							return to this system later to continue working on your character.
+						</p>
 						<a class="button small" data-bind="click: function() { save(false); }">Save</a>
 					</div>
 				</div>
 				<div class="small-12 medium-6 columns">
 					<div class="panel callout save-exit-prompt">
 						<b>Finalize Changes</b>
-						<p class="save-instructions">	To send your changes to the storytellers for review, click this button. You will not be able to make any more changes to your character 
-														until after the STs have a chance to review and discuss your changes. You'll get a PM on the forum with more information when they do so.</p>
+						<p class="save-instructions">	
+							To send your changes to the storytellers for review, click this button. 
+							You will not be able to make any more changes to your character 
+							until after the STs have a chance to review and discuss your changes. 
+							You'll receive a PM on the forum with more information when they do so.
+						</p>
 						<a class="button small" data-bind="click: function() { save(true); }">Send for Review</a>
 
 					</div>
 				</div>	
 			</div>
-			@if(isset($character_id))
+			@if(isset($character))
 			<div class="row">
 				<div class="small-12 columns">
 					<div class="panel callout">
 						<b>Reset Changes</b>
-						<p>	If you don't like the changes you've made, you can roll back your character to the most recently approved version. 
-							That said, if you haven't saved any changes since your character was last approved, you can just refresh the page.</p>
-						<form action="/generator/{{$character_id}}/reset" method="post">
-							<input type="hidden" name="characterId" value="{{$character_id}}" />
+						<p>	
+							If you don't like the changes you've made, you can roll back your 
+							character to the most recently approved version. That said, if you haven't 
+							saved any changes since your character was last approved, you can just refresh the page.
+						</p>
+						<form action="/generator/{{$character->id}}/reset" method="post">
+							<input type="hidden" name="characterId" value="{{$character->id}}" />
 							<input type="submit" class="button small" value="Reset Changes" />
 						</form>
 					</div>
@@ -883,20 +928,18 @@
 	var preloaded = {
 		userId: {{Auth::user()->id}},
 		isStoryteller: {{Auth::user()->isStoryteller() ? "true" : "false"}},
-		characterId: {{isset($character_id) ? $character_id : -1}}
+		characterId: {{isset($character) ? $character->id : -1}}
 	}
-	<? if(isset($character_id)) {
-		$character = Character::find($character_id);
-		if($character->in_review) {
-			echo 'document.location = "/dashboard";';
-		} ?>
-		preloaded.editingVersion = {{$character->approved_version}};
-		preloaded.newVersion = {{$character->activeVersion() == $character->latestVersion()->version ? "true" : "false"}};
-		preloaded.experienceSpent = {{$character->getExperienceCost($character->latestVersion()->version)}};
-		preloaded.experienceTotal =	10 + {{$character->experience}};
-		preloaded.cData = {{json_encode($character->getVersion($character->latestVersion()->version, false))}};
-
-	<? } ?>
+	@if(isset($character))
+			@if($character->in_review)
+				{{'document.location = "/dashboard";'}};
+			@endif
+			preloaded.editingVersion = {{$character->approved_version}};
+			preloaded.newVersion = {{$character->activeVersion() == $character->latestVersion()->version ? "true" : "false"}};
+			preloaded.experienceSpent = {{$character->getExperienceCost($character->latestVersion()->version)}};
+			preloaded.experienceTotal =	10 + {{$character->experience}};
+			preloaded.cData = {{json_encode($character->getVersion($character->latestVersion()->version, false))}};
+	@endif
 </script>
 <script src="/js/generator.js"></script>
 @stop

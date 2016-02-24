@@ -36,7 +36,7 @@ App::after(function($request, $response)
 Route::filter('auth', function() {
 	if (Auth::guest()) {
 		if (Request::ajax()) {
-			return Response::make('Unauthorized', 401);
+			return App::abort(403);
 		} else {
 			return Redirect::guest('login');
 		}
@@ -50,18 +50,15 @@ Route::filter('auth.basic', function() {
 
 Route::filter('storyteller', function() {
 	if (Auth::guest() || !Auth::user()->isStoryteller()) {
-		return Response::make('Unauthorized', 401);
+		return App::abort(403);
 	}	
 });
 
 Route::filter('ownsCharacter', function($route) {
-	$id = $route->parameter('id');
-	if(!isset($id)) $id = Input::get("id");
-	if(!isset($id)) $id = Input::get("characterId");
-	$character = Character::find($id);
+	$character = $route->parameter('character');
 	$user = Auth::user();
-	if(!$character || ($character->user_id != $user->id && !$user->isStoryteller())) {
-		return Response::make("Route Unauthorized", 401);
+	if($character->user_id != $user->id && !$user->isStoryteller()) {
+		return App::abort(403);
 	}
 });
 

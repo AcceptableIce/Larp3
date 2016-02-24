@@ -72,20 +72,14 @@ class SaveController extends BaseController {
 		}
 	}
 
-	public function resetCurrentChanges() {
-		$character = Character::find(Input::get("characterId"));
-		if($character) {
-			CharacterVersion::where('character_id', $character->id)->where('version', '>', $character->activeVersion())->delete();
-			return Redirect::to('/generator/'.$character->id);	
-		} else {
-			return Response::json(["success" => false, "message" => "Character could not be found."]);
-		}
+	public function resetCurrentChanges(Character $character) {
+		CharacterVersion::where('character_id', $character->id)->where('version', '>', $character->activeVersion())->delete();
+		return Redirect::to('/generator/'.$character->id);	
 	}
 	
-	public function saveBiography($id) {
+	public function saveBiography($character) {
 		$question_ids = Input::get('ids');
 		$replies = Input::get('replies');
-		$character = Character::find($id);
 		if($character) {
 			foreach($question_ids as $index => $q) {
 				$response = CharacterQuestionnaire::firstOrNew(['character_id' => $character->id, 'questionnaire_id' => $q]);
@@ -101,13 +95,13 @@ class SaveController extends BaseController {
 			}
 			if($character->active || $character->in_review) {
 				//Find the relevant forum post and bump it (or create it if it doesn't exist)
-				$post = ForumPost::where('body', "[[questionnaire/$id]]")->first();
+				$post = ForumPost::where('body', "[[questionnaire/$character->id]]")->first();
 				if($post) {
 					$topic = $post->topic;
 					$topic->postReply($character->owner->id, "Questionnaire responses updated. (Automatic system post)");
 				} else {
 					//42 = Character Backgrounds
-					$topic = Forum::find(42)->post("Character Biography for ".$character->name, "[[questionnaire/$id]]");
+					$topic = Forum::find(42)->post("Character Biography for ".$character->name, "[[questionnaire/$character->id]]");
 					$topic->markAsRead(Auth::user());
 				}
 				return Redirect::to("/forums/topic/".$topic->id);
@@ -835,8 +829,7 @@ class SaveController extends BaseController {
 	}
 
 
-	public function saveStorytellerOptions($id) {
-		$character = Character::find($id);
+	public function saveStorytellerOptions(Character $character) {
 		foreach(RulebookStorytellerOption::all() as $definition) {
 			$value = Input::get("storyteller-option-".$definition->id);
 			if($definition->type == "checkbox") $value = ($value == "on" ? 1 : 0);
@@ -847,7 +840,7 @@ class SaveController extends BaseController {
 				$setting->save();
 			}
 		}
-		return Redirect::to("/generator/$id");
+		return Redirect::to("/generator/$character->id");
 	}
 	
 

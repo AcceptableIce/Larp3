@@ -1,10 +1,5 @@
 @extends('forums/forumLayout')
 @section('title', 'Post Topic')
-@section('forum-style') 
-<style type="text/css">
-
-</style>
-@stop
 @section('forum-script')
 	tinymce.init({
 		selector: "#post",
@@ -18,7 +13,7 @@
 	self.allUsers = ko.observableArray([]);
 	self.selectedUsers = ko.observableArray([]);
 	self.selectedUser = ko.observable();
-	<? if(isset($topic_id)) $added_users = ForumTopicAddedUser::where('topic_id', $topic_id)->get(); ?>
+	<? if(isset($topic)) $added_users = ForumTopicAddedUser::where('topic_id', $topic->id)->get(); ?>
 	@foreach(Character::activeCharacters()->get() as $c)
 		var userObject = {id: "{{$c->owner->id}}", name: "{{$c->owner->username}}"};
 		self.allUsers.push(userObject);
@@ -54,12 +49,9 @@
 	 
 @stop
 @section('forum-content')
-<? if(isset($topic_id)) {
-	$topic = ForumTopic::find($topic_id);
-	$forum = $topic->forum;
-} else {
-	$forum = Forum::find($id); 
-} ?>
+<? 
+	if(isset($topic)) $forum = $topic->forum;
+?>
 <ul class="button-group breadcrumb-group">
 	<li><a href="/forums" class="button small secondary"><i class="icon-home"></i></a></li>
 	<li><a href="/forums/{{$forum->id}}" class="button small secondary">{{$forum->name}}</a></li>
@@ -70,10 +62,10 @@
 	@if(strlen($forum->post_header) > 0)
 		<div class="list-header">{{ForumPost::render($forum->post_header)}}</div>		
 	@endif
-	<div class="forum-title">{{isset($topic_id) ? "Edit" : "New"}} Topic</div>
+	<div class="forum-title">{{isset($topic) ? "Edit" : "New"}} Topic</div>
 
 	<input type="hidden" value="{{$forum->id}}" name="forum_id" />
-	@if(isset($topic_id)) <input type="hidden" value="{{$topic->id}}" name="topic_id" /> @endif
+	@if(isset($topic)) <input type="hidden" value="{{$topic->id}}" name="topic_id" /> @endif
 	<input type="text" class="topic-field" name="title" placeholder="Subject" value="{{isset($topic) ? $topic->title : ''}}" />
 	<div class="topic-divider"></div>
 	<textarea id="post" class="topic-body" name="body" placeholder="Type your message here...">

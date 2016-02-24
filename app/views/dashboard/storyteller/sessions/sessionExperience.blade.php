@@ -3,8 +3,7 @@
 
 @section('storyteller-script')
 	self.activeCharacters = ko.observableArray([]);
-	@if(isset($id))
-		<? $session = GameSession::find($id); ?>
+	@if(isset($session))
 		@foreach($session->checkins()->with('character')->get()->sortBy('character.name') as $checkin)
 		self.activeCharacters.push(ko.observable(
 			{
@@ -23,9 +22,9 @@
 @endsection
 @section('storyteller-content')
 <div class="row left">
-	@if(isset($id))
+	@if(isset($session))
 		<h2>Award Experience for {{$session->date}}</h2>
-		<form method="post" action="/dashboard/storyteller/session/experience/{{$id}}/award">
+		<form method="post" action="/dashboard/storyteller/session/experience/{{$session->id}}/award">
 		<table class="responsive">
 			<thead>
 				<th>Character</th>

@@ -115,7 +115,7 @@
 		</table>
 	@endforeach
 	@elseif($mode == "edit")
-	<? $forum = Forum::find(isset($id) ? $id : -1); ?>
+	<? if(!isset($forum)) $forum = null; ?>
 	<h2>{{$forum ? 'Edit '.$forum->name : 'New Forum'}}</h2>
 	<form action="/dashboard/storyteller/manage/forums/{{$forum ? $forum->id.'/' : ''}}save" method="post">
 		<div class="row">

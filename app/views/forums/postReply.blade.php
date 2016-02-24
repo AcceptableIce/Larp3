@@ -1,10 +1,5 @@
 @extends('forums/forumLayout')
 @section('title', 'Post Reply')
-@section('forum-style') 
-<style type="text/css">
-
-</style>
-@stop
 
 @section('forum-script')
 	tinymce.init({
@@ -28,12 +23,8 @@ if(isset($quote)) {
 		$quoteValue = "<blockquote><cite>".$postToQuote->poster->username." wrote:</cite>".$postToQuote->body."</blockquote><br>";
 	}
 }
-if(isset($post_id)) {
-	$post = ForumPost::find($post_id);
-	$topic = $post->topic;
-} else {
-	$topic = ForumTopic::find($id);
-} ?>
+if(isset($post)) $topic = $post->topic;
+?>
 <ul class="button-group breadcrumb-group">
 	<li><a href="/forums" class="button small secondary"><i class="icon-home"></i></a></li>
 	<li><a href="/forums/{{$topic->forum->id}}" class="button small secondary">{{$topic->forum->name}}</a></li>
@@ -44,9 +35,9 @@ if(isset($post_id)) {
 
 </ul>
 <form method="post" action="/forums/reply/post">
-	<div class="forum-title">{{isset($post_id) ? "Edit" : "Post"}} Reply to "{{$topic->title}}"</div>
-	@if(isset($id))<input type="hidden" value="{{$id}}" name="topic_id" />@endif
-	@if(isset($post_id)) <input type="hidden" value="{{$post_id}}" name="post_id" /> @endif
+	<div class="forum-title">{{isset($post) ? "Edit" : "Post"}} Reply to "{{$topic->title}}"</div>
+	<input type="hidden" value="{{$topic->id}}" name="topic_id" />
+	@if(isset($post)) <input type="hidden" value="{{$post->id}}" name="post_id" /> @endif
 	<textarea class="topic-body" name="body" placeholder="Type your message here..." id="post">{{isset($post) ? $post->body : $quoteValue}}</textarea>
 	@if(Auth::user()->isStoryteller() && $topic->forum->asymmetric_replies)
 		<div class="switch post-option-switch">

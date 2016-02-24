@@ -3,7 +3,6 @@
 	self.activeTab("characters");
 @stop
 @section('dashboard-content')
-<? $character = Character::find($character_id); ?>
 <div class="row left">
 	<div class="small-12 columns">
 		<h2 class="character-title">Lores</h2>

@@ -1,6 +1,4 @@
 @extends('dashboard')
-<? $character = Character::find($character_id); ?>
-
 @section('dashboard-script')
 	self.activeTab("characters");
 
