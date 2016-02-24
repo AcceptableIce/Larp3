@@ -1,5 +1,8 @@
 <?php
 
+//Force IDs to be numerical.
+Route::pattern('id', '[0-9]+');
+
 // Define the classes that routes can accept.
 Route::model('character', 'Character');
 Route::model('session', 'GameSession');

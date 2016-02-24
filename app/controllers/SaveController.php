@@ -447,16 +447,21 @@ class SaveController extends BaseController {
 			
 			foreach($disciplines as $d) {
 				//Look for a discipline record from the previous version
-				$old_discipline = CharacterDiscipline::character($character_id)->where(array('discipline_id' => $d["id"], 'path_id' => $d["path"]))->version($active_version - 1)->first();
+				$old_discipline = CharacterDiscipline::character($character_id)
+				->where(array('discipline_id' => $d["id"], 'path_id' => $d["path"]))
+				->version($active_version - 1)
+				->first();
+				
 				if(isset($old_discipline)) {
 					$new_discipline = $old_discipline->replicate();
 					$rank_difference = $d["count"] - $old_discipline->ranks;
 					if($rank_difference < 0) {
 						//We burn points if we've lost a discipline rank
-						$new_discipline->lost_points += $character->getDisciplineCost($old_discipline->definition, $old_discipline->ranks, $active_version) - $character->getDisciplineCost($old_discipline->definition, $d["count"], $active_version);							
+						$new_discipline->lost_points += $character->getDisciplineCost($old_discipline->definition, $old_discipline->ranks, $active_version) - 																						$character->getDisciplineCost($old_discipline->definition, $d["count"], $active_version);							
 					} else if($user->isStoryteller()) {
 						//We receive free points if we're a storyteller.
-						$new_discipline->free_points += $character->getDisciplineCost($old_discipline->definition, $d["count"], $active_version) - $character->getDisciplineCost($old_discipline->definition, $old_discipline->ranks, $active_version);
+						$new_discipline->free_points += $character->getDisciplineCost($old_discipline->definition, $d["count"], $active_version) - 
+																						$character->getDisciplineCost($old_discipline->definition, $old_discipline->ranks, $active_version);
 					}
 					$new_discipline->ranks = $d["count"];
 					$new_discipline->version_id = $active_version_id;
@@ -632,7 +637,11 @@ class SaveController extends BaseController {
 			if(isset($character_data["merits"])) {
 				$merits = $character_data["merits"];
 				foreach($merits as $dr) {
-					$old_merit = CharacterMerit::character($character_id)->version($active_version - 1)->where('merit_id', $dr["id"])->where('description', isset($dr['description']) && strlen($dr['description']) > 0 ? $dr['description'] : null)->first();
+					$old_merit = CharacterMerit::character($character_id)
+											->version($active_version - 1)
+											->where('merit_id', $dr["id"])
+											->where('description', isset($dr['description']) && strlen($dr['description']) > 0 ? $dr['description'] : null)
+											->first();
 					if(isset($old_merit)) {
 						$new_merit = $old_merit->replicate();
 						$new_merit->version_id = $active_version_id;
@@ -678,7 +687,11 @@ class SaveController extends BaseController {
 			if(isset($character_data["flaws"])) {
 				$flaws = $character_data["flaws"];
 				foreach($flaws as $dr) {
-					$old_flaw = CharacterFlaw::character($character_id)->version($active_version - 1)->where('flaw_id', $dr["id"])->where('description', isset($dr['description']) && strlen($dr['description']) > 0 ? $dr['description'] : null)->first();
+					$old_flaw = CharacterFlaw::character($character_id)
+											->version($active_version - 1)
+											->where('flaw_id', $dr["id"])
+											->where('description', isset($dr['description']) && strlen($dr['description']) > 0 ? $dr['description'] : null)
+											->first();
 					if(isset($old_flaw)) {
 						$new_flaw = $old_flaw->replicate();
 						$new_flaw->version_id = $active_version_id;
@@ -720,8 +733,12 @@ class SaveController extends BaseController {
 			}
 			
 			foreach($backgrounds as $b) {
-				$old_background = CharacterBackground::character($character_id)->version($active_version - 1)->where(['background_id' => $b["id"], 
-								  'description' => (isset($b['description']) && strlen($b['description']) > 0 ? $b['description'] : null)])->first();
+				$old_background = CharacterBackground::character($character_id)
+													->version($active_version - 1)
+													->where([
+														'background_id' => $b["id"], 
+														'description' => (isset($b['description']) && strlen($b['description']) > 0 ? $b['description'] : null)
+													])->first();
 				if(isset($old_background)) {
 					$new_background = $old_background->replicate();
 					$rank_difference = $b["count"] - $old_background->amount;
@@ -811,11 +828,20 @@ class SaveController extends BaseController {
 				} 
 			}
 			foreach($comboDisciplines as $ep) {
-				$old_power = CharacterComboDiscipline::character($character_id)->where('combo_id', $ep["id"])->version($active_version - 1)->first();
+				$old_power = CharacterComboDiscipline::character($character_id)
+										->where('combo_id', $ep["id"])
+										->version($active_version - 1)
+										->first();
 				if(!isset($old_power)) {
 					$opt3 = strlen($ep['option3']) == 0 ? null : $ep['option3'];
-					$disc = RulebookComboDiscipline::firstOrCreate(['owner_id' => $character_id, 'option1' => $ep['option1'], 'option2' => $ep['option2'], 'option3' => $opt3, 
-																	 'name' => $ep['name'], 'description' => $ep['description']]);
+					$disc = RulebookComboDiscipline::firstOrCreate([
+						'owner_id' => $character_id, 
+						'option1' => $ep['option1'], 
+						'option2' => $ep['option2'], 
+						'option3' => $opt3, 
+						'name' => $ep['name'], 
+						'description' => $ep['description']
+					]);
 					$power = new CharacterComboDiscipline;
 					$power->character_id = $character_id;
 					$power->combo_id = $disc->id;
@@ -824,7 +850,6 @@ class SaveController extends BaseController {
 					$power->save();
 				}	
 			}
-
 			return $character;
 	}
 

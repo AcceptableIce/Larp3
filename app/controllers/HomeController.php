@@ -1,10 +1,6 @@
 <?php
 class HomeController extends BaseController {
 
-	public function showWelcome() {
-		return View::make('hello');
-	}
-	
 	public function buildRulebook($owner = -1) {
 		//Build rulebook or retrieve it from the cache.
 		$out = Cache::remember('rulebook', 24*60, function() {
@@ -109,12 +105,12 @@ class HomeController extends BaseController {
 		}
 		usort($outList, function($a, $b) use ($type){
 			$ordering = [	
-							"merits" => ["Other", "Physical", "Mental", "Social", "Supernatural"],
-							"flaws" => ["Other", "Physical", "Mental", "Social", "Supernatural"],
-							"backgrounds" => ["Backgrounds", "Influence", "Lores"],
-							"abilities" => ["Combat", "Discipline", "Other"],
-							"rituals" => ["Basic", "Intermediate", "Advanced"]
-						];
+				"merits" => ["Other", "Physical", "Mental", "Social", "Supernatural"],
+				"flaws" => ["Other", "Physical", "Mental", "Social", "Supernatural"],
+				"backgrounds" => ["Backgrounds", "Influence", "Lores"],
+				"abilities" => ["Combat", "Discipline", "Other"],
+				"rituals" => ["Basic", "Intermediate", "Advanced"]
+			];
 			$va = $a["name"];
 			$vb = $b["name"];
 			return array_search($va, $ordering[$type]) > array_search($vb, $ordering[$type]);
@@ -196,13 +192,12 @@ class HomeController extends BaseController {
 		if($upload) {
 			if($upload->read_permission) {
 				$user = Auth::user();
-				if(!$user || !$user->hasPermissionById($user)) App::abort(503);
+				if(!$user || !$user->hasPermissionById($user)) App::abort(403);
 			}
 			$fileName = app_path()."/uploads/".$upload->url;
 			$file = File::get($fileName);
 			$response = Response::make($file, 200);
-            // using this will allow you to do some checks on it (if pdf/docx/doc/xls/xlsx)
-            $response->header('Content-Type', mime_content_type($fileName));
+      $response->header('Content-Type', mime_content_type($fileName));
 			return $response;
 		} else {
 			App::abort(404); 

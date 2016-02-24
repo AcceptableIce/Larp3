@@ -363,7 +363,7 @@ class ForumController extends BaseController {
 				$st->sendMessage(null, 
 					"Carpe Noctem Topic Alert", 
 					"Hello, $st->username,<br><br>This message has been sent to you by $user->username to".
-					" your bring attention to the topic <a href='http://larp3.acceptableice.com/forums/topic/$topic->id'>".
+					" your bring attention to the topic <a href='http://larp.illini-rp.net/forums/topic/$topic->id'>".
 					"$topic->title</a>.".
 					($message ? " $user->username had this to say about the topic:<br><br>"."<blockquote>$message</blockquote>" : "")
 				);

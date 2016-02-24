@@ -45,6 +45,4 @@ class MailController extends BaseController {
 	public function lookupUser($name) {
 		return Response::json(['found' => User::where('username', 'LIKE', $name)->count() > 0]);
 	}
-
-
 }
