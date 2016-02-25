@@ -250,6 +250,13 @@ input.topic-field {
 	float: left;
 }
 
+.post-like-list {
+	font-size: 0.7em;
+	width: calc(100% - 30px);
+	margin-left: 30px;
+	margin-top: 5px;
+}
+
 .post-footer {
 	clear: both;
 	overflow: hidden;
@@ -261,16 +268,11 @@ input.topic-field {
 .icon-thumbs-up {
 	color: #c0c0c0;
 	float: left;
-}
-.icon-thumbs-up.active {
-	color: #5E99AD;
+	cursor: pointer;
 }
 
-.post-like-list {
-	font-size: 0.7em;
-	width: calc(100% - 30px);
-	margin-left: 30px;
-	margin-top: 5px;
+.icon-thumbs-up.active {
+	color: #5E99AD;
 }
 
 .post-actions {

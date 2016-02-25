@@ -356,16 +356,15 @@ Route::group(['before' => 'auth'], function() {
 
 		Route::get('/topic/{topic}', 'ForumController@showTopic');
 
-		Route::get('/topic/{id}/toggleComplete', 'ForumController@toggleTopicComplete');
-		Route::get('/topic/{id}/toggleSticky', 'ForumController@toggleTopicSticky');
-		Route::post('/topic/{id}/toggleLike', 'ForumController@toggleTopicSticky');
+		Route::get('/topic/{topic}/toggleComplete', 'ForumController@toggleTopicComplete');
+		Route::get('/topic/{topic}/toggleSticky', 'ForumController@toggleTopicSticky');
 
-		Route::get('/topic/{id}/toggleWatch', 'ForumController@toggleWatch');		
+		Route::get('/topic/{topic}/toggleWatch', 'ForumController@toggleWatch');		
 
 		Route::post('/topic/post', 'ForumController@postTopic');
 		Route::post('/reply/post', 'ForumController@postReply');
 
-		Route::get('/{id}/read', 'ForumController@markForumRead');
+		Route::get('/{forum}/read', 'ForumController@markForumRead');
 		Route::get('/category/{id}/read', 'ForumController@markCategoryRead');
 
 		Route::post('/post/delete', 'ForumController@deletePost');

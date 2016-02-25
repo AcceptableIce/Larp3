@@ -209,23 +209,18 @@ class ForumController extends BaseController {
 		}
 	}
 
-	function toggleWatch($id) {
+	function toggleWatch(ForumTopic $topic) {
 		$user = Auth::user();
-		$topic = ForumTopic::find($id);
 		if($user) {
-			if($topic) {
-				if($user->canAccessTopic($id)) {
-					if(ForumTopicWatch::where(['user_id' => $user->id, 'topic_id' => $id])->exists()) {
-						$this->unsubscribeFromTopic($id);
-					} else {
-						$this->subscribeToTopic($id);
-					}
-					return Redirect::to("/forums/topic/$id");
+			if($user->canAccessTopic($topic->id)) {
+				if(ForumTopicWatch::where(['user_id' => $user->id, 'topic_id' => $topic->id])->exists()) {
+					$this->unsubscribeFromTopic($topic->id);
 				} else {
-					return Response::json(["success" => false, "message" => "Access denied."]);			
+					$this->subscribeToTopic($topic->id);
 				}
+				return Redirect::to("/forums/topic/$topic->id");
 			} else {
-				return Response::json(["success" => false, "message" => "Invalid topic."]);			
+				return Response::json(["success" => false, "message" => "Access denied."]);			
 			}
 		} else {
 			return Response::json(["success" => false, "message" => "Not logged in."]);			
@@ -262,7 +257,16 @@ class ForumController extends BaseController {
 			return Response::json(["success" => false, "message" => "Not logged in."]);			
 		}
 	}
-
+	
+	function markForumRead(Forum $forum) {
+		$user = Auth::user();
+		if($user) {
+			$forum->markForumRead($user->id);
+			return Redirect::to("/forums/$forum->id");
+		} else {
+			return Response::json(["success" => false, "message" => "Not logged in."]);			
+		}
+	}
 
 	function subscribeToTopic($id) {
 		$user = Auth::user();
@@ -299,31 +303,21 @@ class ForumController extends BaseController {
 		}		
 	}
 
-	function toggleTopicComplete($id) {
+	function toggleTopicComplete(ForumTopic $topic) {
 		if(Auth::user()->isStoryteller()) {
-			$topic = ForumTopic::find($id);
-			if($topic) {
-				$topic->is_complete = $topic->is_complete ? 0 : 1;
-				$topic->save();
-				return Redirect::to("/forums/topic/$id");
-			} else {
-				return Response::json(["success" => false, "message" => "No topic found with that ID."]);		
-			}
+			$topic->is_complete = $topic->is_complete ? 0 : 1;
+			$topic->save();
+			return Redirect::to("/forums/topic/$topic->id");
 		} else {
 				return Response::json(["success" => false, "message" => "Unauthorized."]);
 		}
 	}
 
-	function toggleTopicSticky($id) {
+	function toggleTopicSticky(ForumTopic $topic) {
 		if(Auth::user()->isStoryteller()) {
-			$topic = ForumTopic::find($id);
-			if($topic) {
-				$topic->is_sticky = $topic->is_sticky ? 0 : 1;
-				$topic->save();
-				return Redirect::to("/forums/topic/$id");
-			} else {
-				return Response::json(["success" => false, "message" => "No topic found with that ID."]);		
-			}
+			$topic->is_sticky = $topic->is_sticky ? 0 : 1;
+			$topic->save();
+			return Redirect::to("/forums/topic/$topic->id");
 		} else {
 			return Response::json(["success" => false, "message" => "Unauthorized."]);
 		}
