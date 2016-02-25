@@ -11,19 +11,19 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 	protected $table = 'users';
 
-	protected $hidden = ['password', 'email'];
+	protected $hidden = ['password', 'email', 'remember_token'];
 
-    public function permissions() {
-        return $this->hasMany("Permission");
-    }
+  public function permissions() {
+  	return $this->hasMany("Permission");
+  }
 
 	public function hasPermission($permission) {
 		$p_id = PermissionDefinition::where('name', $permission)->firstOrFail()->id;
-        return $this->permissions()->where('permission_id', $p_id)->count() > 0 || $this->isStoryteller();
+		return $this->permissions()->where('permission_id', $p_id)->count() > 0 || $this->isStoryteller();
 	}
 
 	public function hasPermissionById($permission_id) {
-        return $this->permissions()->where('permission_id', $permission_id)->count() > 0 || $this->isStoryteller();
+		return $this->permissions()->where('permission_id', $permission_id)->count() > 0 || $this->isStoryteller();
 	}
 
 	public function isStoryteller() {

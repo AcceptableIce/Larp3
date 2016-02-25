@@ -15,6 +15,10 @@ class ForumPost extends Eloquent {
 	public function edits() {
 		return $this->hasMany('ForumEdit', 'post_id', 'id');
 	}
+	
+	public function likes() {
+		return $this->hasMany('ForumPostLike', 'post_id', 'id');
+	}
 
 	public static function render($body) {
 		//First off, look for tags.

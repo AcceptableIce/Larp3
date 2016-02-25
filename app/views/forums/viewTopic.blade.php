@@ -39,6 +39,7 @@
 		self.promptDeleteThread(thread);
 		$('#delete-modal').foundation('reveal', 'open');
 	}
+	
 	self.stopDelete = function() {
 		$('#delete-modal').foundation('reveal', 'close');
 	}
@@ -46,6 +47,99 @@
 
 	self.showAlertSTsModal = function(id) {
 		$("#alert-sts-modal").foundation('reveal', 'open');
+	}
+	
+	self.currentUser = ko.observable({ 
+		id: {{$user->id}},
+		username: "{{$user->username}}"
+	});
+	
+	self.postLikes = ko.observableArray([]);
+	@foreach($topic->postsForUser($user->id)->get() as $post)
+		<? $likes = $post->likes()->join("users", "users.id", "=", "user_id")->select(DB::raw('post_id, users.id as user_id, username'))->orderBy('username')->get(); ?>
+		self.postLikes.push({ 
+			id: {{$post->id}},
+			likes: {{$likes->toJson()}}
+		});
+	@endforeach
+	
+	self.hasLikedPost = function(id) {
+		for(var i = 0; i < self.postLikes().length; i++) {
+			var post = self.postLikes()[i];
+			if(post.id == id) {
+				for(var j = 0; j < post.likes.length; j++) {
+					var like = post.likes[j];
+					if(like.user_id == self.currentUser().id) return true;
+				}
+			}
+		}
+		return false;
+	}
+	
+	self.getLikedList = function(id) {
+		var liked = [];
+		var userLiked = false;
+		for(var i = 0; i < self.postLikes().length; i++) {
+			var post = self.postLikes()[i];
+			if(post.id == id) {
+				for(var j = 0; j < post.likes.length; j++) {
+					var like = post.likes[j];
+					if(like.user_id == self.currentUser().id) {
+						userLiked = true;
+					} else {
+						liked.push(like.username);
+					}
+				}
+			}
+		}
+		
+		if(liked.length == 0 && !userLiked) {
+			return "";
+		}
+		if(userLiked && liked.length == 0) {
+			return "You liked this post.";
+		} else if(userLiked && liked.length == 1) {
+			return "You and " + liked[0] + " liked this post.";
+		} else if(userLiked && liked.length > 1) {
+			return "You, " + liked.slice(0, liked.length - 1).join(", ") + ", and " + liked[liked.length - 1] + " liked this post.";
+		} else if (!userLiked && liked.length == 1) {
+			return liked[0] + " liked this post.";
+		} else if (!userLiked && liked.length == 2) {
+			return liked.join(" and ") + " liked this post.";
+		} else if(!userLiked && liked.length > 2) {
+			return liked.slice(0, liked.length - 1).join(", ") + ", and " + liked[liked.length - 1] + " liked this post.";
+		}
+		return "";
+	}
+	
+	self.toggleLike = function(id) {
+		$.post("/forums/post/" + id + "/toggleLike");
+		for(var i = 0; i < self.postLikes().length; i++) {
+			var post = self.postLikes()[i];
+			if(post.id == id) {
+				var found = false;
+				for(var j = 0; j < post.likes.length; j++) {
+					var like = post.likes[j];
+					if(like.user_id == self.currentUser().id) {
+						post.likes.splice(j);
+						j--;
+						found = true;
+					}
+				}
+				console.log(found);
+				if(!found) {
+					post.likes.push({
+						user_id: self.currentUser().id, 
+						user: { 
+							username: self.currentUser().username
+						} 
+					});
+				}
+			}
+		}
+		var temp = self.postLikes();
+		self.postLikes({});
+		self.postLikes(temp);
 	}
 	
 	var startPoint = {{$i + 1}};
@@ -241,35 +335,49 @@
 				@foreach($post->edits()->orderBy('created_at')->take(3)->get() as $edit) 
 					<div class="edit-notification"><i>Edited {{Helpers::timestamp($edit->created_at)}} by {{$edit->user->username}}</i></div>
 				@endforeach
-
-				<div class="forum-signature">{{$post->poster->getSettingValue("Forum Signature")}}</div>
-				<div class="post-options">
-					@if(($forum->asymmetric_replies  || $forum->id == 35) && $isStoryteller) <!-- Contact the STs -->
-						<a href="/forums/topic/{{$topic->id}}/toggleComplete">
-							@if($topic->is_complete) 
-								<button class="button post-option tiny warning toggle-complete">Mark Incomplete</button>
-							@else
-								<button class="button post-option tiny success toggle-complete">Mark Complete</button>
+				<? $signature = $post->poster->getSettingValue("Forum Signature"); ?>
+				@if($signature) 
+					<div class="forum-signature">{{$signature}}</div>
+				@endif
+				<div class="post-footer">
+					<div class="post-likes">
+						<i class="icon-thumbs-up" data-bind="css: {'active': $root.hasLikedPost({{$post->id}}) }, 
+							click: function() { $root.toggleLike({{$post->id}}) }">
+						</i>
+						<div class="post-like-list" data-bind="text: $root.getLikedList({{$post->id}})"></div>
+					</div>
+					<div class="post-options">
+						@if($post->posted_by == $user->id || $isStoryteller) 
+							<a href="#" data-bind="click: function() { promptDelete({{$post->id}}, {{$i == 1 ? "true " : "false"}}); }">
+								<button class="button post-option alert tiny">Delete</button>
+							</a>
+						@endif		
+						@if($isStoryteller)
+							<a href="/forums/topic/{{$topic->id}}/toggleSticky">
+							@if($topic->is_sticky)<button class="button post-option tiny">Unstick</button>
+							@else <button class="button post-option tiny">Stick</button>
 							@endif
-						</a>
-					@endif
-					@if($isStoryteller)
-						<a href="/forums/topic/{{$topic->id}}/toggleSticky">
-						@if($topic->is_sticky)<button class="button post-option tiny">Unstick</button>
-						@else <button class="button post-option tiny">Stick</button>
+							</a>
+							<button data-bind="click: $root.showAlertSTsModal" class="button post-option tiny warning">Alert STs</button>
 						@endif
+						<a href="/forums/topic/{{$topic->id}}/post?quote={{$post->id}}">
+							<button id="quote-post-{{$i}}" class="button post-option tiny">Quote</button>
 						</a>
-						<button data-bind="click: $root.showAlertSTsModal" class="button post-option tiny warning">Alert STs</button>
-					@endif
-					<a href="/forums/topic/{{$topic->id}}/post?quote={{$post->id}}">
-						<button id="quote-post-{{$i}}" class="button post-option tiny">Quote</button>
-					</a>
-					@if($post->posted_by == $user->id || $isStoryteller) 
-						<a href="/forums/{{$i == 1 ? 'topic/'.$topic->id : 'post/'.$post->id}}/edit">
-							<button id="edit-post-{{$i}}" class="button post-option tiny">Edit</button>
-						</a>
-					@endif
-					<a href="#" data-bind="click: function() { promptDelete({{$post->id}}, {{$i == 1 ? "true " : "false"}}); }"<button class="button post-option alert tiny">Delete</button></a>
+						@if($post->posted_by == $user->id || $isStoryteller) 
+							<a href="/forums/{{$i == 1 ? 'topic/'.$topic->id : 'post/'.$post->id}}/edit">
+								<button id="edit-post-{{$i}}" class="button post-option tiny">Edit</button>
+							</a>
+						@endif
+						@if(($forum->asymmetric_replies || $forum->id == 35) && $isStoryteller) <!-- Contact the STs -->
+							<a href="/forums/topic/{{$topic->id}}/toggleComplete">
+								@if($topic->is_complete) 
+									<button class="button post-option tiny warning toggle-complete">Mark Incomplete</button>
+								@else
+									<button class="button post-option tiny success toggle-complete">Mark Complete</button>
+								@endif
+							</a>
+						@endif
+					</div>
 				</div>
 			</div>
 		</div>

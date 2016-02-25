@@ -134,11 +134,11 @@ class Forum extends Eloquent {
 
 	public function hasUnreadPosts($user_id) {
 		$response = $this->rawTopicsForUser($user_id)
-						->select('title', 'watch.mark_read', DB::raw('MAX(plist.created_at) as maxca'))
-						->leftJoin('forums_track_reads as watch', function($j) use ($user_id) {
-							$j->on('forums_topics.id', '=', 'watch.topic_id')->where('watch.user_id', '=', $user_id);
-						})	
-						->join('forums_posts as plist', 'forums_topics.id', '=', 'plist.topic_id');
+			->select('title', 'watch.mark_read', DB::raw('MAX(plist.created_at) as maxca'))
+			->leftJoin('forums_track_reads as watch', function($j) use ($user_id) {
+				$j->on('forums_topics.id', '=', 'watch.topic_id')->where('watch.user_id', '=', $user_id);
+			})	
+			->join('forums_posts as plist', 'forums_topics.id', '=', 'plist.topic_id');
 
 		if($this->asymmetric_replies && !Auth::user()->isStoryteller()) {
 			$response = $response->where('plist.is_storyteller_reply', false);
@@ -166,7 +166,7 @@ class Forum extends Eloquent {
 		 return DB::table("forums_topics AS topics")
 		 		->select(DB::raw("DISTINCT topics.id"))
 		 		->where('forum_id', $this->id)
-				->leftJoin(DB::raw('(SELECT id, topic_id, MAX(created_at) AS latestDate FROM forums_posts GROUP BY topic_id) AS posts'), 							function($join) {
+				->leftJoin(DB::raw('(SELECT id, topic_id, MAX(created_at) AS latestDate FROM forums_posts GROUP BY topic_id) AS posts'), 														function($join) {
 						$join->on('topics.id','=','posts.topic_id');
 					}
 				)

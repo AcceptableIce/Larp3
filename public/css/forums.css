@@ -227,6 +227,8 @@ input.topic-field {
 .button.post-option {
 	padding: 5px 5px;
 	margin: 0;
+	float: right;
+	margin-right: 3px;
 }
 
 .option-divider {
@@ -234,7 +236,41 @@ input.topic-field {
 }
 
 .post-options {
-	text-align: right;
+	display: inline-block;
+	float: right;
+	vertical-align: bottom;
+	position: absolute;
+	bottom: 5px;
+	right: 20px;
+}
+
+.post-likes {
+	width: calc(50%);
+	display: inline-block;
+	float: left;
+}
+
+.post-footer {
+	clear: both;
+	overflow: hidden;
+	border-top: 1px solid #ddd;
+	margin-top: 2px;
+	padding-top: 2px;
+}
+
+.icon-thumbs-up {
+	color: #c0c0c0;
+	float: left;
+}
+.icon-thumbs-up.active {
+	color: #5E99AD;
+}
+
+.post-like-list {
+	font-size: 0.7em;
+	width: calc(100% - 30px);
+	margin-left: 30px;
+	margin-top: 5px;
 }
 
 .post-actions {

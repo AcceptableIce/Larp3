@@ -358,6 +358,7 @@ Route::group(['before' => 'auth'], function() {
 
 		Route::get('/topic/{id}/toggleComplete', 'ForumController@toggleTopicComplete');
 		Route::get('/topic/{id}/toggleSticky', 'ForumController@toggleTopicSticky');
+		Route::post('/topic/{id}/toggleLike', 'ForumController@toggleTopicSticky');
 
 		Route::get('/topic/{id}/toggleWatch', 'ForumController@toggleWatch');		
 
@@ -369,7 +370,7 @@ Route::group(['before' => 'auth'], function() {
 
 		Route::post('/post/delete', 'ForumController@deletePost');
 		Route::post('/alert', 'ForumController@alertSTs');
-
+		Route::post('/post/{post}/toggleLike', 'ForumController@toggleLike');
 	});
 
 

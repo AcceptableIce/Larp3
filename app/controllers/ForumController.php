@@ -232,18 +232,22 @@ class ForumController extends BaseController {
 		}
 	}
 
-	function markForumRead($id) {
+	function toggleLike(ForumPost $post) {
 		$user = Auth::user();
-		$forum = Forum::find($id);
-		if($user) {
-			if($forum) {
-				$forum->markForumRead($user->id);
-				return Redirect::to("/forums/$id");
+		if($user && $user->canAccessTopic($post->topic_id)) {
+			$like = ForumPostLike::where(['post_id' => $post->id, 'user_id' => $user->id])->first();
+			if($like) {
+				$like->delete();
+				return Response::json(["success" => true, "message" => "Unliked."]);
 			} else {
-				return Response::json(["success" => false, "message" => "Invalid topic."]);			
+				$like = new ForumPostLike;
+				$like->post_id = $post->id;
+				$like->user_id = $user->id;
+				$like->save();
+				return Response::json(["success" => true, "message" => "Liked."]);
 			}
 		} else {
-			return Response::json(["success" => false, "message" => "Not logged in."]);			
+			return Response::json(["success" => false, "message" => "Access denied."]);
 		}
 	}
 
