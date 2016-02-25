@@ -20,7 +20,7 @@ class StorytellerPositionController extends BaseController {
 	
 	public function grantCharacterPosition(Character $character) {
 		$position = RulebookPosition::find(Input::get("position"));
-		if($position != null &&) {
+		if($position != null) {
 			if(!CharacterPosition::where(['character_id' => $character->id, 'position_id' => $position->id])->exists()) {
 				$newPosition = new CharacterPosition;
 				$newPosition->character_id = $character->id;

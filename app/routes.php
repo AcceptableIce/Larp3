@@ -258,7 +258,7 @@ Route::group(['before' => 'auth'], function() {
 				return Redirect::to('/dashboard/storyteller'); 
 			});
 			
-			Route::post('/manage/forums/{id}/save', 'StorytellerForumController@saveForum');	
+			Route::post('/manage/forums/{forum}/save', 'StorytellerForumController@saveForum');	
 			Route::post('/manage/forums/save', 'StorytellerForumController@saveForum');
 			Route::post('/manage/forum/{forum}/character/add', 'StorytellerForumController@grantCharacterForumPermission');	
 			Route::post('/manage/forum/{forum}/character/remove', 'StorytellerForumController@removeCharacterForumPermission');	

@@ -1,7 +1,7 @@
 <?php
 class StorytellerForumController extends BaseController {
-	public function saveForum($id = -1) {
-		$forum = Forum::findOrNew($id);
+	public function saveForum(Forum $forum = null) {
+		if($forum == null) $forum = new Forum;
 		$forum->name = Input::get("name");
 		$forum->description = Input::get("description");
 		$forum->category_id = Input::get("category");				

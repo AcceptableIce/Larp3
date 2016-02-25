@@ -117,11 +117,15 @@ b {
 	display: block;
 }
 
-
 .character-actions {
 	width: 90px;
 	overflow-y: visible;
 	display: block;
+}
+
+.storyteller-character-list .character-actions a {
+	position: relative;
+	top: 9px;
 }
 .top-bar-section .dropdown li.parent-link a {
 	display: none;
