@@ -254,7 +254,7 @@ input.topic-field {
 	clear: both;
 	overflow: hidden;
 	border-top: 1px solid #ddd;
-	margin-top: 2px;
+	margin-top: 5px;
 	padding-top: 2px;
 }
 
@@ -465,7 +465,7 @@ p + .handbook-page {
 .forum-signature {
 	font-size: 0.9em;
 	border-top: 1px solid #ddd;
-	padding-top: 10px;
+	padding-top: 5px;
 }
 
 .clan-image {
