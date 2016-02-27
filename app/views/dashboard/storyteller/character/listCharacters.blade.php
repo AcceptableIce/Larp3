@@ -78,7 +78,7 @@
 	<? $items = $request[$filter]->with('owner')->orderBy('name')->paginate(25); ?>
 	<div class="character-pagination">{{ $items->links() }}</div>
 </div>
-<table class="responsive storyteller-character-list">
+<table class="responsive storyteller-character-list-{{$filter}}">
 	<thead>
 		<th>Actions</th>
 		<th>Character Name</th>

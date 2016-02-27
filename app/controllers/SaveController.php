@@ -1,53 +1,61 @@
 <?php
 class SaveController extends BaseController {
 
-	public function saveCharacter() {
-		if(!Auth::check()) return Response::json(array("success" => false, "message" => "Unable to validate user."));
-		$character_data = Input::get('sheet');
-		$user = Auth::user();
-		$continue_save = Input::get("continue");
+	public function saveCharacter() {		
+		$user = Auth::user();	
 		
-		// Make sure we have a name.
-		if(strlen(trim($character_data["name"])) == 0) {
-			return Response::json(["success" => false, "mode" => 2, "message" => "Characters must have a name."]);
-		}
-		
-		DB::beginTransaction();
-		$character_exists = Character::where('id', Input::get('characterId'))->exists();
-		if($character_exists) {
-			if(Character::where('id', Input::get('characterId'))->first()->user_id != $user->id && !$user->isStoryteller()) {
-				return Response::json(array("success" => false, "mode" => 0, "message" => "Unauthorized"));
+		if($user) {
+			// Make sure we have a name.
+			if(strlen(trim(Input::get("sheet.name"))) == 0) {
+				return Response::json(["success" => false, "mode" => 2, "message" => "Characters must have a name."]);
 			}
-		}
-		try {
-			$character = $this->save($character_data, $user);
-			if(Input::get("review") && !($character->getOptionValue("Ignore Validation") || $user->isStoryteller())) {
-				$character->verify($character->approved_version + 1, $character->approved_version == 0);
+			
+			$character = Character::find(Input::get('characterId'));
+					
+			if($character) {
+				if(Character::where('id', Input::get('characterId'))->first()->user_id != $user->id && !$user->isStoryteller()) {
+					return Response::json(array("success" => false, "mode" => 0, "message" => "Unauthorized"));
+				}
 			}
-		} catch (Exception $e) {
-			DB::rollback();
-			if(get_class($e) == "CharacterValidationException") {
-				return Response::json(array("success" => false, "mode" => 2, "message" => $e->getMessage()));
+			
+			try {
+				$version = $this->newSave();
+				$character = $version->character;
+				if(Input::get("review") && !($character->getOptionValue("Ignore Validation") || $user->isStoryteller())) {
+					$character->verify($character->approved_version + 1, $character->approved_version == 0);
+				}
+			} catch (Exception $e) {
+				$version->rollback();
+				if(get_class($e) == "CharacterValidationException") {
+					return Response::json(array("success" => false, "mode" => 2, "message" => $e->getMessage()));
+				}
+				return Response::json(array("success" => false, "mode" => 0, "message" => $e->getMessage()."[".$e->getFile()."$".$e->getLine()."]"));
 			}
-			return Response::json(array("success" => false, "mode" => 0, "message" => $e->getMessage()."[".$e->getFile()."$".$e->getLine()."]"));
+			
+			$version->commit();
+			
+			if(Input::get("review")) {
+				if($user->isStoryteller()) {
+					$character->approved_version = $version->version;
+					$character->in_review = false;
+					if(!$character->is_active) $character->approved_at = new DateTime;
+					$character->save();	
+				} else {
+					//41 = Character Changes
+					$topic = (($character->approved_version == 0) ? "Character Changes to " : "New Character ")."\"".$character->name."\" from ".$user->username;
+					$versionNumber = $character->latestVersion()->version;
+					Forum::find(41)->post($topic, "[[change/$character->id/$versionNumber]]");
+				}
+			}
+			
+			return Response::json([	
+				"success" => true, 
+				"mode" => 0, 
+				"message" => (Input::get("review") ? "In review queue." : "Saved successfully.")
+			]);
+		} else {
+			return Response::json(array("success" => false, "message" => "Unable to validate user."));
 		}
-
-		DB::commit();
-		if(Input::get("review") && !$user->isStoryteller()) {
-			//41 = Character Changes
-			$topic = ($character_exists ? "Character Changes to " : "New Character ")."\"".$character->name."\" from ".$user->username;
-			$version = $character->latestVersion()->version;
-			Forum::find(41)->post($topic, "[[change/$character->id/$version]]");
-		}
-		if($user->isStoryteller() && Input::get("review")) {
-			$character->approved_version = $character->latestVersion()->version;
-			$character->in_review = false;
-			if(!$character->is_active) 	$character->approved_at = new DateTime;
-			$character->save();
-		}
-		return Response::json([	"success" => true, 
-								"mode" => $continue_save ? 1 : 0, 
-								"message" => (Input::get("review") ? "In review queue." : "Saved successfully.")]);
 	}
 
 	public function deleteCharacter() {
@@ -114,19 +122,149 @@ class SaveController extends BaseController {
 	}
 
 	public function getCost() {
-		if(!Auth::check()) return Response::json(array("success" => false, "message" => "Unable to validate user."));
-		$character_data = Input::get('sheet');
-		$user = Auth::user();		
-		DB::beginTransaction();
-		try { 
-			$char = $this->save($character_data, $user);
-		} catch (Exception $e) {
-			DB::rollback();
-			return Response::json(array("success" => false, "message" => $e->getMessage()."[".$e->getFile()."$".$e->getLine()."]"));
+		if(Auth::check()) {
+			$user = Auth::user();		
+			try {
+				$version = $this->newSave();
+			} catch (Exception $e) {
+				$version->rollback();
+				return Response::json(array("success" => false, "message" => $e->getMessage()."[".$e->getFile()."$".$e->getLine()."]"));
+			}
+			$xpc = $version->character->getExperienceCost($version->version);
+			$version->rollback();
+			return Response::json(array("success" => true, "cost" => $xpc));
+		} else {
+			return Response::json(array("success" => false, "message" => "Unable to validate user."));
 		}
-		$xpc = $char->getExperienceCost($char->approved_version + 1);
-		DB::rollback();
-		return Response::json(array("success" => true, "cost" => $xpc));
+	}
+	
+	public function newSave() {
+		$user = Auth::user();
+		$character = Character::firstOrNew(['id' => Input::get('characterId')]);
+		if(!isset($character->user_id)) {
+			$character->user_id = $user->id;
+		}
+		$character->name = Input::get("sheet.name");
+		$character->in_review = (Input::get("review") == 1);
+		$character->save();
+		
+		CharacterVersion::where('character_id', $character->id)->where('version', '>', $character->activeVersion())->delete();
+		
+		$version = CharacterVersion::createNewVersion($character);
+		
+		if($version->isNewCharacter()) {
+			$version->setHasDroppedMorality(Input::get("sheet.hasDroppedMorality") == "true");
+		}
+		try {
+			$version->setEditingUser($user);
+			
+			if(Input::get("sheet.sect")) {
+				$version->setSect(
+					RulebookSect::find(Input::get("sheet.sect.selected")), 
+					RulebookSect::find(Input::get("sheet.sect.displaying"))
+				);
+			}
+			
+			if(Input::get("sheet.clan")) {
+				$version->setClan(
+					RulebookClan::find(Input::get("sheet.clan.selected")),
+					RulebookClan::find(Input::get("sheet.clan.displaying"))
+				);
+			}
+			
+			if(Input::get("sheet.clanOptions")) {
+				$version->setClanOptions(
+					Input::get("sheet.clanOptions.0"),
+					Input::get("sheet.clanOptions.1"),
+					Input::get("sheet.clanOptions.2")
+				);
+			}
+			
+			if(Input::get("sheet.nature")) {
+				$version->setNature(
+					RulebookNature::find(Input::get("sheet.nature"))
+				);
+			}
+			
+			if(Input::get("sheet.willpower")) {
+				$version->setWillpower(
+					Input::get("sheet.willpower.dots"),
+					Input::get("sheet.willpower.traits")
+				);
+			}
+			
+			if(Input::get("sheet.attributes")) {
+				$version->setAttributes(
+					Input::get("sheet.attributes.physicals"),
+					Input::get("sheet.attributes.mentals"),
+					Input::get("sheet.attributes.socials")
+				);
+			}
+			
+			foreach((array) Input::get("sheet.abilities") as $ability) {
+				if(array_key_exists("specialization", $ability)) {
+					$version->addAbilityWithSpecialization(RulebookAbility::find($ability["id"]), $ability["count"], $ability["specialization"], $ability["name"]);
+				} else {
+					$version->addAbility(RulebookAbility::find($ability["id"]), $ability["count"], $ability["name"]);
+				}
+			}
+			
+			foreach((array) Input::get("sheet.disciplines") as $discipline) {
+				$version->updateDiscipline(RulebookDiscipline::find($discipline["id"]), $discipline["count"],
+					array_key_exists("path", $discipline) ? $discipline["path"] : null);
+			}
+						
+			foreach((array) Input::get("newRituals") as $newRitualData) {
+				$version->addRitualToBook($newRitualData["name"], $newRitualData["description"], $newRitualData["type"]);
+			}
+			
+			foreach((array) Input::get("sheet.rituals") as $ritualId) {
+				$version->addRitual($ritualId);
+			}
+			if(Input::get("sheet.path")) {
+				$version->updatePath(
+					RulebookPath::find(Input::get("sheet.path")),
+					Input::get("sheet.virtues.0"),
+					Input::get("sheet.virtues.1"),
+					Input::get("sheet.virtues.2"),
+					Input::get("sheet.virtues.3")			
+				);
+			}
+			
+			foreach((array) Input::get("sheet.merits") as $meritData) {
+				$version->addMerit(RulebookMerit::find($mertData["id"]),
+					array_key_exists("description", $meritData) ? $meritData["description"] : null);
+			}		
+			
+			foreach((array) Input::get("sheet.flaws") as $flawData) {
+				$version->addFlaw(RulebookFlaw::find($flawData["id"]),
+					array_key_exists("description", $flawData) ? $flawData["description"] : null);
+			}
+			
+			foreach((array) Input::get("sheet.derangements") as $derangementData) {
+				$version->addDerangement(RulebookDerangement::find($derangementData["id"]), 
+					array_key_exists("description", $derangementData) ? $derangementData["description"] : null);
+			}
+			
+			foreach((array) Input::get("sheet.backgrounds") as $backgroundData) {
+				$version->addBackground(RulebookBackground::find($backgroundData["id"]), $backgroundData["count"],
+					array_key_exists("description", $backgroundData) ? $backgroundData["description"] : null);
+			}
+			
+			foreach((array) Input::get("sheet.elderPowers") as $elderData) {
+				$version->addElderPower($elderData);
+			}
+		
+			foreach((array) Input::get("sheet.comboDisciplines") as $comboData) {
+				$version->addComboDiscipline($comboData);
+			}
+			
+			$version->clearUntouchedRecords();
+		} catch (Exception $e) {
+			echo $e;
+		}
+			
+		return $version;
 	}
 
 	public function save($character_data, $user) {

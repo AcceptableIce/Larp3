@@ -5,7 +5,7 @@ class Character extends Eloquent {
 	protected $table = 'characters';
 
 	protected $appends = [	'sect', 'clan', 'nature', 'willpower', 'attributes', 'abilities', 'disciplines', 'rituals', 'backgrounds', 'path', 
-							'derangements', 'merits', 'flaws'];
+													'derangements', 'merits', 'flaws'];
 	protected $fillable = ['user_id', 'name'];
 
 	public function activeVersion() {
@@ -170,7 +170,7 @@ class Character extends Eloquent {
 
 	public function elderPowers($version = -1) {
 		if($version == -1) $version = $this->activeVersion();
-		return CharacterElderPower::character($this->id)->version($version);
+		return CharacterElderPower::character($this->id)->where('removed', false)->version($version);
 	}
 
 	public function getElderPowersAttribute() {
@@ -460,9 +460,11 @@ class Character extends Eloquent {
 	
 	public function getDisciplinePathCost($discipline, $path, $rank, $version) {
 		$cost = $this->getDisciplineCost($discipline, $rank, $version);
-		$path = RulebookDisciplinePath::find($path);
-		if($path->hard_path) {
-			$cost += $rank;
+		if($path != null) {
+			$path = RulebookDisciplinePath::find($path);
+			if($path->hard_path) {
+				$cost += $rank;
+			}
 		}
 		return $cost;
 	}
@@ -508,6 +510,26 @@ class Character extends Eloquent {
 			return $this->approved_version > 0 ? @$this->availableExperience() : "N/A";
 		});
 	}
+	
+	public function countInClanBasics($version) {
+		$basic_count = 0;
+		if($this->clan($version)->exists()) {
+			$in_clans = $this->inClanDisciplines($version);
+			foreach($this->disciplines($version, true)->get() as $d) {
+				if(in_array($d->definition, $in_clans)) {
+					$basic_count += min($d->ranks, 2);
+				}
+			}
+		}
+		return $basic_count;
+	}
+	
+	public function isDisciplineInClan($discipline, $version) {
+		if($this->clan($version)->exists()) {
+			return in_array($discipline, $this->inClanDisciplines($version));
+		}
+		return false;
+	}
 	public function getExperienceCost($version) {
 		//Keep a running total of how expensive this sheet is.
 		$experience_cost = 0;
@@ -537,7 +559,7 @@ class Character extends Eloquent {
 		foreach($abilities as $a) {
 			$ability_total += $a->amount + $a->lost_points - $a->free_points;
 			if($clan == "Brujah") {
-				if(	$clanOptions->option1 == "Neighborhood" && $a->definition->name == "Streetwise" ||
+				if($clanOptions->option1 == "Neighborhood" && $a->definition->name == "Streetwise" ||
 					$clanOptions->option1 == "Politics" && $a->definition->name == "Politics" ||
 					$clanOptions->option1 == "University" && $a->definition->name == "Academics") $ability_total -= 1;
 			} else if ($clan == "Gangrel" || $clan == "City Gangrel" || $clan == "Country Gangrel") {
@@ -578,7 +600,6 @@ class Character extends Eloquent {
 		if($this->clan($version)->exists()) {
 			$in_clans = $this->inClanDisciplines($version);
 			foreach($disciplines as $d) {
-
 				if($d->path_id > 0) {
 					$experience_cost += $this->getDisciplinePathCost($d->definition, $d->path_id, $d->ranks, $version);
 				} else {
@@ -596,7 +617,7 @@ class Character extends Eloquent {
 		$freeBasic = false;
 		foreach($rituals as $r) {
 			$ritual_cost = ["Basic" => 2, "Intermediate" => 4, "Advanced" => 6];
-			$experience_cost += $ritual_cost[$r->definition->group];
+			if(!$r->is_free) $experience_cost += $ritual_cost[$r->definition->group];
 			if(!$freeBasic && $r->definition->group == "Basic" && $r->definition->name != "Rite of Introduction") {
 				$experience_cost -= 2;
 				$freeBasic = true;

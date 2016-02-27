@@ -123,7 +123,7 @@ b {
 	display: block;
 }
 
-.storyteller-character-list .character-actions a {
+.storyteller-character-list-complete .character-actions a {
 	position: relative;
 	top: 9px;
 }

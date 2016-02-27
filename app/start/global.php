@@ -83,6 +83,11 @@ App::down(function() {
 	return Response::make("Be right back!", 503);
 });
 
+Validator::extend('username', function($attribute, $value)
+{
+    return preg_match('/^[A-Za-z0-9!@#$%^&*\s]+$/u', $value);
+});
+
 /*
 |--------------------------------------------------------------------------
 | Require The Filters File
@@ -95,7 +100,5 @@ App::down(function() {
 */
 
 require app_path().'/filters.php';
-
-require app_path().'/validators.php';
 
 require app_path().'/helpers.php';

@@ -10,6 +10,10 @@ Route::model('forum', 'Forum');
 Route::model('topic', 'ForumTopic');
 Route::model('post', 'ForumPost');
 
+Route::get('/test', function() {
+	CharacterVersion::createNewVersion(Character::find(415));
+});
+
 Route::get('/', function() {
 	if(Auth::user()) {
 		return Redirect::to('dashboard');

@@ -112,7 +112,7 @@
 							@endif
 						</td>
 						<td>
-							{{$character->versionInfo($character->latestVersion()->version)->updated_at}}
+							{{@$character->versionInfo($character->latestVersion()->version)->updated_at}}
 						</td>
 					</tr>
 				@endforeach

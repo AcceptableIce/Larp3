@@ -1,4 +1,5 @@
 <?php
+if (!class_exists("Helpers")) {
 class Helpers {
 	static function timestamp($timestamp) {
 		$user = Auth::user();
@@ -43,4 +44,5 @@ class Helpers {
 		"elder_powers" => "RulebookElderPower",
 		"combo_disciplines" => "RulebookComboDiscipline"
 	];
+}
 }

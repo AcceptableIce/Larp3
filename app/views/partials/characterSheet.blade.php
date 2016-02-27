@@ -390,7 +390,7 @@
 	</div>		
 </div>
 
-<? $elders = $character->elderPowers()->get(); ?>
+<? $elders = $character->elderPowers($version)->get(); ?>
 <div class="row character-sheet-row collapse">
 	@foreach($character->disciplines($version)->with('definition')->get()->sortBy('definition.name') as $discipline)
 	<div class="columns discipline">
@@ -422,6 +422,15 @@
 		@endforeach
 	</div>
 	@endforeach
+	<? $combos = $character->comboDisciplines($version)->get(); ?>
+	@if($combos->count() > 0)
+		<div class="columns discipline">
+			<b>Combo Disciplines</b>
+			@foreach($combos as $combo)
+				<div class="discipline-row">{{$combo->definition->name}}</div>
+			@endforeach
+		</div>
+	@endif
 </div>
 @if($requires_chop)
 <div class="requires-chop">

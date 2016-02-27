@@ -1,5 +1,5 @@
 <?php
-class StorytellerRulebookController extends BaseController {
+class StorytellerInfluenceController extends BaseController {
 	public function addInfluenceField() {
 		$background_id = Input::get("background");
 		if($background_id) {
