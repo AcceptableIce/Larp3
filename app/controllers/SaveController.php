@@ -232,7 +232,7 @@ class SaveController extends BaseController {
 			}
 			
 			foreach((array) Input::get("sheet.merits") as $meritData) {
-				$version->addMerit(RulebookMerit::find($mertData["id"]),
+				$version->addMerit(RulebookMerit::find($meritData["id"]),
 					array_key_exists("description", $meritData) ? $meritData["description"] : null);
 			}		
 			
