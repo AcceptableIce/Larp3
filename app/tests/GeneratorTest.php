@@ -39,6 +39,7 @@ class GeneratorTest extends TestCase {
 	public static function tearDownAfterClass() {
 		echo 'Doing final teardown...';
 		parent::tearDownAfterClass();
+		self::$version2->rollback();
 		self::$version->rollback();
 		self::$character->delete();
 		self::$player->delete();
@@ -478,6 +479,7 @@ class GeneratorTest extends TestCase {
 																					"option2" => $ability2->id, "option3" => null, "description" => "Test Combo Desc 2"]);
 		});
 	}
+	
 		
 	protected function assertCostDifference($difference, $method) {
 		$preCost = @self::$character->getExperienceCost(self::$version->version);

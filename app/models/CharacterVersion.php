@@ -342,7 +342,7 @@ class CharacterVersion extends Eloquent {
 			
 			foreach($virtueDifferences as $index => $difference) {
 				if($difference < 0) {
-					//Index 3 = Morality, which only costs 2.
+					//Index 2 = Morality, which only costs 2.
 					$pathRecord->lost_points += abs($difference) * ($index == 2 ? 2 : 3);
 				} elseif ($difference > 0 && $this->editingAsStoryteller()) {
 					$pathRecord->free_points += abs($difference) * ($index == 2 ? 2 : 3);					
@@ -522,7 +522,7 @@ class CharacterVersion extends Eloquent {
 						}
 						break;
 					case "CharacterMerit":
-						if($this->editingAsStoryteller() || !$untouchedRecord->bought_off) {
+						if($this->editingAsStoryteller() && !$untouchedRecord->bought_off) {
 							$untouchedRecord->lost_points += $untouchedRecord->definition->cost;
 							$untouchedRecord->bought_off = true;
 							$untouchedRecord->save();
