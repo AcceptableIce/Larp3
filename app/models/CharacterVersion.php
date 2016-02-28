@@ -187,14 +187,14 @@ class CharacterVersion extends Eloquent {
 				$ability->isCustom = true;
 				$ability->owner = $this->character_id;
 				$ability->save();
+				if($this->editingAsStoryteller()) {
+					$abilityRecord->free_points += $count;
+				}
 			}
 			
 			$abilityRecord = $this->createNewRecord("CharacterAbility");
 			$abilityRecord->ability_id = $ability->id;
 			
-			if($this->editingAsStoryteller()) {
-				$abilityRecord->free_points += $count;
-			}
 		}
 		
 		$abilityRecord->amount = $count;
@@ -267,6 +267,7 @@ class CharacterVersion extends Eloquent {
 		$disciplineRecord = CharacterDiscipline::character($this->character_id)->version($this->version)
 			->where('discipline_id', $discipline->id)
 			->where('path_id', $path)
+			->where('ranks', '!=', 0)
 			->first();
 					
 		$inClanBasicCount = $this->character->countInClanBasics($this->version);
@@ -423,7 +424,9 @@ class CharacterVersion extends Eloquent {
 	public function addMerit(RulebookMerit $merit, $description = null) {
 		$query = CharacterMerit::character($this->character_id)
 			->version($this->version)
-			->where('merit_id', $merit->id);
+			->where('merit_id', $merit->id)
+			->where('bought_off', false);
+			
 		if($description) {
 			$query = $query->where('description', $description);
 		} else {
