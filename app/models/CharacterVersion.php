@@ -365,7 +365,11 @@ class CharacterVersion extends Eloquent {
 	}
 	
 	public function addDerangement(RulebookDerangement $derangement, $description = null) {
-		$derangementRecord = $this->findOneWhere("CharacterDerangement", "derangement_id", $derangement->id);
+		$derangementRecord = CharacterDerangement::character($this->character_id)
+			->version($this->version)
+			->where('derangement_id', $derangement->id)
+			->where('bought_off', false)
+			->first();
 		if(!$derangementRecord) {
 			$derangementRecord = $this->createNewRecord("CharacterDerangement");
 			$derangementRecord->derangement_id = $derangement->id;
@@ -387,7 +391,8 @@ class CharacterVersion extends Eloquent {
 	public function addFlaw(RulebookFlaw $flaw, $description = null) {
 		$query = CharacterFlaw::character($this->character_id)
 			->version($this->version)
-			->where('flaw_id', $flaw->id);
+			->where('flaw_id', $flaw->id)
+			->where('bought_off', false);
 			
 		if($description) {
 			$query = $query->where('description', $description);

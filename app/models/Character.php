@@ -709,7 +709,7 @@ class Character extends Eloquent {
 			$flaws_cost += $f->definition->cost - $f->lost_points + $f->free_points;
 		}
 		foreach($this->derangements($version, true)->get() as $index => $d) {
-			$flaws_cost += 2 - $d->lost_points + $d->free_points;
+ 			$flaws_cost += 2 - $d->lost_points + $d->free_points;
 			if($clan == "Malkavian" && $index == 0) $flaws_cost -= 2;
 		}
 		$experience_cost -= $flaws_cost;
