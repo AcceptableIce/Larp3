@@ -10,10 +10,6 @@ Route::model('forum', 'Forum');
 Route::model('topic', 'ForumTopic');
 Route::model('post', 'ForumPost');
 
-Route::get('/test', function() {
-	Character::where('name', '')->delete();
-});
-
 Route::get('/', function() {
 	if(Auth::user()) {
 		return Redirect::to('dashboard');

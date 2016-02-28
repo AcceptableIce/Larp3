@@ -95,12 +95,12 @@ class CharacterVersion extends Eloquent {
 		$willpowerRecord = $this->findOne("CharacterWillpower");
 		
 		if($willpowerRecord) {
-			$willpowerDifference = $dots - $willpowerRecord->dots;
+			$willpowerDifference = $dots - $willpowerRecord->willpower_total;
 			if($willpowerDifference > 0) {
 				if($this->editingAsStoryteller()) {
 					$willpowerRecord->amount_free += $willpowerDifference;
 				}
-			} else {
+			} else if ($willpowerDifference < 0) {
 				if(!$this->editingAsStoryteller()) {
 					$willpowerRecord->amount_lost += abs($willpowerDifference);
 				}
@@ -205,8 +205,10 @@ class CharacterVersion extends Eloquent {
 	
 	public function addAbilityWithSpecialization($ability, $count, $specialization, $name = null) {
 		$abilityRecord = $this->addAbility($ability, $count, $name);
-		$abilityRecord->specialization = $specialization;
-		if($this->editingAsStoryteller()) $abilityRecord->free_points += 1;
+		if(!$abilityRecord->specialization) {
+			$abilityRecord->specialization = $specialization;
+			if($this->editingAsStoryteller()) $abilityRecord->free_points += 1;
+		}
 		$abilityRecord->save();
 	}
 	
@@ -507,9 +509,9 @@ class CharacterVersion extends Eloquent {
 					case "CharacterDerangement":
 						if(!$untouchedRecord->bought_off) {
 							$untouchedRecord->lost_points += $this->editingAsStoryteller() ? 2 : 4;
+							$untouchedRecord->bought_off = true;
+							$untouchedRecord->save();
 						}
-						$untouchedRecord->bought_off = true;
-						$untouchedRecord->save();
 						break;
 					case "CharacterMerit":
 						if($this->editingAsStoryteller() || !$untouchedRecord->bought_off) {
