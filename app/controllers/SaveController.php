@@ -171,14 +171,13 @@ class SaveController extends BaseController {
 					RulebookClan::find(Input::get("sheet.clan.displaying"))
 				);
 			}
+
+			$version->setClanOptions(
+				Input::get("sheet.clanOptions.0"),
+				Input::get("sheet.clanOptions.1"),
+				Input::get("sheet.clanOptions.2")
+			);
 			
-			if(Input::get("sheet.clanOptions")) {
-				$version->setClanOptions(
-					Input::get("sheet.clanOptions.0"),
-					Input::get("sheet.clanOptions.1"),
-					Input::get("sheet.clanOptions.2")
-				);
-			}
 			
 			if(Input::get("sheet.nature")) {
 				$version->setNature(
