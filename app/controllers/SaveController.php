@@ -31,9 +31,7 @@ class SaveController extends BaseController {
 				}
 				return Response::json(array("success" => false, "mode" => 0, "message" => $e->getMessage()."[".$e->getFile()."$".$e->getLine()."]"));
 			}
-			
 			$version->commit();
-			
 			if(Input::get("review")) {
 				if($user->isStoryteller()) {
 					$character->approved_version = $version->version;
@@ -42,6 +40,8 @@ class SaveController extends BaseController {
 					$character->save();	
 				} else {
 					//41 = Character Changes
+					$character->in_review = true;
+					$character->save();
 					$topic = (($character->approved_version == 0) ? "Character Changes to " : "New Character ")."\"".$character->name."\" from ".$user->username;
 					$versionNumber = $character->latestVersion()->version;
 					Forum::find(41)->post($topic, "[[change/$character->id/$versionNumber]]");
@@ -125,9 +125,11 @@ class SaveController extends BaseController {
 		if(Auth::check()) {
 			$user = Auth::user();		
 			try {
-				$version = $this->save();
+				DB::beginTransaction();
+				$version = $this->save(true);
+				DB::rollback();
 			} catch (Exception $e) {
-				$version->rollback();
+				DB::rollback();
 				return Response::json(array("success" => false, "message" => $e->getMessage()."[".$e->getFile()."$".$e->getLine()."]"));
 			}
 			$xpc = $version->character->getExperienceCost($version->version);
@@ -140,12 +142,15 @@ class SaveController extends BaseController {
 	
 	public function save() {
 		$user = Auth::user();
-		$character = Character::firstOrNew(['id' => Input::get('characterId')]);
+		$character = Character::find(Input::get('characterId'));
+		if(!$character) {
+			$character = new Character;
+			$characterIsNew = true;
+		}
 		if(!isset($character->user_id)) {
 			$character->user_id = $user->id;
 		}
 		$character->name = Input::get("sheet.name");
-		$character->in_review = (Input::get("review") == 1);
 		$character->save();
 		
 		CharacterVersion::where('character_id', $character->id)->where('version', '>', $character->activeVersion())->delete();
@@ -158,14 +163,14 @@ class SaveController extends BaseController {
 		try {
 			$version->setEditingUser($user);
 			
-			if(Input::get("sheet.sect")) {
+			if(Input::get("sheet.sect.selected")) {
 				$version->setSect(
 					RulebookSect::find(Input::get("sheet.sect.selected")), 
 					RulebookSect::find(Input::get("sheet.sect.displaying"))
 				);
 			}
 			
-			if(Input::get("sheet.clan")) {
+			if(Input::get("sheet.clan.selected")) {
 				$version->setClan(
 					RulebookClan::find(Input::get("sheet.clan.selected")),
 					RulebookClan::find(Input::get("sheet.clan.displaying"))
@@ -210,7 +215,7 @@ class SaveController extends BaseController {
 			
 			foreach((array) Input::get("sheet.disciplines") as $discipline) {
 				$version->updateDiscipline(RulebookDiscipline::find($discipline["id"]), $discipline["count"],
-					array_key_exists("path", $discipline) ? $discipline["path"] : null);
+					array_key_exists("path", $discipline) ? $discipline["path"] : 0);
 			}
 						
 			foreach((array) Input::get("newRituals") as $newRitualData) {
@@ -260,8 +265,10 @@ class SaveController extends BaseController {
 			
 			$version->clearUntouchedRecords();
 		} catch (Exception $e) {
-			echo $e;
+			$version->rollback();
+			throw $e;
 		}
+		
 			
 		return $version;
 	}

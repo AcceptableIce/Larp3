@@ -211,12 +211,15 @@ class CharacterVersion extends Eloquent {
 	}
 	
 	public function addBackground(RulebookBackground $background, $amount, $description = null) {
-		$backgroundRecord = CharacterBackground::character($this->character_id)
+		$query = CharacterBackground::character($this->character_id)
 			->version($this->version)
-			->where([
-				'background_id' => $background->id, 
-				'description' => $description ? $description : null
-			])->first();
+			->where('background_id', $background->id);
+		if($description) {
+			$query = $query->where('description', $description);
+		} else {
+			$query = $query->whereNull('description');
+		}
+		$backgroundRecord = $query->first();
 			
 		if($backgroundRecord) {			
 			$rankDifference = $amount - $backgroundRecord->amount;
@@ -258,11 +261,12 @@ class CharacterVersion extends Eloquent {
 		$this->touchedRecords["CharacterBackground"][] = $backgroundRecord->id;
 	}
 	
-	public function updateDiscipline(RulebookDiscipline $discipline, $amount, $path = null) {
-		$disciplineRecord = CharacterDiscipline::character($this->character_id)
-		->where(['discipline_id' => $discipline->id, 'path_id' => $path])
-		->version($this->version)
-		->first();
+	public function updateDiscipline(RulebookDiscipline $discipline, $amount, $path = 0) {
+		$disciplineRecord = CharacterDiscipline::character($this->character_id)->version($this->version)
+			->where('discipline_id', $discipline->id)
+			->where('path_id', $path)
+			->first();
+					
 		$inClanBasicCount = $this->character->countInClanBasics($this->version);
 		if($disciplineRecord) {			
 			$rankDifference = $amount - $disciplineRecord->ranks;
@@ -379,11 +383,17 @@ class CharacterVersion extends Eloquent {
 	}
 	
 	public function addFlaw(RulebookFlaw $flaw, $description = null) {
-		$flawRecord = CharacterFlaw::character($this->character_id)
+		$query = CharacterFlaw::character($this->character_id)
 			->version($this->version)
-			->where('flaw_id', $flaw->id)
-			->where('description', $description)
-			->first();
+			->where('flaw_id', $flaw->id);
+			
+		if($description) {
+			$query = $query->where('description', $description);
+		} else {
+			$query = $query->whereNull('description');
+		}
+		$flawRecord = $query->first();
+		
 		if(!$flawRecord) {
 			
 			$flawRecord = $this->createNewRecord("CharacterFlaw");
@@ -404,11 +414,16 @@ class CharacterVersion extends Eloquent {
 	}
 	
 	public function addMerit(RulebookMerit $merit, $description = null) {
-		$meritRecord = CharacterMerit::character($this->character_id)
+		$query = CharacterMerit::character($this->character_id)
 			->version($this->version)
-			->where('merit_id', $merit->id)
-			->where('description', $description)
-			->first();
+			->where('merit_id', $merit->id);
+		if($description) {
+			$query = $query->where('description', $description);
+		} else {
+			$query = $query->whereNull('description');
+		}
+		$meritRecord = $query->first();
+			
 		if(!$meritRecord) {
 			
 			$meritRecord = $this->createNewRecord("CharacterMerit");

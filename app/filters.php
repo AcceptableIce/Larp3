@@ -56,6 +56,7 @@ Route::filter('storyteller', function() {
 
 Route::filter('ownsCharacter', function($route) {
 	$character = $route->parameter('character');
+	if(!($character instanceof Character)) $character = Character::find(Input::get("characterId"));
 	$user = Auth::user();
 	if($character->user_id != $user->id && !$user->isStoryteller()) {
 		return App::abort(403);

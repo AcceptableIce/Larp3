@@ -461,8 +461,8 @@ class Character extends Eloquent {
 	public function getDisciplinePathCost($discipline, $path, $rank, $version) {
 		$cost = $this->getDisciplineCost($discipline, $rank, $version);
 		if($path != null) {
-			$path = RulebookDisciplinePath::find($path);
-			if($path->hard_path) {
+			$pathData = RulebookDisciplinePath::find($path);
+			if($pathData->hard_path) {
 				$cost += $rank;
 			}
 		}

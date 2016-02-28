@@ -11,7 +11,7 @@ Route::model('topic', 'ForumTopic');
 Route::model('post', 'ForumPost');
 
 Route::get('/test', function() {
-	CharacterVersion::createNewVersion(Character::find(415));
+	Character::where('name', '')->delete();
 });
 
 Route::get('/', function() {
