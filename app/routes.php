@@ -409,6 +409,8 @@ App::missing(function($exception) {
 
 App::error(function($error, $code) {
 	if ($code != 500 || Config::getEnvironment() == 'production') {
-		return Response::view('errors.'.$code, [], $code);
+		if(!Auth::user() || !Auth::user()->isStoryteller()) {
+			return Response::view('errors.'.$code, [], $code);
+		}
 	}
 });

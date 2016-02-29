@@ -56,17 +56,17 @@ $developers_to_email = [
 App::error(function(Exception $exception, $code) use ($developers_to_email) {
 	Log::error($exception);
 	
-	if (Config::getEnvironment() == 'production') {
+	if (Config::getEnvironment() != 'production') {
 		if(!Auth::user() || !Auth::user()->isStoryteller()) {
-		    $data = array('exception' => $exception);
-		    foreach($developers_to_email as $d) {
-			    Mail::send('emails.error', $data, function($message) use ($d) {
-			        $message->to($d)->subject("[Bug Report] Carpe Noctem Error");
-			    });
-			  }
-		    Log::info('Error Emails sent to '.Helpers::nl_join($developers_to_email));
-		    return App::abort(500);
-	    }
+	    $data = array('exception' => $exception);
+	    foreach($developers_to_email as $d) {
+		    Mail::send('emails.error', $data, function($message) use ($d) {
+		        $message->to($d)->subject("[Bug Report] Carpe Noctem Error");
+		    });
+		  }
+	    Log::info('Error Emails sent to '.Helpers::nl_join($developers_to_email));
+	    return App::abort(500);
+    }
 	}
 });
 
