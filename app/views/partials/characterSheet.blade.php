@@ -41,14 +41,16 @@
 			Sect:
 		</div>
 		<div class="list-dots character-data">
-			{{$character->sect($version)->first()->definition->name}}
+			<? $sect = $character->sect($version)->first(); ?>
+			{{$sect ? $sect->definition->name : ""}}
 		</div>
 		
 		<div class="list-label character-stat">
 			Clan:
 		</div>
 		<div class="list-dots character-data">
-			{{$character->clan($version)->first()->definition->name}}
+			<? $clan = $character->clan($version)->first(); ?>
+			{{$clan ? $clan->definition->name : ""}} 
 		</div>
 		
 		<? $path = $character->path($version)->first(); ?>
@@ -69,7 +71,8 @@
 			{{$nature ? $nature->definition->name : ""}}
 		</div>
 		
-		<? 	$gen = $character->backgrounds($version)->whereHas('definition', function($q) { 
+		<? 
+			$gen = $character->backgrounds($version)->whereHas('definition', function($q) { 
 				$q->where('name', 'Generation'); 
 			})->first();
 			
