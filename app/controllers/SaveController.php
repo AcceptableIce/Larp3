@@ -42,8 +42,8 @@ class SaveController extends BaseController {
 					//41 = Character Changes
 					$character->in_review = true;
 					$character->save();
-					$topic = (($character->approved_version == 0) ? "Character Changes to " : "New Character ")."\"".$character->name."\" from ".$user->username;
-					$versionNumber = $character->latestVersion()->version;
+					$topic = (($version->isNewCharacter()) ? "Character Changes to " : "New Character ")."\"".$character->name."\" from ".$user->username;
+					$versionNumber = $version->version;
 					Forum::find(41)->post($topic, "[[change/$character->id/$versionNumber]]");
 				}
 			}
