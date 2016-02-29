@@ -65,7 +65,8 @@
 			Nature:
 		</div>
 		<div class="list-dots character-data">
-			{{$character->nature($version)->first()->definition->name}}
+			<? $nature = $character->nature($version)->first(); ?>
+			{{$nature ? $nature->definition->name : ""}}
 		</div>
 		
 		<? 	$gen = $character->backgrounds($version)->whereHas('definition', function($q) { 
