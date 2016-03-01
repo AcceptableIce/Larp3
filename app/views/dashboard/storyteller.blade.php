@@ -85,7 +85,10 @@
 					<li>
 						<a href="/dashboard/storyteller/manage/permissions">Manage User Permissions</a>
 					</li>                                    
-        		</ul>
+					<li>
+						<a href="/dashboard/storyteller/manage/userSettings">Manage User Settings</a>
+					</li>
+        </ul>
 			</li>  
 			
 			<li class="has-dropdown">

@@ -86,4 +86,25 @@ class StorytellerApplicationController extends BaseController {
 		FileUpload::find($id)->delete();
 		return Redirect::to("/dashboard/storyteller/manage/files");
 	}
+	
+	public function createUserSetting() {
+		$name = Input::get("name");
+		if($name) {
+			$position = new UserSettingDefinition;
+			$position->name = $name;
+			$position->description = Input::get("description");
+			$position->type = Input::get("type");
+			$position->position = Input::get("position");
+			$position->save();
+			return Redirect::to('/dashboard/storyteller/manage/userSettings');
+		} else {
+			return "Invalid name.";
+		}
+	}	
+
+	public function deleteUserSetting() {
+		$id = Input::get("id");
+		UserSettingDefinition::find($id)->delete();
+		return Redirect::to('/dashboard/storyteller/manage/userSettings');
+	}
 }

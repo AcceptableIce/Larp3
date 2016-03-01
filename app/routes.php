@@ -181,7 +181,10 @@ Route::group(['before' => 'auth'], function() {
 			});		
 			Route::get('/manage/sessions', function() { 
 				return View::make('dashboard/storyteller/sessions/manageSessions'); 
-			});		
+			});
+			Route::get('/manage/userSettings', function() { 
+				return View::make('dashboard/storyteller/tools/manageUserSettings'); 
+			});				
 			Route::get('/manage/forums', function() { 
 				return View::make('dashboard/storyteller/forums/manageForums')->with('mode', 'management'); 
 			});				
@@ -278,6 +281,9 @@ Route::group(['before' => 'auth'], function() {
 			
 			Route::post('/manage/positions/create', 'StorytellerPositionController@createPosition');		
 			Route::post('/manage/positions/delete', 'StorytellerPositionController@deletePosition');	
+			
+			Route::post('/manage/userSettings/create', 'StorytellerApplicationController@createUserSetting');		
+			Route::post('/manage/userSettings/delete', 'StorytellerApplicationController@deleteUserSetting');	
 			
 			Route::post('/manage/permissions/grant', 'StorytellerPermissionController@grantPermission');	
 			Route::post('/manage/permissions/remove', 'StorytellerPermissionController@removePermission');	
