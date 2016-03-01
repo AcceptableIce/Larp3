@@ -181,6 +181,7 @@ class CharacterVersion extends Eloquent {
 				$abilityRecord->free_points += $rankDifference;
 			}
 		} else {
+			$abilityRecord = $this->createNewRecord("CharacterAbility");
 			if(!$ability) {
 				$ability = new RulebookAbility;
 				$ability->name = $name;
@@ -192,7 +193,6 @@ class CharacterVersion extends Eloquent {
 				}
 			}
 			
-			$abilityRecord = $this->createNewRecord("CharacterAbility");
 			$abilityRecord->ability_id = $ability->id;
 			
 		}
