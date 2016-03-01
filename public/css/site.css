@@ -127,6 +127,10 @@ b {
 	position: relative;
 	top: 9px;
 }
+
+.character-actions .character-dropdown-holder a {
+	top: 0px;
+}
 .top-bar-section .dropdown li.parent-link a {
 	display: none;
 }
