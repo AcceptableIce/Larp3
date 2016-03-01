@@ -30,7 +30,8 @@
 <? 	
 	$user = Auth::user();
 	$topics = $forum->topicsForUserInOrder($user->id);
-	$pagination = $topics->paginate(25);
+	$pageSize = $user->getSettingValue("Threads Per Page");
+	$pagination = $topics->paginate($pageSize ? $pageSize : 15);
 ?>
 <div class="topic-pagination">{{$pagination->links()}}</div>
 @if($pagination->count() == 0) 

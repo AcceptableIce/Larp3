@@ -12,6 +12,9 @@ class UserSettingDefinition extends Eloquent {
 			case "Timestamp Style":
 				$options = ["default" => "Relative (\"minutes ago\")", "exact" => "Exact"];
 				break;
+			case "Threads Per Page":
+				$options = ["15" => 15, "20" => 20, "25" => 25];
+				break;
 		}
 		$out = "";
 		foreach($options as $k => $v) {
