@@ -56,7 +56,7 @@ $developers_to_email = [
 App::error(function(Exception $exception, $code) use ($developers_to_email) {
 	Log::error($exception);
 	
-	if (Config::getEnvironment() != 'production') {
+	if (Config::getEnvironment() == 'production') {
 		if(!Auth::user() || !Auth::user()->isStoryteller()) {
 	    $data = array('exception' => $exception);
 	    foreach($developers_to_email as $d) {
