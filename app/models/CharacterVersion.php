@@ -15,10 +15,9 @@ class CharacterVersion extends Eloquent {
 	public static function createNewVersion(Character $character, $comment = null, $dropped = false) {
 		DB::beginTransaction();
 		//Get the active version
-		$activeVersion = $character->version($character->activeVersion())->first();
 		$newVersion = new CharacterVersion;
 		$newVersion->character_id = $character->id;
-		$newVersion->version = $activeVersion ? $activeVersion->version + 1 : 1;
+		$newVersion->version = $character->approved_version + 1;
 		$newVersion->comment = $comment;
 		$newVersion->save();
 		$newVersion->copyDataFromPreviousVersion();
