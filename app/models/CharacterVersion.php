@@ -13,7 +13,6 @@ class CharacterVersion extends Eloquent {
 	protected $editingUser = null;
 	
 	public static function createNewVersion(Character $character, $comment = null, $dropped = false) {
-		DB::beginTransaction();
 		//Get the active version
 		$newVersion = new CharacterVersion;
 		$newVersion->character_id = $character->id;
@@ -638,15 +637,6 @@ class CharacterVersion extends Eloquent {
 	public function setDroppedMorality($dropped) {
 		$this->hasDroppedMorality = $dropped;
 		$this->save();
-	}
-	
-	public function commit() {
-		DB::commit();
-	}
-	
-	public function rollback() {
-		DB::rollback();
-		$this->delete();
 	}
 
 }

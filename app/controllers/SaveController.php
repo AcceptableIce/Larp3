@@ -19,19 +19,22 @@ class SaveController extends BaseController {
 			}
 			
 			try {
+				DB::beginTransaction();
 				$version = $this->save();
 				$character = $version->character;
 				if(Input::get("review") && !($character->getOptionValue("Ignore Validation") || $user->isStoryteller())) {
 					$character->verify($character->approved_version + 1, $character->approved_version == 0);
 				}
+				DB::commit();
 			} catch (Exception $e) {
-				$version->rollback();
+				DB::rollback();
 				if(get_class($e) == "CharacterValidationException") {
 					return Response::json(array("success" => false, "mode" => 2, "message" => $e->getMessage()));
 				}
 				return Response::json(array("success" => false, "mode" => 0, "message" => $e->getMessage()."[".$e->getFile()."$".$e->getLine()."]"));
 			}
-			$version->commit();
+			
+			
 			if(Input::get("review")) {
 				if($user->isStoryteller()) {
 					$character->approved_version = $version->version;
@@ -42,7 +45,7 @@ class SaveController extends BaseController {
 					//41 = Character Changes
 					$character->in_review = true;
 					$character->save();
-					$topic = (($version->isNewCharacter()) ? "Character Changes to " : "New Character ")."\"".$character->name."\" from ".$user->username;
+					$topic = ($version->isNewCharacter() ? "New Character " : "Character Changes to ")."\"".$character->name."\" from ".$user->username;
 					$versionNumber = $version->version;
 					Forum::find(41)->post($topic, "[[change/$character->id/$versionNumber]]");
 				}
@@ -127,13 +130,12 @@ class SaveController extends BaseController {
 			try {
 				DB::beginTransaction();
 				$version = $this->save(true);
-				DB::rollback();
 			} catch (Exception $e) {
 				DB::rollback();
 				return Response::json(array("success" => false, "message" => $e->getMessage()."[".$e->getFile()."$".$e->getLine()."]"));
 			}
 			$xpc = $version->character->getExperienceCost($version->version);
-			$version->rollback();
+			DB::rollback();
 			return Response::json(array("success" => true, "cost" => $xpc));
 		} else {
 			return Response::json(array("success" => false, "message" => "Unable to validate user."));
@@ -156,7 +158,7 @@ class SaveController extends BaseController {
 		CharacterVersion::where('character_id', $character->id)->where('version', '>', $character->activeVersion())->delete();
 		
 		$version = CharacterVersion::createNewVersion($character);
-		
+
 		if($version->isNewCharacter()) {
 			$version->setHasDroppedMorality(Input::get("sheet.hasDroppedMorality") == "true");
 		}
@@ -265,7 +267,6 @@ class SaveController extends BaseController {
 			
 			$version->clearUntouchedRecords();
 		} catch (Exception $e) {
-			$version->rollback();
 			throw $e;
 		}
 		

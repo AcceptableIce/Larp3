@@ -39,7 +39,6 @@ class GeneratorTest extends TestCase {
 	public static function tearDownAfterClass() {
 		echo 'Doing final teardown...';
 		parent::tearDownAfterClass();
-		self::$version->rollback();
 		self::$character->delete();
 		self::$player->delete();
 		DB::rollback();
