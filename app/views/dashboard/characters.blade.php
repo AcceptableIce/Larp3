@@ -102,7 +102,7 @@
 							{{$clan ? $clan->definition->name : "No clan"}}
 						</td>
 						<td>
-							{{$character->approved_version > 0 ? @$character->availableExperience() : "N/A"}}
+							{{$character->approved_version > 0 ? @$character->availableExperience($character->latestVersion()->version) : "N/A"}}
 						</td>
 						<td>
 							@if($character->approved_version == 0)
