@@ -43,7 +43,7 @@ class StorytellerSessionController extends BaseController {
 		}
 	}
 
-	public function awardExperience(Session $session) {
+	public function awardExperience(GameSession $session) {
 		$ids = Input::get("ids");
 		$costumes = Input::get("costumes");
 		$nom1s = Input::get("nom1s");
