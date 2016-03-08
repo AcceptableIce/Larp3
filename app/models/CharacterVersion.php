@@ -60,7 +60,7 @@ class CharacterVersion extends Eloquent {
 		$clanRecord = $this->findOne('CharacterClan');
 		
 		if($clanRecord) {
-			if($this->editingAsStoryteller()) return;
+			if(!$this->editingAsStoryteller()) return;
 		} else {
 			$clanRecord = $this->createNewRecord('CharacterClan');
 		}
