@@ -1650,7 +1650,7 @@ function chargenVM() {
 			var items = _.filter(self.characterSheet.backgrounds(), function(item) { 
 				return self.getBackgroundById(item.id).group == "Influence"; 
 			});
-			return _.reduce(items, function(memo, item) { return memo + item.count; }, 0);
+			return _.reduce(items, function(memo, item) { return memo + Number(item.count); }, 0);
 		}
 
 		
