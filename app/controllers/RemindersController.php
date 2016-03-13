@@ -1,17 +1,6 @@
 <?php
 
 class RemindersController extends Controller {
-
-	/**
-	 * Display the password reminder view.
-	 *
-	 * @return Response
-	 */
-	public function getRemind()
-	{
-		return View::make('password.remind');
-	}
-
 	/**
 	 * Handle a POST request to remind a user of their password.
 	 *

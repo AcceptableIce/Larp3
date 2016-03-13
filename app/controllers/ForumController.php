@@ -179,7 +179,7 @@ class ForumController extends BaseController {
 			if(strtolower($m) == "andrew") $m = "Crap. I am Malevolent.";
 			$user = User::where('username', 'like', $m)->first();
 			if($user && $user->getSettingValue("Disable @Mentions") != 1) {
-				$link = "http://larp.illini-rp.net/".$topic->getLinkForLastPost($user);
+				$link = "http://larp.illini-rp.net".$topic->getLinkForLastPost($user);
 				$user->sendMessage($poster_id, 
 					"Mentioned in topic $topic->title", 
 					"Hello $user->username,<br><br>You have been mentioned by $poster->username in the topic".
