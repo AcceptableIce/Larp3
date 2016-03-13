@@ -801,7 +801,7 @@ function chargenVM() {
 		});
 
 		self.attributePointsSpent = ko.computed(function() {
-			return _.reduce(self.characterSheet.attributes(), function(memo, item) { return memo + item; }, 0);
+			return _.reduce(self.characterSheet.attributes(), function(memo, item) { return memo + Number(item); }, 0);
 		});
 
 		self.backgroundName = function(data) {
@@ -1658,7 +1658,7 @@ function chargenVM() {
 			var items = _.filter(self.characterSheet.backgrounds(), function(item) { 
 				return item.name == "Retainers" || item.name.indexOf("Ghoul") !== -1; 
 			});
-			return self.attributePointsSpent() + _.reduce(items, function(memo, item) { return memo + item.count; }, 0);
+			return self.attributePointsSpent() + _.reduce(items, function(memo, item) { return memo + Number(item.count); }, 0);
 		}
 
 
