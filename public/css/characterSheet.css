@@ -189,6 +189,9 @@ body, label {
 	color: #444;
 	font-size: 0.9em;
 	font-style: italic;
+	line-height: 1.0em;
+	margin-bottom: 5px;
+	padding-top: 3px;
 }
 
 .list-label {
