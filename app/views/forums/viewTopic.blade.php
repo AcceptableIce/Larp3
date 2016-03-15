@@ -363,6 +363,11 @@
 						<a href="/forums/topic/{{$topic->id}}/post?quote={{$post->id}}">
 							<button id="quote-post-{{$i}}" class="button post-option tiny">Quote</button>
 						</a>
+						<a href="/forums/topic/{{$topic->id}}/toggleReminder">
+							<button id="quote-remind-{{$i}}" class="button post-option tiny">
+								{{ForumTopicReminder::where(['topic_id' => $topic->id, 'user_id' => $user->id])->exists() ? 'Remove from Todo' : 'Add to Todo'}}
+							</button>
+						</a>
 						@if($post->posted_by == $user->id || $isStoryteller) 
 							<a href="/forums/{{$i == 1 ? 'topic/'.$topic->id : 'post/'.$post->id}}/edit">
 								<button id="edit-post-{{$i}}" class="button post-option tiny">Edit</button>

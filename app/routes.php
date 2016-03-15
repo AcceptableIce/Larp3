@@ -88,6 +88,8 @@ Route::group(['before' => 'auth'], function() {
 	Route::group(['prefix' => 'dashboard'], function() {
 		Route::get('/', function() { return View::make('dashboard/mail'); });
 		Route::get('/characters', function() { return View::make('dashboard/characters'); });	
+		Route::get('/todo', function() { return View::make('dashboard/todo'); });	
+
 		Route::get('/mail', function() { return View::make('dashboard/mail'); });
 		Route::get('/settings', function() { return View::make('dashboard/settings'); });
 		
@@ -366,6 +368,7 @@ Route::group(['before' => 'auth'], function() {
 		Route::get('/topic/{topic}/toggleSticky', 'ForumController@toggleTopicSticky');
 
 		Route::get('/topic/{topic}/toggleWatch', 'ForumController@toggleWatch');		
+		Route::get('/topic/{topic}/toggleReminder', 'ForumController@toggleReminder');		
 
 		Route::post('/topic/post', 'ForumController@postTopic');
 		Route::post('/reply/post', 'ForumController@postReply');

@@ -77,6 +77,14 @@ ko.applyBindings(new dashboardVM());
 		<i class="icon-users"></i>
 		<label class="hide-for-small">Characters</label>
 	</a>
+	<a class="item" data-bind="css: { 'active': $root.activeTab() == 'todo' }" href="/dashboard/todo">
+		<? $todo = ForumTopicReminder::where('user_id', Auth::user()->id)->count(); ?>
+		@if($todo > 0) 
+			<label class="label round radius warning">{{$todo}}</label> 
+		@endif
+		<i class="icon-list"></i>
+		<label class="hide-for-small">To-do List</label>
+	</a>
 	@if(Auth::user()->isStoryteller())
 		<a class="item" data-bind="css: { 'active': $root.activeTab() == 'storyteller' }" href="/dashboard/storyteller">
 			<i class="icon-tools"></i>

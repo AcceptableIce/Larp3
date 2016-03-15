@@ -226,6 +226,28 @@ class ForumController extends BaseController {
 			return Response::json(["success" => false, "message" => "Not logged in."]);			
 		}
 	}
+	
+	function toggleReminder(ForumTopic $topic) {
+		$user = Auth::user();
+		if($user) {
+			if($user->canAccessTopic($topic->id)) {
+				if(ForumTopicReminder::where(['user_id' => $user->id, 'topic_id' => $topic->id])->exists()) {
+					ForumTopicReminder::where(['user_id' => $user->id, 'topic_id' => $topic->id])->delete();
+				} else {
+					$reminder = new ForumTopicReminder;
+					$reminder->user_id = $user->id;
+					$reminder->topic_id = $topic->id;
+					$reminder->save();
+				}
+				return Redirect::to("/forums/topic/$topic->id");
+			} else {
+				return Response::json(["success" => false, "message" => "Access denied."]);			
+			}
+		} else {
+			return Response::json(["success" => false, "message" => "Not logged in."]);			
+		}
+	}
+
 
 	function toggleLike(ForumPost $post) {
 		$user = Auth::user();
