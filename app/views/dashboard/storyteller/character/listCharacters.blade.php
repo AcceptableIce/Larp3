@@ -108,10 +108,30 @@
 			</td>
 			<? $clan = $character->clan()->first(); ?>
 			<td>
-				{{$clan ? $clan->definition->name : "No clan"}}
+				@if($clan)
+					@if($clan->definition->name == "Daughters of Cacophony")
+						Daughters
+					@elseif($clan->definition->name == "Followers of Set")
+						Setites
+					@else
+						{{$clan->definition->name}}
+					@endif
+				@else
+					No clan
+				@endif
 			</td>
 			<td>
-				{{$clan ? $clan->hiddenDefinition->name : "No clan"}}
+				@if($clan)
+					@if($clan->hiddenDefinition->name == "Daughters of Cacophony")
+						Daughters
+					@elseif($clan->hiddenDefinition->name == "Followers of Set")
+						Setites
+					@else
+						{{$clan->hiddenDefinition->name}}
+					@endif
+				@else
+					No clan
+				@endif		
 			</td>
 			<td>
 				{{$character->cachedExperience()}}
