@@ -99,7 +99,7 @@ class HandbookPage extends Eloquent {
 	public function checkPermission($type, $user) {
 		$permission = $this->{$type."Permission"};
 		if(!$user) return !($permission && $permission->hasRestrictions()) && $type == "read";
-		if($permission == null || $this->created_by == $user->id) return true;
+		if($permission == null || $this->created_by == $user->id || $user->isStoryteller()) return true;
 		$activeCharacter = $user->activeCharacter();
 		$canView = true;
 		if($permission->sect_id) {
