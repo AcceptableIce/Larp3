@@ -311,7 +311,7 @@ Route::group(['before' => 'auth'], function() {
 			Route::post('/character/{character}/accept', 'StorytellerCharacterController@acceptChanges');		
 			Route::post('/character/{character}/reject', 'StorytellerCharacterController@rejectChanges');		
 			
-			Route::post('/rulebook/{key}/{id}/edit', 'StorytellerRulebookController@saveRulebookItem');
+			Route::post('/rulebook/{key}/{flaw_id}/edit', 'StorytellerRulebookController@saveRulebookItem');
 			Route::post('/rulebook/{key}/{id}/delete', 'StorytellerRulebookController@deleteRulebookItem');
 		});
 	});

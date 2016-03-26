@@ -1,8 +1,8 @@
 <?php
 class StorytellerRulebookController extends BaseController {
-		public function saveRulebookItem($key, $id) {
+		public function saveRulebookItem($key, $flaw_id) {
 		$class = Helpers::$rulebook_items[$key];
-		$object = $class::find($id);
+		$object = $class::find($flaw_id);
 		if(!$object) {
 			$object = new $class();
 		}
