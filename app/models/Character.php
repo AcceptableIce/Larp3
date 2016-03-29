@@ -429,10 +429,9 @@ class Character extends Eloquent {
 	}
 	
 	public function gamesMissed() {
-		$last_game = GameSessionCheckIn::where('character_id', $this->id)->with('session')->get()->sortByDesc('date');
-		if($last_game->first()) {
-			$last_game_data = $last_game->first();
-			return GameSession::where('date', '>', $last_game_data->session->date)->where('submitted', 1)->count();
+		$last_game = GameSessionCheckIn::where('character_id', $this->id)->join('sessions as session', 'session.id', '=', 'session_id')->orderBy('date', 'desc')->first();
+		if($last_game) {
+			return GameSession::where('date', '>', $last_game->date)->where('submitted', 1)->count();
 		}
 		return -1;
 	}
