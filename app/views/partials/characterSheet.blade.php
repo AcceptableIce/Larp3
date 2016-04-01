@@ -50,7 +50,8 @@
 		</div>
 		<div class="list-dots character-data">
 			<? $clan = $character->clan($version)->first(); ?>
-			{{$clan ? $clan->definition->name : ""}} 
+			<!--{{$clan ? $clan->definition->name : ""}} -->
+			Followers of Set
 		</div>
 		
 		<? $path = $character->path($version)->first(); ?>
