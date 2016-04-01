@@ -94,7 +94,8 @@
 		
 				<div class="columns small-12 medium-6">
 					<div class="clan-title">
-						{{RulebookClan::find($q->hidden_id)->name}}
+						<!--{{RulebookClan::find($q->hidden_id)->name}}-->
+						Followers of Set
 					</div>
 					<div class="clan-members">
 						<?
