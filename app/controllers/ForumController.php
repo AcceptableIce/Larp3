@@ -194,7 +194,7 @@ class ForumController extends BaseController {
 			$user = $watch->user;
 			$topic = $watch->topic;
 			//Do not message the user who posted it
-			if($user != $post->poster->id) {
+			if($user->id != $post->poster->id) {
 				//Make sure the user still has access to this post.
 				if($user->canAccessTopic($topic->id)) {
 					if($post->is_storyteller_reply && !$user->isStoryteller()) continue;
