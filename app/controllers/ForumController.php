@@ -197,7 +197,7 @@ class ForumController extends BaseController {
 			if($user->id != $post->poster->id) {
 				//Make sure the user still has access to this post.
 				if($user->canAccessTopic($topic->id)) {
-					if($post->is_storyteller_reply && !$user->isStoryteller()) continue;
+					if($post->is_storyteller_reply == 1 && !$user->isStoryteller()) continue;
 					Mail::send("emails.forumWatch", 
 						['user' => $user, 'topic' => $topic, 'post' => $post], 
 						function($message) use ($user, $topic) {
