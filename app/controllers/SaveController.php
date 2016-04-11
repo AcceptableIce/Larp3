@@ -157,7 +157,7 @@ class SaveController extends BaseController {
 		
 		CharacterVersion::where('character_id', $character->id)->where('version', '>', $character->activeVersion())->delete();
 		
-		$version = CharacterVersion::createNewVersion($character);
+		$version = CharacterVersion::createNewVersion($character, Input::has("comment") ? Input::get("comment") : null);
 
 		if($version->isNewCharacter()) {
 			$version->setHasDroppedMorality(Input::get("sheet.hasDroppedMorality") == "true");
