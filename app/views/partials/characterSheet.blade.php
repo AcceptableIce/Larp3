@@ -114,9 +114,13 @@
 			//If we have ghouls, we lose one point per ghoul. There... isn't really a good way of doing this 
 			//for an odd number of ghouls, so I round up. Sorry players.
 			if($character->clan($version)->first()->definition->name != 'Tsimisce') {
-				$blood -= ceil($character->backgrounds($version)->whereHas('definition', function($q) { 
+				$ghoul_total = 0;
+				foreach($character->backgrounds($version)->whereHas('definition', function($q) { 
 					$q->where('name', 'Ghouls'); 
-				})->count() / 2);
+				})->get() as $ghoul) {
+					$ghoul_total += $ghoul->amount;
+				}
+				$blood -= ceil($ghoul_total / 2);
 			}
 		?>
 		
