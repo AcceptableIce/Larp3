@@ -2134,6 +2134,47 @@ function chargenVM() {
 					self.editingVersion(preloaded.editingVersion);
 					self.approvedVersion(preloaded.cData.approved_version);
 					self.characterSheet.hasDroppedMorality(preloaded.cData.version.hasDroppedMorality == 1);
+					
+					if(self.approvedVersion() == 0) {
+						console.log('Enabling subscribers');
+						self.characterSheet.clan.selected.subscribe(function(oldValue) { self.lockAndClearClanOptions(); }, this, 'beforeChange');
+	
+						self.characterSheet.clan.selected.subscribe(function(newValue) { self.unlockAndUpdateClanOptions(); });
+	
+						self.characterSheet.sect.selected.subscribe(function(oldValue) { self.lockAndClearSectOptions(); }, this, 'beforeChange');
+						
+						self.characterSheet.sect.selected.subscribe(function(newValue) { self.unlockAndUpdateSectOptions(); });
+	
+						for(var key in self.clanOptionValues) {
+							for(var i in self.clanOptionValues[key]) {
+								self.clanOptionValues[key][i].subscribe(function(oldValue){ 
+									console.log("Update ID", update++); self.lockAndClearClanOptions(); 
+								}, this, 'beforeChange');
+								self.clanOptionValues[key][i].subscribe(function(newValue){ 
+									console.log("Update ID", update++);  self.unlockAndUpdateClanOptions(); 
+								});
+							}
+						}
+						self.clanOptionValues.caitiff[0].subscribe(function(newValue) {
+							if(newValue != "" && (newValue == self.clanOptionValues.caitiff[1]() || newValue == self.clanOptionValues.caitiff[2]())) {
+								self.showModal("Cannot select the same discipline.", "Caitiff must have three distinct disciplines.");
+								self.clanOptionValues.caitiff[0]("");
+							}							
+						});
+						self.clanOptionValues.caitiff[1].subscribe(function(newValue) {
+							if(newValue != "" && (newValue == self.clanOptionValues.caitiff[0]() || newValue == self.clanOptionValues.caitiff[2]())) {
+								self.showModal("Cannot select the same discipline.", "Caitiff must have three distinct disciplines.");
+								self.clanOptionValues.caitiff[1]("");
+							}							
+						});
+						self.clanOptionValues.caitiff[2].subscribe(function(newValue) {
+							if(newValue != "" && (newValue == self.clanOptionValues.caitiff[0]() || newValue == self.clanOptionValues.caitiff[1]())) {
+								self.showModal("Cannot select the same discipline.", "Caitiff must have three distinct disciplines.");
+								self.clanOptionValues.caitiff[2]("");
+							}							
+						});
+					}
+				
 					if(preloaded.cData.sect) {
 						self.activeSect(self.getSectById(preloaded.cData.sect.sect_id));
 						self.characterSheet.sect.selected(self.activeSect());
@@ -2183,12 +2224,24 @@ function chargenVM() {
 
 					for(var i = 0; i < preloaded.cData.backgrounds.length; i++) {
 						var background = preloaded.cData.backgrounds[i];
-						self.characterSheet.backgrounds.push({ 	
+						var existingBackground = _.findWhere(self.characterSheet.backgrounds(), {
 							id: background.background_id, 
-							count: background.amount, 
-							name: self.getBackgroundById(background.background_id).name, 
-							description: background.description
+							description: background.description ? background.description : ""
 						});
+						console.log(self.characterSheet.backgrounds())
+						if(existingBackground) {
+							existingBackground.count = Number(background.amount);
+							self.characterSheet.backgrounds.refresh();
+							console.log('upticking');
+						} else {	
+							console.log('newticking', background);
+							self.characterSheet.backgrounds.push({ 	
+								id: Number(background.background_id), 
+								count: Number(background.amount), 
+								name: self.getBackgroundById(background.background_id).name, 
+								description: background.description
+							});
+						}
 					}
 					if(preloaded.cData.path) {
 						self.characterSheet.path(self.getPathById(preloaded.cData.path.path_id));
@@ -2275,46 +2328,7 @@ function chargenVM() {
 					self.totalExperience(preloaded.experienceTotal);
 				}
 
-				if(self.approvedVersion() == 0) {
-					console.log('Enabling subscribers');
-					self.characterSheet.clan.selected.subscribe(function(oldValue) { self.lockAndClearClanOptions(); }, this, 'beforeChange');
-
-					self.characterSheet.clan.selected.subscribe(function(newValue) { self.unlockAndUpdateClanOptions(); });
-
-					self.characterSheet.sect.selected.subscribe(function(oldValue) { self.lockAndClearSectOptions(); }, this, 'beforeChange');
-					
-					self.characterSheet.sect.selected.subscribe(function(newValue) { self.unlockAndUpdateSectOptions(); });
-
-					for(var key in self.clanOptionValues) {
-						for(var i in self.clanOptionValues[key]) {
-							self.clanOptionValues[key][i].subscribe(function(oldValue){ 
-								console.log("Update ID", update++); self.lockAndClearClanOptions(); 
-							}, this, 'beforeChange');
-							self.clanOptionValues[key][i].subscribe(function(newValue){ 
-								console.log("Update ID", update++);  self.unlockAndUpdateClanOptions(); 
-							});
-						}
-					}
-					self.clanOptionValues.caitiff[0].subscribe(function(newValue) {
-						if(newValue != "" && (newValue == self.clanOptionValues.caitiff[1]() || newValue == self.clanOptionValues.caitiff[2]())) {
-							self.showModal("Cannot select the same discipline.", "Caitiff must have three distinct disciplines.");
-							self.clanOptionValues.caitiff[0]("");
-						}							
-					});
-					self.clanOptionValues.caitiff[1].subscribe(function(newValue) {
-						if(newValue != "" && (newValue == self.clanOptionValues.caitiff[0]() || newValue == self.clanOptionValues.caitiff[2]())) {
-							self.showModal("Cannot select the same discipline.", "Caitiff must have three distinct disciplines.");
-							self.clanOptionValues.caitiff[1]("");
-						}							
-					});
-					self.clanOptionValues.caitiff[2].subscribe(function(newValue) {
-						if(newValue != "" && (newValue == self.clanOptionValues.caitiff[0]() || newValue == self.clanOptionValues.caitiff[1]())) {
-							self.showModal("Cannot select the same discipline.", "Caitiff must have three distinct disciplines.");
-							self.clanOptionValues.caitiff[2]("");
-						}							
-					});
-
-				}
+				
 
 				$(".load-curtain").addClass("curtain-fall");
 				setTimeout(function() { $(".load-curtain").remove()}, 1500);				
