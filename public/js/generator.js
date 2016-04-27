@@ -545,7 +545,6 @@ function chargenVM() {
 		self.removeClanOptionBackgroundByName = function(name, amount) {
 			if(name && name.length > 0) {
 				var background = self.getBackgroundByName(name);
-				console.log(background);
 				if(background) {
 					if(self.getBackgroundCount(background.id) == amount) {
 						for(var k in self.characterSheet.backgrounds()) {
@@ -2286,6 +2285,8 @@ function chargenVM() {
 								} else {
 									self.clanOptionValues.toreador[1](preloaded.cData.clanOptions.option2);
 								}
+								self.clearClanOptions();
+								self.updateClanOptions();
 								break;
 							case null:
 								break;
@@ -2294,7 +2295,10 @@ function chargenVM() {
 								if(preloaded.cData.clanOptions.option1) self.clanOptionValues[clanMapping][0](preloaded.cData.clanOptions.option1);
 								if(preloaded.cData.clanOptions.option2) self.clanOptionValues[clanMapping][1](preloaded.cData.clanOptions.option2);
 								if(preloaded.cData.clanOptions.option3) self.clanOptionValues[clanMapping][2](preloaded.cData.clanOptions.option3);
-						}
+								self.clearClanOptions();
+								previousMalkavianData = null;
+								self.updateClanOptions();
+						}				
 					}
 
 					for(var i = 0; i < preloaded.cData.elderPowers.length; i++) {

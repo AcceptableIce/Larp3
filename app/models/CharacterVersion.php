@@ -220,7 +220,6 @@ class CharacterVersion extends Eloquent {
 			$query = $query->whereNull('description');
 		}
 		$backgroundRecord = $query->first();
-			
 		if($backgroundRecord) {			
 			$rankDifference = $amount - $backgroundRecord->amount;
 			if($rankDifference < 0) {
