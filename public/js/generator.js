@@ -1678,7 +1678,7 @@ function chargenVM() {
 						return;
 					}
 				}
-				item.count = Number(item.count) + amount;
+				item.count = Number(item.count) + Number(amount);
 				if(item.count > 5) item.count = 5;
 				//Check if we're limited by our clan.
 				var limit = _.filter(_.where(self.clanSelectionDependentLimits, { type: "background", id: background.id}), function(item) {
@@ -2232,11 +2232,9 @@ function chargenVM() {
 						if(existingBackground) {
 							existingBackground.count = Number(background.amount);
 							self.characterSheet.backgrounds.refresh();
-							console.log('upticking');
 						} else {	
-							console.log('newticking', background);
 							self.characterSheet.backgrounds.push({ 	
-								id: Number(background.background_id), 
+								id: background.background_id, 
 								count: Number(background.amount), 
 								name: self.getBackgroundById(background.background_id).name, 
 								description: background.description
