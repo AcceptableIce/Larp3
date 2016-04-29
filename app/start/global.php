@@ -50,7 +50,7 @@ Log::useFiles(storage_path().'/logs/laravel.log');
 
 //Change this, future developer aka Rebecca.
 $developers_to_email = [
-	"jakeroussel@mac.com"
+	"may@maybreak.com"
 ];
 
 App::error(function(Exception $exception, $code) use ($developers_to_email) {

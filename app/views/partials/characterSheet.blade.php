@@ -94,11 +94,10 @@
 		<div class="list-dots">
 			{{print_dots($willpower->willpower_total, $willpower->willpower_total - $willpower->willpower_current)}}
 		</div>
-		
 		<? 	//We start at 10. Higher generation characters get more blood, 1 per generation.
 			$blood_pool = 10 + max(0, $gen_amt);
 			$st_chop = mt_rand(0, 2);
-			$pc_chop = mt_rand(0,2);
+			$pc_chop = mt_rand(0, 2);
 			if($st_chop > $pc_chop) {
 				$blood = 4; //Sad day.
 			} else if ($st_chop == $pc_chop) {
@@ -107,9 +106,7 @@
 				$blood = $blood_pool - 1;
 			}
 			//If we have the Stigmata flaw, we lose another blood.
-			if($character->flaws($version)->whereHas('definition', function($q) { 
-				$q->where('name', 'Stigmata'); 
-			})->exists()) $blood--;			
+			if($character->hasFlaw('Stigmata')) $blood--;	
 			
 			//If we have ghouls, we lose one point per ghoul. There... isn't really a good way of doing this 
 			//for an odd number of ghouls, so I round up. Sorry players.
@@ -118,7 +115,7 @@
 				foreach($character->backgrounds($version)->whereHas('definition', function($q) { 
 					$q->where('name', 'Ghouls'); 
 				})->get() as $ghoul) {
-					$ghoul_total += $ghoul->amount;
+					$ghoul_total += 1;
 				}
 				$blood -= ceil($ghoul_total / 2);
 			}
